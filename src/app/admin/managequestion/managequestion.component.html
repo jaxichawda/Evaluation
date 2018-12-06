@@ -1,0 +1,250 @@
+<!-- Inner Section -->
+<!-- <div class="inner_banner">
+    <img src="assets/images/inner_banner.jpg" alt="" class="img-responsive" />
+    <div class="innerbanner_text">HR QUESTIONNAIRE<span><a routerLink="/admin/candidate/list">Home</a> / <a routerLink="/admin/question/list">Questions</a> / <i>Add Question</i></span></div>
+</div>
+<div class="clearfix"></div> -->
+<!-- End Inner Section -->
+<!-- Inner Section -->
+<!-- <div class="inner_content"> -->
+	
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- <h1 class="text-center">Add Question</h1>
+				<div class="separator text-center"><span class="dott"></span><span class="dott"></span><span class="dott"></span></div> -->
+				
+				<div class="breadcrumb_block">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="page_heading">
+				<h1>Add Question</h1>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12 text-right">
+			<ol class="breadcrumb">
+			  <li class="breadcrumb-item"><a routerLink="/admin/candidate/list">Home</a></li>
+			  <li class="breadcrumb-item"><a routerLink="/admin/question/list">Questions</a></li>
+			  <li class="breadcrumb-item active">Add</li>
+			</ol>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	  </div>
+				
+				
+				<div class="btn-group pull-right add-right addpage_backbtn">
+					<a routerLink="/admin/question/list" class="lgn_btn">
+						Back to list
+					</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				
+						<div class="form-bg">
+							<form class="form-validate" role="form" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
+								<div class="col-md-6 col-sm-6">
+									<div class="question_wrap">
+										<h3>Question :</h3>
+										<div class="form-group">
+											<!-- <label>Write your question below</label> -->
+											<textarea class="form-control" #QuestionName="ngModel" [(ngModel)]="questionEntity.QuestionName" name="QuestionName"
+											 required maxlength="1000"></textarea>
+											<span class="error_span" *ngIf="(QuestionName.dirty && QuestionName.invalid) || (QuestionName.pristine && submitted)">
+												<span *ngIf="QuestionName.errors && QuestionName.errors.required">
+													Please enter question
+												</span>
+
+												<span *ngIf="QuestionName.errors && QuestionName.errors.pattern">
+													Please enter valid question
+												</span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+
+							<div >
+								<div class="col-md-6 col-sm-6">
+									<div class="answer_wrap">
+										<h3>Question type :</h3>
+
+										<div class="form-group">
+											<!-- <label><span class="required">*</span>Question Answer Type</label> -->
+											<select class='select-option' [disabled]="questionEntity.QuestionId>0" (ngModelChange)="Reset()" required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
+											 name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}">
+												<option value=""  value="" ngSelected='questionEntity.AnswerTypeId==""'>Select</option>
+												<option class='option' *ngFor='let quetype of queAnsTypeList' [value]="quetype.AnswerTypeId">{{quetype.AnswerName}}</option>
+											</select>
+											<span class="error_span" *ngIf="(AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)">
+												<span *ngIf="AnswerTypeId.errors.required || (AnswerTypeId.pristine && submitted)">Please select answer
+													type
+												</span>
+											</span>
+										</div>
+
+										<div *ngIf="questionEntity.AnswerTypeId==2">
+											<label><span class="required">*</span>Enter Label for Text Boxes</label>
+											<!-- loop start -->
+											<div class="r-group add_que" *ngFor="let Question of QuestionList; let i = index; let last = last;">
+
+												<input type="text" [disabled]="questionEntity.QuestionId>0" class="form-control" pattern="[a-zA-Z0-9',&.$\ ]{2,100}" maxlength="100" #QLabel="ngModel"
+												 [(ngModel)]="QuestionList[i].QLabel" name="QLabel{{i}}" required />
+
+												<span class="error_span" *ngIf="(QLabel.dirty && QLabel.invalid) || (QLabel.pristine && submitted)">
+													<span *ngIf="QLabel.errors && QLabel.errors.required">
+														Please enter label name
+													</span>
+
+													<span *ngIf="QLabel.errors && QLabel.errors.pattern">
+														Please enter valid label
+													</span>
+												</span>
+
+												<button type="button" [disabled]="questionEntity.QuestionId>0" (click)="DeleteQuestion(Question)" *ngIf="i!=0" class="r-btnRemove btn btn-danger btn-rounded btn-sm"
+												 title="Delete">
+													<span class="fa fa-times"></span>
+												</button>
+												<button type="button" [disabled]="questionEntity.QuestionId>0" (click)="AddNewQuestion(i)" *ngIf="last" class="r-btnAdd btn btn-default btn-rounded btn-sm"
+												 title="Add">
+													<span class="fa fa-plus"></span>
+												</button>
+
+
+
+											</div>
+											<!-- loop end -->
+
+
+										</div>
+
+										<div *ngIf="questionEntity.AnswerTypeId==1 ">
+
+
+											<label><span class="required">*</span>Enter Radio button Label and its Value</label>
+											<!-- loop start -->
+											<div class="r-group add_que" *ngFor="let Question of QuestionList; let i = index; let last = last;">
+
+												<input type="text" [disabled]="questionEntity.QuestionId>0" class="form-control" pattern="[a-zA-Z',&.$\ ]{2,100}" maxlength="100" #QLabel="ngModel"
+												 [(ngModel)]="QuestionList[i].QLabel" name="QLabel{{i}}" placeholder="Label" required />
+
+												<span class="error_span" *ngIf="(QLabel.dirty && QLabel.invalid) || (QLabel.pristine && submitted)">
+													<span *ngIf="QLabel.errors && QLabel.errors.required">
+														Please enter label name
+													</span>
+													<span *ngIf="QLabel.errors && QLabel.errors.pattern">
+														Please enter valid label
+													</span>
+												</span>
+												<input type="text" [disabled]="questionEntity.QuestionId>0" class="form-control" pattern="[a-zA-Z',&.$\ ]{2,100}" maxlength="100" #QValue="ngModel"
+												 [(ngModel)]="QuestionList[i].QValue" name="QValue{{i}}" placeholder="Value" required />
+
+												<span class="error_span" *ngIf="(QValue.dirty && QValue.invalid) || (QValue.pristine && submitted)">
+													<span *ngIf="QValue.errors && QValue.errors.required">
+														Please enter value name
+													</span>
+
+													<span *ngIf="QValue.errors && QValue.errors.pattern">
+														Please enter valid value
+													</span>
+												</span>
+
+												<button type="button" [disabled]="questionEntity.QuestionId>0" (click)="DeleteQuestion(Question)" *ngIf="i!=0" class="r-btnRemove btn btn-danger btn-rounded btn-sm"
+												 title="Delete">
+													<span class="fa fa-times"></span>
+												</button>
+												<button type="button" [disabled]="questionEntity.QuestionId>0" (click)="AddNewQuestion(i)" *ngIf="last" class="r-btnAdd btn btn-default btn-rounded btn-sm"
+												 title="Add">
+													<span class="fa fa-plus"></span>
+												</button>
+
+
+
+											</div>
+											<!-- loop end -->
+
+										</div>
+
+										<div *ngIf="questionEntity.AnswerTypeId==3 ">
+											<div class="form-group">
+												<label>Enter Label for Text Box</label>
+												<!-- loop start -->
+												<div class="r-group add_que" *ngFor="let Question of QuestionList; let i = index; let last = last;">
+
+													<input type="text" [disabled]="questionEntity.QuestionId>0" class="form-control" pattern="[a-zA-Z0-9',&.$\ ]{2,100}" maxlength="100" #QLabel="ngModel"
+													 [(ngModel)]="QuestionList[i].QLabel" name="QLabel{{i}}" required />
+
+													<div class="clearfix"></div>
+													<span class="error_span" *ngIf="(QLabel.dirty && QLabel.invalid) || (QLabel.pristine && submitted)">
+														<span *ngIf="QLabel.errors && QLabel.errors.required">
+															Please enter label name
+														</span>
+
+														<span *ngIf="QLabel.errors && QLabel.errors.pattern">
+															Please enter valid label
+														</span>
+													</span>
+
+
+
+
+
+												</div>
+												<!-- loop end -->
+
+											</div>
+										</div>
+
+
+										<div class="clearfix"></div>
+
+
+									</div>
+									<div class="clearfix"></div>
+								</div>
+
+							</div>
+
+								<div class="form-group col-md-6">
+									<label><span class="required">*</span>Active?</label>
+									<br>
+									<div class="radio_box">
+										<input type="radio" name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive"
+										 required />
+										<label for="role1">Yes</label>
+									</div>
+									<div class="radio_box">
+										<input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive"
+										 required />
+										<label for="role2">No </label>
+									</div>
+									<br>
+									<span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
+										<span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+									</span>
+								</div>
+								<div class="clearfix"></div>
+
+
+								<div class="col-md-12 col-sm-12 text-center">
+									<button type="submit" *ngIf="questionEntity.QuestionId==0" class="lgn_btn"><span>Submit</span></button>
+									<button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button>
+								</div>
+								<div class="clearfix"></div>
+
+
+
+							</form>
+						</div>
+					
+				<div class="clearfix"></div>
+
+			</div>
+
+
+		</div>
+
+<!-- </div> -->
+<div class="clearfix"></div>
+<!-- End Inner Section -->

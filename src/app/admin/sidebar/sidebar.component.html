@@ -1,0 +1,20 @@
+<div class="sidebar_wrap" *ngIf="globals.authData!=undefined">
+	<ul class="sidebar_box">
+		<li class="sidebar_box_label"><span>Reports</span></li>
+		<li><a routerLink="/admin/candidate/list" title="Candidate Report" data-toggle="tooltip" data-placement="right"><i class="fa fa-bar-chart"></i><span>Candidate Report</span></a></li>		
+	</ul>
+	<ul class="sidebar_box">
+		<li class="sidebar_box_label"><span>Manage Questions</span></li>
+		<li>
+			<a routerLink="/admin/question/add" title="Add Question" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Add Question</span></a>
+		</li>
+		<li>
+			<a routerLink="/admin/question/list" title="View Question" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>View Question</span></a>
+		</li>
+	</ul>
+	<ul class="sidebar_box">
+		<li class="sidebar_box_label"><span>Manage Job Position</span></li>
+		<li><a routerLink="/admin/position" title="Add Position" data-toggle="tooltip" data-placement="right"><i class="fa fa-users"></i><span>Add Position</span></a></li>
+		<li><a routerLink="/admin/position/list" title="View Position" data-toggle="tooltip" data-placement="right"><i class="fa fa-calendar"></i><span>View Position</span></a></li>
+	</ul>
+</div>
