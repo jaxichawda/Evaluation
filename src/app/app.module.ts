@@ -5,16 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
-
-//import { HomeComponent } from './home/home.component';
-//import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+//import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    FooterComponent,
+    HeaderComponent
    
   ],
   imports: [
@@ -23,16 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
 	FormsModule,
 	HttpClientModule,
 	RouterModule.forRoot([	
-		{
-			path: 'admin',
-			//canActivate: [AuthGuard],
-			loadChildren: './admin/admin.module#AdminModule'
-		},	
-		{
-			path: '',
-			//canActivate: [AuthGuard],
-			loadChildren: './client/client.module#ClientModule'
-		}
+	
+      { path: '', component: LoginComponent},
+		
 	])
   ],
   bootstrap: [AppComponent]
