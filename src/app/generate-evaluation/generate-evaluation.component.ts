@@ -18,12 +18,11 @@ declare var $, PerfectScrollbar: any;
 })
 export class GenerateEvaluationComponent implements OnInit {
   evaluationEntity;
-  myOptions: Array<IOption> = [
-    {label: 'Belgium', value: 'BE'},
-    {label: 'Luxembourg', value: 'LU'},
-    {label: 'Netherlands', value: 'NL'}
-];
-// myOptions: Array<string> = ['1', '3'];
+  submitted;
+  btn_disable;
+  userlist;
+  evaluationtypelist;
+
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
 
@@ -52,8 +51,32 @@ export class GenerateEvaluationComponent implements OnInit {
 				startView: 2,
 				minView: 2
 			});
-			myInput();
-		},500);
+    },500);
+    this.default();
   }
-
+  default(){
+    this.GenerateEvaluationService.getData()
+			.then((data) => {
+        this.userlist = data['users'];
+        this.evaluationtypelist = data['evaluationtypes'];
+				this.globals.isLoading = false;
+			},
+			(error) => {
+       this.globals.isLoading = false;	
+        this.router.navigate(['/pagenotfound']);
+      });
+  }
+  generateEvaluation(evaluationForm){
+    this.submitted = true;
+    this.evaluationEntity.CreatedBy = this.globals.authData.UserId;
+    this.evaluationEntity.UpdatedBy = this.globals.authData.UserId;
+    this.evaluationEntity.UserId = this.globals.authData.UserId;
+    if(evaluationForm.valid){
+      this.submitted = false;
+      this.btn_disable = true;
+      this.evaluationEntity = {};
+      evaluationForm.form.markAsPristine();
+    }
+    
+  }
 }
