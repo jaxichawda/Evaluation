@@ -271,6 +271,21 @@ form .form-control:hover, form .form-control:focus {border: 2px solid #0954a4!im
 .dataTables_wrapper{padding-bottom:15px;}
 .style_position{position:relative;}
 
+table .activeyes_box{margin:0 0;}
+table .activeyes_box label{height: 20px; width: 45px; top: 0;}
+table .activeyes_box label:after{width: 15px; height: 15px; top: 2px; }
+table .activeyes_box input[type="checkbox"]:checked + label:after{left :62%;}
+
+.activeyes_box.note_check label{height: 20px; width: 45px; top: 0;}
+.activeyes_box.note_check label:after{width: 15px; height: 15px; top: 2px; }
+.activeyes_box.note_check input[type="checkbox"]:checked + label:after{left :62%;}
+.activeyes_box.note_check span{font-size:13px; line-height:20px;}
+
+.activeyes_box {display:inline-block; margin:5px 20px 0 0;}
+.activeyes_box label{ background:#dfe2ea; font-weight:normal; height: 30px; width: 60px; display:inline-block; vertical-align:top; margin:0; cursor:pointer; color:#444; position: relative; top: 5px; border-radius: 20px;}
+.activeyes_box label:after{ content: ''; width: 24px; height: 24px; border-radius: 100%; left: 3px; top: 3px; background: #aaa; position: absolute; transition:left 0.3s linear 0s; }
+.activeyes_box input[type="checkbox"]:checked + label:after{left :52%; background: #333333; transition:left 0.3s linear 0s; }
+
 
 /*----------- end admin css ------------*/
 
