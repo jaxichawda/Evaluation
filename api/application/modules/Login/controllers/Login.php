@@ -32,6 +32,7 @@ class Login extends CI_Controller {
 				"RoleId" => $result[0]->RoleId,
 			    "EmailAddress" => $result[0]->EmailAddress,
 				"FirstName" => $result[0]->FirstName,
+				"MiddleName" => $result[0]->MiddleName,
 				"LastName" => $result[0]->LastName
 				);
 

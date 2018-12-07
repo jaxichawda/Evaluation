@@ -18,10 +18,20 @@ declare var $, PerfectScrollbar: any;
 export class GenerateEvaluationComponent implements OnInit {
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
-		private GenerateEvaluationService: GenerateEvaluationService) { }
+    private GenerateEvaluationService: GenerateEvaluationService) { }
 
   ngOnInit() {
-    
+    setTimeout(function () {
+      if ($("body").height() < $(window).height()) {
+        $('footer').addClass('footer_fixed');
+      }
+      else {
+        $('footer').removeClass('footer_fixed');
+      }
+    }, 100);
+    const body = document.querySelector('body');
+    var count = $(window).height() - 270;
+    body.style.setProperty('--screen-height', count + "px");
   }
 
 }

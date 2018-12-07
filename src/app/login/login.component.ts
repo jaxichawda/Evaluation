@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { debug } from 'util';
-declare var $,swal: any;
+
+declare var $, swal: any;
 
 @Component({
   selector: 'app-login',
@@ -14,25 +15,29 @@ declare var $,swal: any;
 })
 export class LoginComponent implements OnInit {
   loginEntity;
-	submitted;
+  submitted;
   btn_disable;
   invalid;
-  constructor(private http: Http, private router: Router, private route: ActivatedRoute, private AuthService : AuthService,public globals: Globals) {} 
+  constructor(private http: Http, private router: Router, private route: ActivatedRoute, private AuthService: AuthService, public globals: Globals) { }
 
-  ngOnInit() { debugger
-    this.loginEntity={};
+  ngOnInit() {
+    debugger
+    const body = document.querySelector('body');
+    var count = $(window).height();
+    body.style.setProperty('--screen-height', count + "px");
+
+    this.loginEntity = {};
   }
-  login(loginForm)
-  {		debugger
+  login(loginForm) {
+    debugger
     //alert("fhdsvfs");
     this.submitted = true;
-    if(loginForm.valid){
+    if (loginForm.valid) {
       this.btn_disable = true;
-     
+
       this.AuthService.login(this.loginEntity)
-      .then((data) => 
-      {
-        
+        .then((data) => {
+
           //alert('success');
           swal({
             position: 'top-end',
@@ -41,32 +46,29 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          
-       
-        // else
-        //   {
-        // alert('error');
-        // this.btn_disable = false;
-        // this.submitted = false;
-        // this.invalid = false;
-        // this.loginEntity = {};
-        // loginForm.form.markAsPristine();
-        //   }
-        this.router.navigate(['/generate-evaluation']);
-         
-      }, 
-      (error) => 
-      { 
-        swal({
-          type: 'warning',
-          title: 'Oops...',
-          text: 'Either username or password is incorrect!',
-        })    
-        this.btn_disable = false;
-        this.submitted = false;
-         
-      });
-    } 		
+          // else
+          //   {
+          // alert('error');
+          // this.btn_disable = false;
+          // this.submitted = false;
+          // this.invalid = false;
+          // this.loginEntity = {};
+          // loginForm.form.markAsPristine();
+          //   }
+          this.router.navigate(['/dashboard']);
+
+        },
+          (error) => {
+            swal({
+              type: 'warning',
+              title: 'Oops...',
+              text: 'Either username or password is incorrect!',
+            })
+            this.btn_disable = false;
+            this.submitted = false;
+
+          });
+    }
   }
 
 }
