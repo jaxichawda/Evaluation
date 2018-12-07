@@ -3,14 +3,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 use \Firebase\JWT\JWT;
 
-class Login_user extends CI_Controller {
+class Login extends CI_Controller {
 
 
 	public function __construct() {
 	
 		parent::__construct();
 		
-		$this->load->model('Login_user_model');
+		$this->load->model('Login_model');
 		include APPPATH . 'vendor/firebase/php-jwt/src/JWT.php';
 		
 	}
@@ -24,10 +24,9 @@ class Login_user extends CI_Controller {
 		$post_login = json_decode(trim(file_get_contents('php://input')), true);		
 
 		if ($post_login) {
-			$result = $this->Login_user_model->check_login($post_login);
+			$result = $this->Login_model->check_login($post_login);
 			if ($result)
 			{
-
 				$token = array(
 				"UserId" => $result[0]->UserId,
 				"RoleId" => $result[0]->RoleId,
@@ -43,7 +42,6 @@ class Login_user extends CI_Controller {
 			}
 			else
 			{
-			
 				return $this->output
 				->set_status_header(404)
 				->set_output(json_encode(array(
@@ -66,9 +64,6 @@ class Login_user extends CI_Controller {
 		//	$res = $this->db->insert('tblloginlog',$login_data);
 			echo json_encode('success');	
 		}
-	
-		
-	
 	}
 	
 }

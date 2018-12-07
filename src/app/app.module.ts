@@ -8,6 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { Globals } from './globals';
+import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { GenerateEvaluationService } from './services/generate-evaluation.service';
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -15,20 +21,25 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     LoginComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    GenerateEvaluationComponent
    
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
 	HttpModule,
 	FormsModule,
 	HttpClientModule,
 	RouterModule.forRoot([	
 	
-      { path: '', component: LoginComponent},
+      { path: 'login', component: LoginComponent,canActivate : [AuthGuard]},
+      { path: 'generate-evaluation', component: GenerateEvaluationComponent,canActivate : [AuthGuard]},
+      { path: '', redirectTo: 'login', pathMatch:'full'},
+				{ path: '**', redirectTo : 'login' }
 		
 	])
   ],
+  providers: [Globals,AuthGuard,AuthService,GenerateEvaluationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

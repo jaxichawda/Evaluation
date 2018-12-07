@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-lg-12">
+      
+      <div class="breadcrumb_block">
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="page_heading">
+      <h1>Generate Evaluation</h1>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+      <li class="breadcrumb-item"><a routerLink="">Questions</a></li>
+      <li class="breadcrumb-item active">Add</li>
+    </ol>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+  </div>
+      <div class="btn-group pull-right add-right addpage_backbtn">
+        <a routerLink="" class="lgn_btn">
+          Back to list
+        </a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      
+          <div class="form-bg">
+            <form class="form-validate" role="form" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
+              <div class="col-md-6 col-sm-6">
+                <div class="question_wrap">
+                  <h3>Question :</h3>
+                  <div class="form-group">
+                    <!-- <label>Write your question below</label> -->
+                    <textarea class="form-control" #QuestionName="ngModel" [(ngModel)]="questionEntity.QuestionName" name="QuestionName"
+                     required maxlength="1000"></textarea>
+                    <span class="error_span" *ngIf="(QuestionName.dirty && QuestionName.invalid) || (QuestionName.pristine && submitted)">
+                      <span *ngIf="QuestionName.errors && QuestionName.errors.required">
+                        Please enter question
+                      </span>
+
+                      <span *ngIf="QuestionName.errors && QuestionName.errors.pattern">
+                        Please enter valid question
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+            <div >
+              <div class="col-md-6 col-sm-6">
+                <div class="answer_wrap">
+                  <h3>Question type :</h3>
+
+                  <div class="form-group">
+                    <!-- <label><span class="required">*</span>Question Answer Type</label> -->
+                    <select class='select-option' [disabled]="questionEntity.QuestionId>0" (ngModelChange)="Reset()" required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
+                     name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}">
+                      <option value=""  value="" ngSelected='questionEntity.AnswerTypeId==""'>Select</option>
+                      <option class='option' *ngFor='let quetype of queAnsTypeList' [value]="quetype.AnswerTypeId">{{quetype.AnswerName}}</option>
+                    </select>
+                    <span class="error_span" *ngIf="(AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)">
+                      <span *ngIf="AnswerTypeId.errors.required || (AnswerTypeId.pristine && submitted)">Please select answer
+                        type
+                      </span>
+                    </span>
+                  </div>
+
+                 
+                 
+
+                 
+
+
+                  <div class="clearfix"></div>
+
+
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+            </div>
+
+              <div class="form-group col-md-6">
+                <label><span class="required">*</span>Active?</label>
+                <br>
+                <div class="radio_box">
+                  <input type="radio" name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive"
+                   required />
+                  <label for="role1">Yes</label>
+                </div>
+                <div class="radio_box">
+                  <input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive"
+                   required />
+                  <label for="role2">No </label>
+                </div>
+                <br>
+                <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
+                  <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+
+
+              <div class="col-md-12 col-sm-12 text-center">
+                <button type="submit" class="lgn_btn"><span>Submit</span></button>
+                <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
+              </div>
+              <div class="clearfix"></div>
+
+
+
+            </form>
+          </div>
+        
+      <div class="clearfix"></div>
+
+    </div>
+
+
+  </div>
+
+<!-- </div> -->
+<div class="clearfix"></div>
+<!-- End Inner Section -->

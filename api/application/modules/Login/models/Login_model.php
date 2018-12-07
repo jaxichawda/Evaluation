@@ -1,6 +1,6 @@
 <?php
 
-class Login_user_model extends CI_Model {
+class Login_model extends CI_Model {
 
 	public function check_login($data) {
 		
@@ -8,7 +8,6 @@ class Login_user_model extends CI_Model {
 		$this->db->from('tbluser');
 		$this->db->where('EmailAddress',trim($data['EmailAddress']));
 		$this->db->where('Password',md5(trim($data['Password'])));
-		$this->db->where('RoleId=',1);
 		$this->db->where('IsActive',1);
 		$this->db->limit(1);
 		$query = $this->db->get();
