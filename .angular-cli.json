@@ -40,7 +40,9 @@
 		"assets/js/jszip.min.js" ,
         "assets/js/buttons.html5.min.js" ,
         "assets/js/jspdf.min.js",
-        "assets/js/html2canvas.min.js"
+        "assets/js/html2canvas.min.js",
+        "assets/js/select2.min.js",
+        "assets/js/typeahead.bundle.js"
   
       ],
       "environmentSource": "environments/environment.ts",

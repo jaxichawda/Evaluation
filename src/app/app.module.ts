@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { Globals } from './globals';
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
+import {SelectModule} from 'ng-select';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -29,7 +30,8 @@ import { GenerateEvaluationService } from './services/generate-evaluation.servic
   BrowserModule,
 	HttpModule,
 	FormsModule,
-	HttpClientModule,
+  HttpClientModule,
+  SelectModule,
 	RouterModule.forRoot([	
 	
       { path: 'login', component: LoginComponent,canActivate : [AuthGuard]},
