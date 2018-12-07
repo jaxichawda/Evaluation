@@ -50,7 +50,8 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
     QuestionListComponent,
     UserComponent,
     UserListComponent,
-    EvaluationListComponent
+    EvaluationListComponent,
+    SelectModule
 
   ],
   imports: [
@@ -58,6 +59,7 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
     HttpModule,
     FormsModule,
     HttpClientModule,
+
     RouterModule.forRoot([
       
 
