@@ -74,7 +74,7 @@ header .user_dropdown li ul.dropdown-menu li a.next_btn:hover{opacity: 1;backgro
 .navbar-default .navbar-nav>.dropdown>a .caret {border-top-color: #fff;border-bottom-color: #fff;}
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {color: #fff;background: #0061af;}
 .navbar-default .navbar-nav>.dropdown>a:hover .caret, .navbar-default .navbar-nav>.dropdown>a:focus .caret {border-top-color: #fff;border-bottom-color: #fff;}
-.dropdown-menu{min-width:100%;}
+/* .dropdown-menu{min-width:100%;} */
 .dropdown-menu>li>a{color: #111;font-size: 16px;text-transform: uppercase;}
 .navbar .navbar-nav {display: inline-block;float: none;}
 .navbar .navbar-collapse {text-align: center;}
@@ -147,7 +147,7 @@ input[type="checkbox"] { visibility:hidden; position:absolute;}
 .sidebar_wrap .sidebar_box .sidebar_box_label span{padding: 5px 0px;color: #0852a5;display: inline-block;font-size: 16px;margin-bottom: 5px;margin: 0 15px 10px 15px;font-weight: bold;}
 .sidebar_wrap .sidebar_box li i {font-size: 18px; width:25px;}
 .sidebar_wrap .sidebar_box li i.fa-angle-down{margin: 0; text-align: right;}
-.sidebar_wrap .sidebar_box li a {color: #1919919 !important;display: block;font-size: 13px;line-height: 15px;list-style: none outside none; padding: 10px 15px; text-decoration: none; text-transform: capitalize; border-left: 3px solid transparent; background: transparent; transition: all .3s ease-in-out;}
+.sidebar_wrap .sidebar_box li a {color: #191991 !important;display: block;font-size: 13px;line-height: 15px;list-style: none outside none; padding: 10px 15px; text-decoration: none; text-transform: capitalize; border-left: 3px solid transparent; background: transparent; transition: all .3s ease-in-out;}
 .sidebar_wrap .sidebar_box li a span {display: inline-block;float: none;left: 10px;position: relative;}
 .sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a{border-left: 3px solid transparent; background: transparent;}
 .sidebar_wrap .sidebar_box li a:hover,.sidebar_wrap .sidebar_box li a:focus,.sidebar_wrap .sidebar_box li.dropdown_menu a,.sidebar_wrap .sidebar_box li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a:focus{background: rgba(0, 0, 0, 0.07); transition: all .3s ease-in-out;}
