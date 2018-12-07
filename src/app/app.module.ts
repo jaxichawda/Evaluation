@@ -12,6 +12,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { Globals } from './globals';
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
+import {SelectModule} from 'ng-select';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
