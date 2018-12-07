@@ -12,13 +12,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { Globals } from './globals';
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
+import { GenerateEvaluationService } from './services/generate-evaluation.service';
 import {SelectModule} from 'ng-select';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
-import { GenerateEvaluationService } from './services/generate-evaluation.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentComponent } from './department/department.component';
+import { DepartmentService } from './services/department.service';
 import { DepartmentListComponent } from './department-list/department-list.component';
 import { JobTitleComponent } from './job-title/job-title.component';
 import { JobTitleListComponent } from './job-title-list/job-title-list.component';
@@ -58,6 +59,7 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
     HttpModule,
     FormsModule,
     HttpClientModule,
+	SelectModule,
     RouterModule.forRoot([
       
 
@@ -93,7 +95,7 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
