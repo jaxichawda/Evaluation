@@ -25,5 +25,40 @@ export class GenerateEvaluationService {
     });	
     return promise;
     }
-
+    getReportingEmployee(Id){ 
+      debugger
+      let promise = new Promise((resolve, reject) => {
+        this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getReportingEmployee/' + Id)
+          .toPromise()
+          .then(
+            res => { // Success
+              resolve(res);
+            },
+            msg => { // Error
+              reject(msg);
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+            }
+          );
+      });		
+      return promise;
+      }  
+      generateEvaluation(evaluationEntity){
+        debugger
+        let promise = new Promise((resolve, reject) => {
+          this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/generate_Evaluation', evaluationEntity)
+            .toPromise()
+            .then(
+              res => { // Success
+                resolve(res);
+              },
+              msg => { // Error
+                reject(msg);
+                this.globals.isLoading = false;
+                this.router.navigate(['/pagenotfound']);      
+              }
+            );
+        });		
+        return promise;
+        }
 }

@@ -34,7 +34,7 @@
                   <div class="form-group">
                     <label><span>*</span>Users</label>
                     <select class='select-option' required class="form-control" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
-                     name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}">
+                     name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}" (change)="onChange($event)">
                      <ng-container *ngFor="let user of userlist">
                       <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
                   </ng-container> 
@@ -44,11 +44,24 @@
                       </span>
                     </span>
                   </div>
-                  <!-- <div class="form-group">
-                    <label><input type="checkbox" value=""/></label>
-                  </div> -->
+                  <div class="check_box">
+                    <input type="checkbox" name="Check" id="Check1" value="Check1" #Check="ngModel" [(ngModel)]="evaluationEntity.Check">
+                    <label for="Check1" title="Check1" class="checkboxbtn_label">Keep selected to send the evaluation to above selected user</label>
+                  </div>
               </div>
-
+              <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                  <label><span>*</span>Evaluators</label>
+                  <ng-select
+                    [options]="userlist"
+                    [multiple]="true"
+                    name="Instructor"
+                    [(ngModel)]="selectedCharacters"
+                    >
+                </ng-select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
               <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label><span>*</span>Evaluation type</label>
@@ -70,27 +83,18 @@
                     <label><span>*</span>Evaluation Date</label>
                     <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date" #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate" [ngClass]="{red_border: (EvaluationDate.dirty && EvaluationDate.invalid) || (EvaluationDate.pristine && submitted)}" required>
 
-                    <span class="error_span" *ngIf="(EvaluationDate.dirty && EvaluationDate.invalid) || (EvaluationDate.pristine && submitted)">
+                    <!-- <span class="error_span" *ngIf="(EvaluationDate.dirty && EvaluationDate.invalid) || (EvaluationDate.pristine && submitted)">
                       <span *ngIf="EvaluationDate.errors.required || (EvaluationDate.pristine && submitted)">Please select Evaluation Date
                       </span>
-                    </span>
+                    </span> -->
                 </div>
               </div>
-              <div class="col-md-6 col-sm-6">
-                  <div class="form-group">
-                    <label><span>*</span>Evaluators</label>
-                    <ng-select
-                      [options]="userlist"
-                      [multiple]="true"
-                      [(ngModel)]="evaluationEntity">
-                  </ng-select>
-                  </div>
-              </div>
+              
               <div class="clearfix"></div>
               <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control" #Description="ngModel" [(ngModel)]="evaluationEntity.Description" name="Description"
+                    <textarea class="form-control" #EvaluationDescription="ngModel" [(ngModel)]="evaluationEntity.EvaluationDescription" name="EvaluationDescription"
                      maxlength="1000"></textarea>
                   </div>
               </div>
@@ -114,7 +118,7 @@
               </div>
               <div class="clearfix"></div>
               <div class="col-md-12 col-sm-12 text-center">
-                <button type="submit" class="lgn_btn"><span>Submit</span></button>
+                <button type="submit" [disabled]="btn_disable" class="lgn_btn"><span>Submit</span></button>
                 <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
               </div>
               <div class="clearfix"></div>

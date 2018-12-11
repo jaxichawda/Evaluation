@@ -73,7 +73,7 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     HttpModule,
     FormsModule,
     HttpClientModule,
-	SelectModule,
+	  SelectModule,
     RouterModule.forRoot([
       
 
