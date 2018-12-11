@@ -44,7 +44,7 @@
                   <th style="width:1%;">#</th>
                   <th style="width:20%;">Department</th>
                   <th style="width:1%;">Is Active?</th>
-                  <!-- <th style="width:1%;">Actions</th> -->
+                  <th style="width:1%;">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -58,25 +58,26 @@
                       <label for="active{{i}}"></label>
                     </div>
                   </td>
-                  <td *ngIf="department.IsActive=='1'">Yes</td>
-                  <td *ngIf="department.IsActive=='0'">No</td>
-                  <!-- <td>
+                  <td>
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
-                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/admin/position/edit/{{position.JobPositionId}}">
+                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/department/edit/{{department.DepartmentId}}">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Position can't be deleted as it is already used by Candidate(s).">
-                      <button *ngIf="position.isdisabled>0" [disabled]="position.isdisabled>0" data-type="Record" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span
-                          class="fa fa-times"></span></button>
+                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Department can't be deleted as it is already used in Job Title.">
+                      <button *ngIf="department.isdisabled>0" [disabled]="department.isdisabled>0" data-type="Record"
+                        class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span class="fa fa-times"></span></button>
                     </div>
                     <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                      <button data-type="Record" *ngIf="position.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
-                        (click)="deleteJobPosition(position)">
+                      <button data-type="Record" *ngIf="department.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
+                        (click)="deleteDepartment(department)">
                         <span class="fa fa-times"></span>
                       </button>
                     </div>
-                  </td> -->
+                  </td>
+                </tr>
+                <tr class="text-center" *ngIf="departmentList.length <= 0">
+                  <td colspan="4">There is no record found.</td>
                 </tr>
               </tbody>
             </table>

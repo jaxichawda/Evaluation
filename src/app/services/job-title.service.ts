@@ -5,14 +5,14 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 
 @Injectable()
-export class DepartmentService {
+export class JobTitleService {
 
   constructor(private http: HttpClient, private globals: Globals, private router: Router) { }
 
-  addDepartment(departmentEntity) {
+  addJobTitle(jobtitleEntity) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'Department/addDepartment', departmentEntity)
+      this.http.post(this.globals.baseAPIUrl + 'JobTitle/addJobTitle', jobtitleEntity)
         .toPromise()
         .then(
           res => { // Success
@@ -27,9 +27,24 @@ export class DepartmentService {
     });
     return promise;
   }
-  getById(departmentId) {
+  getAllDepartment() {
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'Department/getById/' + departmentId)
+      this.http.get(this.globals.baseAPIUrl + 'JobTitle/getAllDepartment')
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
+          }
+        );
+    });
+    return promise;
+  }
+  getById(jobtitleId) {
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(this.globals.baseAPIUrl + 'JobTitle/getById/' + jobtitleId)
         .toPromise()
         .then(
           res => { // Success
@@ -44,10 +59,10 @@ export class DepartmentService {
     });
     return promise;
   }
-  getAllDepartment() {
+  getAllJobTitle() {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'Department/getAllDepartment')
+      this.http.get(this.globals.baseAPIUrl + 'JobTitle/getAllJobTitle')
         .toPromise()
         .then(
           res => { // Success
@@ -64,7 +79,7 @@ export class DepartmentService {
   }
   isActiveChange(changeEntity) {
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'Department/isActiveChange', changeEntity)
+      this.http.post(this.globals.baseAPIUrl + 'JobTitle/isActiveChange', changeEntity)
         .toPromise()
         .then(
           res => { // Success
@@ -79,10 +94,10 @@ export class DepartmentService {
     });
     return promise;
   }
-  deleteDepartment(del) {
+  deleteJobTitle(del) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'Department/deleteDepartment', del)
+      this.http.post(this.globals.baseAPIUrl + 'JobTitle/deleteJobTitle', del)
         .toPromise()
         .then(
           res => { // Success

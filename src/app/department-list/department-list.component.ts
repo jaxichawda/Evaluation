@@ -16,6 +16,7 @@ declare var $, Bloodhound: any;
 export class DepartmentListComponent implements OnInit {
   departmentList;
   msgflag;
+  deleteEntity;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private DepartmentService: DepartmentService) { }
@@ -39,7 +40,7 @@ export class DepartmentListComponent implements OnInit {
       .then((data) => {
         debugger
         setTimeout(function () {
-          var table = $('#list_tables').DataTable({
+          var table = $('#dataTables-example').DataTable({
             // scrollY: '55vh',
             responsive: {
               details: {
@@ -107,7 +108,7 @@ export class DepartmentListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Certificate Updated Successfully!',
+          title: 'Department Updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })
@@ -117,5 +118,49 @@ export class DepartmentListComponent implements OnInit {
           // this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
+  }
+  deleteDepartment(department) {
+    this.deleteEntity = department;
+    swal({
+      title: 'Are you sure?',
+      text: "You want to delete this Department?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    })
+      .then((result) => {
+        if (result.value) {
+          var del = { 'Userid': 1, 'id': department.DepartmentId, 'Name': department.DepartmentName };
+          this.DepartmentService.deleteDepartment(del)
+            .then((data) => {
+              let index = this.departmentList.indexOf(department);
+              $('#Delete_Modal').modal('hide');
+              if (index != -1) {
+                this.departmentList.splice(index, 1);
+              }
+              swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Department deleted successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            },
+              (error) => {
+                $('#Delete_Modal').modal('hide');
+                if (error.text) {
+                  swal({
+                    position: 'top-end',
+                    type: 'success',
+                    title: "You can't delete this record because of their dependency!",
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                }
+              });
+        }
+      })
   }
 }

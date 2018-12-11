@@ -1,23 +1,24 @@
 <?php
 
-class Department_model extends CI_Model {
+class JobTitle_model extends CI_Model {
 
-	public function addDepartment($post_Department)
+	public function addJobTitle($post_JobTitle)
 	{	
 		try{
-			if($post_Department) {
-				if($post_Department['IsActive']==1) {
+			if($post_JobTitle) {
+				if($post_JobTitle['IsActive']==1) {
 					$IsActive = true;
 				} else {
 					$IsActive = false;
 				}
-				$department_data=array(
-				"DepartmentName"=>trim($post_Department['DepartmentName']),
+				$jobtitle_data=array(
+				"JobTitleName"=>trim($post_JobTitle['JobTitleName']),
+				"DepartmentId"=>trim($post_JobTitle['DepartmentId']),
 				"IsActive"=>$IsActive,
-				"CreatedBy" => trim($post_Department['CreatedBy']),
+				"CreatedBy" => trim($post_JobTitle['CreatedBy']),
 				"CreatedOn" =>date('y-m-d H:i:s')
 				);
-				$res=$this->db->insert('tblmstdepartment',$department_data);
+				$res=$this->db->insert('tblmstjobtitle',$jobtitle_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -39,23 +40,48 @@ class Department_model extends CI_Model {
 		}	
 	}
 
-	public function editDepartment($post_Department) 
+	public function getAllDepartment() 
 	{
 		try{
-			if($post_Department['IsActive']==1) {
+			$this->db->select('DepartmentId, DepartmentName');
+			$this->db->where('IsActive',1);
+			$this->db->order_by('DepartmentName','asc');
+			$result = $this->db->get('tblmstdepartment');
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+			$res=array();
+			if($result->result())
+			{
+				$res=$result->result();
+			}
+			return $res;
+		}catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+
+	public function editJobTitle($post_JobTitle) 
+	{
+		try{
+			if($post_JobTitle['IsActive']==1) {
 				$IsActive = true;
 			} else {
 				$IsActive = false;
 			}
-			if($post_Department) {
-				$department_data = array(
-				"DepartmentName"=>trim($post_Department['DepartmentName']),
+			if($post_JobTitle) {
+				$jobtitle_data = array(
+				"JobTitleName"=>trim($post_JobTitle['JobTitleName']),
+				"DepartmentId"=>trim($post_JobTitle['DepartmentId']),
 				"IsActive"=>$IsActive,
-				"UpdatedBy" => trim($post_Department['UpdatedBy']),
+				"UpdatedBy" => trim($post_JobTitle['UpdatedBy']),
 				"UpdatedOn" =>date('y-m-d H:i:s')
 				);
-				$this->db->where('DepartmentId',trim($post_Department['DepartmentId']));
-				$res = $this->db->update('tblmstdepartment',$department_data);
+				$this->db->where('JobTitleId',trim($post_JobTitle['JobTitleId']));
+				$res = $this->db->update('tblmstjobtitle',$jobtitle_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -75,32 +101,33 @@ class Department_model extends CI_Model {
 			return false;
 		}	
 	}
-	public function getById($departmentId=Null)
+	public function getById($jobtitleId=Null)
 	{
-	  if($departmentId)
+	  if($jobtitleId)
 	  {
-		 $this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive');
-		 $this->db->where('tmd.DepartmentId',$departmentId);
-		 $result=$this->db->get('tblmstdepartment tmd');
-		 $department_data= array();
+		 $this->db->select('tmjt.JobTitleId, tmjt.JobTitleName, tmjt.DepartmentId,tmjt.IsActive');
+		 $this->db->where('tmjt.JobTitleId',$jobtitleId);
+		 $result=$this->db->get('tblmstjobtitle tmjt');
+		 $jobtitle_data= array();
 		 foreach($result->result() as $row)
 		 {
-			$department_data=$row;
+			$jobtitle_data=$row;
 			
 		 }
-		 return $department_data;
-		 
+		 return $jobtitle_data;
 	  }
 	  else
 	  {
 		  return false;
 	  }
 	}
-	public function getAllDepartment()
+	public function getAllJobTitle()
 	{
 		try{
-			$this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive, (SELECT COUNT(tmjt.JobTitleId) FROM tblmstjobtitle as tmjt WHERE tmjt.DepartmentId=tmd.DepartmentId) as isdisabled');
-			$result = $this->db->get('tblmstdepartment tmd');
+			$this->db->select('tmjt.JobTitleId, tmjt.JobTitleName, tmd.DepartmentName, tmjt.IsActive, (SELECT COUNT(tu.UserId) FROM tbluser as tu WHERE tmjt.JobTitleId=tu.JobTitleId) as isdisabled');
+			$this->db->from('tblmstjobtitle tmjt');
+			$this->db->join('tblmstdepartment tmd', 'tmjt.DepartmentId = tmd.DepartmentId');
+			$result = $this->db->get();
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
 						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -130,8 +157,8 @@ class Department_model extends CI_Model {
 					'UpdatedBy' => trim($post_data['UpdatedBy']),
 					'UpdatedOn' => date('y-m-d H:i:s'),
 				);			
-				$this->db->where('DepartmentId',trim($post_data['DepartmentId']));
-				$res = $this->db->update('tblmstdepartment',$data);
+				$this->db->where('JobTitleId',trim($post_data['JobTitleId']));
+				$res = $this->db->update('tblmstjobtitle',$data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -151,13 +178,13 @@ class Department_model extends CI_Model {
 			return false;
 		}
 	}
-	public function deleteDepartment($post_Department) {
+	public function deleteJobTitle($post_JobTitle) {
 		try{
-			if($post_Department) 
+			if($post_JobTitle) 
 			{
-				$id=$post_Department['id'];
-				$this->db->where('DepartmentId',$post_Department['id']);
-				$res = $this->db->delete('tblmstdepartment');
+				$id=$post_JobTitle['id'];
+				$this->db->where('JobTitleId',$post_JobTitle['id']);
+				$res = $this->db->delete('tblmstjobtitle');
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);

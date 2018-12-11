@@ -3,23 +3,25 @@ import { Http } from '@angular/http';
 import { Globals } from '.././globals';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { JobTitleService } from '../services/job-title.service';
+import { EmployeeService } from '../services/employee.service';
 declare var $, swal: any;
 
 @Component({
-  selector: 'app-job-title',
-  templateUrl: './job-title.component.html',
-  styleUrls: ['./job-title.component.css']
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.css']
 })
-export class JobTitleComponent implements OnInit {
+export class EmployeeComponent implements OnInit {
 
-  jobtitleEntity;
+  employeeEntity;
   submitted;
   btn_disable;
-  departmentList;
+  jobtitleList;
+  roleList;
+  linemanagerList;
   header;
 
-  constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private JobTitleService: JobTitleService) { }
+  constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private EmployeeService: EmployeeService) { }
 
   ngOnInit() {
     debugger
@@ -36,9 +38,25 @@ export class JobTitleComponent implements OnInit {
     var count = $(window).height() - 270;
     body.style.setProperty('--screen-height', count + "px");
 
-    this.JobTitleService.getAllDepartment()
+    this.EmployeeService.getAllJobTitle()
       .then((data) => {
-        this.departmentList = data;
+        this.jobtitleList = data;
+      },
+        (error) => {
+          //alert('error');
+        });
+
+    this.EmployeeService.getAllRole()
+      .then((data) => {
+        this.roleList = data;
+      },
+        (error) => {
+          //alert('error');
+        });
+
+    this.EmployeeService.getAllLineManager()
+      .then((data) => {
+        this.linemanagerList = data;
       },
         (error) => {
           //alert('error');
@@ -47,13 +65,13 @@ export class JobTitleComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
-      this.JobTitleService.getById(id)
+      this.EmployeeService.getById(id)
         .then((data) => {
-          this.jobtitleEntity = data;
+          this.employeeEntity = data;
           if (data['IsActive'] == 0) {
-            this.jobtitleEntity.IsActive = 0;
+            this.employeeEntity.IsActive = 0;
           } else {
-            this.jobtitleEntity.IsActive = '1';
+            this.employeeEntity.IsActive = '1';
           }
         },
           (error) => {
@@ -66,40 +84,45 @@ export class JobTitleComponent implements OnInit {
     }
     else {
       this.header = 'Add';
-      this.jobtitleEntity = {};
-      this.jobtitleEntity.JobTitleId = 0;
-      this.jobtitleEntity.IsActive = '1';
-      this.jobtitleEntity.DepartmentId='';
+      this.employeeEntity = {};
+      this.employeeEntity.UserId = 0;
+      this.employeeEntity.IsActive = '1';
+      this.employeeEntity.RoleId = '';
+      this.employeeEntity.JobTitleId = '';
+      this.employeeEntity.LineManagerId = '';
     }
   }
-  addJobTitle(jobtitleForm) {
+
+  addEmployee(employeeForm) {
     debugger
     let id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
-      this.jobtitleEntity.UpdatedBy = this.globals.authData.UserId;
+      this.employeeEntity.UpdatedBy = this.globals.authData.UserId;
       this.submitted = false;
     } else {
-      this.jobtitleEntity.CreatedBy = this.globals.authData.UserId;
-      this.jobtitleEntity.UpdatedBy = this.globals.authData.UserId;
-      this.jobtitleEntity.JobTitleId = 0;
+      this.employeeEntity.CreatedBy = this.globals.authData.UserId;
+      this.employeeEntity.UpdatedBy = this.globals.authData.UserId;
+      this.employeeEntity.RoleId = 0;
+      this.employeeEntity.JobTitleId = 0;
+      this.employeeEntity.LineManagerId = 0;
       this.submitted = true;
     }
 
-    if (jobtitleForm.valid) {
+    if (employeeForm.valid) {
       this.btn_disable = true;
 
-      this.JobTitleService.addJobTitle(this.jobtitleEntity)
+      this.EmployeeService.addEmployee(this.employeeEntity)
         .then((data) => {
           this.btn_disable = false;
           this.submitted = false;
-          this.jobtitleEntity = {};
-          jobtitleForm.form.markAsPristine();
+          this.employeeEntity = {};
+          employeeForm.form.markAsPristine();
           if (id) {
             swal({
               position: 'top-end',
               type: 'success',
-              title: 'Job Title updated successfully!',
+              title: 'Employee updated successfully!',
               showConfirmButton: false,
               timer: 1500
             })
@@ -107,12 +130,12 @@ export class JobTitleComponent implements OnInit {
             swal({
               position: 'top-end',
               type: 'success',
-              title: 'Job Title added successfully!',
+              title: 'Employee added successfully!',
               showConfirmButton: false,
               timer: 1500
             })
           }
-          this.router.navigate(['/job-title/list']);
+          this.router.navigate(['/employee/list']);
         },
           (error) => {
             alert('error');

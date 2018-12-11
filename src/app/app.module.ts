@@ -11,25 +11,39 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { Globals } from './globals';
+import {SelectModule} from 'ng-select';
+
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
 import { GenerateEvaluationService } from './services/generate-evaluation.service';
-import {SelectModule} from 'ng-select';
+import { EvaluationListComponent } from './evaluation-list/evaluation-list.component';
+
+
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentService } from './services/department.service';
 import { DepartmentListComponent } from './department-list/department-list.component';
+
 import { JobTitleComponent } from './job-title/job-title.component';
+import { JobTitleService } from './services/job-title.service';
 import { JobTitleListComponent } from './job-title-list/job-title-list.component';
+
 import { EvaluationTypeComponent } from './evaluation-type/evaluation-type.component';
+import { EvaluationTypeService } from './services/evaluation-type.service';
 import { EvaluationTypeListComponent } from './evaluation-type-list/evaluation-type-list.component';
+
 import { QuestionComponent } from './question/question.component';
+import { QuestionService } from './services/question.service';
 import { QuestionListComponent } from './question-list/question-list.component';
-import { UserComponent } from './user/user.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { EvaluationListComponent } from './evaluation-list/evaluation-list.component';
+
+import { EmployeeComponent } from './employee/employee.component';
+import { EmployeeService } from './services/employee.service';
+import { EmployeeListComponent } from './employee-list/employee-list.component';
+
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -49,9 +63,9 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
     EvaluationTypeListComponent,
     QuestionComponent,
     QuestionListComponent,
-    UserComponent,
-    UserListComponent,
-    EvaluationListComponent
+    EvaluationListComponent,
+    EmployeeComponent,
+    EmployeeListComponent
 
   ],
   imports: [
@@ -86,16 +100,16 @@ import { EvaluationListComponent } from './evaluation-list/evaluation-list.compo
       { path: 'question/edit/:id', component: QuestionComponent, canActivate: [AuthGuard] },
       { path: 'question/list', component: QuestionListComponent, canActivate: [AuthGuard] },
 
-      { path: 'employee/add', component: UserComponent, canActivate: [AuthGuard] },
-      { path: 'employee/edit/:id', component: UserComponent, canActivate: [AuthGuard] },
-      { path: 'employee/list', component: UserListComponent, canActivate: [AuthGuard] },
+      { path: 'employee/add', component: EmployeeComponent, canActivate: [AuthGuard] },
+      { path: 'employee/edit/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
+      { path: 'employee/list', component: EmployeeListComponent, canActivate: [AuthGuard] },
 
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

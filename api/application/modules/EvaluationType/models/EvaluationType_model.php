@@ -1,23 +1,23 @@
 <?php
 
-class Department_model extends CI_Model {
+class EvaluationType_model extends CI_Model {
 
-	public function addDepartment($post_Department)
+	public function addEvaluationType($post_EvaluationType)
 	{	
 		try{
-			if($post_Department) {
-				if($post_Department['IsActive']==1) {
+			if($post_EvaluationType) {
+				if($post_EvaluationType['IsActive']==1) {
 					$IsActive = true;
 				} else {
 					$IsActive = false;
 				}
-				$department_data=array(
-				"DepartmentName"=>trim($post_Department['DepartmentName']),
+				$evaluationtype_data=array(
+				"EvaluationTypeName"=>trim($post_EvaluationType['EvaluationTypeName']),
 				"IsActive"=>$IsActive,
-				"CreatedBy" => trim($post_Department['CreatedBy']),
+				"CreatedBy" => trim($post_EvaluationType['CreatedBy']),
 				"CreatedOn" =>date('y-m-d H:i:s')
 				);
-				$res=$this->db->insert('tblmstdepartment',$department_data);
+				$res=$this->db->insert('tblmstevaluationtype',$evaluationtype_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -39,23 +39,23 @@ class Department_model extends CI_Model {
 		}	
 	}
 
-	public function editDepartment($post_Department) 
+	public function editEvaluationType($post_EvaluationType) 
 	{
 		try{
-			if($post_Department['IsActive']==1) {
+			if($post_EvaluationType['IsActive']==1) {
 				$IsActive = true;
 			} else {
 				$IsActive = false;
 			}
-			if($post_Department) {
-				$department_data = array(
-				"DepartmentName"=>trim($post_Department['DepartmentName']),
+			if($post_EvaluationType) {
+				$evaluationtype_data = array(
+				"EvaluationTypeName"=>trim($post_EvaluationType['EvaluationTypeName']),
 				"IsActive"=>$IsActive,
-				"UpdatedBy" => trim($post_Department['UpdatedBy']),
+				"UpdatedBy" => trim($post_EvaluationType['UpdatedBy']),
 				"UpdatedOn" =>date('y-m-d H:i:s')
 				);
-				$this->db->where('DepartmentId',trim($post_Department['DepartmentId']));
-				$res = $this->db->update('tblmstdepartment',$department_data);
+				$this->db->where('EvaluationTypeId',trim($post_EvaluationType['EvaluationTypeId']));
+				$res = $this->db->update('tblmstevaluationtype',$evaluationtype_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -75,20 +75,20 @@ class Department_model extends CI_Model {
 			return false;
 		}	
 	}
-	public function getById($departmentId=Null)
+	public function getById($evaluationtypeId=Null)
 	{
-	  if($departmentId)
+	  if($evaluationtypeId)
 	  {
-		 $this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive');
-		 $this->db->where('tmd.DepartmentId',$departmentId);
-		 $result=$this->db->get('tblmstdepartment tmd');
-		 $department_data= array();
+		 $this->db->select('tmet.EvaluationTypeId, tmet.EvaluationTypeName, tmet.IsActive');
+		 $this->db->where('tmet.EvaluationTypeId',$evaluationtypeId);
+		 $result=$this->db->get('tblmstevaluationtype tmet');
+		 $evaluationtype_data= array();
 		 foreach($result->result() as $row)
 		 {
-			$department_data=$row;
+			$evaluationtype_data=$row;
 			
 		 }
-		 return $department_data;
+		 return $evaluationtype_data;
 		 
 	  }
 	  else
@@ -96,11 +96,11 @@ class Department_model extends CI_Model {
 		  return false;
 	  }
 	}
-	public function getAllDepartment()
+	public function getAllEvaluationType()
 	{
 		try{
-			$this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive, (SELECT COUNT(tmjt.JobTitleId) FROM tblmstjobtitle as tmjt WHERE tmjt.DepartmentId=tmd.DepartmentId) as isdisabled');
-			$result = $this->db->get('tblmstdepartment tmd');
+			$this->db->select('tmet.EvaluationTypeId, tmet.EvaluationTypeName, tmet.IsActive, (SELECT COUNT(tmee.EvaluationId) FROM tblmstempevaluation as tmee WHERE tmet.EvaluationTypeId=tmee.EvaluationTypeId) as isdisabled');
+			$result = $this->db->get('tblmstevaluationtype tmet');
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
 						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -130,8 +130,8 @@ class Department_model extends CI_Model {
 					'UpdatedBy' => trim($post_data['UpdatedBy']),
 					'UpdatedOn' => date('y-m-d H:i:s'),
 				);			
-				$this->db->where('DepartmentId',trim($post_data['DepartmentId']));
-				$res = $this->db->update('tblmstdepartment',$data);
+				$this->db->where('EvaluationTypeId',trim($post_data['EvaluationTypeId']));
+				$res = $this->db->update('tblmstevaluationtype',$data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -151,13 +151,13 @@ class Department_model extends CI_Model {
 			return false;
 		}
 	}
-	public function deleteDepartment($post_Department) {
+	public function deleteEvaluationType($post_EvaluationType) {
 		try{
-			if($post_Department) 
+			if($post_EvaluationType) 
 			{
-				$id=$post_Department['id'];
-				$this->db->where('DepartmentId',$post_Department['id']);
-				$res = $this->db->delete('tblmstdepartment');
+				$id=$post_EvaluationType['id'];
+				$this->db->where('EvaluationTypeId',$post_EvaluationType['id']);
+				$res = $this->db->delete('tblmstevaluationtype');
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);

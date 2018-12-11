@@ -1,0 +1,160 @@
+<div class="row">
+  <div class="col-lg-12">
+
+    <div class="breadcrumb_block">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="page_heading">
+          <h1>{{ header }} Employee</h1>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="fa fa-home"></i></a></li>
+          <li class="breadcrumb-item"><a routerLink="/employee/list">Employee</a></li>
+          <li class="breadcrumb-item active">Add</li>
+        </ol>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="btn-group pull-right add-right addpage_backbtn">
+      <a routerLink="/job-title/list" class="lgn_btn">
+        Back to list
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="form-bg">
+      <form class="form-validate" role="form" #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+        <div class="form-group col-md-3">
+          <label><span class="required">*</span>First Name</label>
+          <input type="text" class="form-control" #EmployeeFirstName="ngModel" [(ngModel)]="employeeEntity.EmployeeFirstName"
+            class="form-control" name="EmployeeFirstName" maxlength="100" required>
+          <span class="error_span" *ngIf="(EmployeeFirstName.dirty && EmployeeFirstName.invalid) || (EmployeeFirstName.pristine && submitted)">
+            <span *ngIf="EmployeeFirstName.errors.required || (EmployeeFirstName.pristine && submitted)">Please
+              enter First Name</span>
+            <span class="error_span" *ngIf="EmployeeFirstName.errors && EmployeeFirstName.errors.pattern">
+              Please enter a valid First Name
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Middle Name</label>
+          <input type="text" class="form-control" #EmployeeMiddleName="ngModel" [(ngModel)]="employeeEntity.EmployeeMiddleName"
+            class="form-control" name="EmployeeMiddleName" maxlength="100">
+          <span class="error_span" *ngIf="(EmployeeMiddleName.dirty && EmployeeMiddleName.invalid) || (EmployeeMiddleName.pristine && submitted)">
+            <span *ngIf="EmployeeMiddleName.errors.required || (EmployeeMiddleName.pristine && submitted)">Please
+              enter Middle Name</span>
+            <span class="error_span" *ngIf="EmployeeMiddleName.errors && EmployeeMiddleName.errors.pattern">
+              Please enter a valid Middle Name
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label><span class="required">*</span>Last Name</label>
+          <input type="text" class="form-control" #EmployeeLastName="ngModel" [(ngModel)]="employeeEntity.EmployeeLastName"
+            class="form-control" name="EmployeeLastName" maxlength="100" required>
+          <span class="error_span" *ngIf="(EmployeeLastName.dirty && EmployeeLastName.invalid) || (EmployeeLastName.pristine && submitted)">
+            <span *ngIf="EmployeeLastName.errors.required || (EmployeeLastName.pristine && submitted)">Please
+              enter Last Name</span>
+            <span class="error_span" *ngIf="EmployeeLastName.errors && EmployeeLastName.errors.pattern">
+              Please enter a valid Last Name
+            </span>
+          </span>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-md-3">
+          <label>Employee ID</label>
+          <input type="text" class="form-control" #EmployeeId="ngModel" [(ngModel)]="employeeEntity.EmployeeId"
+            class="form-control" name="EmployeeId" maxlength="100">
+          <span class="error_span" *ngIf="(EmployeeId.dirty && EmployeeId.invalid) || (EmployeeId.pristine && submitted)">
+            <span *ngIf="EmployeeId.errors.required || (EmployeeId.pristine && submitted)">Please
+              enter Last Name</span>
+            <span class="error_span" *ngIf="EmployeeId.errors && EmployeeId.errors.pattern">
+              Please enter a valid Employee ID
+            </span>
+          </span>
+        </div>
+        <div class="form-group col-md-3">
+          <label><span class="required">*</span>Email Address</label>
+          <input type="text" class="form-control" #EmployeeEmailAddress="ngModel" [(ngModel)]="employeeEntity.EmployeeEmailAddress"
+            class="form-control" name="EmployeeEmailAddress" maxlength="100" required>
+          <span class="error_span" *ngIf="(EmployeeEmailAddress.dirty && EmployeeEmailAddress.invalid) || (EmployeeEmailAddress.pristine && submitted)">
+            <span *ngIf="EmployeeEmailAddress.errors.required || (EmployeeEmailAddress.pristine && submitted)">Please
+              enter Email Address</span>
+            <span class="error_span" *ngIf="EmployeeEmailAddress.errors && EmployeeEmailAddress.errors.pattern">
+              Please enter a valid Email Address
+            </span>
+          </span>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+            <label><span class="required">*</span>Job Title</label>
+            <select class='select-option' required class="form-control" #JobTitleId="ngModel" [(ngModel)]="employeeEntity.JobTitleId"
+              name="JobTitleId" [ngClass]="{red_border: (JobTitleId.dirty && JobTitleId.invalid) || (JobTitleId.pristine && submitted)}">
+              <option value="" ngSelected='employeeEntity.JobTitleId==""'>Select</option>
+              <ng-container *ngFor='let jobtitle of jobtitleList'>
+                <option class='option' [value]="jobtitle.JobTitleId" ngSelected="employeeEntity.JobTitleId==jobtitle.JobTitleId">{{jobtitle.JobTitleName}}</option>
+              </ng-container>
+            </select>
+            <span class="error_span" *ngIf="(JobTitleId.dirty && JobTitleId.invalid) || (JobTitleId.pristine && submitted)">
+              <span *ngIf="JobTitleId.errors.required || (JobTitleId.pristine && submitted)">Please select
+                Job Title </span>
+            </span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+            <label><span class="required">*</span>Line Manager</label>
+            <select class='select-option' required class="form-control" #LineManagerId="ngModel" [(ngModel)]="employeeEntity.LineManagerId"
+              name="LineManagerId" [ngClass]="{red_border: (LineManagerId.dirty && LineManagerId.invalid) || (LineManagerId.pristine && submitted)}">
+              <option value="" ngSelected='employeeEntity.LineManagerId==""'>Select</option>
+              <ng-container *ngFor='let linemanager of linemanagerList'>
+                <option class='option' [value]="linemanager.UserId" ngSelected="employeeEntity.LineManagerId==linemanager.UserId">{{linemanager.FirstName}} {{linemanager.LastName}}</option>
+              </ng-container>
+            </select>
+            <span class="error_span" *ngIf="(LineManagerId.dirty && LineManagerId.invalid) || (LineManagerId.pristine && submitted)">
+              <span *ngIf="LineManagerId.errors.required || (LineManagerId.pristine && submitted)">Please select
+                Line Manager </span>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="form-group">
+            <label><span class="required">*</span>Role</label>
+            <select class='select-option' required class="form-control" #RoleId="ngModel" [(ngModel)]="employeeEntity.RoleId"
+              name="RoleId" [ngClass]="{red_border: (RoleId.dirty && RoleId.invalid) || (RoleId.pristine && submitted)}">
+              <option value="" ngSelected='employeeEntity.RoleId==""'>Select</option>
+              <ng-container *ngFor='let role of roleList'>
+                <option class='option' [value]="role.RoleId" ngSelected="employeeEntity.RoleId==role.RoleId">{{role.RoleName}}</option>
+              </ng-container>
+            </select>
+            <span class="error_span" *ngIf="(RoleId.dirty && RoleId.invalid) || (RoleId.pristine && submitted)">
+              <span *ngIf="RoleId.errors.required || (RoleId.pristine && submitted)">Please select
+                role </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+          <label><span class="required">*</span>Active ?</label>
+          <div class="activeyes_box">
+            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="employeeEntity.IsActive">
+            <label for="IsActive"></label>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12 col-sm-12 text-center">
+          <button type="submit" class="lgn_btn"><span>Submit</span></button>
+          <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<!-- End Inner Section -->

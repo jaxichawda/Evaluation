@@ -6,6 +6,32 @@ header('Content-Type: application/json');
 
 class Department extends CI_Controller {
 
+	public function addDepartment()
+	{
+		$post_Department = json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_Department) {
+			if($post_Department['DepartmentId']>0) {
+				$result = $this->Department_model->editDepartment($post_Department);
+				if($result) {
+					echo json_encode($post_Department);	
+				}	
+			}
+			else {
+				$result = $this->Department_model->addDepartment($post_Department); 
+				if($result) {
+					echo json_encode($post_Department);	
+				}	
+			}		
+		}
+	}
+	public function getById($departmentId=null)
+	{	
+		if(!empty($departmentId)) {
+			$data=[];
+			$data=$this->Department_model->getById($departmentId);
+			echo json_encode($data);
+		}
+	}
 	public function __construct()
 	{
 		parent::__construct();
@@ -25,4 +51,17 @@ class Department extends CI_Controller {
 			}						
 		}		
 	}	
+	public function deleteDepartment() {
+		$post_Department = json_decode(trim(file_get_contents('php://input')), true);		
+
+		if ($post_Department)
+		 {
+			if($post_Department['id'] > 0){
+				$result = $this->Department_model->deleteDepartment($post_Department);
+				if($result) {
+					echo json_encode("Delete successfully");
+				}
+		 	}
+		} 	
+	}
 }
