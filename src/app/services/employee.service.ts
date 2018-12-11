@@ -27,21 +27,6 @@ export class EmployeeService {
     });
     return promise;
   }
-  getAllEmployee() {
-    let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'Employee/getAllEmployee')
-        .toPromise()
-        .then(
-          res => { // Success
-            resolve(res);
-          },
-          msg => { // Error
-            reject(msg);
-          }
-        );
-    });
-    return promise;
-  }
   getById(userId) {
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.globals.baseAPIUrl + 'Employee/getById/' + userId)
@@ -54,6 +39,21 @@ export class EmployeeService {
             reject(msg);
             // this.globals.isLoading = false;
             this.router.navigate(['/pagenotfound']);
+          }
+        );
+    });
+    return promise;
+  }
+  getAllEmployee() {
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(this.globals.baseAPIUrl + 'Employee/getAllEmployee')
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
           }
         );
     });

@@ -41,6 +41,7 @@ export class EmployeeComponent implements OnInit {
     this.EmployeeService.getAllJobTitle()
       .then((data) => {
         this.jobtitleList = data;
+        console.log(this.jobtitleList);
       },
         (error) => {
           //alert('error');
@@ -49,6 +50,7 @@ export class EmployeeComponent implements OnInit {
     this.EmployeeService.getAllRole()
       .then((data) => {
         this.roleList = data;
+        console.log(this.roleList);
       },
         (error) => {
           //alert('error');
@@ -57,6 +59,7 @@ export class EmployeeComponent implements OnInit {
     this.EmployeeService.getAllLineManager()
       .then((data) => {
         this.linemanagerList = data;
+        console.log(this.linemanagerList);
       },
         (error) => {
           //alert('error');
@@ -68,6 +71,7 @@ export class EmployeeComponent implements OnInit {
       this.EmployeeService.getById(id)
         .then((data) => {
           this.employeeEntity = data;
+          console.log(this.employeeEntity);
           if (data['IsActive'] == 0) {
             this.employeeEntity.IsActive = 0;
           } else {
@@ -103,9 +107,6 @@ export class EmployeeComponent implements OnInit {
     } else {
       this.employeeEntity.CreatedBy = this.globals.authData.UserId;
       this.employeeEntity.UpdatedBy = this.globals.authData.UserId;
-      this.employeeEntity.RoleId = 0;
-      this.employeeEntity.JobTitleId = 0;
-      this.employeeEntity.LineManagerId = 0;
       this.submitted = true;
     }
 
