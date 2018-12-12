@@ -38,6 +38,41 @@ class GenerateEvaluation extends CI_Controller {
 			$data=$this->GenerateEvaluation_model->getEvaluationById($evaluationId);
 			echo json_encode($data);
 		}
+    }
+    public function revokeEvaluation() {
+		$post_revoke= json_decode(trim(file_get_contents('php://input')), true);		
+
+		if ($post_revoke)
+		 {
+			if($post_revoke['evaluationid'] > 0){
+				$result = $this->GenerateEvaluation_model->revokeEvaluation($post_revoke);
+				if($result) {
+					echo json_encode("Delete successfully");
+					}
+		 	}
+		} 
+    }
+    public function revokeEvaluator() {
+		$post_revoke= json_decode(trim(file_get_contents('php://input')), true);		
+
+		if ($post_revoke)
+		 {
+			if($post_revoke['EvaluatorId'] > 0){
+				$result = $this->GenerateEvaluation_model->revokeEvaluator($post_revoke);
+				if($result) {
+					echo json_encode("Delete successfully");
+					}
+		 	}
+		} 
+    }
+    public function getEvaluators() {
+		$post_data= json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_data)
+		{
+			$data=$this->GenerateEvaluation_model->getEvaluators($post_data);			
+			echo json_encode($data);
+		}
+				
 	}
     public function generate_Evaluation() {
       $post_generate = json_decode(trim(file_get_contents('php://input')), true);	

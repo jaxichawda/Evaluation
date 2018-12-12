@@ -97,4 +97,61 @@ export class GenerateEvaluationService {
             });
             return promise;
           }
+          revokeEvaluation(del)
+          {
+            debugger
+          let promise = new Promise((resolve, reject) => {		
+            this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/revokeEvaluation', del)
+              .toPromise()
+              .then(
+                res => { // Success
+                  resolve(res);
+                },
+                msg => { // Error
+              reject(msg);
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+                }
+              );
+          });		
+          return promise;
+          }
+          revokeEvaluator(del)
+          {
+            debugger
+          let promise = new Promise((resolve, reject) => {		
+            this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/revokeEvaluator', del)
+              .toPromise()
+              .then(
+                res => { // Success
+                  resolve(res);
+                },
+                msg => { // Error
+              reject(msg);
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+                }
+              );
+          });		
+          return promise;
+          }
+          getEvaluators(obj)
+          {
+            debugger
+          let promise = new Promise((resolve, reject) => {
+            this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/getEvaluators', obj)
+              .toPromise()
+              .then(
+                res => { // Success
+                  resolve(res);
+                },
+                msg => { // Error
+              reject(msg);
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+                }
+              );
+          });		
+          return promise;
+          }
 }

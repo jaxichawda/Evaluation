@@ -34,16 +34,72 @@ class GenerateEvaluation_model extends CI_Model
 		 {
 			$row['evalutor']=explode(",",$row['evalutor']);
 			$evaluation_data=$row;
-			
 		 }
 		 return $evaluation_data;
-		 
 	  }
 	  else
 	  {
 		  return false;
 	  }
 	}
+	public function revokeEvaluation($post_revoke) {
+		try{
+		if($post_revoke) {
+				$evaluation_data = array(
+					'StatusId' => 3,
+					'UpdatedBy' => $post_revoke['UserId'],
+					'UpdatedOn' => date('y-m-d H:i:s')
+				);
+				$this->db->where('EvaluationId',$post_revoke['evaluationid']);
+				$res = $this->db->update('tblmstempevaluator',$evaluation_data);
+				$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+				if($res) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}	
+		}
+		catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}	
+		}
+		public function revokeEvaluator($post_revoke) {
+			try{
+			if($post_revoke) {
+					$evaluation_data = array(
+						'StatusId' => 3,
+						'UpdatedBy' => $post_revoke['UserId'],
+						'UpdatedOn' => date('y-m-d H:i:s')
+					);
+					$this->db->where('EvaluatorId',$post_revoke['EvaluatorId']);
+					$res = $this->db->update('tblmstempevaluator',$evaluation_data);
+					$db_error = $this->db->error();
+						if (!empty($db_error) && !empty($db_error['code'])) { 
+							throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+							return false; // unreachable return statement !!!
+						}
+					if($res) {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}	
+			}
+			catch(Exception $e){
+				trigger_error($e->getMessage(), E_USER_ERROR);
+				return false;
+			}	
+			}
 	public function getAllEvaluation() {
 		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName,ee.StatusId');
 		$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
@@ -53,6 +109,21 @@ class GenerateEvaluation_model extends CI_Model
 		$this->db->order_by('e.EvaluationId','asc');
 		$this->db->group_by('e.EvaluationId');
 		$result = $this->db->get('tblmstempevaluation as e');	
+		$res = array();
+		if($result->result()) {
+			$res = $result->result();
+		}
+		return $res;
+	}
+	public function getEvaluators($post_data) {
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,ee.EmployeeEvaluatorId,ee.EvaluatorId,ee.StatusId');
+		$this->db->join('tbluser u','u.UserId=ee.EvaluatorId','left');
+		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
+		$this->db->where('ee.EvaluationId',$post_data['EvaluationId']);
+		$this->db->where('ee.EvaluatorId!=',$post_data['UserId']);
+		$this->db->order_by('ee.EmployeeEvaluatorId','asc');
+		//$this->db->group_by('ee.EvaluationId');
+		$result = $this->db->get('tblmstempevaluator as ee');	
 		$res = array();
 		if($result->result()) {
 			$res = $result->result();

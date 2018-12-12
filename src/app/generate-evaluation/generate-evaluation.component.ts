@@ -45,7 +45,7 @@ export class GenerateEvaluationComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.header = 'Edit';
+      this.header = 'ReGenerate';
       this.GenerateEvaluationService.getEvaluationById(id)
         .then((data) => {
           this.evaluationEntity = data;
@@ -68,7 +68,7 @@ export class GenerateEvaluationComponent implements OnInit {
           });
     }
     else {
-      this.header = 'Add';
+      this.header = 'Generate';
       this.evaluationEntity = {};
       this.evaluationEntity.EvaluationId = 0;
       this.evaluationEntity.Check=true;

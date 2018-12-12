@@ -17,7 +17,7 @@ export class EvaluationListComponent implements OnInit {
   evaluationList;
   status;  
   msgflag;
-  deleteEntity;
+  EvaluatorList;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
@@ -35,6 +35,10 @@ export class EvaluationListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
+
+      $('.modal').on('hidden.bs.modal', function () {
+        $('.right_content_block').removeClass('style_position');
+      });
     }, 1000);
 
     this.GenerateEvaluationService.getAllEvaluation()
@@ -93,5 +97,99 @@ export class EvaluationListComponent implements OnInit {
     this.msgflag = false;
   }
 
- 
+  revokeEvaluation(evaluation){
+		swal({
+			title: 'Are you sure?',
+			text: "You want to revoke this evaluation?",
+			type: 'info',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, revoke it!'
+		}).then((result) => {
+			if (result.value) {
+				//this.globals.isLoading = true;
+				var del={'UserId':this.globals.authData.UserId,'evaluationid':evaluation.EvaluationId};
+				this.GenerateEvaluationService.revokeEvaluation(del)
+				.then((data) => 
+				{
+					//this.globals.isLoading = false;
+					let index = this.evaluationList.indexOf(evaluation);			
+					this.evaluationList[index].StatusId = 3;
+					swal({
+						position: 'top-end',
+						type: 'success',
+						title: 'Evaluation revoked successfully',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					//this.default();
+				}, 
+				(error) => 
+				{
+					 // this.globals.isLoading = false;
+           this.router.navigate(['/pagenotfound']);
+				});	
+			
+			}
+		
+		})
+  }
+  revokeEvaluator(evaluators){
+		swal({
+			title: 'Are you sure?',
+			text: "You want to revoke this evaluator?",
+			type: 'info',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, revoke it!'
+		}).then((result) => {
+			if (result.value) {
+				//this.globals.isLoading = true;
+				var del={'UserId':this.globals.authData.UserId,'EvaluatorId':evaluators.EvaluatorId};
+				this.GenerateEvaluationService.revokeEvaluator(del)
+				.then((data) => 
+				{
+					//this.globals.isLoading = false;
+					let index = this.EvaluatorList.indexOf(evaluators);			
+					this.EvaluatorList[index].StatusId = 3;
+					swal({
+						position: 'top-end',
+						type: 'success',
+						title: 'Evaluator revoked successfully',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					//this.default();
+				}, 
+				(error) => 
+				{
+					 // this.globals.isLoading = false;
+           this.router.navigate(['/pagenotfound']);
+				});	
+			
+			}
+		
+		})
+  }
+  showEvaluators(evaluation){
+    var obj={'UserId':evaluation.UserId,'EvaluationId':evaluation.EvaluationId};
+    this.GenerateEvaluationService.getEvaluators(obj)
+      .then((data) => 
+      { 
+      if(data){
+      this.EvaluatorList = data;
+      }
+        this.globals.isLoading = false;	
+        $('#Details_Modal').modal('show'); 
+        $('.right_content_block').addClass('style_position');
+      }, 
+      (error) => 
+      {
+        //this.globals.isLoading = false;
+        this.router.navigate(['/pagenotfound']);
+      });
+         
+  }
 }

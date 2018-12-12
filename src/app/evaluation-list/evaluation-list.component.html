@@ -18,8 +18,8 @@
         <div class="clearfix"></div>
       </div>
       <div class="btn-group pull-right add-right">
-        <a routerLink="/department/add" class="lgn_btn">
-          Add a new Department
+        <a routerLink="/evaluation/create" class="lgn_btn">
+          Generate Evaluation
         </a>
       </div>
       <div class="clearfix"></div>
@@ -63,25 +63,21 @@
                   <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
                   <td>
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
+                      <button class="btn btn-default btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
+                        View Details
+                      </button>
                       <button class="btn btn-default btn-rounded btn-sm" routerLink="/evaluation/edit/{{evaluation.EvaluationId}}">
                         ReGenerate
                       </button>
-                    </div>
-                    <!-- <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Department can't be deleted as it is already used in Job Title.">
-                      <button *ngIf="department.isdisabled>0" [disabled]="department.isdisabled>0" data-type="Record"
-                        class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span class="fa fa-times"></span></button>
-                    </div> -->
-                    <!-- <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                      <button data-type="Record" *ngIf="department.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
-                        (click)="deleteDepartment(department)">
-                        <span class="fa fa-times"></span>
+                      <button *ngIf="evaluation.StatusId=='0'" class="btn btn-default btn-rounded btn-sm" (click)="revokeEvaluation(evaluation)">
+                        Revoke
                       </button>
-                    </div> -->
+                    </div>
                   </td>
                 </tr>
-                <tr class="text-center" *ngIf="evaluationList.length <= 0">
+                <!-- <tr class="text-center" *ngIf="evaluationList.length <= 0">
                   <td colspan="4">There is no record found.</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -92,3 +88,49 @@
   </div>
 </div>
 <!-- end page-wrapper -->
+<div class="modal fade bs-example-modal-sm"  id="Details_Modal" tabindex="-1" role="dialog" aria-labelledby="Details_Modal">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title" id="myModalLabel">Evaluators</h3>
+            </div>
+          <div  class="modal-body">
+            <div class="scroll_preview">
+              <table id="preview_table" class=" table-striped table table-hover table-bordered" style="width:100%">
+              <thead>         
+                  <tr>
+                    <th style="width:1%;">#</th>
+                    <th style="width:20%;">Evaluator Name</th>
+                    <th style="width:20%;">Evaluator Position</th>
+                    <th style="width:20%;">Status</th>
+                    <th style="width:1%;">Actions</th>
+                    </tr>
+                  </thead>
+              <tbody>
+                  <tr *ngFor="let evaluators of EvaluatorList; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>{{evaluators.Name}}</td>                      
+                      <td>{{evaluators.JobTitleName}}</td> 
+                      <td *ngIf="evaluators.StatusId=='1'"><span class="submit_status">{{status.submitted}}</span></td>
+                      <td *ngIf="evaluators.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
+                      <td *ngIf="evaluators.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
+                      <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
+                      <td class="text-center">
+                          <button *ngIf="evaluators.StatusId=='0'" type="button" class="back_btn" data-tooltip="Revoke" 
+                          (click)="revokeEvaluator(evaluators)" >
+                            Revoke</button>
+                      </td>
+                      </tr>
+                      <!-- <tr *ngIf="EvaluatorList.length<=0">
+                        <td colspan="6" class="text-center">There is no record found</td>
+                      </tr> -->
+                </tbody>
+              </table>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="back_btn" data-dismiss="modal">OK</button>
+              </div>
+      </div>
+  </div>
+</div>
