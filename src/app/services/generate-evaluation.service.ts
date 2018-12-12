@@ -61,4 +61,40 @@ export class GenerateEvaluationService {
         });		
         return promise;
         }
+        getAllEvaluation(){   
+          debugger  
+          let promise = new Promise((resolve, reject) => {     
+            this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getAllEvaluation')
+              .toPromise()
+              .then(
+                res => { // Success
+                  resolve(res);
+                },
+                msg => { // Error
+                  reject(msg);
+                  this.globals.isLoading = false;
+                  this.router.navigate(['/pagenotfound']);
+                }
+              );
+          });	
+          return promise;
+          }
+          getEvaluationById(evaluationId) {
+            debugger
+            let promise = new Promise((resolve, reject) => {
+              this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getEvaluationById/' + evaluationId)
+                .toPromise()
+                .then(
+                  res => { // Success
+                    resolve(res);
+                  },
+                  msg => { // Error
+                    reject(msg);
+                    // this.globals.isLoading = false;
+                    this.router.navigate(['/pagenotfound']);
+                  }
+                );
+            });
+            return promise;
+          }
 }
