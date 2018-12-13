@@ -12,6 +12,13 @@ export class SidebarComponent implements OnInit {
   constructor(private globals: Globals) { }
 
   ngOnInit() {
+	  $('body').tooltip({
+        selector: '[data-toggle="tooltip"], [title]:not([data-toggle="popover"])',
+        trigger: 'hover',
+        container: 'body'
+    }).on('click mousedown mouseup', '[data-toggle="tooltip"], [title]:not([data-toggle="popover"])', function () {
+        $('[data-toggle="tooltip"], [title]:not([data-toggle="popover"])').tooltip('destroy');
+    });	 
     setTimeout(function () {
       $('.left_menu_toggle').click(function () {
         $('.left_menu_toggle i').toggleClass("fa-indent");
