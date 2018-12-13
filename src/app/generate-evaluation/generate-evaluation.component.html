@@ -35,7 +35,7 @@
                     <label><span>*</span>Users</label>
                     <select  class='select-option' required class="form-control" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
                      name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}" (change)="onChange($event)">
-                     <ng-container *ngFor="let user of userlist">
+                     <ng-container *ngFor="let user of userlist1">
                       <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
                       <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
                       <option *ngIf="(user.IsActive==1) && (user.RoleId==2)" value="{{user.value}}">{{user.label}} (HR)</option> -->
@@ -46,10 +46,10 @@
                       </span>
                     </span>
                   </div>
-                  <div class="check_box">
+                  <!-- <div class="check_box">
                     <input type="checkbox" name="Check" id="Check1" value="Check1" #Check="ngModel" [(ngModel)]="evaluationEntity.Check">
                     <label for="Check1" title="Check1" class="checkboxbtn_label">Keep selected to send the evaluation to above selected user</label>
-                  </div>
+                  </div> -->
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="form-group">
@@ -57,9 +57,11 @@
                   <ng-select
                     [options]="userlist"
                     [multiple]="true"
-                    [(ngModel)]="selectedCharacters"
-                    >
+                    [(ngModel)]="selectedCharacters" name="selectedCharacters" [ngClass]="{'red_border': showError}">
                 </ng-select>
+                <span class="error_span" *ngIf="showError">
+                  Please select any Evaluator
+                </span>
                 </div>
             </div>
             <div class="clearfix"></div>

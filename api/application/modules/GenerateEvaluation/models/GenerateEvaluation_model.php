@@ -250,9 +250,9 @@ class GenerateEvaluation_model extends CI_Model
 				}
 				if($res) {
 					$evaluationid = $this->db->insert_id();
-					if(trim($post_generate['Check'])==1){
-						array_push($post_generate['EvaluatorsId'],$post_generate['UserId']);
-					}
+					// if(trim($post_generate['Check'])==1){
+					// 	array_push($post_generate['EvaluatorsId'],$post_generate['UserId']);
+					// }
 					foreach($post_generate['EvaluatorsId'] as $id){
 					$evaluator_data = array(
 						'EvaluationId' =>  $evaluationid,
