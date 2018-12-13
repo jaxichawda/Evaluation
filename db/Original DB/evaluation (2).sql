@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2018 at 09:27 AM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Generation Time: Dec 13, 2018 at 07:15 AM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -71,7 +69,8 @@ INSERT INTO `tblmstconfiguration` (`ConfigurationId`, `Key`, `Value`, `DisplayTe
 (3, 'AnswerType', '3', 'MCQ', 'It store MCQ Answers.', 0, b'1', 1, '2018-12-07 06:34:45', 1, '2018-12-07 06:34:45'),
 (4, 'EvaluationStatus', '0', 'Pending', NULL, 0, b'1', 1, '2018-12-07 06:43:08', 1, '2018-12-07 06:43:08'),
 (5, 'EvaluationStatus', '2', 'In Progress', NULL, 0, b'1', 1, '2018-12-07 06:44:27', 1, '2018-12-07 06:44:27'),
-(6, 'EvaluationStatus', '1', 'Submitted', NULL, 0, b'1', 1, '2018-12-07 06:44:27', 1, '2018-12-07 06:44:27');
+(6, 'EvaluationStatus', '1', 'Submitted', NULL, 0, b'1', 1, '2018-12-07 06:44:27', 1, '2018-12-07 06:44:27'),
+(7, 'EvaluationStatus', '3', 'Revoked', NULL, 0, b'1', 1, '2018-12-07 06:44:27', 1, '2018-12-07 06:44:27');
 
 -- --------------------------------------------------------
 
@@ -109,7 +108,9 @@ INSERT INTO `tblmstdepartment` (`DepartmentId`, `DepartmentName`, `IsActive`, `C
 
 CREATE TABLE `tblmstempevaluation` (
   `EvaluationId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
   `EvaluationTypeId` int(11) NOT NULL,
+  `EvaluationDate` timestamp NOT NULL,
   `EvaluationDescription` text,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
@@ -117,6 +118,14 @@ CREATE TABLE `tblmstempevaluation` (
   `UpdatedBy` int(11) NOT NULL DEFAULT '1',
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblmstempevaluation`
+--
+
+INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `EvaluationDate`, `EvaluationDescription`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(11, 4, 2, '0000-00-00 00:00:00', 'asdfghjkl', b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-11 07:03:43'),
+(12, 5, 1, '0000-00-00 00:00:00', 'helllooooooooooooo', b'1', 1, '2018-12-11 07:11:44', 1, '2018-12-11 14:28:54');
 
 -- --------------------------------------------------------
 
@@ -128,13 +137,25 @@ CREATE TABLE `tblmstempevaluator` (
   `EmployeeEvaluatorId` int(11) NOT NULL,
   `EvaluationId` int(11) NOT NULL,
   `EvaluatorId` int(11) NOT NULL,
-  `StatusId` bit(1) NOT NULL DEFAULT b'0',
+  `StatusId` tinyint(1) NOT NULL DEFAULT '0',
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedBy` int(11) NOT NULL DEFAULT '1',
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblmstempevaluator`
+--
+
+INSERT INTO `tblmstempevaluator` (`EmployeeEvaluatorId`, `EvaluationId`, `EvaluatorId`, `StatusId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(29, 11, 5, 3, b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-12 07:05:08'),
+(30, 11, 4, 3, b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-12 11:20:47'),
+(41, 12, 4, 3, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 11:20:47'),
+(42, 12, 6, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13'),
+(43, 12, 5, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13'),
+(44, 12, 5, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13');
 
 -- --------------------------------------------------------
 
@@ -151,6 +172,14 @@ CREATE TABLE `tblmstevaluationtype` (
   `UpdatedBy` int(11) NOT NULL DEFAULT '1',
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblmstevaluationtype`
+--
+
+INSERT INTO `tblmstevaluationtype` (`EvaluationTypeId`, `EvaluationTypeName`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(1, 'Monthly Evaluation', b'1', 1, '2018-12-07 13:42:24', 1, '2018-12-07 13:42:24'),
+(2, 'Yearly Evaluation', b'1', 1, '2018-12-07 13:42:24', 1, '2018-12-07 13:42:24');
 
 -- --------------------------------------------------------
 
@@ -280,7 +309,12 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobTitleId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 0, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11');
+(1, 1, 15, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(2, 2, 2, 0, 'HR', 'Admin', 'Developer', NULL, 'sparmar@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(4, 3, 10, 2, 'Uttam', '', 'Bhut', NULL, 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(5, 3, 5, 4, 'Jaxi', '', 'Chawda', NULL, 'jaxi.chawda@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(6, 3, 5, 4, 'Vidhi', '', 'Bathani', NULL, 'vidhi.bathani@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(7, 3, 5, 4, 'Nirav', '', 'Patel', NULL, 'nirav.patel@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11');
 
 --
 -- Indexes for dumped tables
@@ -361,68 +395,56 @@ ALTER TABLE `tbluser`
 --
 ALTER TABLE `tblevaluationanswer`
   MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblmstconfiguration`
 --
 ALTER TABLE `tblmstconfiguration`
-  MODIFY `ConfigurationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `ConfigurationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tblmstdepartment`
 --
 ALTER TABLE `tblmstdepartment`
   MODIFY `DepartmentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `tblmstempevaluation`
 --
 ALTER TABLE `tblmstempevaluation`
-  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tblmstempevaluator`
 --
 ALTER TABLE `tblmstempevaluator`
-  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT for table `tblmstevaluationtype`
 --
 ALTER TABLE `tblmstevaluationtype`
-  MODIFY `EvaluationTypeId` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `EvaluationTypeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tblmstjobtitle`
 --
 ALTER TABLE `tblmstjobtitle`
   MODIFY `JobTitleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
 --
 -- AUTO_INCREMENT for table `tblmstquestion`
 --
 ALTER TABLE `tblmstquestion`
   MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tblmstuserrole`
 --
 ALTER TABLE `tblmstuserrole`
   MODIFY `RoleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `tblquestionoptions`
 --
 ALTER TABLE `tblquestionoptions`
   MODIFY `QuestionOptionId` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
