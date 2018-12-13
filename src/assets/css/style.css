@@ -286,7 +286,23 @@ table .activeyes_box input[type="checkbox"]:checked + label:after{left :62%;}
 .activeyes_box label:after{ content: ''; width: 24px; height: 24px; border-radius: 100%; left: 3px; top: 3px; background: #aaa; position: absolute; transition:left 0.3s linear 0s; }
 .activeyes_box input[type="checkbox"]:checked + label:after{left :52%; background: #333333; transition:left 0.3s linear 0s; }
 
-
+.user_dashboard{padding: 30px 0;}
+.user_dashboard .user_feedback_grid {
+    padding: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 1px rgba(88, 103, 221, 0.05);
+    text-align: center;
+    border: 1px solid #e3e3e3;
+}
+.user_dashboard .user_feedback_grid .user_title {
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 15px;
+    height: 150px;
+}
+.user_dashboard .user_feedback_grid .user_title p strong {
+    display: block;
+}
+.user_dashboard .user_feedback_grid.self_feedback{background: #f4f4f4;}
 /*----------- end admin css ------------*/
 
 @media (min-width:2000px){	
