@@ -142,26 +142,27 @@ input[type="checkbox"] { visibility:hidden; position:absolute;}
 
 /* ------- Sidebar Area Start ------- */
 .sidebar_wrap{background: #eaeaea; position: fixed; top: 100px; left: 0; padding: 0 0px 0 0px; height: 90%; width: 17.6667%; z-index: 99; transition:all 0.4s ease 0s; overflow-y: auto;}
-.sidebar_wrap .sidebar_box{background: #eaeaea;border-radius: 0px;padding:20px 0;margin-bottom:1px;box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);}
-.sidebar_wrap .sidebar_box .sidebar_box_label span{padding: 5px 0px;color: #0852a5;display: inline-block;font-size: 16px;margin-bottom: 5px;margin: 0 15px 10px 15px;font-weight: bold;}
+.sidebar_wrap .sidebar_box{background: #eaeaea;border-radius: 0px;padding:0px 0;margin-bottom:1px;box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);}
+.sidebar_wrap .sidebar_box .sidebar_box_label span{padding: 5px 0px;color: #0852a5;display: inline-block;font-size: 16px;margin:15px 15px 0px 15px;font-weight: bold;}
 .sidebar_wrap .sidebar_box li i {font-size: 18px; width:25px;}
 .sidebar_wrap .sidebar_box li i.fa-angle-down{margin: 0; text-align: right;}
-.sidebar_wrap .sidebar_box li a {color: #191991 !important;display: block;font-size: 13px;line-height: 15px;list-style: none outside none; padding: 10px 15px; text-decoration: none; text-transform: capitalize; border-left: 3px solid transparent; background: transparent; transition: all .3s ease-in-out;}
-.sidebar_wrap .sidebar_box li a span {display: inline-block;float: none;left: 10px;position: relative;}
+.sidebar_wrap .sidebar_box li a {color: #0061af !important;display: block;font-size: 14px;line-height: 15px;list-style: none outside none; padding: 10px 15px; text-decoration: none; text-transform: capitalize; border-left: 3px solid transparent; background: transparent; transition: all .3s ease-in-out;}
+.sidebar_wrap .sidebar_box li a span {display: inline-block;float: none;left: 10px;position: relative; color: #000;}
 .sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a{border-left: 3px solid transparent; background: transparent;}
 .sidebar_wrap .sidebar_box li a:hover,.sidebar_wrap .sidebar_box li a:focus,.sidebar_wrap .sidebar_box li.dropdown_menu a,.sidebar_wrap .sidebar_box li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a:focus{background: rgba(0, 0, 0, 0.07); transition: all .3s ease-in-out;}
 .sidebar_wrap .sidebar_box li .sub_menu{background: rgba(0,0,0,0.2);}
-.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a{border-left: 3px solid transparent; background: transparent;}
-.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:focus{border-left: 3px solid #fff; background: rgba(0,0,0,0.2); transition: all .3s ease-in-out;}
+.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a{padding-left: 40px; background: transparent;}
+.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:focus{ background: rgba(0,0,0,0.2); transition: all .3s ease-in-out;}
 .sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a i.fa-angle-down:before{content:'\f107';}
 .sidebar_wrap .sidebar_box li.dropdown_menu a i.fa-angle-down:before{content:'\f106';}
 
 .sidebar_wrap.small_menu{ padding-left:30px;width: 80px; transition:all 0.4s ease 0s; padding-top: 20px;}
 .sidebar_wrap.small_menu .sidebar_box{background:none; padding: 0; margin: 0; box-shadow: none;}
-.sidebar_wrap.small_menu .sidebar_box li a{padding: 10px 0; background: transparent; border:0;}
+.sidebar_wrap.small_menu .sidebar_box li a{padding: 10px 0; background: transparent; border:0; width:75%;}
 .sidebar_wrap.small_menu .sidebar_box li .sub_menu,.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu .sub_menu li a,.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu.collapsed,.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu.collapsed a:hover,.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu.collapsed a:focus,.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu.collapsed a{border: 0!important; background: transparent!important;}
 .sidebar_wrap.small_menu .sidebar_box li a span,.sidebar_wrap.small_menu .sidebar_box .sidebar_box_label{display: none;}
-.sidebar_wrap.small_menu .sidebar_box li a:hover,.sidebar_wrap.small_menu .sidebar_box li a:focus,.sidebar_wrap.small_menu .sidebar_box li.active a{color:var(--option-color)!important;}
+.sidebar_wrap.small_menu .sidebar_box li a:hover,.sidebar_wrap.small_menu .sidebar_box li a:focus,.sidebar_wrap.small_menu .sidebar_box li.active a{color:#000!important;}
+.sidebar_wrap.small_menu .sidebar_box li.dropdown_menu .sub_menu li a{padding-left: 0;}
 .sidebar_wrap.small_menu .sidebar_box li i{width: 20px; }
 .sidebar_wrap.small_menu .sidebar_box li i.fa-angle-down{width: 10px; font-size: 14px; line-height: 25px; }
 .menu_right{transition:all 0.4s ease 0s;}
@@ -285,7 +286,23 @@ table .activeyes_box input[type="checkbox"]:checked + label:after{left :62%;}
 .activeyes_box label:after{ content: ''; width: 24px; height: 24px; border-radius: 100%; left: 3px; top: 3px; background: #aaa; position: absolute; transition:left 0.3s linear 0s; }
 .activeyes_box input[type="checkbox"]:checked + label:after{left :52%; background: #333333; transition:left 0.3s linear 0s; }
 
-
+.user_dashboard{padding: 30px 0;}
+.user_dashboard .user_feedback_grid {
+    padding: 10px 0px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 1px rgba(88, 103, 221, 0.05);
+    text-align: center;
+    border: 1px solid #e3e3e3;
+}
+.user_dashboard .user_feedback_grid .user_title {
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 15px;
+    height: 150px;
+}
+.user_dashboard .user_feedback_grid .user_title p strong {
+    display: block;
+}
+.user_dashboard .user_feedback_grid.self_feedback{background: #f4f4f4;}
 /*----------- end admin css ------------*/
 
 @media (min-width:2000px){	

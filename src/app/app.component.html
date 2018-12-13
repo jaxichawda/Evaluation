@@ -13,9 +13,9 @@
 
 <div *ngIf="globals.authData!=undefined">
     <app-header></app-header>
-    <app-sidebar></app-sidebar>
+    <app-sidebar *ngIf="globals.authData.RoleId!=3"></app-sidebar>
     <div class="right_content_block">
-        <div class="col-md-10 col-sm-10 col-xs-10 col-md-offset-2 col-sm-offset-2 height_100 menu_right">
+        <div [ngClass]="{'col-md-10 col-sm-10 col-xs-10 col-md-offset-2 col-sm-offset-2 height_100 menu_right':globals.authData.RoleId!=3}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-2 col-sm-offset-2 height_100 menu_right">
             <div class="bg_white_block">
                 <router-outlet></router-outlet>
                 <app-footer></app-footer>

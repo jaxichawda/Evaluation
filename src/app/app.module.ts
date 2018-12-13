@@ -23,6 +23,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardService } from './services/dashboard.service';
 
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentService } from './services/department.service';
@@ -115,7 +116,7 @@ import { ChangePasswordService } from './services/change-password.service';
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

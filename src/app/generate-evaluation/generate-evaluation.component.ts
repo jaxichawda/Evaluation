@@ -21,15 +21,21 @@ export class GenerateEvaluationComponent implements OnInit {
   submitted;
   btn_disable;
   userlist;
+  userlist1;
   evaluationtypelist;
   reportingData;
   UserId;
   header;
+  DateValid;
+  showError;
+
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
     selectedCharacters:Array<string> = [];
   ngOnInit() {
+    this.DateValid = false;
+    this.showError = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -51,12 +57,12 @@ export class GenerateEvaluationComponent implements OnInit {
           this.evaluationEntity = data;
           //alert(data['self']);
           this.selectedCharacters = this.evaluationEntity.evalutor;
-          if(data['self']==0){
-            this.evaluationEntity.Check=false;
-          }
-          else if(data['self']==1){
-            this.evaluationEntity.Check=true;
-          }
+          // if(data['self']==0){
+          //   this.evaluationEntity.Check=false;
+          // }
+          // else if(data['self']==1){
+          //   this.evaluationEntity.Check=true;
+          // }
 
         },
           (error) => {
@@ -71,7 +77,7 @@ export class GenerateEvaluationComponent implements OnInit {
       this.header = 'Generate';
       this.evaluationEntity = {};
       this.evaluationEntity.EvaluationId = 0;
-      this.evaluationEntity.Check=true;
+      //this.evaluationEntity.Check=true;
     }
     
     setTimeout(function(){
@@ -83,7 +89,7 @@ export class GenerateEvaluationComponent implements OnInit {
 				todayHighlight: 1,
 				startView: 2,
         //minView: 2
-        format: 'mm-dd-yyyy hh:ii',
+        format: 'mm/dd/yyyy hh:ii',
 		    showMeridian: true,
 			});
     },500);
@@ -93,6 +99,7 @@ export class GenerateEvaluationComponent implements OnInit {
     this.GenerateEvaluationService.getData()
 			.then((data) => {
         this.userlist = data['users'];
+        this.userlist1 = data['users'];
         this.evaluationtypelist = data['evaluationtypes'];
 				this.globals.isLoading = false;
 			},
@@ -102,8 +109,19 @@ export class GenerateEvaluationComponent implements OnInit {
       });
   }
   generateEvaluation(evaluationForm){ debugger
+    this.evaluationEntity.EvaluationDate = $("#EvaluationDate").val();	
+    this.evaluationEntity.EvaluatorsId = this.selectedCharacters;
+    if(this.evaluationEntity.EvaluationDate=="" || this.evaluationEntity.EvaluationDate==null || this.evaluationEntity.EvaluationDate==undefined){
+      this.DateValid = true;
+    } else {
+      this.DateValid = false;
+    }
+    if(this.evaluationEntity.EvaluatorsId.length==0 || this.evaluationEntity.EvaluatorsId=="" || this.evaluationEntity.EvaluatorsId==null || this.evaluationEntity.EvaluatorsId==undefined){
+      this.showError = true;
+    } else {
+      this.showError = false;
+    }
     let id = this.route.snapshot.paramMap.get('id');
-
     if (id) {
       this.evaluationEntity.UpdatedBy = this.globals.authData.UserId;
       this.submitted = false;
@@ -113,11 +131,8 @@ export class GenerateEvaluationComponent implements OnInit {
       this.evaluationEntity.EvaluationId = 0;
       this.submitted = true;
     }
-   
-    this.evaluationEntity.EvaluationDate = $("#EvaluationDate").val();	
-    this.evaluationEntity.EvaluatorsId = this.selectedCharacters;
-    console.log(this.evaluationEntity);
-    if(evaluationForm.valid){
+    //console.log(this.evaluationEntity);
+    if(evaluationForm.valid && !this.DateValid && !this.showError){
       this.btn_disable = true;
       this.GenerateEvaluationService.generateEvaluation(this.evaluationEntity)
       .then((data) => 
@@ -154,45 +169,22 @@ export class GenerateEvaluationComponent implements OnInit {
 			});
       
     }
-  }
+}
   onChange(args,userId) {
     this.UserId = args.target.value; 
-    //this.userlist.splice(this.userlist.indexOf(userId),1);
-    //alert(this.UserId);
     this.GenerateEvaluationService.getReportingEmployee(this.UserId)
       .then((data) => 
       { 
         this.reportingData = data;
-        //alert(this.selectedCharacters.length);
-        // if(this.selectedCharacters.length==0){
-        //   this.selectedCharacters = [this.reportingData.UserId];
-        // } else {
-        //   this.selectedCharacters.push(this.reportingData.UserId);
-        // }
-        this.selectedCharacters = [this.reportingData.UserId];
-        console.log(this.selectedCharacters);
+        this.selectedCharacters = [this.reportingData.UserId,this.UserId];
+        //this.selectedCharacters['1'] = [this.UserId];
+        //console.log(this.selectedCharacters);
       }, 
       (error) => 
       {
         this.globals.isLoading = false;
         this.router.navigate(['/pagenotfound']);
       });
-     // console.log(this.userlist);
   }
 
-  
-
-//   onSelected1(option: IOption) { 
-//     alert(this.selectedCharacters);
-// 		if(this.selectedCharacters.length>0){
-// 			this.selectedCharacters.push(`${option.value}`);
-// 		} else {
-// 			this.selectedCharacters = [];
-// 			this.selectedCharacters.push(`${option.value}`);
-// 		}
-// }
-// changeSourceUser(option: IOption){ 
-//   alert(this.selectedCharacters);
-// 	this.selectedCharacters.splice(this.selectedCharacters.indexOf(option.value),1);
-// }
 }
