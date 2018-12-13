@@ -91,8 +91,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 //   Development
 
- //define('ACTIVE_GROUP', 'Development'); // database mode
- //define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
+// define('ACTIVE_GROUP', 'Development'); // database mode
+// define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
 
 //   UAT
 

@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
           // this.loginEntity = {};
           // loginForm.form.markAsPristine();
           //   }
-          this.router.navigate(['/dashboard']);
+          window.location.href = '/dashboard';
+          //this.router.navigate(['/dashboard']);
 
         },
           (error) => {

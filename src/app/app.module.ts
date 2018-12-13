@@ -44,6 +44,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeService } from './services/employee.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangePasswordService } from './services/change-password.service';
+
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -65,7 +68,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     QuestionListComponent,
     EvaluationListComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    ChangePasswordComponent
 
   ],
   imports: [
@@ -104,12 +108,14 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
       { path: 'employee/edit/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
       { path: 'employee/list', component: EmployeeListComponent, canActivate: [AuthGuard] },
 
+      { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
