@@ -37,6 +37,8 @@
                      name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}" (change)="onChange($event)">
                      <ng-container *ngFor="let user of userlist">
                       <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
+                      <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
+                      <option *ngIf="(user.IsActive==1) && (user.RoleId==2)" value="{{user.value}}">{{user.label}} (HR)</option> -->
                   </ng-container> 
                     </select>
                     <span class="error_span" *ngIf="(UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)">
@@ -51,11 +53,10 @@
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="form-group">
-                  <label><span>*</span>Evaluators</label>
+                  <label>Evaluators</label>
                   <ng-select
                     [options]="userlist"
                     [multiple]="true"
-                    name="Instructor"
                     [(ngModel)]="selectedCharacters"
                     >
                 </ng-select>
@@ -81,12 +82,10 @@
               <div class="col-md-6 col-sm-6">
                   <div class="form-group">
                     <label><span>*</span>Evaluation Date</label>
-                    <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date" #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate" [ngClass]="{red_border: (EvaluationDate.dirty && EvaluationDate.invalid) || (EvaluationDate.pristine && submitted)}">
-
-                    <!-- <span class="error_span" *ngIf="(EvaluationDate.dirty && EvaluationDate.invalid) || (EvaluationDate.pristine && submitted)">
-                      <span *ngIf="EvaluationDate.errors.required || (EvaluationDate.pristine && submitted)">Please select Evaluation Date
-                      </span>
-                    </span> -->
+                    <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date" #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate" [ngClass]="{'red_border': DateValid}">
+                    <span class="error_span" *ngIf="DateValid">
+                      Please select Evaluation Date 
+                    </span>
                 </div>
               </div>
               
