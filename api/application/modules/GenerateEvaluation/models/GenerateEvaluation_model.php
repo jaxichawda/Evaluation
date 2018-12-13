@@ -3,7 +3,11 @@
 class GenerateEvaluation_model extends CI_Model
  {	
 	public function getUsers() {
-        $this->db->select('u.UserId as value,u.RoleId,u.JobTitleId,u.LineManagerId,CONCAT(u.FirstName," ",u.LastName) as label,u.MiddleName,u.EmployeeId,u.EmailAddress,u.IsActive');
+        $this->db->select('u.UserId as value,u.RoleId,u.JobTitleId,u.LineManagerId,CASE
+		WHEN u.RoleId = 1 THEN CONCAT(u.FirstName," ",u.LastName," ","(Admin)")
+		WHEN u.RoleId = 2 THEN CONCAT(u.FirstName," ",u.LastName," ","(HR)")
+		ELSE CONCAT(u.FirstName," ",u.LastName)
+	END as label,u.MiddleName,u.EmployeeId,u.EmailAddress,u.IsActive');
 		$this->db->order_by('u.UserId','asc');
 		$result = $this->db->get('tbluser as u');	
 		$res = array();

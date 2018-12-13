@@ -206,6 +206,7 @@ class GenerateEvaluation extends CI_Controller {
                 //return false;
             }  
             }
+            if(count($post_generate['EvaluatorsId'])>0){
             foreach($post_generate['EvaluatorsId'] as $id){
                 $this->db->select('u.FirstName,u.MiddleName,u.LastName,u.EmailAddress');
                 $this->db->where('u.UserId',$id);
@@ -312,6 +313,7 @@ class GenerateEvaluation extends CI_Controller {
             }  
                 }
             }
+        }
         
             echo json_encode($post_generate);	
           }	

@@ -25,11 +25,14 @@ export class GenerateEvaluationComponent implements OnInit {
   reportingData;
   UserId;
   header;
+  DateValid;
+  errorMsg;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
     selectedCharacters:Array<string> = [];
   ngOnInit() {
+    this.DateValid = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -102,8 +105,14 @@ export class GenerateEvaluationComponent implements OnInit {
       });
   }
   generateEvaluation(evaluationForm){ debugger
+    this.evaluationEntity.EvaluationDate = $("#EvaluationDate").val();	
+    this.evaluationEntity.EvaluatorsId = this.selectedCharacters;
+    if(this.evaluationEntity.StartDate=="" || this.evaluationEntity.StartDate==null || this.evaluationEntity.StartDate==undefined){
+      this.DateValid = true;
+    } else {
+      this.DateValid = false;
+    }
     let id = this.route.snapshot.paramMap.get('id');
-
     if (id) {
       this.evaluationEntity.UpdatedBy = this.globals.authData.UserId;
       this.submitted = false;
@@ -113,11 +122,8 @@ export class GenerateEvaluationComponent implements OnInit {
       this.evaluationEntity.EvaluationId = 0;
       this.submitted = true;
     }
-   
-    this.evaluationEntity.EvaluationDate = $("#EvaluationDate").val();	
-    this.evaluationEntity.EvaluatorsId = this.selectedCharacters;
-    console.log(this.evaluationEntity);
-    if(evaluationForm.valid){
+    //console.log(this.evaluationEntity);
+    if(evaluationForm.valid && this.DateValid){
       this.btn_disable = true;
       this.GenerateEvaluationService.generateEvaluation(this.evaluationEntity)
       .then((data) => 
@@ -154,7 +160,7 @@ export class GenerateEvaluationComponent implements OnInit {
 			});
       
     }
-  }
+}
   onChange(args,userId) {
     this.UserId = args.target.value; 
     //this.userlist.splice(this.userlist.indexOf(userId),1);
