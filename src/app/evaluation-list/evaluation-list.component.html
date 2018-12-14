@@ -46,7 +46,7 @@
                   <th style="width:20%;">Employee Position</th>
                   <th style="width:20%;">Evaluation Type</th>
                   <th style="width:20%;">Employee Date</th>
-                  <th style="width:20%;">Status</th>
+<!--                  <th style="width:20%;">Status</th>-->
                   <th style="width:1%;">Actions</th>
                 </tr>
               </thead>
@@ -57,10 +57,12 @@
                   <td>{{evaluation.JobTitleName}}</td>
                   <td>{{evaluation.EvaluationTypeName}}</td>
                   <td>{{evaluation.EvaluationDate}}</td>
+<!--
                   <td *ngIf="evaluation.StatusId=='1'"><span class="submit_status">{{status.submitted}}</span></td>
                   <td *ngIf="evaluation.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
                   <td *ngIf="evaluation.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
                   <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
+-->
                   <td>
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-default btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
