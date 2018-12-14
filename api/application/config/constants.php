@@ -85,12 +85,12 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 //   Local
-  define('ACTIVE_GROUP', 'default'); // database mode
-  define('BASE_URL', 'http://localhost:4200'); // local Base URL
+ define('ACTIVE_GROUP', 'default'); // database mode
+ define('BASE_URL', 'http://localhost:4200'); // local Base URL
 
 //   Development
-// define('ACTIVE_GROUP', 'Development'); // database mode
-// define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
+//  define('ACTIVE_GROUP', 'Development'); // database mode
+//  define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
 
 //   UAT
  // define('ACTIVE_GROUP', 'QA'); // database mode
