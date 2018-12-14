@@ -1,152 +1,131 @@
 <div class="row">
-  <div class="col-lg-12">
-
-    <div class="breadcrumb_block">
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="page_heading">
-          <h1>{{ header }} Evaluation</h1>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-12 text-right">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="fa fa-home"></i></a></li>
+    <div class="col-lg-12">
+      
+      <div class="breadcrumb_block">
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="page_heading">
+      <h1>{{ header }} Evaluation</h1>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="fa fa-home"></i></a></li>
           <li class="breadcrumb-item"><a routerLink="/evaluation/list">Evaluation</a></li>
           <li class="breadcrumb-item active">Add</li>
-        </ol>
-        <div class="clearfix"></div>
+    </ol>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+  </div>
+      <div class="btn-group pull-right add-right addpage_backbtn">
+        <a routerLink="/evaluation/list" class="back_btn">
+          Back to list
+        </a>
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="btn-group pull-right add-right addpage_backbtn">
-      <a routerLink="/evaluation/list" class="back_btn">
-        Back to list
-      </a>
-    </div>
-    <div class="clearfix"></div>
   </div>
-  <div class="btn-group pull-right add-right addpage_backbtn">
-    <a routerLink="/evaluation/list" class="lgn_btn">
-      Back to list
-    </a>
-  </div>
-  <div class="clearfix"></div>
-</div>
-<div class="row">
-  <div class="col-lg-12">
-
-    <div class="form-bg">
-      <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="generateEvaluation(evaluationForm)">
-        <div class="col-md-6 col-sm-6">
-          <div class="form-group">
-            <label><span>*</span>Users</label>
-            <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
-              name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
-              (change)="onChange($event)">
-              <ng-container *ngFor="let user of userlist1">
-                <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
-                <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
+  <div class="row">
+    <div class="col-lg-12">
+      
+          <div class="form-bg">
+            <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="generateEvaluation(evaluationForm)">
+              <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label><span>*</span>Users</label>
+                    <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
+                     name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}" (change)="onChange($event)">
+                     <ng-container *ngFor="let user of userlist1">
+                      <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
+                      <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
                       <option *ngIf="(user.IsActive==1) && (user.RoleId==2)" value="{{user.value}}">{{user.label}} (HR)</option> -->
-              </ng-container>
-            </select>
-            <span class="error_span" *ngIf="(UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)">
-              <span *ngIf="UserId.errors.required || (UserId.pristine && submitted)">Please select User
-              </span>
-            </span>
-          </div>
-          <!-- <div class="check_box">
+                  </ng-container> 
+                    </select>
+                    <span class="error_span" *ngIf="(UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)">
+                      <span *ngIf="UserId.errors.required || (UserId.pristine && submitted)">Please select User
+                      </span>
+                    </span>
+                  </div>
+                  <!-- <div class="check_box">
                     <input type="checkbox" name="Check" id="Check1" value="Check1" #Check="ngModel" [(ngModel)]="evaluationEntity.Check">
                     <label for="Check1" title="Check1" class="checkboxbtn_label">Keep selected to send the evaluation to above selected user</label>
                   </div> -->
-        </div>
-        <div class="col-md-6 col-sm-6">
-          <div class="form-group">
-            <label>Evaluators</label>
-            <ng-select [options]="userlist" [multiple]="true" [(ngModel)]="selectedCharacters" name="selectedCharacters"
-              [ngClass]="{'red_border': showError}">
-            </ng-select>
-            <span class="error_span" *ngIf="showError">
-              Please select any Evaluator
-            </span>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                  <label>Evaluators</label>
+                  <ng-select
+                    [options]="userlist"
+                    [multiple]="true"
+                    [(ngModel)]="selectedCharacters" name="selectedCharacters" [ngClass]="{'red_border': showError}">
+                </ng-select>
+                <span class="error_span" *ngIf="showError">
+                  Please select any Evaluator
+                </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+              <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label><span>*</span>Evaluation type</label>
+                    <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="evaluationEntity.EvaluationTypeId"
+                     name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}">
+                     <ng-container *ngFor="let type of evaluationtypelist">
+                      <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}</option>
+                  </ng-container> 
+                    </select>
+                    <span class="error_span" *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
+                      <span *ngIf="EvaluationTypeId.errors.required || (EvaluationTypeId.pristine && submitted)">Please select Evaluation
+                        Type
+                      </span>
+                    </span>
+                  </div>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label><span>*</span>Evaluation Date</label>
+                    <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date" #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate" [ngClass]="{'red_border': DateValid}">
+                    <span class="error_span" *ngIf="DateValid">
+                      Please select Evaluation Date 
+                    </span>
+                </div>
+              </div>
+              
+              <div class="clearfix"></div>
+              <div class="col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" #EvaluationDescription="ngModel" [(ngModel)]="evaluationEntity.EvaluationDescription" name="EvaluationDescription"
+                     maxlength="1000"></textarea>
+                  </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label><span>*</span>Active?</label>
+                <br>
+                <div class="radio_box">
+                  <input type="radio" name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive"
+                   required />
+                  <label for="role1">Yes</label>
+                </div>
+                <div class="radio_box">
+                  <input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive"
+                   required />
+                  <label for="role2">No </label>
+                </div>
+                <br>
+                <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
+                  <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+                </span>
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-md-12 col-sm-12 text-center">
+                <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+                <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
+              </div>
+              <div class="clearfix"></div>
+            </form>
           </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-6 col-sm-6">
-          <div class="form-group">
-            <label><span>*</span>Evaluation type</label>
-            <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="evaluationEntity.EvaluationTypeId"
-              name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}">
-              <ng-container *ngFor="let type of evaluationtypelist">
-                <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}</option>
-              </ng-container>
-            </select>
-            <span class="error_span" *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
-              <span *ngIf="EvaluationTypeId.errors.required || (EvaluationTypeId.pristine && submitted)">Please select
-                Evaluation
-                Type
-              </span>
-            </span>
-          </div>
-        </div>
-        <div class="col-md-6 col-sm-6">
-          <div class="form-group">
-            <label><span>*</span>Evaluation Date</label>
-            <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date"
-              #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate"
-              [ngClass]="{'red_border': DateValid}">
-            <span class="error_span" *ngIf="DateValid">
-              Please select Evaluation Date
-            </span>
-          </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <div class="col-md-6 col-sm-6">
-          <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" #EvaluationDescription="ngModel" [(ngModel)]="evaluationEntity.EvaluationDescription"
-              name="EvaluationDescription" maxlength="1000"></textarea>
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label><span>*</span>Active?</label>
-          <br>
-          <div class="radio_box">
-            <input type="radio" name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive"
-              required />
-            <label for="role1">Yes</label>
-          </div>
-          <div class="radio_box">
-            <input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive"
-              required />
-            <label for="role2">No </label>
-          </div>
-          <br>
-          <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
-            <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
-          </span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-12 col-sm-12 text-center">
-          <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
-          <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
-        </div>
-        <div class="clearfix"></div>
-      </form>
     </div>
-    <br>
-    <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
-      <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
-    </span>
-  </div> -->
-  <div class="clearfix"></div>
-  <div class="col-md-12 col-sm-12 text-center">
-    <button type="submit" [disabled]="btn_disable" class="lgn_btn"><span>Submit</span></button>
-    <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
   </div>
-  <div class="clearfix"></div>
-  </form>
-</div>
-</div>
-</div>
 <div class="clearfix"></div>
 <!-- End Inner Section -->
