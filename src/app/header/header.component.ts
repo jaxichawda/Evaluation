@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
-declare varal: any;
+declare var $: any;
 
 @Component({
   selector: 'app-header',
