@@ -150,148 +150,91 @@ class GenerateEvaluation extends CI_Controller {
 
                     if($id==$post_generate['UserId']){
                         $message = '
-                        <table style="font-family:Lucida Grande,Lucida Sans Unicode, Lucida Sans, DejaVu Sans, Verdana, sans-serif; font-size:16px; border:2px solid #ccc; line-height:22px; color:#000; width:700px; margin:0 auto;" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td>
-                                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto;">
-                                        <tr>
-                                            <td>
-                                                <table cellpadding="0" cellspacing="0" border="0" style="padding: 10px 10px 0 10px; width:100%; margin:0 auto;">
-                                                    <tr>
-                                                        <td><img src="'.$path.'/assets/images/emaillogo.png" alt="" style="width: 100px;" /></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding:10px 0 20px 0; text-align:center;">
-                                                <table align="center" cellpadding="0" cellspacing="0" border="0" style="width:70%; margin:auto; background: rgba(255,255,255,0.8); text-align: center;">
-                                                    <tr>
-                                                        <td style="padding:20px 10px 10px 10px; font-size: 25px; font-weight: bold; color:#0061af;">Give Your Evaluation:</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="padding:10px;">Below are the details:</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Evaluation Type:</th><td>'.$evaluationtypename.'</td>
-                                                        
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Date:</th><td>'.$post_generate['EvaluationDate'].'</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Description:</th><td>'.$post_generate['EvaluationDescription'].'</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="padding:5px 10px 20px; text-align:center; font-size:14px; line-height:20px;">
-                                                        Please do not hesitate to contact us in case of any queries or need further information.
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto; font-size:13px; line-height:13px; border-top: 2px solid #ccc;">
-                                    <tr>
-                                    <td style="padding: 5px 10px; text-align: center; background:#fff;"><img src="'.$path.'/assets/images/microsoft.png" style="width: 165px; vertical-align: middle;" alt="" /></td>
-                                    <td style="padding: 10px; background:#b0cb1f;">
-                                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto;">
+
+                        <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
+                            <tbody>
+                                <tr>
+                                    <td style="background-color:#fff; background:#fff; padding:10px 10px 5px 10px; text-align:center"><img alt="" style="width:130px" src="https://devbyopeneyes.com/emailer_images/oess.png" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
+
+                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please give your below evaluation:</p>
+
+                                    <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
+                                        <tbody>
                                             <tr>
-                                                <td><a href="tel:+91 256.298.3937" style="color: #000; text-decoration: none;"><img style="width: 20px; height: 20px; vertical-align: text-bottom;" src="'.$path.'/assets/images/phone.png" alt="" /> +91.265.298.EYES</a></td>
-                                                <td><a href="mailto:info@theopeneyes.com" style="color: #000; text-decoration: none;"><img src="'.$path.'/assets/images/email.png" style="width: 20px; height: 20px; vertical-align: text-bottom;" alt="" /> info@theopeneyes.com</a></td>
-                                                <td> <a href="http://www.theopeneyes.com" target="_blank" style="color: #000; text-decoration: none;"><img src="'.$path.'/assets/images/world.png" style="width: 20px; height: 20px; vertical-align: text-bottom;" alt="" /> www.theopeneyes.com</a></td>
+                                                <td style="padding:5px; text-align:right; width:35%">Evaluation Type</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$evaluationtypename.'</td>
                                             </tr>
-                                        </table>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Date</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Description</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDescription'].'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                     </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="background:#0061af; padding: 15px; text-align: center; color: #fff;">Washington DC | Sterling VA | Vadodara, India</td>
-                                    </tr>
-                                </table>
-                                </td>
-                            </tr>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+                                </tr>
+                            </tbody>
                         </table>
-                        <p style="font-family:Calibri,sans-serif; font-size:16px">Thank you,<br><strong>OpenEyes Software Solutions Pvt. Ltd</strong></p>
                         ';
                     }
                     else{
-        $message = '
-        <table style="font-family:Lucida Grande,Lucida Sans Unicode, Lucida Sans, DejaVu Sans, Verdana, sans-serif; font-size:16px; border:2px solid #ccc; line-height:22px; color:#000; width:700px; margin:0 auto;" cellpadding="0" cellspacing="0" border="0">
-            <tr>
-                <td>
-                    <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto;">
-                        <tr>
-                            <td>
-                                <table cellpadding="0" cellspacing="0" border="0" style="padding: 10px 10px 0 10px; width:100%; margin:0 auto;">
-                                    <tr>
-                                        <td><img src="'.$path.'/assets/images/emaillogo.png" alt="" style="width: 100px;" /></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding:10px 0 20px 0; text-align:center;">
-                                <table align="center" cellpadding="0" cellspacing="0" border="0" style="width:70%; margin:auto; background: rgba(255,255,255,0.8); text-align: center;">
-                                    <tr>
-                                        <td style="padding:20px 10px 10px 10px; font-size: 25px; font-weight: bold; color:#0061af;">Give Evaluation for below employee:</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:10px;">Below are the details:</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Employee Name:</th><td>'.$firstname." ".$lastname.'</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Evaluation Type:</th><td>'.$evaluationtypename.'</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <th>Date:</th><td>'.$post_generate['EvaluationDate'].'</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description:</th><td>'.$post_generate['EvaluationDescription'].'</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding:5px 10px 20px; text-align:center; font-size:14px; line-height:20px;">
-                                        Please do not hesitate to contact us in case of any queries or need further information.
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto; font-size:13px; line-height:13px; border-top: 2px solid #ccc;">
-                    <tr>
-                    <td style="padding: 5px 10px; text-align: center; background:#fff;"><img src="'.$path.'/assets/images/microsoft.png" style="width: 165px; vertical-align: middle;" alt="" /></td>
-                    <td style="padding: 10px; background:#b0cb1f;">
-                        <table cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 auto;">
-                            <tr>
-                                <td><a href="tel:+91 256.298.3937" style="color: #000; text-decoration: none;"><img style="width: 20px; height: 20px; vertical-align: text-bottom;" src="'.$path.'/assets/images/phone.png" alt="" /> +91.265.298.EYES</a></td>
-                                <td><a href="mailto:info@theopeneyes.com" style="color: #000; text-decoration: none;"><img src="'.$path.'/assets/images/email.png" style="width: 20px; height: 20px; vertical-align: text-bottom;" alt="" /> info@theopeneyes.com</a></td>
-                                <td> <a href="http://www.theopeneyes.com" target="_blank" style="color: #000; text-decoration: none;"><img src="'.$path.'/assets/images/world.png" style="width: 20px; height: 20px; vertical-align: text-bottom;" alt="" /> www.theopeneyes.com</a></td>
-                            </tr>
+                        $message = '
+
+                        <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
+                            <tbody>
+                                <tr>
+                                    <td style="background-color:#fff; background:#fff; padding:10px 10px 5px 10px; text-align:center"><img alt="" style="width:130px" src="https://devbyopeneyes.com/emailer_images/oess.png" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
+
+                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please give evaluation for below Employee:</p>
+
+                                    <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Employee Name</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$firstname." ".$lastname.'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Evaluation Type:</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$evaluationtypename.'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Date</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Description</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDescription'].'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="background:#0061af; padding: 15px; text-align: center; color: #fff;">Washington DC | Sterling VA | Vadodara, India</td>
-                    </tr>
-                </table>
-                </td>
-            </tr>
-        </table>
-        <p style="font-family:Calibri,sans-serif; font-size:16px">Thank you,<br><strong>OpenEyes Software Solutions Pvt. Ltd</strong></p>
-        ';
-        }
+                    ';
+                    }
             // $config['protocol']='mail';
             // $config['smtp_host']='vps40446.inmotionhosting.com';
             // $config['smtp_port']='587';
@@ -317,7 +260,6 @@ class GenerateEvaluation extends CI_Controller {
                 
             }
         }
-        
             echo json_encode($post_generate);	
           }	
         							

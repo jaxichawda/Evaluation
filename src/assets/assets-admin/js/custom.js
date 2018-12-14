@@ -1,6 +1,4 @@
-const body = document.querySelector('body');
-var count = jQuery(window).height() - 138;
-body.style.setProperty('--screen-height', count+"px");
+
 // Scroll Header
 if (screen.width < 768) {
     var sticky = $('header');

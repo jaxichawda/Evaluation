@@ -6,55 +6,63 @@ class Employee_model extends CI_Model {
 	{	
 		try{
 			if($post_Employee) {
-				if($post_Employee['IsActive']==1) {
-					$IsActive = true;
-				} else {
-					$IsActive = false;
-				}
-				if(isset($post_Employee['MiddleName']) && !empty($post_Employee['MiddleName'])) {
-					$MiddleName = $post_Employee['MiddleName'];
-				}	else {
-					$MiddleName = '';
-				}
-				if(isset($post_Employee['EmployeeId']) && !empty($post_Employee['EmployeeId'])) {
-					$EmployeeId = $post_Employee['EmployeeId'];
-				}	else {
-					$EmployeeId = '';
-				}
-				if(isset($post_Employee['LineManagerId']) && !empty($post_Employee['LineManagerId'])) {
-					$LineManagerId = $post_Employee['LineManagerId'];
-				}	else {
-					$LineManagerId = '';
-				}
-				$employee_data=array(
-				"RoleId"=>trim($post_Employee['RoleId']),
-				"JobTitleId"=>trim($post_Employee['JobTitleId']),
-				"LineManagerId"=>$LineManagerId,
-				"FirstName"=>trim($post_Employee['FirstName']),
-				"MiddleName"=>$MiddleName,
-				"LastName"=>trim($post_Employee['LastName']),
-				"EmployeeId"=>$EmployeeId,
-				"EmailAddress"=>trim($post_Employee['EmailAddress']),
-				"Password"=>md5(trim($post_Employee['Password'])),
-				"IsActive"=>$IsActive,
-				"CreatedBy" => trim($post_Employee['CreatedBy']),
-				"CreatedOn" =>date('y-m-d H:i:s')
-				);
-				$res=$this->db->insert('tbluser',$employee_data);
-				$UserId = $this->db->insert_id();
-				$db_error = $this->db->error();
-				if (!empty($db_error) && !empty($db_error['code'])) { 
-					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-					return false; // unreachable return statement !!!
-				}
-				if($res) {
-					return $UserId;
-				} else {
-					return false;
-				}
-			}
-			else
-			{
+					$this->db->select('UserId,EmailAddress');
+					$this->db->where('EmailAddress',trim($post_Employee['EmailAddress']));
+					$this->db->limit(1);
+					$this->db->from('tbluser');
+					$query = $this->db->get();
+					
+					if ($query->num_rows() != 1) {
+						if($post_Employee['IsActive']==1) {
+							$IsActive = true;
+						} else {
+							$IsActive = false;
+						}
+						if(isset($post_Employee['MiddleName']) && !empty($post_Employee['MiddleName'])) {
+							$MiddleName = $post_Employee['MiddleName'];
+						}	else {
+							$MiddleName = '';
+						}
+						if(isset($post_Employee['EmployeeId']) && !empty($post_Employee['EmployeeId'])) {
+							$EmployeeId = $post_Employee['EmployeeId'];
+						}	else {
+							$EmployeeId = '';
+						}
+						if(isset($post_Employee['LineManagerId']) && !empty($post_Employee['LineManagerId'])) {
+							$LineManagerId = $post_Employee['LineManagerId'];
+						}	else {
+							$LineManagerId = '';
+						}
+						$employee_data=array(
+						"RoleId"=>trim($post_Employee['RoleId']),
+						"JobTitleId"=>trim($post_Employee['JobTitleId']),
+						"LineManagerId"=>$LineManagerId,
+						"FirstName"=>trim($post_Employee['FirstName']),
+						"MiddleName"=>$MiddleName,
+						"LastName"=>trim($post_Employee['LastName']),
+						"EmployeeId"=>$EmployeeId,
+						"EmailAddress"=>trim($post_Employee['EmailAddress']),
+						"Password"=>md5(trim($post_Employee['Password'])),
+						"IsActive"=>$IsActive,
+						"CreatedBy" => trim($post_Employee['CreatedBy']),
+						"CreatedOn" =>date('y-m-d H:i:s')
+						);
+						$res=$this->db->insert('tbluser',$employee_data);
+						$UserId = $this->db->insert_id();
+						$db_error = $this->db->error();
+						if (!empty($db_error) && !empty($db_error['code'])) { 
+							throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+							return false; // unreachable return statement !!!
+						}
+						if($res) {
+							return $UserId;
+						} else {
+							return false;
+						}
+					} else {
+						return false;
+					}
+			} else {
 					return false;
 			}
 		}catch(Exception $e){
