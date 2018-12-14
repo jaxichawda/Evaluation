@@ -56,7 +56,7 @@
           <div class="form-group">
             <label>Evaluators</label>
             <ng-select [options]="userlist" [multiple]="true" [(ngModel)]="selectedCharacters" name="selectedCharacters"
-              [ngClass]="{'red_border': showError}">
+              [ngClass]="{'red_border': showError}" class="form-control">
             </ng-select>
             <span class="error_span" *ngIf="showError">
               Please select any Evaluator
