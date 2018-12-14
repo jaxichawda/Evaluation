@@ -18,11 +18,17 @@ class Dashboard_model extends CI_Model {
     public function insertQuestions($Id=Null)
 	{
 	  if($Id)
-	  {    
+	  {  
         $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId) SELECT ".$Id.",QuestionId FROM tblmstquestion");
         
         if($result1) {
-            return true; 
+            $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$Id);
+            if($result){
+                return true; 
+            }
+            else{
+                return false;
+            }
         }
         else{
             return false;

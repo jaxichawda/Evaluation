@@ -72,19 +72,39 @@ export class PerformanceReviewComponent implements OnInit {
   addData(evaluationForm){
     debugger
     console.log(this.QuestionList);
-		// this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
-		// 		.then((data) => {
-    //       swal({
-    //         position: 'top-end',
-    //         type: 'success',
-    //         title: 'Your Evaluation Submitted Successfully!',
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //       })
-    //     },
-    //     (error) => {
-    //       //this.btn_disable = false;
-    //       //this.submitted = false;
-    //     });
+		this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
+				.then((data) => {
+          swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your Evaluation Submitted Successfully!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          //this.btn_disable = false;
+          //this.submitted = false;
+        });
+  }
+  saveAsDraft(){
+    debugger
+    console.log(this.QuestionList);
+		this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
+				.then((data) => {
+          swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your Evaluation saved Successfully!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          //this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          //this.btn_disable = false;
+          //this.submitted = false;
+        });
   }
 }

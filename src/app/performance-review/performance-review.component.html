@@ -12,7 +12,7 @@
           <div class="col-md-12 col-sm-12"> -->
 <div class="que_form">
 
-	<button class="pull-left next_btn draft_btn">Save as Draft</button>
+	<button class="pull-left next_btn draft_btn" (click)="saveAsDraft()">Save as Draft</button>
 	<div class="clearfix"></div>
   <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
     <div id="main1" role="main">
@@ -29,14 +29,14 @@
               </div>
               <div *ngIf="que.AnswerTypeId==1">
                 <div class="ans_section">
-                  <textarea class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}" maxlength="500"
+                  <textarea class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" maxlength="500"
                     required></textarea>
                 </div>
               </div>
               <div *ngIf="que.AnswerTypeId==2">
                 <div class="ans_section">
                   <div class="col-md-4 col-sm-4">
-                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}" class="form-control"
+                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" class="form-control"
                       required />
                   </div>
                 </div>
@@ -44,7 +44,7 @@
               <div *ngIf="que.AnswerTypeId==3">
                 <div class="ans_section">
                   <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
-                    <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText"
+                    <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                       required />
                     <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
                   </div>
