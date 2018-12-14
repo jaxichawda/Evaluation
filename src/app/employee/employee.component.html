@@ -18,7 +18,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="btn-group pull-right add-right addpage_backbtn">
-      <a routerLink="/employee/list" class="lgn_btn">
+      <a routerLink="/employee/list" class="back_btn">
         Back to list
       </a>
     </div>
@@ -31,7 +31,7 @@
       <form class="form-validate" role="form" #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
         <div class="form-group col-md-4">
           <label><span class="required">*</span>First Name</label>
-          <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="employeeEntity.FirstName" class="form-control"
+          <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="employeeEntity.FirstName" 
             name="FirstName" maxlength="100" required>
           <span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)">
             <span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted)">Please
@@ -141,7 +141,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="col-md-12 col-sm-12 text-center">
-          <button type="submit" class="lgn_btn"><span>Submit</span></button>
+          <button type="submit" class="next_btn"><span>Submit</span></button>
           <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
         </div>
         <div class="clearfix"></div>

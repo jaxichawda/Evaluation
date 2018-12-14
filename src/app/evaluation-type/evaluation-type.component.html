@@ -18,7 +18,7 @@
       <div class="clearfix"></div>
     </div>
     <div class="btn-group pull-right add-right addpage_backbtn">
-      <a routerLink="/evaluation-type/list" class="lgn_btn">
+      <a routerLink="/evaluation-type/list" class="back_btn">
         Back to list
       </a>
     </div>
@@ -32,7 +32,7 @@
         <div class="form-group col-md-6">
           <label><span class="required">*</span>Evaluation Type</label>
           <input type="text" class="form-control" #EvaluationTypeName="ngModel" [(ngModel)]="evaluationtypeEntity.EvaluationTypeName"
-            class="form-control" name="EvaluationTypeName" maxlength="100" required>
+             name="EvaluationTypeName" maxlength="100" required>
           <span class="error_span" *ngIf="(EvaluationTypeName.dirty && EvaluationTypeName.invalid) || (EvaluationTypeName.pristine && submitted)">
             <span *ngIf="EvaluationTypeName.errors.required || (EvaluationTypeName.pristine && submitted)">Please
               enter Department</span>
@@ -50,7 +50,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="col-md-12 col-sm-12 text-center">
-          <button type="submit" class="lgn_btn"><span>Submit</span></button>
+          <button type="submit" class="next_btn"><span>Submit</span></button>
           <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
         </div>
         <div class="clearfix"></div>

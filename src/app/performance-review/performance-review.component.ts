@@ -15,18 +15,23 @@ declare var $, Bloodhound: any;
 })
 export class PerformanceReviewComponent implements OnInit {
   QuestionList;
+  ans;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
 
   ngOnInit() {
-    setTimeout(function () {
-      if ($(".bg_white_block").hasClass("ps--active-y")) {
-        $('footer').removeClass('footer_fixed');
-      }
-      else {
-        $('footer').addClass('footer_fixed');
-      }
-    }, 1000);
+    var item = { 'OptionValue': '' };
+		this.ans = [];
+    this.ans.push(item);
+    this.globals.isLoading = true;
+    // setTimeout(function () {
+    //   if ($(".bg_white_block").hasClass("ps--active-y")) {
+    //     $('footer').removeClass('footer_fixed');
+    //   }
+    //   else {
+    //     $('footer').addClass('footer_fixed');
+    //   }
+    // }, 1000);
     setTimeout(function () {
       $('#carousel').flexslider({
         animation: "slide",
@@ -49,15 +54,20 @@ export class PerformanceReviewComponent implements OnInit {
         }
       });
 
-    }, 100);
-    this.PerformanceReviewService.getAllQuestionData()
+    }, 1000);
+    //this.globals.isLoading = true;
+    let id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+    this.PerformanceReviewService.getAllQuestionData(id)
       .then((data) => {
         this.QuestionList=data;
+        this.globals.isLoading = false;
       },
       (error) => {
         // this.globals.isLoading = false;
         this.router.navigate(['/pagenotfound']);
       });
+    }
   }
 
 }

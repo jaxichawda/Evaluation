@@ -1,8 +1,8 @@
 <!-- Inner Section -->
-<div *ngIf="first1" class="inner_banner">
+<!-- <div *ngIf="first1" class="inner_banner">
   <img src="assets/images/inner_banner.jpg" alt="" class="img-responsive" />
   <div class="innerbanner_text">HR QUESTIONNAIRE</div>
-</div>
+</div> -->
 <div class="clearfix"></div>
 <!-- End Inner Section -->
 <!-- Inner Section -->
@@ -21,24 +21,20 @@
               <div class="que_section">
                 <h1 class="que_title">Question {{i+1}}</h1>
                 <p class="que_name">
-                  <span [innerHTML]="que.Questiontext"></span>
+                  <span [innerHTML]="que.QuestionText"></span>
                 </p>
               </div>
               <div *ngIf="que.AnswerTypeId==1">
                 <div class="ans_section">
-                  <div *ngFor="let ans of que.child; let j=index;">
-                    <textarea class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}{{j}}" maxlength="500"
-                      required></textarea>
-                  </div>
+                  <textarea class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}" maxlength="500"
+                    required></textarea>
                 </div>
               </div>
               <div *ngIf="que.AnswerTypeId==2">
                 <div class="ans_section">
-                  <div *ngFor="let ans of que.child; let j=index; let firstAns=first; let last = last;">
-                    <div class="col-md-4 col-sm-4">
-                      <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}{{j}}" class="form-control"
-                        required />
-                    </div>
+                  <div class="col-md-4 col-sm-4">
+                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="ans.AnswerText" name="AnswerText{{k}}" class="form-control"
+                      required />
                   </div>
                 </div>
               </div>
@@ -61,17 +57,16 @@
         </div>
         <div id="carousel" class="flexslider">
           <ul class="slides">
-              <li [ngClass]="{'active':que.child.checkActive}" *ngFor="let que of QuestionList; let k=index; let i = index">
-                  <span>Q{{i+1}}</span>
-                  <p>
-                      <i class="fa fa-quote-left" aria-hidden="true"></i>
-            <span [innerHTML]="que.QuestionText" | slice:0:25></span>
-            {{que.QuestionText | slice:3:25}}...
-                      <i class="fa fa-quote-right" aria-hidden="true"></i>
-                  </p>
-              </li>
+            <li [ngClass]="{'active':que.child.checkActive}" *ngFor="let que of QuestionList; let k=index; let i = index">
+              <span>Q{{i+1}}</span>
+              <p>
+                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                {{que.QuestionText | slice:3:25}}...
+                <i class="fa fa-quote-right" aria-hidden="true"></i>
+              </p>
+            </li>
           </ul>
-      </div>
+        </div>
       </section>
     </div>
   </form>

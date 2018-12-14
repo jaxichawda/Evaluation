@@ -112,7 +112,7 @@ import { ChangePasswordService } from './services/change-password.service';
       { path: 'employee/edit/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
       { path: 'employee/list', component: EmployeeListComponent, canActivate: [AuthGuard] },
 
-      { path: 'performance-review', component: PerformanceReviewComponent, canActivate: [AuthGuard] },
+      { path: 'performance-review/:id', component: PerformanceReviewComponent, canActivate: [AuthGuard] },
       { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
 
       { path: '', redirectTo: 'login', pathMatch: 'full' },

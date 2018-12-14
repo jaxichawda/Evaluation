@@ -18,12 +18,18 @@
       <div class="clearfix"></div>
     </div>
     <div class="btn-group pull-right add-right addpage_backbtn">
-      <a routerLink="/evaluation/list" class="lgn_btn">
+      <a routerLink="/evaluation/list" class="back_btn">
         Back to list
       </a>
     </div>
     <div class="clearfix"></div>
   </div>
+  <div class="btn-group pull-right add-right addpage_backbtn">
+    <a routerLink="/evaluation/list" class="lgn_btn">
+      Back to list
+    </a>
+  </div>
+  <div class="clearfix"></div>
 </div>
 <div class="row">
   <div class="col-lg-12">
@@ -33,7 +39,7 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label><span>*</span>Users</label>
-            <select class='select-option' required class="form-control" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
+            <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
               name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
               (change)="onChange($event)">
               <ng-container *ngFor="let user of userlist1">
@@ -101,14 +107,7 @@
               name="EvaluationDescription" maxlength="1000"></textarea>
           </div>
         </div>
-        <div class="form-group col-md-4">
-          <label><span class="required">*</span>Active ?</label>
-          <div class="activeyes_box">
-            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive">
-            <label for="IsActive"></label>
-          </div>
-        </div>
-        <!-- <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
           <label><span>*</span>Active?</label>
           <br>
           <div class="radio_box">
@@ -125,16 +124,29 @@
           <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
             <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
           </span>
-        </div> -->
+        </div>
         <div class="clearfix"></div>
         <div class="col-md-12 col-sm-12 text-center">
-          <button type="submit" [disabled]="btn_disable" class="lgn_btn"><span>Submit</span></button>
+          <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
           <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
         </div>
         <div class="clearfix"></div>
       </form>
     </div>
+    <br>
+    <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
+      <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+    </span>
+  </div> -->
+  <div class="clearfix"></div>
+  <div class="col-md-12 col-sm-12 text-center">
+    <button type="submit" [disabled]="btn_disable" class="lgn_btn"><span>Submit</span></button>
+    <!-- <button type="submit" *ngIf="questionEntity.QuestionId!=0" class="lgn_btn"><span>Update</span></button> -->
   </div>
+  <div class="clearfix"></div>
+  </form>
+</div>
+</div>
 </div>
 <div class="clearfix"></div>
 <!-- End Inner Section -->
