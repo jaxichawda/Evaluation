@@ -105,13 +105,13 @@ class GenerateEvaluation_model extends CI_Model
 			}	
 			}
 	public function getAllEvaluation() {
-		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName,ee.StatusId');
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
 		$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
-		$this->db->join('tblmstempevaluator ee','(ee.EvaluationId=e.EvaluationId) AND (ee.EvaluatorId=e.UserId)','left');
+		//$this->db->join('tblmstempevaluator ee','(ee.EvaluationId=e.EvaluationId) AND (ee.EvaluatorId=e.UserId)','left');
 		$this->db->join('tbluser u','u.UserId=e.UserId','left');
 		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
 		$this->db->order_by('e.EvaluationId','asc');
-		$this->db->group_by('e.EvaluationId');
+		//$this->db->group_by('e.EvaluationId');
 		$result = $this->db->get('tblmstempevaluation as e');	
 		$res = array();
 		if($result->result()) {

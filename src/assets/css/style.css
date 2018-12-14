@@ -14,38 +14,23 @@ a:hover, a.selected {text-decoration:none; color:#0085AD;}
 a:focus{outline:none;}
 ul,ol{list-style:none; padding: 0; margin: 0;}
 li {list-style:none;}
-h1{text-transform:capitalize!important;font-size: 28px;line-height: 35px;font-weight: 300;margin: 0 0 15px 0;color: #222;font-family: 'Titillium Web', sans-serif;}
+h1{text-transform:capitalize!important;font-size: 28px;line-height: 35px;font-weight: 300;margin: 0 0 15px 0;color: #0061af;font-family: 'Titillium Web', sans-serif;}
 .mt-5{margin-top: 5px;}
-label {font-weight: 500;color: #111111;font-size: 16px;}
 .container {width: 100%;max-width: 100%;padding: 0 30px;}
 .breadcrumb{background-color:transparent;margin-bottom:0px;}
-/* label{margin-top: 5px;float:right}  */
 /* ========== Do Not Touch In Css End ========== */
 
 /*--------------Header and Navigation--------------------*/
-/* .container{ width:100%; max-width:100%; padding:0 30px;} */
+:root {--screen-height:450px;}
+
 header{box-shadow: 0 0 5px #d6d6d6;background: #fff;position: relative; z-index: 999; width: 100%; padding:0px 0;transition: all 0.3s ease-in 0s;}
+header .logo a{display:inline-block; width:90px; padding: 6px 0 0;}
 .social_links{display: inline-block;}
 .social_links li{display: inline-block; color: #fff; font-size: 14px; padding: 0 7px;}
 .social_links li a{color: #888888;}
 .social_links li a:hover{color: #0061AF;}
-header .logo a{display:inline-block; width:90px; padding: 6px 0 0;}
-header .header_address{float: right; padding: 30px 0 22px 0;}
-header .header_fixed_title{display:none;}
-header.header_fixed .header_fixed_title{display:block;padding: 20px 0px 0px 0px;}
-header.header_fixed .header_fixed_title h1{font-size: 24px;text-transform: capitalize!important;}
-header .header_address .address{ display: inline-block; position: relative; border-right: 1px solid #ddd; padding: 0 35px 0 0; margin: 0 35px 0 0;}
-header .header_address .address:last-child{margin: 0; border: 0;}
-header .header_address .address i{float: left; position: relative; font-size: 30px; margin-right: 10px; color:#0061af; }
-header .header_address .address span{ position: relative; line-height: 20px; color: #777777; font-size: 17px; margin-bottom: 3px; font-weight: 500; float: left;}
-header .header_address .address span strong { font-weight: 500; color: #111111; font-size: 17px; margin-bottom: 3px; display: inline-block;}
-header .header_address .address span a{color: #777777;}
-header .header_address .address span a:hover{color: #0061AF;}
-header.header_fixed .logo a{width:65px;}
-header.header_fixed .menu,header.header_fixed .top_header,header.header_fixed .header_address{ display: none;}
-header.header_fixed{position: fixed; background:rgba(242,242,242,0.95); transition:all 0.3s ease-in 0s; border-bottom: 2px solid #eee;}
-form .hr_form_wrapper .back_btn{color:#fff!important; text-transform:uppercase; font-size:18px; padding:10px 20px!important;  font-weight:400; background: #0061AF; line-height: 18px;margin:32px 0px 0px 0px;}
-header.header_fixed .back_btn{margin:18px 0px;}
+
+
 header .user_dropdown{ float: right; position: relative; margin: 25px 0 0 0;}
 header .user_dropdown li{position: relative;}
 header .user_dropdown li .letters{width: 50px; height: 50px; border-radius: 100%; background: #fff; border: 1px solid #ccc; text-align: center; font-size: 20px; display: inline-block; padding: 10px 0; font-weight: bold;}
@@ -79,27 +64,33 @@ header .user_dropdown li ul.dropdown-menu li a.next_btn:hover{opacity: 1;backgro
 .navbar .navbar-nav {display: inline-block;float: none;}
 .navbar .navbar-collapse {text-align: center;}
 .all_outer_page {padding: 20px 0;height: var(--screen-height);vertical-align: middle;display: table-cell;position: relative;width: inherit;}
-.white_form_block{ margin: 20px 0 0 0; background: #f9f9f9; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.3); overflow:hidden;}
-.white_form_block .padding_box{padding: 20px;}
-.white_form_block .account_block{ padding:20px; margin-top: 20px; background: #0061af; border-radius:0 0 10px 10px; border-top:1px solid #666;}
-.white_form_block .account_block p{color: #fff; line-height: 30px;font-size:12px;}
-.white_form_block .account_block p a{color:#fff;}
+
 .lgn_btn{margin-top:20px;background: #0061af; border-radius:4px; color: #fff; font-size: 13px; border: 0; padding: 10px; line-height: 13px; min-width: 100px; opacity: 0.85; transition: all .3s ease-in-out; text-align: center; display: inline-block;}
 .lgn_btn:hover,.lgn_btn:focus{opacity: 1; transition: all .3s ease-in-out; box-shadow: 0 5px 10px 2px rgba(88,103,221,.15); color: #fff;}
 .rgstr_btn{background: #fff; border-radius:4px; color: #0061af; font-size: 13px; border: 0; padding: 10px; line-height: 13px; min-width: 100px; opacity: 0.85; transition: all .3s ease-in-out; text-align: center;  display: inline-block;}
 .rgstr_btn:hover,.rgstr_btn:focus{opacity: 1; transition: all .3s ease-in-out; box-shadow: 0 5px 10px 2px rgba(88,103,221,.15); color: #0061af;}
-:root {--screen-height:450px;}
+
+
 /*--------------End Header and Navigation--------------------*/
 
-/* ------- Inner Pages Contener Area Strat ------- */
-.inner_content{background: #fff;padding: 45px 0px 45px 0px;overflow: hidden;width: 100%;position: relative;}
+/*----------Register login--------------------*/
+.register_header{ display:block; position: relative;}
+.register_header a{width: 150px; display: block; margin: 0 auto;}
+.white_form_block{ margin: 20px 0 0 0; background: #f9f9f9; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.3); overflow:hidden;}
+.white_form_block .padding_box{padding: 20px;}
+.white_form_block .account_block{ padding:10px; margin-top: 20px; background: #0061af; border-radius:0 0 10px 10px; border-top:1px solid #666;}
+.white_form_block .account_block p{color: #fff; line-height: 30px;font-size:12px;}
+.white_form_block .account_block p a{color:#fff;}
+/*----------Register login--------------------*/
+
+/*------------Form Fields------------------*/
 select {-moz-appearance: none!important;-webkit-appearance: none!important;background:#fff url("../images/arrow-down-b.png") no-repeat scroll right top / 31px auto!important; border: 1px solid #ccc!important; color: #555!important; height: 34px!important; border-radius:4px!important; padding: 3px 35px 2px 5px!important; width: 100%!important; font-family: 'Titillium Web', sans-serif; font-size:14px!important;}
 select option{ background:#f4f4f4!important; padding:7px!important; color:#555!important; font-size:14px!important; text-transform:capitalize!important; display:block!important; width:100%!important; transition:all 0.2s linear 0s!important; border:0!important; border-bottom:1px solid #ccc!important; font-family: 'Titillium Web', sans-serif;}
-.form-group label{line-height:15px; color: #2d5c8a; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal;}
+.form-group label{line-height:15px; color: #000; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal;}
 .form-group label span{color:red;}
-.form-group input,.form-group textarea{line-height:15px; color: #555!important; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal;}
+.form-group input,.form-group textarea{line-height:15px; color: #000!important; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal; border:1px solid #999;}
 textarea{height:150px; resize:none;}
-.next_btn { font-family: 'Titillium Web', sans-serif; font-size:16px; padding: 15px 15px; text-align: left; background: #0085ad; background:linear-gradient(to right, #0085ad 50%, #007699 50%) repeat scroll left bottom / 200% 100%; background-size: 200% 100%; background-position: left bottom; color: #ffffff;  box-shadow: none; position: relative; transition:all 0.8s ease 0s; display:inline-block; border-right: solid #007699 53px; border-width: 0 53px 0 0;}
+.next_btn { font-family: 'Titillium Web', sans-serif; font-size:15px; line-height: 15px; padding: 10px 15px; text-align: center; background: #0061af; color: #ffffff; box-shadow: none; position: relative; transition:all 0.8s ease 0s; display:inline-block; border: solid #0061af 1px; border-radius: 5px; min-width: 100px;}
 .next_btn:hover,.next_btn:focus{background-position: right bottom; color: #ffffff; }
 input[type="radio"] { visibility:hidden; position:absolute;}
 .radio_box {display:inline-block; margin:5px 20px 0 0;}
@@ -109,6 +100,13 @@ input[type="checkbox"] { visibility:hidden; position:absolute;}
 .check_box {display:block; margin:5px 20px 0 0;}
 .check_box label{ background:url(../images/checkbox.png) left center no-repeat; font-weight:normal; font-size: 15px; font-family: 'Titillium Web', sans-serif; background-size:15px; padding:5px 5px 5px 20px; text-align:center; display:inline-block; vertical-align:top; margin:0; cursor:pointer; color:#000;}
 .check_box input[type="checkbox"]:checked + label{background:url(../images/checkbox_checked.png) left center no-repeat; background-size:15px; color:#007699;}
+/*------------Form Fields------------------*/
+
+/* ------- Inner Pages Contener Area Strat ------- */
+.inner_content{background: #fff;padding: 45px 0px 45px 0px;overflow: hidden;width: 100%;position: relative;}
+
+
+
 .inner_content .inner_block{padding: 0px 0px 0px 0px;margin-bottom: 30px;background-color: #fff;border: 1px solid #cecece;cursor: pointer;position: relative;transition-duration: .2s;transition-property: border,box-shadow;float: left;width: 100%;}
 .inner_content .inner_block:hover{border-color: #0061AF;box-shadow: 0 0 0 1px #0061AF;}
 .read_more{margin-top:10px;padding:9px 15px 10px 15px; font-size: 16px; display: inline-block; line-height: 16px; position: relative; background: transparent; border:2px solid #fff; color: #fff; transition:all 0.3s ease-in 0s; min-width: 100px; text-align: center; font-weight: 500; border-radius:15px;}
@@ -265,9 +263,6 @@ footer .footer_top .header_address {display: none;}
 .question_wrap h3,.answer_wrap h3{font-size:16px;}
 #page-wrapper{background: #fff;}
 .que_form form{background: transparent!important;padding: 0px 0px!important;border: 0px!important;box-shadow: none!important;}
-form {background: #fff;}
-form .form-control, form select.form-control {margin-bottom: 5px;transition: all 0.2s linear 0s;border: 1px solid #000000!important;border-radius: 0px!important;box-shadow: none!important;}
-form .form-control:hover, form .form-control:focus {border: 2px solid #0954a4!important;border-left: 4px solid #2678ba!important;}
 .dataTables_wrapper{padding-bottom:15px;}
 .style_position{position:relative;}
 
