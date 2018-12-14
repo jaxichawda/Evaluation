@@ -120,30 +120,42 @@ export class EmployeeComponent implements OnInit {
       this.globals.isLoading = true;
       this.EmployeeService.addEmployee(this.employeeEntity)
         .then((data) => {
-          this.btn_disable = false;
-          this.submitted = false;
-          this.employeeEntity = {};
-          employeeForm.form.markAsPristine();
-          if (id) {
+          if (data == 'Exist User') {
             this.globals.isLoading = false;
             swal({
-              position: 'top-end',
-              type: 'success',
-              title: 'Employee updated successfully!',
-              showConfirmButton: false,
-              timer: 1500
+              type: 'warning',
+              title: 'Oops...',
+              text: 'You already added this employee!',
             })
+            this.btn_disable = false;
+            this.submitted = false;
+            this.router.navigate(['/employee/add']);
           } else {
-            this.globals.isLoading = false;
-            swal({
-              position: 'top-end',
-              type: 'success',
-              title: 'Employee added successfully!',
-              showConfirmButton: false,
-              timer: 1500
-            })
+            this.btn_disable = false;
+            this.submitted = false;
+            this.employeeEntity = {};
+            employeeForm.form.markAsPristine();
+            if (id) {
+              this.globals.isLoading = false;
+              swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Employee updated successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            } else {
+              this.globals.isLoading = false;
+              swal({
+                position: 'top-end',
+                type: 'success',
+                title: 'Employee added successfully!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+            this.router.navigate(['/employee/list']);
           }
-          this.router.navigate(['/employee/list']);
         },
           (error) => {
             alert('error');
