@@ -25,6 +25,7 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -38,6 +39,7 @@ export class QuestionComponent implements OnInit {
     var count = $(window).height() - 270;
     body.style.setProperty('--screen-height', count + "px");
 
+    this.globals.isLoading = true;
     this.QuestionService.getAllQuestionType()
       .then((data) => {
         this.questiontypeList = data;
@@ -48,6 +50,7 @@ export class QuestionComponent implements OnInit {
     this.QuestionService.getAllEvaluationType()
       .then((data) => {
         this.evaluationtypeList = data;
+        this.globals.isLoading = false;
       },
         (error) => {
           //alert('error');
@@ -56,6 +59,7 @@ export class QuestionComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
+      this.globals.isLoading = true;
       this.QuestionService.getById(id)
         .then((data) => {
           
@@ -67,11 +71,13 @@ export class QuestionComponent implements OnInit {
           } else {
             this.questionEntity.IsActive = '1';
           }
+          this.globals.isLoading = false;
         },
           (error) => {
             //alert('error');
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
             //	this.router.navigate(['/admin/pagenotfound']);
           });
     }
@@ -85,6 +91,7 @@ export class QuestionComponent implements OnInit {
       var item = { 'QueOption': '' };
       this.OptionList = [];
       this.OptionList.push(item);
+      this.globals.isLoading = false;
     }
   }
   AddOption(index) {
@@ -99,6 +106,7 @@ export class QuestionComponent implements OnInit {
   }
   addQuestion(questionForm) {
     debugger
+    
     let id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
@@ -114,6 +122,7 @@ export class QuestionComponent implements OnInit {
     if (questionForm.valid) {
       this.btn_disable = true;
       var question = { 'question': this.questionEntity, 'option': this.OptionList };
+      this.globals.isLoading = true;
       this.QuestionService.addQuestion(question)
         .then((data) => {
           this.btn_disable = false;
@@ -121,6 +130,7 @@ export class QuestionComponent implements OnInit {
           this.questionEntity = {};
           questionForm.form.markAsPristine();
           if (id) {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -129,6 +139,7 @@ export class QuestionComponent implements OnInit {
               timer: 1500
             })
           } else {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -143,6 +154,7 @@ export class QuestionComponent implements OnInit {
             alert('error');
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
             //	this.router.navigate(['/admin/pagenotfound']);
           });
     }

@@ -15,7 +15,7 @@ declare var $, Bloodhound: any;
 })
 export class EvaluationListComponent implements OnInit {
   evaluationList;
-  status;  
+  status;
   msgflag;
   EvaluatorList;
 
@@ -24,7 +24,7 @@ export class EvaluationListComponent implements OnInit {
 
   ngOnInit() {
     debugger
-
+    this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
@@ -40,7 +40,7 @@ export class EvaluationListComponent implements OnInit {
         $('.right_content_block').removeClass('style_position');
       });
     }, 1000);
-
+    this.globals.isLoading = true;
     this.GenerateEvaluationService.getAllEvaluation()
       .then((data) => {
         debugger
@@ -88,108 +88,102 @@ export class EvaluationListComponent implements OnInit {
 
         this.evaluationList = data['evaluations'];
         this.status = data['status'];
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
   }
 
-  revokeEvaluation(evaluation){
-		swal({
-			title: 'Are you sure?',
-			text: "You want to revoke this evaluation?",
-			type: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, revoke it!'
-		}).then((result) => {
-			if (result.value) {
-				//this.globals.isLoading = true;
-				var del={'UserId':this.globals.authData.UserId,'evaluationid':evaluation.EvaluationId};
-				this.GenerateEvaluationService.revokeEvaluation(del)
-				.then((data) => 
-				{
-					//this.globals.isLoading = false;
-					let index = this.evaluationList.indexOf(evaluation);			
-					this.evaluationList[index].StatusId = 3;
-					swal({
-						position: 'top-end',
-						type: 'success',
-						title: 'Evaluation revoked successfully',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					//this.default();
-				}, 
-				(error) => 
-				{
-					 // this.globals.isLoading = false;
-           this.router.navigate(['/pagenotfound']);
-				});	
-			
-			}
-		
-		})
-  }
-  revokeEvaluator(evaluators){
-		swal({
-			title: 'Are you sure?',
-			text: "You want to revoke this evaluator?",
-			type: 'info',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes, revoke it!'
-		}).then((result) => {
-			if (result.value) {
-				//this.globals.isLoading = true;
-				var del={'UserId':this.globals.authData.UserId,'EvaluatorId':evaluators.EvaluatorId};
-				this.GenerateEvaluationService.revokeEvaluator(del)
-				.then((data) => 
-				{
-					//this.globals.isLoading = false;
-					let index = this.EvaluatorList.indexOf(evaluators);			
-					this.EvaluatorList[index].StatusId = 3;
-					swal({
-						position: 'top-end',
-						type: 'success',
-						title: 'Evaluator revoked successfully',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					//this.default();
-				}, 
-				(error) => 
-				{
-					 // this.globals.isLoading = false;
-           this.router.navigate(['/pagenotfound']);
-				});	
-			
-			}
-		
-		})
-  }
-  showEvaluators(evaluation){
-    var obj={'UserId':evaluation.UserId,'EvaluationId':evaluation.EvaluationId};
-    this.GenerateEvaluationService.getEvaluators(obj)
-      .then((data) => 
-      { 
-      if(data){
-      this.EvaluatorList = data;
+  revokeEvaluation(evaluation) {
+    swal({
+      title: 'Are you sure?',
+      text: "You want to revoke this evaluation?",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, revoke it!'
+    }).then((result) => {
+      if (result.value) {
+        this.globals.isLoading = true;
+        var del = { 'UserId': this.globals.authData.UserId, 'evaluationid': evaluation.EvaluationId };
+        this.GenerateEvaluationService.revokeEvaluation(del)
+          .then((data) => {
+            this.globals.isLoading = false;
+            let index = this.evaluationList.indexOf(evaluation);
+            this.evaluationList[index].StatusId = 3;
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Evaluation revoked successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            //this.default();
+          },
+            (error) => {
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+            });
       }
-        this.globals.isLoading = false;	
-        $('#Details_Modal').modal('show'); 
+
+    })
+  }
+  revokeEvaluator(evaluators) {
+    swal({
+      title: 'Are you sure?',
+      text: "You want to revoke this evaluator?",
+      type: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, revoke it!'
+    }).then((result) => {
+      if (result.value) {
+        this.globals.isLoading = true;
+        var del = { 'UserId': this.globals.authData.UserId, 'EvaluatorId': evaluators.EvaluatorId };
+        this.GenerateEvaluationService.revokeEvaluator(del)
+          .then((data) => {
+            this.globals.isLoading = false;
+            let index = this.EvaluatorList.indexOf(evaluators);
+            this.EvaluatorList[index].StatusId = 3;
+            swal({
+              position: 'top-end',
+              type: 'success',
+              title: 'Evaluator revoked successfully',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            //this.default();
+          },
+            (error) => {
+              this.globals.isLoading = false;
+              this.router.navigate(['/pagenotfound']);
+            });
+
+      }
+
+    })
+  }
+  showEvaluators(evaluation) {
+    var obj = { 'UserId': evaluation.UserId, 'EvaluationId': evaluation.EvaluationId };
+    this.globals.isLoading = true;
+    this.GenerateEvaluationService.getEvaluators(obj)
+      .then((data) => {
+        if (data) {
+          this.EvaluatorList = data;
+        }
+        this.globals.isLoading = false;
+        $('#Details_Modal').modal('show');
         $('.right_content_block').addClass('style_position');
-      }, 
-      (error) => 
-      {
-        //this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
-      });
-         
+      },
+        (error) => {
+          this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+
   }
 }

@@ -23,7 +23,7 @@ export class EvaluationTypeListComponent implements OnInit {
 
   ngOnInit() {
     debugger
-
+    this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
@@ -36,6 +36,7 @@ export class EvaluationTypeListComponent implements OnInit {
       }
     }, 1000);
 
+    this.globals.isLoading = true;
     this.EvaluationTypeService.getAllEvaluationType()
       .then((data) => {
         debugger
@@ -83,10 +84,10 @@ export class EvaluationTypeListComponent implements OnInit {
 
         this.evaluationtypeList = data;
         console.log(this.evaluationtypeList);
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
@@ -99,12 +100,12 @@ export class EvaluationTypeListComponent implements OnInit {
       this.evaluationtypeList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
 
     this.EvaluationTypeService.isActiveChange(changeEntity)
       .then((data) => {
-        // this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
         swal({
           position: 'top-end',
           type: 'success',
@@ -115,7 +116,7 @@ export class EvaluationTypeListComponent implements OnInit {
 
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
   }
@@ -133,6 +134,7 @@ export class EvaluationTypeListComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           var del = { 'Userid': 1, 'id': evaluationtype.EvaluationTypeId, 'Name': evaluationtype.EvaluationTypeName };
+          this.globals.isLoading = true;
           this.EvaluationTypeService.deleteEvaluationType(del)
             .then((data) => {
               let index = this.evaluationtypeList.indexOf(evaluationtype);
@@ -140,6 +142,7 @@ export class EvaluationTypeListComponent implements OnInit {
               if (index != -1) {
                 this.evaluationtypeList.splice(index, 1);
               }
+              this.globals.isLoading = false;
               swal({
                 position: 'top-end',
                 type: 'success',
@@ -149,6 +152,7 @@ export class EvaluationTypeListComponent implements OnInit {
               })
             },
               (error) => {
+                this.globals.isLoading = false;
                 $('#Delete_Modal').modal('hide');
                 if (error.text) {
                   swal({

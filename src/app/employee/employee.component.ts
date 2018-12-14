@@ -25,6 +25,7 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -38,6 +39,7 @@ export class EmployeeComponent implements OnInit {
     var count = $(window).height() - 270;
     body.style.setProperty('--screen-height', count + "px");
 
+    this.globals.isLoading = true;
     this.EmployeeService.getAllJobTitle()
       .then((data) => {
         this.jobtitleList = data;
@@ -60,6 +62,7 @@ export class EmployeeComponent implements OnInit {
       .then((data) => {
         this.linemanagerList = data;
         console.log(this.linemanagerList);
+        this.globals.isLoading = false;
       },
         (error) => {
           //alert('error');
@@ -68,6 +71,7 @@ export class EmployeeComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
+      this.globals.isLoading = true;
       this.EmployeeService.getById(id)
         .then((data) => {
           this.employeeEntity = data;
@@ -77,13 +81,13 @@ export class EmployeeComponent implements OnInit {
           } else {
             this.employeeEntity.IsActive = '1';
           }
+          this.globals.isLoading = false;
         },
           (error) => {
             //alert('error');
             this.btn_disable = false;
             this.submitted = false;
-
-            //	this.router.navigate(['/admin/pagenotfound']);
+            this.globals.isLoading = false;
           });
     }
     else {
@@ -94,6 +98,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeEntity.RoleId = '';
       this.employeeEntity.JobTitleId = '';
       this.employeeEntity.LineManagerId = '';
+      this.globals.isLoading = false;
     }
   }
 
@@ -112,7 +117,7 @@ export class EmployeeComponent implements OnInit {
 
     if (employeeForm.valid) {
       this.btn_disable = true;
-
+      this.globals.isLoading = true;
       this.EmployeeService.addEmployee(this.employeeEntity)
         .then((data) => {
           this.btn_disable = false;
@@ -120,6 +125,7 @@ export class EmployeeComponent implements OnInit {
           this.employeeEntity = {};
           employeeForm.form.markAsPristine();
           if (id) {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -128,6 +134,7 @@ export class EmployeeComponent implements OnInit {
               timer: 1500
             })
           } else {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -142,7 +149,7 @@ export class EmployeeComponent implements OnInit {
             alert('error');
             this.btn_disable = false;
             this.submitted = false;
-
+            this.globals.isLoading = false;
             //	this.router.navigate(['/admin/pagenotfound']);
           });
     }

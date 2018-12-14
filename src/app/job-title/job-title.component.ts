@@ -23,6 +23,7 @@ export class JobTitleComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -36,9 +37,11 @@ export class JobTitleComponent implements OnInit {
     var count = $(window).height() - 270;
     body.style.setProperty('--screen-height', count + "px");
 
+    this.globals.isLoading = true;
     this.JobTitleService.getAllDepartment()
       .then((data) => {
         this.departmentList = data;
+        this.globals.isLoading = false;
       },
         (error) => {
           //alert('error');
@@ -47,6 +50,7 @@ export class JobTitleComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
+      this.globals.isLoading = true;
       this.JobTitleService.getById(id)
         .then((data) => {
           this.jobtitleEntity = data;
@@ -55,11 +59,13 @@ export class JobTitleComponent implements OnInit {
           } else {
             this.jobtitleEntity.IsActive = '1';
           }
+          this.globals.isLoading = false;
         },
           (error) => {
             //alert('error');
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
 
             //	this.router.navigate(['/admin/pagenotfound']);
           });
@@ -88,7 +94,7 @@ export class JobTitleComponent implements OnInit {
 
     if (jobtitleForm.valid) {
       this.btn_disable = true;
-
+      this.globals.isLoading = true;
       this.JobTitleService.addJobTitle(this.jobtitleEntity)
         .then((data) => {
           this.btn_disable = false;
@@ -96,6 +102,7 @@ export class JobTitleComponent implements OnInit {
           this.jobtitleEntity = {};
           jobtitleForm.form.markAsPristine();
           if (id) {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -104,6 +111,7 @@ export class JobTitleComponent implements OnInit {
               timer: 1500
             })
           } else {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -118,6 +126,7 @@ export class JobTitleComponent implements OnInit {
             alert('error');
             this.btn_disable = false;
             this.submitted = false;
+            this.globals.isLoading = false;
 
             //	this.router.navigate(['/admin/pagenotfound']);
           });
