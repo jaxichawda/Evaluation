@@ -40,7 +40,16 @@ export class DashboardComponent implements OnInit {
           this.router.navigate(['/pagenotfound']);
         });
   }
-  startEvaluation() {
-    this.router.navigate(['/performance-review']);
+  startEvaluation(Id){
+    debugger
+    this.DashboardService.insertQuestions(Id)
+      .then((data) => {
+        this.router.navigate(['/performance-review/'+Id]);
+      },
+      (error) => {
+        // this.globals.isLoading = false;
+        this.router.navigate(['/pagenotfound']);
+      });
+   
   }
 }
