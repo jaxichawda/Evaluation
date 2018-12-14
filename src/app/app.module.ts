@@ -47,6 +47,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 import { PerformanceReviewComponent } from './performance-review/performance-review.component';
 import { PerformanceReviewService } from './services/performance-review.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangePasswordService } from './services/change-password.service';
 
 //import { AuthGuard } from './services/auth-guard.service';
 
@@ -70,7 +72,8 @@ import { PerformanceReviewService } from './services/performance-review.service'
     EvaluationListComponent,
     EmployeeComponent,
     EmployeeListComponent,
-    PerformanceReviewComponent
+    PerformanceReviewComponent,
+    ChangePasswordComponent
 
   ],
   imports: [
@@ -110,13 +113,14 @@ import { PerformanceReviewService } from './services/performance-review.service'
       { path: 'employee/list', component: EmployeeListComponent, canActivate: [AuthGuard] },
 
       { path: 'evaluation-review', component: PerformanceReviewComponent, canActivate: [AuthGuard] },
+      { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
 
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, DashboardService, PerformanceReviewService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService, PerformanceReviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -97,7 +97,6 @@ select {-moz-appearance: none!important;-webkit-appearance: none!important;backg
 select option{ background:#f4f4f4!important; padding:7px!important; color:#555!important; font-size:14px!important; text-transform:capitalize!important; display:block!important; width:100%!important; transition:all 0.2s linear 0s!important; border:0!important; border-bottom:1px solid #ccc!important; font-family: 'Titillium Web', sans-serif;}
 .form-group label{line-height:15px; color: #2d5c8a; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal;}
 .form-group label span{color:red;}
-.form-group textarea{height: 80px;}
 .form-group input,.form-group textarea{line-height:15px; color: #555!important; font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight:normal;}
 textarea{height:150px; resize:none;}
 .next_btn { font-family: 'Titillium Web', sans-serif; font-size:16px; padding: 15px 15px; text-align: left; background: #0085ad; background:linear-gradient(to right, #0085ad 50%, #007699 50%) repeat scroll left bottom / 200% 100%; background-size: 200% 100%; background-position: left bottom; color: #ffffff;  box-shadow: none; position: relative; transition:all 0.8s ease 0s; display:inline-block; border-right: solid #007699 53px; border-width: 0 53px 0 0;}
