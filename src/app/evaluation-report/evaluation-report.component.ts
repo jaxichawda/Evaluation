@@ -16,6 +16,7 @@ export class EvaluationReportComponent implements OnInit {
   evaluationList;
   status;
   EvaluatorList;
+  employeelist;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
@@ -45,46 +46,48 @@ export class EvaluationReportComponent implements OnInit {
         .then((data) => {
           debugger
           setTimeout(function () {
-            var table = $('#dataTables-example').DataTable({
-              // scrollY: '55vh',
-              responsive: {
-                details: {
-                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                  type: ''
-                }
-              },
-              scrollCollapse: true,
-              "oLanguage": {
-                "sLengthMenu": "_MENU_ Evaluation per Page",
-                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation",
-                "sInfoFiltered": "(filtered from _MAX_ total Evaluation)",
-                "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation"
-              },
-              dom: 'lBfrtip',
-              buttons: [
+          //   var table = $('#dataTables-example').DataTable({
+          //     // scrollY: '55vh',
+          //     responsive: {
+          //       details: {
+          //         display: $.fn.dataTable.Responsive.display.childRowImmediate,
+          //         type: ''
+          //       }
+          //     },
+          //     scrollCollapse: true,
+          //     "oLanguage": {
+          //       "sLengthMenu": "_MENU_ Evaluation per Page",
+          //       "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation",
+          //       "sInfoFiltered": "(filtered from _MAX_ total Evaluation)",
+          //       "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation"
+          //     },
+          //     dom: 'lBfrtip',
+          //     buttons: [
 
-              ]
-            });
-            var buttons = new $.fn.dataTable.Buttons(table, {
-              buttons: [
-                {
-                  extend: 'excel',
-                  title: 'Evaluation List',
-                  exportOptions: {
-                    columns: [0, 1, 2, 3]
-                  }
-                },
-                {
-                  extend: 'print',
-                  title: 'Evaluation List',
-                  exportOptions: {
-                    columns: [0, 1, 2, 3]
-                  }
-                },
-              ]
-            }).container().appendTo($('#buttons'));
-          }, 100);
-          this.evaluationList = data;
+          //     ]
+          //   });
+          //   var buttons = new $.fn.dataTable.Buttons(table, {
+          //     buttons: [
+          //       {
+          //         extend: 'excel',
+          //         title: 'Evaluation List',
+          //         exportOptions: {
+          //           columns: [0, 1, 2, 3]
+          //         }
+          //       },
+          //       {
+          //         extend: 'print',
+          //         title: 'Evaluation List',
+          //         exportOptions: {
+          //           columns: [0, 1, 2, 3]
+          //         }
+          //       },
+          //     ]
+          //   }).container().appendTo($('#buttons'));
+           }, 100);
+           console.log(data);
+           this.employeelist = data['employee'];
+          this.evaluationList = data['report'];
           this.globals.isLoading = false;
         },
           (error) => {
