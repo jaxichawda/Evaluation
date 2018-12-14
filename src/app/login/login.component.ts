@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     debugger
+
     const body = document.querySelector('body');
     var count = $(window).height();
     body.style.setProperty('--screen-height', count + "px");
@@ -34,10 +35,9 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (loginForm.valid) {
       this.btn_disable = true;
-
+      this.globals.isLoading = true;
       this.AuthService.login(this.loginEntity)
         .then((data) => {
-
           //alert('success');
           swal({
             position: 'top-end',
@@ -55,16 +55,19 @@ export class LoginComponent implements OnInit {
           // this.loginEntity = {};
           // loginForm.form.markAsPristine();
           //   }
+          this.globals.isLoading = true;
           window.location.href = '/dashboard';
           //this.router.navigate(['/dashboard']);
 
         },
           (error) => {
+
             swal({
               type: 'warning',
               title: 'Oops...',
               text: 'Either username or password is incorrect!',
             })
+            this.globals.isLoading = false;
             this.btn_disable = false;
             this.submitted = false;
 

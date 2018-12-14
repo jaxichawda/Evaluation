@@ -46,6 +46,45 @@ class GenerateEvaluation_model extends CI_Model
 		  return false;
 	  }
 	}
+	public function getEvaluationEmployee($evaluationId=Null) {
+		if($evaluationId) {
+			$result = $this->db->query("SELECT a.EvaluatorId, CONCAT(b.FirstName,' ',b.LastName) as name FROM tblmstempevaluator a left join tbluser b on a.EvaluatorId=b.UserId WHERE EvaluationId=".$evaluationId);			
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+			$res = array();
+			if($result->result()) {
+				$res = $result->result();
+			}
+			return $res;
+		} else {
+			return false;
+		}
+	}
+
+	public function getEvaluationReport($evaluationId=Null) {
+		if($evaluationId) {
+			$data = array(
+				'evaluationId' => $evaluationId,
+			);
+			$result = $this->db->query('call getReport1(?)',$data);			
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+			$res = array();
+			if($result->result()) {
+				$res = $result->result();
+			}
+			return $res;
+		} else {
+			return false;
+		}
+	}
+
 	public function revokeEvaluation($post_revoke) {
 		try{
 		if($post_revoke) {

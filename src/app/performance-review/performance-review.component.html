@@ -10,6 +10,7 @@
 <div class="container ">
       <div class="row">
           <div class="col-md-12 col-sm-12"> -->
+<div class="review_block">
 <div class="que_form">
 
 	<button class="pull-left next_btn draft_btn" (click)="saveAsDraft()">Save as Draft</button>
@@ -36,7 +37,7 @@
               <div *ngIf="que.AnswerTypeId==2">
                 <div class="ans_section">
                   <div class="col-md-4 col-sm-4">
-                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" class="form-control"
+                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}"
                       required />
                   </div>
                 </div>
@@ -51,7 +52,7 @@
                 </div>
               </div>
               <div class="form-btn" *ngIf="last">
-                <button type="submit" class="lgn_btn margin_top">
+                <button type="submit" class="next_btn margin_top">
                   <span>Submit</span>
                 </button>
               </div>
@@ -74,3 +75,4 @@
     </div>
   </form>
 </div>
+	</div>

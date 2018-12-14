@@ -16,6 +16,7 @@ import {SelectModule} from 'ng-select';
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
 import { GenerateEvaluationService } from './services/generate-evaluation.service';
 import { EvaluationListComponent } from './evaluation-list/evaluation-list.component';
+import { EvaluationReportComponent } from './evaluation-report/evaluation-report.component';
 
 
 
@@ -50,6 +51,7 @@ import { PerformanceReviewService } from './services/performance-review.service'
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePasswordService } from './services/change-password.service';
 
+
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -73,7 +75,8 @@ import { ChangePasswordService } from './services/change-password.service';
     EmployeeComponent,
     EmployeeListComponent,
     PerformanceReviewComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    EvaluationReportComponent
 
   ],
   imports: [
@@ -91,6 +94,7 @@ import { ChangePasswordService } from './services/change-password.service';
       { path: 'evaluation/create', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/edit/:id', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/list', component: EvaluationListComponent, canActivate: [AuthGuard] },
+      { path: 'evaluation/report/:id', component: EvaluationReportComponent, canActivate: [AuthGuard] },
 
       { path: 'department/add', component: DepartmentComponent, canActivate: [AuthGuard] },
       { path: 'department/edit/:id', component: DepartmentComponent, canActivate: [AuthGuard] },
