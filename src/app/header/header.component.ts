@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit
   firstNameChar;
   lastNameChar;
   ngOnInit() {
+	 const body = document.querySelector('body');
+    body.style.setProperty('--screen-height', $(window).height()-150 + "px");
+	  
     this.firstNameChar = this.globals.authData.FirstName.slice(0,1);
     this.lastNameChar = this.globals.authData.LastName.slice(0,1);
        }
