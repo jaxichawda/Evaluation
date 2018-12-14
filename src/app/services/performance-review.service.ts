@@ -26,4 +26,21 @@ export class PerformanceReviewService {
     });
     return promise;
   }
+  insertPerformance(PerformanceData){ 
+    debugger
+    let promise = new Promise((resolve, reject) => { 
+      this.http.post(this.globals.baseAPIUrl + 'PerformanceReview/insertPerformance', PerformanceData)
+      
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res); 
+          },
+          msg => { // Error
+        reject(msg);
+          }
+        );
+    });		
+    return promise;
+    }
 }

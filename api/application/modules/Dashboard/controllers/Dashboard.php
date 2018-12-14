@@ -20,5 +20,13 @@ class Dashboard extends CI_Controller {
 			echo json_encode($data);
 		}
 	}
+	public function insertQuestions($Id=null)
+	{	
+		if(!empty($Id)) {
+			$data=[];
+			$data=$this->Dashboard_model->insertQuestions($Id);
+			echo json_encode($data);
+		}
+	}
 }
 ?>
