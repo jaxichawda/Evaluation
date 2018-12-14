@@ -3,6 +3,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
+declare varal: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
