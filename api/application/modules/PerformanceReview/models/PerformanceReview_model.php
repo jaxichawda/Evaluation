@@ -1,12 +1,18 @@
 <?php
 
 class PerformanceReview_model extends CI_Model {
-    public function getAllQuestionData()
+    public function getAllQuestionData($Id=Null)
 	{
 		try{
-            $this->db->select('q.QuestionId, q.Questiontext, q.AnswerTypeId, q.IsActive');
+            if($Id)
+	        { 
+            $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId) SELECT ".$Id.",QuestionId FROM tblmstquestion");
+            
+            $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive');
+            $this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
+            $this->db->where('ea.EmployeeEvaluatorId',$Id);
             $this->db->where('q.IsActive',1);
-            $result=$this->db->get('tblmstquestion q');
+            $result=$this->db->get('tblevaluationanswer ea');
             
             $res=array();
             foreach($result->result() as $row)
@@ -19,6 +25,11 @@ class PerformanceReview_model extends CI_Model {
                 array_push($res,$row);
             }
             return $res;
+            }
+            else
+            {
+                return false;
+            }
 		}catch(Exception $e){
 			trigger_error($e->getMessage(), E_USER_ERROR);
 			return false;

@@ -12,10 +12,13 @@ class PerformanceReview extends CI_Controller {
 		$this->load->model('PerformanceReview_model');
 		
     }
-    public function getAllQuestionData()
+    public function getAllQuestionData($Id=null)
 	{
-		$data=$this->PerformanceReview_model->getAllQuestionData();
-		echo json_encode($data);
+        if(!empty($Id)) {
+        $data=[];
+		$data=$this->PerformanceReview_model->getAllQuestionData($Id);
+        echo json_encode($data);
+        }
 	}
 }
 ?>

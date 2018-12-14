@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 export class PerformanceReviewService {
 
   constructor(private http: HttpClient, private globals: Globals, private router: Router) { }
-  getAllQuestionData() {
+  getAllQuestionData(id) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'PerformanceReview/getAllQuestionData')
+      this.http.get(this.globals.baseAPIUrl + 'PerformanceReview/getAllQuestionData/' + id)
         .toPromise()
         .then(
           res => { // Success
