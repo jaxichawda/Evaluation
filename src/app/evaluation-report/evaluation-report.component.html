@@ -44,19 +44,20 @@
                 <tr>
                   <th style="width:1%;" class="text-center">#</th>
                   <th style="width:5%;">Employee Name</th>
-                  <th style="width:4%;">Employee Position</th>
-                  <th style="width:3%;">Evaluation Type</th>
-                  <th style="width:5%;">Employee Date</th>
+                  <th *ngFor="let emp of employeelist;" style="width:4%;">
+                    {{emp.name}}</th>
+                  <!-- <th style="width:3%;">Evaluation Type</th>
+                  <th style="width:5%;">Employee Date</th> -->
                   <!--<th style="width:20%;">Status</th>-->
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let evaluation of evaluationList; let i = index">
                   <td class="text-center">{{i+1}}</td>
-                  <td>{{evaluation.Name}}</td>
-                  <td>{{evaluation.JobTitleName}}</td>
-                  <td>{{evaluation.EvaluationTypeName}}</td>
-                  <td>{{evaluation.EvaluationDate}}</td>
+                  <td>{{evaluation.QuestionText}}</td>
+                  <td *ngFor="let emp of employeelist;">{{evaluationList[i].QuestionText}}</td>
+                  <!-- <td>{{evaluation.Employee69}}</td>
+                  <td>{{evaluation.Employee70}}</td> -->
                 </tr>
                 <!-- <tr class="text-center" *ngIf="evaluationList.length <= 0">
                   <td colspan="4">There is no record found.</td>

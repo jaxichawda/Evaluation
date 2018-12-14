@@ -42,9 +42,13 @@ class GenerateEvaluation extends CI_Controller {
     public function getEvaluationReport($evaluationId=null)
 	{	
 		if(!empty($evaluationId)) {
-			$data=[];
-			$data=$this->GenerateEvaluation_model->getEvaluationReport($evaluationId);
-			echo json_encode($data);
+            //$data=[];
+            $data['employee']=$this->GenerateEvaluation_model->getEvaluationEmployee($evaluationId);
+            $data['report']=$this->GenerateEvaluation_model->getEvaluationReport($evaluationId);
+           
+            //echo "<pre>";
+            //print_r($data);
+            echo json_encode($data);
 		}
     }
     public function revokeEvaluation() {

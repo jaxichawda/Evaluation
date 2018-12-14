@@ -34,5 +34,19 @@ class PerformanceReview extends CI_Controller {
 					}	
             }
     }
+    public function saveAsDraft()
+	{  
+		$post_data = json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_data) 
+			{
+                $result = $this->PerformanceReview_model->saveAsDraft($post_data); 
+			
+					if($result)
+					{
+						echo json_encode($post_data); 
+						
+					}	
+            }
+    }
 }
 ?>

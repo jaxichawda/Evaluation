@@ -46,15 +46,14 @@ class GenerateEvaluation_model extends CI_Model
 		  return false;
 	  }
 	}
-	public function getEvaluationReport($evaluationId=Null) {
+	public function getEvaluationEmployee($evaluationId=Null) {
 		if($evaluationId) {
-			$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
-			$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
-			$this->db->join('tbluser u','u.UserId=e.UserId','left');
-			$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
-			$this->db->where('e.EvaluationId',$evaluationId);
-			$this->db->order_by('e.EvaluationId','asc');
-			$result = $this->db->get('tblmstempevaluation as e');	
+			$result = $this->db->query("SELECT a.EvaluatorId, CONCAT(b.FirstName,' ',b.LastName) as name FROM tblmstempevaluator a left join tbluser b on a.EvaluatorId=b.UserId WHERE EvaluationId=".$evaluationId);			
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
 			$res = array();
 			if($result->result()) {
 				$res = $result->result();
@@ -63,18 +62,29 @@ class GenerateEvaluation_model extends CI_Model
 		} else {
 			return false;
 		}
-		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
-		$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
-		$this->db->join('tbluser u','u.UserId=e.UserId','left');
-		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
-		$this->db->order_by('e.EvaluationId','asc');
-		$result = $this->db->get('tblmstempevaluation as e');	
-		$res = array();
-		if($result->result()) {
-			$res = $result->result();
-		}
-		return $res;
 	}
+
+	public function getEvaluationReport($evaluationId=Null) {
+		if($evaluationId) {
+			$data = array(
+				'evaluationId' => $evaluationId,
+			);
+			$result = $this->db->query('call getReport1(?)',$data);			
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+			$res = array();
+			if($result->result()) {
+				$res = $result->result();
+			}
+			return $res;
+		} else {
+			return false;
+		}
+	}
+
 	public function revokeEvaluation($post_revoke) {
 		try{
 		if($post_revoke) {

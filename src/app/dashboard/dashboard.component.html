@@ -52,7 +52,7 @@
                 </div>
                 <button *ngIf="evaluation.StatusId==0" (click)="startEvaluation(evaluation.EmployeeEvaluatorId)" class="next_btn">Start</button>
                 <button *ngIf="evaluation.StatusId==1" class="back_btn">View</button>
-                <button *ngIf="evaluation.StatusId==2" class="next_btn">Continue</button>
+                <button *ngIf="evaluation.StatusId==2" routerLink="/performance-review/{{evaluation.EmployeeEvaluatorId}}" class="next_btn">Continue</button>
               </div>
             </div>
 			  <div class="clearfix"></div>

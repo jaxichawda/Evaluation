@@ -35,43 +35,45 @@ class PerformanceReview_model extends CI_Model {
     }
     public function insertPerformance($post_data)
 	{	
-		            $PerformanceData=$post_data['PerformanceData'];
+                    $PerformanceData=$post_data['PerformanceData'];
+                    //$performance_data= array();
 					foreach($PerformanceData as $data){
-						$child = $data['child'];
-						
-						if($data['AnswerTypeId']==1){
-							foreach($child as $ans){
-								
-							$cans_data1=array(
-								"CandidateId"=>$candidateId,
-								"QuestionId"=>trim($ans['QuestionId']),
-								"QAnswerId"=>trim($ans['QAnswerId']),
-								"CAnswer"=>trim($ans['CAnswer1']),
+						//$child = $data['child'];
+							$data1=array(
+								"EmployeeEvaluatorId"=>$data['EmployeeEvaluatorId'],
+								"QuestionId"=>$data['QuestionId'],
+								"AnswerText"=>$data['AnswerText'],
 								"IsActive"=>1,
-								"CreatedBy"=>1,
-								"CreatedOn"=>date('y-m-d H:i:s')
-								);	
-									
-								$res1=$this->db->insert('tblcandidateanswer',$cans_data1);
-							}
-						} else {
-							foreach($child as $ans){
-								
-								$cans_data1=array(
-									"CandidateId"=>$candidateId,
-									"QuestionId"=>trim($ans['QuestionId']),
-									"QAnswerId"=>trim($ans['QAnswerId']),
-									"CAnswer"=>trim($ans['CAnswer']),
-									"IsActive"=>1,
-									"CreatedBy"=>1,
-									"CreatedOn"=>date('y-m-d H:i:s')
-									);	
-										
-									$res1=$this->db->insert('tblcandidateanswer',$cans_data1);
-								}
-						}
-					}
-				
+								"UpdatedOn"=>date('y-m-d H:i:s')
+                                );	
+                                $this->db->where('EvaluationAnswerId',trim($data['EvaluationAnswerId']));
+                                $res1=$this->db->update('tblevaluationanswer',$data1);
+
+                    } 
+                    $result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$data['EmployeeEvaluatorId']);
+                    return true;
+                    
+    }
+    public function saveAsDraft($post_data)
+	{	
+                    $PerformanceData=$post_data['PerformanceData'];
+                    //$performance_data= array();
+					foreach($PerformanceData as $data){
+						//$child = $data['child'];
+							$data1=array(
+								"EmployeeEvaluatorId"=>$data['EmployeeEvaluatorId'],
+								"QuestionId"=>$data['QuestionId'],
+								"AnswerText"=>$data['AnswerText'],
+								"IsActive"=>1,
+								"UpdatedOn"=>date('y-m-d H:i:s')
+                                );	
+                                $this->db->where('EvaluationAnswerId',trim($data['EvaluationAnswerId']));
+                                $res1=$this->db->update('tblevaluationanswer',$data1);
+
+                    } 
+                    //$result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$data['EmployeeEvaluatorId']);
+                    return true;
+                    
 	}
 }
 ?>
