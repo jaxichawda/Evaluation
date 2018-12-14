@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2018 at 07:15 AM
+-- Generation Time: Dec 14, 2018 at 08:22 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -124,8 +124,7 @@ CREATE TABLE `tblmstempevaluation` (
 --
 
 INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `EvaluationDate`, `EvaluationDescription`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(11, 4, 2, '0000-00-00 00:00:00', 'asdfghjkl', b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-11 07:03:43'),
-(12, 5, 1, '0000-00-00 00:00:00', 'helllooooooooooooo', b'1', 1, '2018-12-11 07:11:44', 1, '2018-12-11 14:28:54');
+(21, 5, 1, '2018-12-18 02:55:00', 'jaxi\'s evaluation', b'1', 4, '2018-12-13 14:15:54', 4, '2018-12-13 14:15:54');
 
 -- --------------------------------------------------------
 
@@ -150,12 +149,9 @@ CREATE TABLE `tblmstempevaluator` (
 --
 
 INSERT INTO `tblmstempevaluator` (`EmployeeEvaluatorId`, `EvaluationId`, `EvaluatorId`, `StatusId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(29, 11, 5, 3, b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-12 07:05:08'),
-(30, 11, 4, 3, b'1', 1, '2018-12-11 07:03:43', 1, '2018-12-12 11:20:47'),
-(41, 12, 4, 3, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 11:20:47'),
-(42, 12, 6, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13'),
-(43, 12, 5, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13'),
-(44, 12, 5, 0, b'1', 1, '2018-12-11 14:28:54', 1, '2018-12-12 07:05:13');
+(68, 21, 4, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55'),
+(69, 21, 5, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55'),
+(70, 21, 6, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55');
 
 -- --------------------------------------------------------
 
@@ -238,6 +234,22 @@ CREATE TABLE `tblmstquestion` (
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tblmstquestion`
+--
+
+INSERT INTO `tblmstquestion` (`QuestionId`, `QuestionText`, `AnswerTypeId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(1, '<p>Has any of the following happened to you in the last 5 years?</p>\r\n\r\n<ol style=""list-style-type:circle;"">\r\n	<li>Fired from a job.</li>\r\n	<li>Quit a job after being told you&#39;d be fired.</li>\r\n	<li>Left a job by mutual agreement following allegations of misconduct.</li>\r\n	<li>Left a job by mutual agreement following allegations of unsatisfactory performance.</li>\r\n	<li>Left a job for other reasons under unfavorable circumstances.</li>\r\n</ol>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
+(2, '<p>List three people in the specific textbox who know you well and live in the state of Gujarat. They should be good friends, peers, colleagues, college roommates, etc., whose combined association with you covers as well as possible the last 5 years.&nbsp;</p>\r\n\r\n<p><strong>Note:</strong> In each text box, write people&#39;s details in order of their name, email address and contact number (like <strong>NAME, EMAIL ADDRESS, CONTACT NUMBER</strong>).&nbsp;</p>\r\n\r\n<p><strong>Do not</strong> list your spouse, former spouses, or other relatives, and try not to list anyone who is listed elsewhere on this form.</p>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
+(3, '<p>What is your current marital status?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
+(4, '<p>Have you served in the Indian Military?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
+(5, '<p>Have you served in the Indian Merchant Marine?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
+(6, '<p>In the last 5 years, have you been arrested for, charged with, or convicted of any criminal offense(s)?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
+(7, '<p>In the last 5 year, have you illegally used any controlled substance, for example, marijuana, cocaine, crack cocaine, hashish, narcotics (opium, morphine, codeine, heroin, etc.), amphetamines, depressants (barbiturates, methaqualone, tranquilizers, etc.), hallucinogenic (LSD, PCP, etc.), or prescription drugs?</p>', 1, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
+(8, '<p>In the last 5 years, have you been involved in the illegal purchase, manufacture, trafficking, production, transfer, shipping, receiving, or sale of any narcotic, depressant, stimulant, hallucinogen, or cannabis, for your own intended profit or that of another?</p>', 1, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
+(9, '<p>In the last 5 years, have you, or a company over which you exercised some control, filed for bankruptcy, been declared bankrupt, been subject to a tax lien, or had legal judgment rendered against you for a debt?</p>', 3, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30'),
+(10, '<p>Are you now over 180 days&rsquo; delinquent on any loan or financial obligation? Include loans or obligations funded or guaranteed by the Government?</p>"\r\n"12";"<p>Would you like to add any additional note for us?</p>', 1, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30');
+
 -- --------------------------------------------------------
 
 --
@@ -279,6 +291,23 @@ CREATE TABLE `tblquestionoptions` (
   `UpdatedBy` int(11) NOT NULL DEFAULT '1',
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblquestionoptions`
+--
+
+INSERT INTO `tblquestionoptions` (`QuestionOptionId`, `QuestionId`, `OptionValue`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(1, 3, 'Married', b'1', 1, '2018-12-14 06:27:27', 1, '2018-12-14 06:27:27'),
+(2, 3, 'Unmarried', b'1', 1, '2018-12-14 06:27:27', 1, '2018-12-14 06:27:27'),
+(3, 3, 'Widow', b'1', 1, '2018-12-14 06:27:45', 1, '2018-12-14 06:27:45'),
+(4, 4, 'Yes', b'1', 1, '2018-12-14 06:28:35', 1, '2018-12-14 06:28:35'),
+(5, 4, 'No', b'1', 1, '2018-12-14 06:28:35', 1, '2018-12-14 06:28:35'),
+(6, 5, 'Yes', b'1', 1, '2018-12-14 06:29:34', 1, '2018-12-14 06:29:34'),
+(7, 5, 'No', b'1', 1, '2018-12-14 06:29:34', 1, '2018-12-14 06:29:34'),
+(8, 6, 'Yes', b'1', 1, '2018-12-14 06:30:06', 1, '2018-12-14 06:30:06'),
+(9, 6, 'No', b'1', 1, '2018-12-14 06:30:06', 1, '2018-12-14 06:30:06'),
+(10, 9, 'Yes', b'1', 1, '2018-12-14 06:30:29', 1, '2018-12-14 06:30:29'),
+(11, 9, 'No', b'1', 1, '2018-12-14 06:30:29', 1, '2018-12-14 06:30:29');
 
 -- --------------------------------------------------------
 
@@ -409,12 +438,12 @@ ALTER TABLE `tblmstdepartment`
 -- AUTO_INCREMENT for table `tblmstempevaluation`
 --
 ALTER TABLE `tblmstempevaluation`
-  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `tblmstempevaluator`
 --
 ALTER TABLE `tblmstempevaluator`
-  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `tblmstevaluationtype`
 --
@@ -429,7 +458,7 @@ ALTER TABLE `tblmstjobtitle`
 -- AUTO_INCREMENT for table `tblmstquestion`
 --
 ALTER TABLE `tblmstquestion`
-  MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tblmstuserrole`
 --
@@ -439,7 +468,7 @@ ALTER TABLE `tblmstuserrole`
 -- AUTO_INCREMENT for table `tblquestionoptions`
 --
 ALTER TABLE `tblquestionoptions`
-  MODIFY `QuestionOptionId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `QuestionOptionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbluser`
 --

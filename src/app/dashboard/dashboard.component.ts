@@ -37,6 +37,6 @@ export class DashboardComponent implements OnInit {
       });
   }
   startEvaluation(){
-    this.router.navigate(['/evaluation-review']);
+    this.router.navigate(['/performance-review']);
   }
 }
