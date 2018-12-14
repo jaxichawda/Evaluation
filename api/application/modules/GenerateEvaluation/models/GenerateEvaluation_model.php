@@ -46,6 +46,35 @@ class GenerateEvaluation_model extends CI_Model
 		  return false;
 	  }
 	}
+	public function getEvaluationReport($evaluationId=Null) {
+		if($evaluationId) {
+			$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
+			$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
+			$this->db->join('tbluser u','u.UserId=e.UserId','left');
+			$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
+			$this->db->where('e.EvaluationId',$evaluationId);
+			$this->db->order_by('e.EvaluationId','asc');
+			$result = $this->db->get('tblmstempevaluation as e');	
+			$res = array();
+			if($result->result()) {
+				$res = $result->result();
+			}
+			return $res;
+		} else {
+			return false;
+		}
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
+		$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
+		$this->db->join('tbluser u','u.UserId=e.UserId','left');
+		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
+		$this->db->order_by('e.EvaluationId','asc');
+		$result = $this->db->get('tblmstempevaluation as e');	
+		$res = array();
+		if($result->result()) {
+			$res = $result->result();
+		}
+		return $res;
+	}
 	public function revokeEvaluation($post_revoke) {
 		try{
 		if($post_revoke) {

@@ -27,14 +27,14 @@ export class HeaderComponent implements OnInit
 	//.map(res => res.json())
       .then((data) => 
       {
-       // this.globals.isLoading = true;
+        this.globals.isLoading = true;
         window.location.href = '';
             
       }, 
       (error) => 
       {
         //alert('error');
-        //this.globals.isLoading = false;
+        this.globals.isLoading = false;
 				
       });
           

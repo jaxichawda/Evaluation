@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
     private DashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.globals.isLoading = true;
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -27,16 +29,18 @@ export class DashboardComponent implements OnInit {
         $('footer').addClass('footer_fixed');
       }
     }, 1000);
+    this.globals.isLoading = true;
     this.DashboardService.getEvaluationsById(this.globals.authData.UserId)
       .then((data) => {
         this.evaluationList = data;
+        this.globals.isLoading = false;
       },
-      (error) => {
-        // this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
-      });
+        (error) => {
+          this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
   }
-  startEvaluation(){
+  startEvaluation() {
     this.router.navigate(['/performance-review']);
   }
 }
