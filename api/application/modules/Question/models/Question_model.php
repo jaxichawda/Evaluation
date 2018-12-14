@@ -19,7 +19,7 @@ class Question_model extends CI_Model {
 				$question_data=array(
 				"QuestionText"=>trim($question['QuestionText']),
 				"EvaluationTypeId"=>trim($question['EvaluationTypeId']),
-				"QuestionTypeId"=>trim($question['QuestionTypeId']),
+				"AnswerTypeId"=>trim($question['AnswerTypeId']),
 				"IsActive"=>$IsActive,
 				"CreatedBy" => trim($question['CreatedBy']),
 				"CreatedOn" =>date('y-m-d H:i:s')
@@ -30,7 +30,7 @@ class Question_model extends CI_Model {
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
-				$QuestionType = trim($question['QuestionTypeId']);
+				$QuestionType = trim($question['AnswerTypeId']);
 				if(($res) && ($QuestionType == 3)) {
 					$QuestionId = $this->db->insert_id();
 					foreach($option as $options) {
@@ -66,7 +66,7 @@ class Question_model extends CI_Model {
 	public function getAllQuestionType() 
 	{
 		try{
-			$this->db->select('Value as QuestionTypeId, DisplayText as QuestionTypeName');
+			$this->db->select('Value as AnswerTypeId, DisplayText as QuestionTypeName');
 			$this->db->where('IsActive',1);
 			$this->db->where('Key','AnswerType');
 			$this->db->order_by('QuestionTypeName','asc');
@@ -130,7 +130,7 @@ class Question_model extends CI_Model {
 				$question_data=array(
 				"QuestionText"=>trim($question['QuestionText']),
 				"EvaluationTypeId"=>trim($question['EvaluationTypeId']),
-				"QuestionTypeId"=>trim($question['QuestionTypeId']),
+				"AnswerTypeId"=>trim($question['AnswerTypeId']),
 				"IsActive"=>$IsActive,
 				"UpdatedBy" => trim($question['UpdatedBy']),
 			 	"UpdatedOn" =>date('y-m-d H:i:s')
@@ -143,7 +143,7 @@ class Question_model extends CI_Model {
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
-				$QuestionType = trim($question['QuestionTypeId']);
+				$QuestionType = trim($question['AnswerTypeId']);
 
 				if(($res) && ($QuestionType == 3)) {
 					
@@ -185,7 +185,7 @@ class Question_model extends CI_Model {
 	{
 	  if($QuestionId)
 	  {
-		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.QuestionText, tmq.QuestionTypeId, tmq.IsActive');
+		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive');
 		 $this->db->where('tmq.QuestionId',$QuestionId);
 		 $result=$this->db->get('tblmstquestion tmq');
 		 $question_data= array();
@@ -226,7 +226,7 @@ class Question_model extends CI_Model {
 			//$this->db->select('tmq.QuestionId, tmet.EvaluationTypeName as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
 			$this->db->from('tblmstquestion tmq');
 			$this->db->join('tblmstevaluationtype tmet', 'tmet.EvaluationTypeId=tmq.EvaluationTypeId', 'LEFT');
-			$this->db->join('tblmstconfiguration tmc', 'tmc.Value=tmq.QuestionTypeId', 'LEFT');
+			$this->db->join('tblmstconfiguration tmc', 'tmc.Value=tmq.AnswerTypeId', 'LEFT');
 			$this->db->where('tmc.Key','AnswerType');
 			$this->db->order_by('tmq.QuestionId');
 			$result = $this->db->get();
