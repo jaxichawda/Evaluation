@@ -45,6 +45,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeService } from './services/employee.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 
+import { PerformanceReviewComponent } from './performance-review/performance-review.component';
+import { PerformanceReviewService } from './services/performance-review.service';
+
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -66,7 +69,8 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     QuestionListComponent,
     EvaluationListComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    PerformanceReviewComponent
 
   ],
   imports: [
@@ -105,12 +109,14 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
       { path: 'employee/edit/:id', component: EmployeeComponent, canActivate: [AuthGuard] },
       { path: 'employee/list', component: EmployeeListComponent, canActivate: [AuthGuard] },
 
+      { path: 'evaluation-review', component: PerformanceReviewComponent, canActivate: [AuthGuard] },
+
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, DashboardService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, DashboardService, PerformanceReviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

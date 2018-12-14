@@ -36,5 +36,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/pagenotfound']);
       });
   }
-
+  startEvaluation(){
+    this.router.navigate(['/evaluation-review']);
+  }
 }
