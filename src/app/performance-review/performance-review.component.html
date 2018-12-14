@@ -11,8 +11,9 @@
       <div class="row">
           <div class="col-md-12 col-sm-12"> -->
 <div class="que_form">
+	<button class="pull-left next_btn draft_btn">Save as Draft</button>
+	<div class="clearfix"></div>
   <form class="form-validate" role="form" #candidateForm="ngForm" (ngSubmit)="addUser(candidateForm)">
-
     <div id="main1" role="main">
       <section class="slider">
         <div id="slider" class="flexslider">
@@ -20,6 +21,7 @@
             <li *ngFor="let que of QuestionList; let k=index; let i = index; let last = last">
               <div class="que_section">
                 <h1 class="que_title">Question {{i+1}}</h1>
+				  
                 <p class="que_name">
                   <span [innerHTML]="que.QuestionText"></span>
                 </p>

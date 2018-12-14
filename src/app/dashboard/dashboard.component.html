@@ -50,9 +50,9 @@
                   <p><strong>Feedback for</strong>{{evaluation.FirstName}} {{evaluation.LastName}}</p>
                   <p class="padding_15"><strong>Feedback Request date</strong>{{evaluation.EvaluationDate}}</p>
                 </div>
-                <button *ngIf="evaluation.StatusId==0" routerLink="/performance-review/{{evaluation.EmployeeEvaluatorId}}" class="lgn_btn">Start</button>
-                <button *ngIf="evaluation.StatusId==1" class="lgn_btn">View</button>
-                <button *ngIf="evaluation.StatusId==2" class="lgn_btn">Continue</button>
+                <button *ngIf="evaluation.StatusId==0" routerLink="/performance-review/{{evaluation.EmployeeEvaluatorId}}" class="next_btn">Start</button>
+                <button *ngIf="evaluation.StatusId==1" class="back_btn">View</button>
+                <button *ngIf="evaluation.StatusId==2" class="next_btn">Continue</button>
               </div>
             </div>
           </div>
