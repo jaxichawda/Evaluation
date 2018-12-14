@@ -23,7 +23,7 @@ export class DepartmentListComponent implements OnInit {
 
   ngOnInit() {
     debugger
-
+    this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
@@ -35,7 +35,7 @@ export class DepartmentListComponent implements OnInit {
         $('footer').addClass('footer_fixed');
       }
     }, 1000);
-
+    this.globals.isLoading = true;
     this.DepartmentService.getAllDepartment()
       .then((data) => {
         debugger
@@ -83,10 +83,10 @@ export class DepartmentListComponent implements OnInit {
 
         this.departmentList = data;
         console.log(this.departmentList);
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
@@ -99,12 +99,12 @@ export class DepartmentListComponent implements OnInit {
       this.departmentList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
 
     this.DepartmentService.isActiveChange(changeEntity)
       .then((data) => {
-        // this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
         swal({
           position: 'top-end',
           type: 'success',
@@ -115,7 +115,7 @@ export class DepartmentListComponent implements OnInit {
 
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
   }
@@ -133,8 +133,10 @@ export class DepartmentListComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           var del = { 'Userid': 1, 'id': department.DepartmentId, 'Name': department.DepartmentName };
+          this.globals.isLoading = true;
           this.DepartmentService.deleteDepartment(del)
             .then((data) => {
+              this.globals.isLoading = false;
               let index = this.departmentList.indexOf(department);
               $('#Delete_Modal').modal('hide');
               if (index != -1) {

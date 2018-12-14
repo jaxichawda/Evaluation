@@ -3,68 +3,26 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 use \Firebase\JWT\JWT;
 
-class Login extends CI_Controller {
+class ChangePassword extends CI_Controller {
 
 
 	public function __construct() {
 	
 		parent::__construct();
 		
-		$this->load->model('Login_model');
+		$this->load->model('ChangePassword_model');
 		include APPPATH . 'vendor/firebase/php-jwt/src/JWT.php';
 		
 	}
-
-	// public function db_mode(){
-	// 	echo json_encode(ACTIVE_GROUP);
-	// }
-	
-	public function check_login() {
-
-		$post_login = json_decode(trim(file_get_contents('php://input')), true);		
-
-		if ($post_login) {
-			$result = $this->Login_model->check_login($post_login);
-			if ($result)
-			{
-				$token = array(
-				"UserId" => $result[0]->UserId,
-				"RoleId" => $result[0]->RoleId,
-			    "EmailAddress" => $result[0]->EmailAddress,
-				"FirstName" => $result[0]->FirstName,
-				"MiddleName" => $result[0]->MiddleName,
-				"LastName" => $result[0]->LastName
-				);
-
-				$jwt = JWT::encode($token, "MyGeneratedKey","HS256");
-				$output['token'] = $jwt;
-				echo json_encode($output);
-		
-			}
-			else
-			{
-				return $this->output
-				->set_status_header(404)
-				->set_output(json_encode(array(
-						'text' => 'Invalid username or password.',
-						'type' => 'danger'
-				)));
-			}
+	public function changeNewPassword() {			
+		$post_password = json_decode(trim(file_get_contents('php://input')), true);		
+		if ($post_password) {					
+			$result = $this->ChangePassword_model->changeNewPassword($post_password);
+			if($result)	{
+				echo json_encode('success');
+			} else {					
+				echo json_encode("Incorrect Password");
+			}								
 		}
 	}
-	public function logout() {
-		$post_logout = json_decode(trim(file_get_contents('php://input')), true);		
-
-		if ($post_logout) {
-			$login_data = array(
-				'UserId ' => $post_logout['Userid'],
-				'LoginType' => 0,
-				'PanelType' =>$post_logout['paneltype']
-				
-			);
-		//	$res = $this->db->insert('tblloginlog',$login_data);
-			echo json_encode('success');	
-		}
-	}
-	
 }

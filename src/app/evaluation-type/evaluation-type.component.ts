@@ -22,6 +22,7 @@ export class EvaluationTypeComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -38,6 +39,7 @@ export class EvaluationTypeComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
+      this.globals.isLoading = true;
       this.EvaluationTypeService.getById(id)
         .then((data) => {
           this.evaluationtypeEntity = data;
@@ -46,6 +48,7 @@ export class EvaluationTypeComponent implements OnInit {
           } else {
             this.evaluationtypeEntity.IsActive = '1';
           }
+          this.globals.isLoading = false;
         },
           (error) => {
             //alert('error');
@@ -78,7 +81,7 @@ export class EvaluationTypeComponent implements OnInit {
 
     if (evaluationtypeForm.valid) {
       this.btn_disable = true;
-
+      this.globals.isLoading = true;
       this.EvaluationTypeService.addEvaluationType(this.evaluationtypeEntity)
         .then((data) => {
           this.btn_disable = false;
@@ -86,6 +89,7 @@ export class EvaluationTypeComponent implements OnInit {
           this.evaluationtypeEntity = {};
           evaluationtypeForm.form.markAsPristine();
           if (id) {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -94,6 +98,7 @@ export class EvaluationTypeComponent implements OnInit {
               timer: 1500
             })
           } else {
+            this.globals.isLoading = false;
             swal({
               position: 'top-end',
               type: 'success',
@@ -108,7 +113,7 @@ export class EvaluationTypeComponent implements OnInit {
             alert('error');
             this.btn_disable = false;
             this.submitted = false;
-
+            this.globals.isLoading = false;
             //	this.router.navigate(['/admin/pagenotfound']);
           });
     }

@@ -23,7 +23,7 @@ export class JobTitleListComponent implements OnInit {
 
   ngOnInit() {
     debugger
-
+    this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
@@ -35,7 +35,7 @@ export class JobTitleListComponent implements OnInit {
         $('footer').addClass('footer_fixed');
       }
     }, 1000);
-
+    this.globals.isLoading = true;
     this.JobTitleService.getAllJobTitle()
       .then((data) => {
         debugger
@@ -83,10 +83,10 @@ export class JobTitleListComponent implements OnInit {
 
         this.jobtitleList = data;
         console.log(this.jobtitleList);
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
@@ -99,12 +99,12 @@ export class JobTitleListComponent implements OnInit {
       this.jobtitleList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
 
     this.JobTitleService.isActiveChange(changeEntity)
       .then((data) => {
-        // this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
         swal({
           position: 'top-end',
           type: 'success',
@@ -115,7 +115,7 @@ export class JobTitleListComponent implements OnInit {
 
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
   }
@@ -133,6 +133,7 @@ export class JobTitleListComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           var del = { 'Userid': 1, 'id': jobtitle.JobTitleId, 'Name': jobtitle.JobTitleName };
+          this.globals.isLoading = true;
           this.JobTitleService.deleteJobTitle(del)
             .then((data) => {
               let index = this.jobtitleList.indexOf(jobtitle);
@@ -140,6 +141,7 @@ export class JobTitleListComponent implements OnInit {
               if (index != -1) {
                 this.jobtitleList.splice(index, 1);
               }
+              this.globals.isLoading = false;
               swal({
                 position: 'top-end',
                 type: 'success',

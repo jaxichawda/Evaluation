@@ -23,6 +23,7 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
 
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
@@ -35,6 +36,7 @@ export class EmployeeListComponent implements OnInit {
         $('footer').addClass('footer_fixed');
       }
     }, 1000);
+    this.globals.isLoading = true;
     this.EmployeeService.getAllEmployee()
       .then((data) => {
         debugger
@@ -81,10 +83,10 @@ export class EmployeeListComponent implements OnInit {
         }, 100);
 
         this.employeeList = data;
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
@@ -97,12 +99,12 @@ export class EmployeeListComponent implements OnInit {
       this.employeeList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
 
     this.EmployeeService.isActiveChange(changeEntity)
       .then((data) => {
-        // this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
         swal({
           position: 'top-end',
           type: 'success',
@@ -113,7 +115,7 @@ export class EmployeeListComponent implements OnInit {
 
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
   }
@@ -131,6 +133,7 @@ export class EmployeeListComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           var del = { 'Userid': 1, 'id': employee.UserId, 'Name': employee.FirstName };
+          this.globals.isLoading = true;
           this.EmployeeService.deleteEmployee(del)
             .then((data) => {
               let index = this.employeeList.indexOf(employee);
@@ -138,6 +141,7 @@ export class EmployeeListComponent implements OnInit {
               if (index != -1) {
                 this.employeeList.splice(index, 1);
               }
+              this.globals.isLoading = false;
               swal({
                 position: 'top-end',
                 type: 'success',
@@ -147,6 +151,7 @@ export class EmployeeListComponent implements OnInit {
               })
             },
               (error) => {
+                this.globals.isLoading = false;
                 $('#Delete_Modal').modal('hide');
                 if (error.text) {
                   swal({

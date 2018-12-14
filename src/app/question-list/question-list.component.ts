@@ -24,7 +24,7 @@ export class QuestionListComponent implements OnInit {
 
   ngOnInit() {
     debugger
-
+    this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
@@ -36,7 +36,7 @@ export class QuestionListComponent implements OnInit {
         $('footer').addClass('footer_fixed');
       }
     }, 1000);
-
+    this.globals.isLoading = true;
     this.QuestionService.getAllQuestion()
       .then((data) => {
         debugger
@@ -84,10 +84,10 @@ export class QuestionListComponent implements OnInit {
 
         this.questionList = data;
         console.log(this.questionList);
-        //this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
@@ -100,12 +100,12 @@ export class QuestionListComponent implements OnInit {
       this.questionList[i].IsActive = 1;
       changeEntity.IsActive = 1;
     }
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     changeEntity.UpdatedBy = 1;
 
     this.QuestionService.isActiveChange(changeEntity)
       .then((data) => {
-        // this.globals.isLoading = false;	
+        this.globals.isLoading = false;	
         swal({
           position: 'top-end',
           type: 'success',
@@ -116,7 +116,7 @@ export class QuestionListComponent implements OnInit {
 
       },
         (error) => {
-          // this.globals.isLoading = false;
+          this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
   }
@@ -134,6 +134,7 @@ export class QuestionListComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           var del = { 'Userid': 1, 'id': question.QuestionId, 'Name': question.QuestionText };
+          this.globals.isLoading = true;
           this.QuestionService.deleteQuestion(del)
             .then((data) => {
               let index = this.questionList.indexOf(question);
@@ -141,6 +142,7 @@ export class QuestionListComponent implements OnInit {
               if (index != -1) {
                 this.questionList.splice(index, 1);
               }
+              this.globals.isLoading = false;
               swal({
                 position: 'top-end',
                 type: 'success',
@@ -152,6 +154,7 @@ export class QuestionListComponent implements OnInit {
               (error) => {
                 $('#Delete_Modal').modal('hide');
                 if (error.text) {
+                  this.globals.isLoading = false;
                   swal({
                     position: 'top-end',
                     type: 'success',

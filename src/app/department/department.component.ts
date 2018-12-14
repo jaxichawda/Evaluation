@@ -22,6 +22,7 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit() {
     debugger
+    this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
@@ -38,6 +39,7 @@ export class DepartmentComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.header = 'Edit';
+      this.globals.isLoading = true;
       this.DepartmentService.getById(id)
         .then((data) => {
           this.departmentEntity = data;
@@ -46,8 +48,10 @@ export class DepartmentComponent implements OnInit {
           } else {
             this.departmentEntity.IsActive = '1';
           }
+          this.globals.isLoading = false;
         },
           (error) => {
+            this.globals.isLoading = false;
             //alert('error');
             this.btn_disable = false;
             this.submitted = false;
@@ -78,7 +82,7 @@ export class DepartmentComponent implements OnInit {
 
     if (departmentForm.valid) {
       this.btn_disable = true;
-
+      this.globals.isLoading = true;
       this.DepartmentService.addDepartment(this.departmentEntity)
         .then((data) => {
           this.btn_disable = false;
@@ -108,7 +112,7 @@ export class DepartmentComponent implements OnInit {
             alert('error');
             this.btn_disable = false;
             this.submitted = false;
-
+            this.globals.isLoading = false;
             //	this.router.navigate(['/admin/pagenotfound']);
           });
     }
