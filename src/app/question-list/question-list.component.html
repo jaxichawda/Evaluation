@@ -52,7 +52,7 @@
                 <tbody>
                   <tr *ngFor="let question of questionList; let i = index">
                     <td class="text-center">{{i+1}}</td>
-                    <td>{{question.QuestionText}}</td>
+                    <td><span [innerHTML]="question.QuestionText"></span></td>
                     <td>{{question.QuestionType}}</td>
                     <td>{{question.EvaluationType}}</td>
                     <td class="text-center">
