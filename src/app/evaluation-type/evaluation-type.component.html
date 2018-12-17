@@ -35,9 +35,9 @@
              name="EvaluationTypeName" maxlength="100" required>
           <span class="error_span" *ngIf="(EvaluationTypeName.dirty && EvaluationTypeName.invalid) || (EvaluationTypeName.pristine && submitted)">
             <span *ngIf="EvaluationTypeName.errors.required || (EvaluationTypeName.pristine && submitted)">Please
-              enter Department</span>
+              enter Evaluation Type</span>
             <span class="error_span" *ngIf="EvaluationTypeName.errors && EvaluationTypeName.errors.pattern">
-              Please enter a valid Department
+              Please enter a valid Evaluation Type
             </span>
           </span>
         </div>
