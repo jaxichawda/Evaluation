@@ -37,7 +37,7 @@ export class QuestionComponent implements OnInit {
         $('footer').removeClass('footer_fixed');
       }
     }, 100);
-
+    
     CKEDITOR.replace('QuestionText', {
       height: '300',
       resize_enabled: 'false',
