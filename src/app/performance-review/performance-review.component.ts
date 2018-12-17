@@ -16,6 +16,7 @@ declare var $, Bloodhound: any;
 export class PerformanceReviewComponent implements OnInit {
   QuestionList;
   ans;
+  Status;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
 
@@ -59,8 +60,10 @@ export class PerformanceReviewComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
     this.PerformanceReviewService.getAllQuestionData(id)
-      .then((data) => {
-        this.QuestionList=data;
+      .then((data) => { debugger
+        this.QuestionList=data['QuestionData'];
+        this.Status=data['EvaluationStatus'];
+        console.log(this.Status);
         this.globals.isLoading = false;
       },
       (error) => {

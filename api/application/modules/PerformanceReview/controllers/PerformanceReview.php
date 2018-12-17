@@ -16,7 +16,8 @@ class PerformanceReview extends CI_Controller {
 	{
         if(!empty($Id)) {
         $data=[];
-		$data=$this->PerformanceReview_model->getAllQuestionData($Id);
+		$data['QuestionData']=$this->PerformanceReview_model->getAllQuestionData($Id);
+		$data['EvaluationStatus']=$this->PerformanceReview_model->getEvaluationStatus($Id);
         echo json_encode($data);
         }
     }

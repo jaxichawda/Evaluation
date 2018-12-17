@@ -175,7 +175,7 @@ class GenerateEvaluation_model extends CI_Model
 		$this->db->join('tbluser u','u.UserId=ee.EvaluatorId','left');
 		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
 		$this->db->where('ee.EvaluationId',$post_data['EvaluationId']);
-		$this->db->where('ee.EvaluatorId!=',$post_data['UserId']);
+		//$this->db->where('ee.EvaluatorId!=',$post_data['UserId']);
 		$this->db->order_by('ee.EmployeeEvaluatorId','asc');
 		//$this->db->group_by('ee.EvaluationId');
 		$result = $this->db->get('tblmstempevaluator as ee');	

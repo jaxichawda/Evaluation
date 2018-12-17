@@ -139,7 +139,6 @@ export class GenerateEvaluationComponent implements OnInit {
       this.showError = false;
     }
 
-
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.evaluationEntity.UpdatedBy = this.globals.authData.UserId;

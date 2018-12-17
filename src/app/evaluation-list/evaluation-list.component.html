@@ -120,7 +120,7 @@
             <tbody>
               <tr *ngFor="let evaluators of EvaluatorList; let i = index">
                 <td>{{i+1}}</td>
-                <td>{{evaluators.Name}} {{evaluators.StatusId}}</td>
+                <td>{{evaluators.Name}}</td>
                 <td>{{evaluators.JobTitleName}}</td>
                 <td *ngIf="evaluators.StatusId=='1'"><span class="submit_status">{{status.submitted}}</span></td>
                 <td *ngIf="evaluators.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>

@@ -44,5 +44,23 @@ export class DashboardService {
     });
     return promise;
   }
+  reviewById(EmployeeEvaluatorId) {
+    debugger
+    let promise = new Promise((resolve, reject) => {
+      this.http.get(this.globals.baseAPIUrl + 'Dashboard/reviewById/' + EmployeeEvaluatorId)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
+            // this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
+          }
+        );
+    });
+    return promise;
+  }
 
 }

@@ -28,5 +28,13 @@ class Dashboard extends CI_Controller {
 			echo json_encode($data);
 		}
 	}
+	public function reviewById($EmployeeEvaluatorId=null)
+	{	
+		if(!empty($EmployeeEvaluatorId)) {
+			$data=[];
+			$data=$this->Dashboard_model->reviewById($EmployeeEvaluatorId);
+			echo json_encode($data);
+		}
+	}
 }
 ?>
