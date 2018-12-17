@@ -91,7 +91,7 @@ import { ChangePasswordService } from './services/change-password.service';
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
-      { path: 'evaluation/create', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
+      { path: 'evaluation/generate', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/edit/:id', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/list', component: EvaluationListComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/report/:id', component: EvaluationReportComponent, canActivate: [AuthGuard] },

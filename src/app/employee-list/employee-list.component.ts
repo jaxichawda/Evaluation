@@ -51,10 +51,10 @@ export class EmployeeListComponent implements OnInit {
             },
             scrollCollapse: true,
             "oLanguage": {
-              "sLengthMenu": "_MENU_ Employee per Page",
-              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Employee",
-              "sInfoFiltered": "(filtered from _MAX_ total Employee)",
-              "sInfoEmpty": "Showing 0 to 0 of 0 Employee"
+              "sLengthMenu": "_MENU_ Employees per Page",
+              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Employees",
+              "sInfoFiltered": "(filtered from _MAX_ total Employees)",
+              "sInfoEmpty": "Showing 0 to 0 of 0 Employees"
             },
             dom: 'lBfrtip',
             buttons: [

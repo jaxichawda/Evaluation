@@ -50,10 +50,10 @@ export class JobTitleListComponent implements OnInit {
             },
             scrollCollapse: true,
             "oLanguage": {
-              "sLengthMenu": "_MENU_ Job Title per Page",
-              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Job Title",
-              "sInfoFiltered": "(filtered from _MAX_ total Job Title)",
-              "sInfoEmpty": "Showing 0 to 0 of 0 Job Title"
+              "sLengthMenu": "_MENU_ Job Titles per Page",
+              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Job Titles",
+              "sInfoFiltered": "(filtered from _MAX_ total Job Titles)",
+              "sInfoEmpty": "Showing 0 to 0 of 0 Job Titles"
             },
             dom: 'lBfrtip',
             buttons: [
