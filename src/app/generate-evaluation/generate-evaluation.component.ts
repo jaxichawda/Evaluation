@@ -128,6 +128,11 @@ export class GenerateEvaluationComponent implements OnInit {
     } else {
       this.DateValid = false;
     }
+    if (this.evaluationEntity.EvaluationDescription == "" || this.evaluationEntity.EvaluationDescription == null || this.evaluationEntity.EvaluationDescription == undefined) {
+      this.evaluationEntity.EvaluationDescription = null;
+    } else {
+      this.evaluationEntity.EvaluationDescription = this.evaluationEntity.EvaluationDescription;
+    }
     if (this.evaluationEntity.EvaluatorsId.length == 0 || this.evaluationEntity.EvaluatorsId == "" || this.evaluationEntity.EvaluatorsId == null || this.evaluationEntity.EvaluatorsId == undefined) {
       this.showError = true;
     } else {

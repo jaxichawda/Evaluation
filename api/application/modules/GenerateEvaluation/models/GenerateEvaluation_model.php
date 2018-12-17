@@ -269,12 +269,17 @@ class GenerateEvaluation_model extends CI_Model
 			} else {
 				$IsActive = false;
 			}
+			if($post_generate['EvaluationDescription'] == null) {
+				$EvaluationDescription = 'Not mentioned!';
+			} else {
+				$EvaluationDescription = trim($post_generate['EvaluationDescription']);
+			}
 			$EvaluationDate = strtotime($post_generate['EvaluationDate']);
 				$generate_data = array(
 					'UserId' =>  trim($post_generate['UserId']),
 					'EvaluationTypeId' =>  trim($post_generate['EvaluationTypeId']),
 					'EvaluationDate' =>  date('Y-m-d H:i:s', $EvaluationDate),
-					'EvaluationDescription' =>  trim($post_generate['EvaluationDescription']),
+					'EvaluationDescription' =>  $EvaluationDescription,
 					'IsActive' =>  $IsActive,
 					'CreatedBy' => trim($post_generate['CreatedBy']),
 					'CreatedOn' => date('y-m-d H:i:s'),
@@ -332,12 +337,17 @@ class GenerateEvaluation_model extends CI_Model
 			} else {
 				$IsActive = false;
 			}
+			if($post_generate['EvaluationDescription'] == null) {
+				$EvaluationDescription = 'Not mentioned!';
+			} else {
+				$EvaluationDescription = trim($post_generate['EvaluationDescription']);
+			}
 			$EvaluationDate = strtotime($post_generate['EvaluationDate']);
 				$generate_data = array(
 					'UserId' =>  trim($post_generate['UserId']),
 					'EvaluationTypeId' =>  trim($post_generate['EvaluationTypeId']),
 					'EvaluationDate' =>  date('Y-m-d H:i:s', $EvaluationDate),
-					'EvaluationDescription' =>  trim($post_generate['EvaluationDescription']),
+					'EvaluationDescription' =>  $EvaluationDescription,
 					'IsActive' =>  $IsActive,
 					'UpdatedBy' => trim($post_generate['UpdatedBy']),
 					'UpdatedOn' => date('y-m-d H:i:s'),

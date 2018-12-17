@@ -148,6 +148,12 @@ class GenerateEvaluation extends CI_Controller {
                
                     $email = $row1->EmailAddress;
 
+                    if($post_generate['EvaluationDescription'] == null) {
+                        $EvaluationDescription = 'Not mentioned!';
+                    } else {
+                        $EvaluationDescription = $post_generate['EvaluationDescription'];
+                    }
+
                     if($id==$post_generate['UserId']){
                         $message = '
 
@@ -176,7 +182,7 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Description</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDescription'].'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -222,7 +228,7 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Description</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDescription'].'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
