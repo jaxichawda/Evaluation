@@ -34,7 +34,10 @@ export class DepartmentListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-    }, 1000);
+      $("#collapseExample5").addClass("in");
+      $("#test_department").removeClass("collapsed");
+      $("#test_department").attr("aria-expanded","true");
+    }, 100);
     this.globals.isLoading = true;
     this.DepartmentService.getAllDepartment()
       .then((data) => {

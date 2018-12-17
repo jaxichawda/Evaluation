@@ -41,18 +41,18 @@
               <table class="table table-bordered" id="dataTables-example">
                 <thead>
                   <tr>
-                    <th style="width:1%;" class="text-center">#</th>
-                    <th style="width:12%;">Question</th>
-                    <th style="width:2%;">Question Type</th>
-                    <th style="width:2%;">Evaluation Type</th>
-                    <th style="width:1%;" class="text-center">Is Active?</th>
-                    <th style="width:1%;" class="text-center">Actions</th>
+                    <th class="text-center sr_width">#</th>
+                    <th>Question</th>
+                    <th class="qt_width">Question Type</th>
+                    <th class="et_width">Evaluation Type</th>
+                    <th class="text-center active_width">Is Active?</th>
+                    <th class="text-center action_width">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let question of questionList; let i = index">
                     <td class="text-center">{{i+1}}</td>
-                    <td>{{question.QuestionText}}</td>
+                    <td><span [innerHTML]="question.QuestionText"></span></td>
                     <td>{{question.QuestionType}}</td>
                     <td>{{question.EvaluationType}}</td>
                     <td class="text-center">

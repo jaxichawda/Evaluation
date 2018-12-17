@@ -33,6 +33,9 @@ export class EmployeeComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+          $("#collapseExample1").addClass("in");
+          $("#test_employee").removeClass("collapsed");
+      		$("#test_employee").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

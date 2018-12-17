@@ -25,6 +25,7 @@ export class PerformanceReviewComponent implements OnInit {
 		this.ans = [];
     this.ans.push(item);
     this.globals.isLoading = true;
+	$('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
@@ -50,6 +51,7 @@ export class PerformanceReviewComponent implements OnInit {
         animationLoop: false,
         slideshow: false,
         sync: "#carousel",
+    maxItems: 5,
         start: function (slider) {
           $('body').removeClass('loading');
         }
@@ -74,9 +76,11 @@ export class PerformanceReviewComponent implements OnInit {
   }
   addData(evaluationForm){
     debugger
+    // this.globals.isLoading = true;
     console.log(this.QuestionList);
 		this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
 				.then((data) => {
+          // this.globals.isLoading = false;
           swal({
             position: 'top-end',
             type: 'success',
@@ -93,9 +97,11 @@ export class PerformanceReviewComponent implements OnInit {
   }
   saveAsDraft(){
     debugger
+    // this.globals.isLoading = true;
     console.log(this.QuestionList);
 		this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
 				.then((data) => {
+          // this.globals.isLoading = false;
           swal({
             position: 'top-end',
             type: 'success',
@@ -103,7 +109,7 @@ export class PerformanceReviewComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          //this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/dashboard']);
         },
         (error) => {
           //this.btn_disable = false;

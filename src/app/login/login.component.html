@@ -17,7 +17,7 @@
                   required />
                 <span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)">
                   <span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted)">Please enter your
-                    email</span>
+                    Email Address</span>
                 </span>
               </div>
               <div class="clearfix"></div>
@@ -27,7 +27,7 @@
                   [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted)}"
                   required />
                 <span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted)">
-                  <span *ngIf="Password.errors.required || (Password.pristine && submitted)">Please enter your password</span>
+                  <span *ngIf="Password.errors.required || (Password.pristine && submitted)">Please enter your Password</span>
 
                 </span>
               </div>

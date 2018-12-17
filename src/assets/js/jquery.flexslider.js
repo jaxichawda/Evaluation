@@ -319,7 +319,7 @@
       },
       directionNav: {
         setup: function() {
-          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#"><span>' + slider.vars.prevText + '</span></a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#"><span>' + slider.vars.nextText + '</span></a></li></ul>');
+          var directionNavScaffold = $('<ul class="' + namespace + 'direction-nav"><li class="' + namespace + 'nav-prev"><a class="' + namespace + 'prev" href="#">' + slider.vars.prevText + '</a></li><li class="' + namespace + 'nav-next"><a class="' + namespace + 'next" href="#">' + slider.vars.nextText + '</a></li></ul>');
 
           // CUSTOM DIRECTION NAV:
           if (slider.customDirectionNav) {
@@ -801,7 +801,7 @@
           }
         }
         // SMOOTH HEIGHT:
-        if (slider.vars.smoothHeight) { methods.smoothHeight(slider.vars); }
+        if (slider.vars.smoothHeight) { methods.smoothHeight(slider.vars.animationSpeed); }
       }
     };
     slider.wrapup = function(dimension) {
@@ -1130,7 +1130,7 @@
     startAt: 0,                     //Integer: The slide that the slider should start on. Array notation (0 = first slide)
     slideshow: true,                //Boolean: Animate slider automatically
     slideshowSpeed: 7000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
-    animationSpeed: 1500,            //Integer: Set the speed of animations, in milliseconds
+    animationSpeed: 600,            //Integer: Set the speed of animations, in milliseconds
     initDelay: 0,                   //{NEW} Integer: Set an initialization delay, in milliseconds
     randomize: false,               //Boolean: Randomize slide order
     fadeFirstSlide: true,           //Boolean: Fade in the first slide when animation type is "fade"
@@ -1216,5 +1216,3 @@
     }
   };
 })(jQuery);
-
- 

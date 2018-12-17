@@ -30,6 +30,9 @@ export class DepartmentComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+      $("#collapseExample5").addClass("in");
+      $("#test_department").removeClass("collapsed");
+      $("#test_department").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

@@ -68,6 +68,7 @@ export class ChangePasswordComponent implements OnInit {
               title: 'Oops...',
               text: 'Your current password is incorrect!',
             })
+            this.globals.isLoading = false;
             this.btn_disable = false;
             this.submitted = false;
             this.router.navigate(['/change-password']);
@@ -75,6 +76,7 @@ export class ChangePasswordComponent implements OnInit {
           else {
             //alert('success');
             //this.aa=true;
+            this.globals.isLoading = false;
             this.btn_disable = false;
             this.submitted = false;
             this.changepasswordEntity = {};

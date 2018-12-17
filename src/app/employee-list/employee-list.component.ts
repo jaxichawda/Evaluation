@@ -35,7 +35,10 @@ export class EmployeeListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-    }, 1000);
+          $("#collapseExample1").addClass("in");
+          $("#test_employee").removeClass("collapsed");
+      		$("#test_employee").attr("aria-expanded","true");
+    }, 100);
     this.globals.isLoading = true;
     this.EmployeeService.getAllEmployee()
       .then((data) => {

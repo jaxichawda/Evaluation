@@ -22,7 +22,7 @@ export class EvaluationTypeListComponent implements OnInit {
     private EvaluationTypeService: EvaluationTypeService) { }
 
   ngOnInit() {
-    debugger
+    
     this.globals.isLoading = false;
     $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
     $('.buttons-print').attr('data-original-title', 'Print').tooltip();
@@ -34,12 +34,15 @@ export class EvaluationTypeListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-    }, 1000);
+      $("#collapseExample4").addClass("in");
+      $("#test_evaluation_type").removeClass("collapsed");
+      $("#test_evaluation_type").attr("aria-expanded","true");
+    }, 100);
 
     this.globals.isLoading = true;
     this.EvaluationTypeService.getAllEvaluationType()
       .then((data) => {
-        debugger
+        
         setTimeout(function () {
           var table = $('#dataTables-example').DataTable({
             // scrollY: '55vh',
