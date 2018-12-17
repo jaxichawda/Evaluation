@@ -90,6 +90,8 @@ export class GenerateEvaluationComponent implements OnInit {
       this.evaluationEntity.EvaluationId = 0;
       this.evaluationEntity.IsActive = '1';
       this.globals.isLoading = false;
+      this.evaluationEntity.EvaluationTypeId = '';
+      this.evaluationEntity.UserId = '';
       //this.evaluationEntity.Check=true;
     }
 
