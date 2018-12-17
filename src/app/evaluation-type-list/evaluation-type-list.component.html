@@ -41,15 +41,15 @@
             <table class="table table-bordered" id="dataTables-example">
               <thead>
                 <tr>
-                  <th style="width:1%;">#</th>
-                  <th style="width:20%;">Evaluation Type</th>
-                  <th style="width:1%;">Is Active?</th>
-                  <th style="width:1%;">Actions</th>
+                  <th class="text-center sr_width">#</th>
+                  <th class="">Evaluation Type</th>
+                  <th class="text-center active_width">Is Active?</th>
+                  <th class="text-center action_width">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let evaluationtype of evaluationtypeList; let i = index">
-                  <td>{{i+1}}</td>
+                  <td class="text-center">{{i+1}}</td>
                   <td>{{evaluationtype.EvaluationTypeName}}</td>
                   <td class="text-center">
                     <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluationtype.IsActive==1 ? 'Active' : 'Deactive'">
