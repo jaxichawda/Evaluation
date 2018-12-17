@@ -2,8 +2,8 @@
 
 
 .loader_new {
-	background: rgb(153, 153, 153);
-	opacity: 0.8;
+	background: rgb(255, 255, 255);
+	opacity: 1;
 	width: 100%;
 	z-index: 9998;
 	height: 100%;

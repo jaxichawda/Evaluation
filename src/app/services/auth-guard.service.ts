@@ -9,9 +9,10 @@ declare var $: any;
 export class AuthGuard implements CanActivate {
 
   constructor(private authService : AuthService,private router: Router, public globals: Globals) { }
+  
 
-  canActivate(route,state:RouterStateSnapshot) { 
-
+  canActivate(route,state:RouterStateSnapshot) {
+	debugger 
 	this.globals.isLoading = false;	
 	$('footer').removeClass('footer_fixed');
 	if(state.url=='/login'){					   
@@ -28,7 +29,7 @@ export class AuthGuard implements CanActivate {
 	}
 	  if(this.authService.isLoggedIn()==true){	
 
-		if(state.url=='/login'){			
+		if(state.url=='/login' || state.url=='/forgot-password' || state.url.split('/')[1]=='reset-password'){			
 			this.globals.IsLoggedIn = true;
 			
 			this.router.navigate(['/generate-evaluation']);
@@ -72,7 +73,7 @@ export class AuthGuard implements CanActivate {
 		// 	  return true;		  
 		//   }		  
 	  } else {
-		if(state.url=='/login'){					   
+		if(state.url=='/login' || state.url=='/forgot-password' || state.url.split('/')[1]=='reset-password'){					   
 			   this.globals.IsLoggedIn = false;
 			   return true;
 		   } else {

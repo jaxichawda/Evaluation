@@ -90,6 +90,8 @@ export class GenerateEvaluationComponent implements OnInit {
       this.evaluationEntity.EvaluationId = 0;
       this.evaluationEntity.IsActive = '1';
       this.globals.isLoading = false;
+      this.evaluationEntity.EvaluationTypeId = '';
+      this.evaluationEntity.UserId = '';
       //this.evaluationEntity.Check=true;
     }
 
@@ -152,7 +154,7 @@ export class GenerateEvaluationComponent implements OnInit {
       this.evaluationEntity.EvaluationId = 0;
       this.submitted = true;
     }
-    //console.log(this.evaluationEntity);
+    console.log(this.evaluationEntity);
     if (evaluationForm.valid && !this.DateValid && !this.showError) {
       this.btn_disable = true;
       this.globals.isLoading = true;
@@ -200,7 +202,7 @@ export class GenerateEvaluationComponent implements OnInit {
         this.reportingData = data;
         this.selectedCharacters = [this.reportingData.UserId, this.UserId];
         //this.selectedCharacters['1'] = [this.UserId];
-        //console.log(this.selectedCharacters);
+        console.log(this.selectedCharacters);
         this.globals.isLoading = false;
         
       },
