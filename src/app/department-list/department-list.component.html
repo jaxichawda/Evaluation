@@ -41,15 +41,15 @@
             <table class="table table-bordered" id="dataTables-example">
               <thead>
                 <tr>
-                  <th style="width:1%;">#</th>
-                  <th style="width:20%;">Department</th>
-                  <th style="width:1%;">Is Active?</th>
-                  <th style="width:1%;">Actions</th>
+                  <th class="sr_width text-center">#</th>
+                  <th class="">Department</th>
+                  <th class="active_width text-center">Is Active?</th>
+                  <th class="action_width text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let department of departmentList; let i = index">
-                  <td>{{i+1}}</td>
+                  <td class=" text-center">{{i+1}}</td>
                   <td>{{department.DepartmentName}}</td>
                   <td class="text-center">
                     <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="department.IsActive==1 ? 'Active' : 'Deactive'">
@@ -58,7 +58,7 @@
                       <label for="active{{i}}"></label>
                     </div>
                   </td>
-                  <td>
+                  <td class=" text-center">
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-default btn-rounded btn-sm" routerLink="/department/edit/{{department.DepartmentId}}">
                         <span class="fa fa-pencil"></span>

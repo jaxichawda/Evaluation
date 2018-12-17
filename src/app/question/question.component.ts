@@ -40,7 +40,7 @@ export class QuestionComponent implements OnInit {
       $("#test_question").removeClass("collapsed");
       $("#test_question").attr("aria-expanded","true");
     }, 100);
-
+    
     CKEDITOR.replace('QuestionText', {
       height: '300',
       resize_enabled: 'false',
