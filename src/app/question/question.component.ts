@@ -103,6 +103,7 @@ export class QuestionComponent implements OnInit {
       this.header = 'Add';
       this.questionEntity = {};
       this.questionEntity.QuestionTypeId = '';
+      this.questionEntity.AnswerTypeId = '';
       this.questionEntity.EvaluationTypeId = '';
       this.questionEntity.IsActive = '1';
       this.questionEntity.QuestionId = '';

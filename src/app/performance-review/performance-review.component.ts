@@ -67,18 +67,18 @@ export class PerformanceReviewComponent implements OnInit {
         this.globals.isLoading = false;
       },
       (error) => {
-        this.globals.isLoading = false;
+        // this.globals.isLoading = false;
         this.router.navigate(['/pagenotfound']);
       });
     }
   }
   addData(evaluationForm){
     debugger
-    this.globals.isLoading = true;
+    // this.globals.isLoading = true;
     console.log(this.QuestionList);
 		this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
 				.then((data) => {
-          this.globals.isLoading = false;
+          // this.globals.isLoading = false;
           swal({
             position: 'top-end',
             type: 'success',
@@ -95,11 +95,11 @@ export class PerformanceReviewComponent implements OnInit {
   }
   saveAsDraft(){
     debugger
-    this.globals.isLoading = true;
+    // this.globals.isLoading = true;
     console.log(this.QuestionList);
 		this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
 				.then((data) => {
-          this.globals.isLoading = false;
+          // this.globals.isLoading = false;
           swal({
             position: 'top-end',
             type: 'success',
