@@ -152,7 +152,6 @@ export class GenerateEvaluationService {
     return promise;
   }
   getEvaluationReport(evaluationId) {
-    debugger
     let promise = new Promise((resolve, reject) => {
       this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getEvaluationReport/' + evaluationId)
         .toPromise()

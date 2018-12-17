@@ -44,48 +44,47 @@ export class EvaluationReportComponent implements OnInit {
     if (id) {
       this.GenerateEvaluationService.getEvaluationReport(id)
         .then((data) => {
-          debugger
+          
           setTimeout(function () {
-          //   var table = $('#dataTables-example').DataTable({
-          //     // scrollY: '55vh',
-          //     responsive: {
-          //       details: {
-          //         display: $.fn.dataTable.Responsive.display.childRowImmediate,
-          //         type: ''
-          //       }
-          //     },
-          //     scrollCollapse: true,
-          //     "oLanguage": {
-          //       "sLengthMenu": "_MENU_ Evaluation per Page",
-          //       "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation",
-          //       "sInfoFiltered": "(filtered from _MAX_ total Evaluation)",
-          //       "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation"
-          //     },
-          //     dom: 'lBfrtip',
-          //     buttons: [
+            var table = $('#dataTables-example').DataTable({
+              // scrollY: '55vh',
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                  type: ''
+                }
+              },
+              scrollCollapse: true,
+              "oLanguage": {
+                "sLengthMenu": "_MENU_ Question per Page",
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Question",
+                "sInfoFiltered": "(filtered from _MAX_ total Question)",
+                "sInfoEmpty": "Showing 0 to 0 of 0 Question"
+              },
+              dom: 'lBfrtip',
+              buttons: [
 
-          //     ]
-          //   });
-          //   var buttons = new $.fn.dataTable.Buttons(table, {
-          //     buttons: [
-          //       {
-          //         extend: 'excel',
-          //         title: 'Evaluation List',
-          //         exportOptions: {
-          //           columns: [0, 1, 2, 3]
-          //         }
-          //       },
-          //       {
-          //         extend: 'print',
-          //         title: 'Evaluation List',
-          //         exportOptions: {
-          //           columns: [0, 1, 2, 3]
-          //         }
-          //       },
-          //     ]
-          //   }).container().appendTo($('#buttons'));
+              ]
+            });
+            var buttons = new $.fn.dataTable.Buttons(table, {
+              buttons: [
+                {
+                  extend: 'excel',
+                  title: 'Question List',
+                  exportOptions: {
+                    columns: [0, 1, 2, 3]
+                  }
+                },
+                {
+                  extend: 'print',
+                  title: 'Question List',
+                  exportOptions: {
+                    columns: [0, 1, 2, 3]
+                  }
+                },
+              ]
+            }).container().appendTo($('#buttons'));
            }, 100);
-           console.log(data);
            this.employeelist = data['employee'];
           this.evaluationList = data['report'];
           this.globals.isLoading = false;
