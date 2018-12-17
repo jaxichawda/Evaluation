@@ -50,10 +50,10 @@ export class DepartmentListComponent implements OnInit {
             },
             scrollCollapse: true,
             "oLanguage": {
-              "sLengthMenu": "_MENU_ Department per Page",
-              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Department",
-              "sInfoFiltered": "(filtered from _MAX_ total Department)",
-              "sInfoEmpty": "Showing 0 to 0 of 0 Department"
+              "sLengthMenu": "_MENU_ Departments per Page",
+              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Departments",
+              "sInfoFiltered": "(filtered from _MAX_ total Departments)",
+              "sInfoEmpty": "Showing 0 to 0 of 0 Departments"
             },
             dom: 'lBfrtip',
             buttons: [

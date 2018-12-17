@@ -51,10 +51,10 @@ export class EvaluationTypeListComponent implements OnInit {
             },
             scrollCollapse: true,
             "oLanguage": {
-              "sLengthMenu": "_MENU_ Evaluation Type per Page",
-              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation Type",
-              "sInfoFiltered": "(filtered from _MAX_ total Evaluation Type)",
-              "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation Type"
+              "sLengthMenu": "_MENU_ Evaluation Types per Page",
+              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation Types",
+              "sInfoFiltered": "(filtered from _MAX_ total Evaluation Types)",
+              "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation Types"
             },
             dom: 'lBfrtip',
             buttons: [

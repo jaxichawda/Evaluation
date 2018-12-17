@@ -32,7 +32,7 @@
         <div class="form-group col-md-4">
           <label><span class="required">*</span>First Name</label>
           <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="employeeEntity.FirstName" name="FirstName"
-            maxlength="100" required>
+            maxlength="100" pattern="[a-zA-Z',&.$\ ]{2,}" required>
           <span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)">
             <span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted)">Please
               enter First Name</span>
@@ -44,7 +44,7 @@
         <div class="form-group col-md-4">
           <label>Middle Name</label>
           <input type="text" class="form-control" #MiddleName="ngModel" [(ngModel)]="employeeEntity.MiddleName" class="form-control"
-            name="MiddleName" maxlength="100">
+            name="MiddleName" maxlength="100" pattern="[a-zA-Z',&.$\ ]{2,}">
           <span class="error_span" *ngIf="(MiddleName.dirty && MiddleName.invalid)">
             <span class="error_span" *ngIf="MiddleName.errors && MiddleName.errors.pattern">
               Please enter a valid Middle Name
@@ -54,7 +54,7 @@
         <div class="form-group col-md-4">
           <label><span class="required">*</span>Last Name</label>
           <input type="text" class="form-control" #LastName="ngModel" [(ngModel)]="employeeEntity.LastName" class="form-control"
-            name="LastName" maxlength="100" required>
+            name="LastName" maxlength="100" pattern="[a-zA-Z',&.$\ ]{2,}" required>
           <span class="error_span" *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)">
             <span *ngIf="LastName.errors.required || (LastName.pristine && submitted)">Please
               enter Last Name</span>
@@ -67,7 +67,7 @@
         <div class="form-group col-md-4">
           <label>Employee ID</label>
           <input type="text" class="form-control" #EmployeeId="ngModel" [(ngModel)]="employeeEntity.EmployeeId" class="form-control"
-            name="EmployeeId" maxlength="100">
+            name="EmployeeId" maxlength="100" pattern="[0-9a-zA-Z',&.$\ ]{2,}">
           <span class="error_span" *ngIf="(EmployeeId.dirty && EmployeeId.invalid)">
             <span class="error_span" *ngIf="EmployeeId.errors && EmployeeId.errors.pattern">
               Please enter a valid Employee ID
@@ -77,7 +77,7 @@
         <div class="form-group col-md-4">
           <label><span class="required">*</span>Email Address</label>
           <input type="text" class="form-control" #EmailAddress="ngModel" [(ngModel)]="employeeEntity.EmailAddress"
-            class="form-control" name="EmailAddress" maxlength="100" required>
+            class="form-control" name="EmailAddress" maxlength="100" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
           <span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)">
             <span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted)">Please
               enter Email Address</span>

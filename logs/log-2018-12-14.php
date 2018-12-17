@@ -69,3 +69,4 @@ ERROR - 2018-12-14 19:35:29 --> Query error: Commands out of sync; you can't run
 ERROR - 2018-12-14 19:35:49 --> Query error: Commands out of sync; you can't run this command now - Invalid query: SELECT a.EvaluatorId, CONCAT(b.FirstName,' ',b.LastName) FROM tblmstempevaluator a left join tbluser b on a.EvaluatorId=b.UserId WHERE EvaluationId=21
 ERROR - 2018-12-14 19:55:10 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL' at line 1 - Invalid query: call getReport1('22')
 ERROR - 2018-12-14 19:56:51 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL' at line 1 - Invalid query: call getReport1('22')
+ERROR - 2018-12-14 20:19:49 --> Query error: PROCEDURE evaluation.getReport1 does not exist - Invalid query: call getReport1('1')

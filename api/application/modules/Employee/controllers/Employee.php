@@ -83,7 +83,7 @@ class Employee extends CI_Controller {
 											<td style="padding:5px; text-align:left; width:48%">'.$password.'</td>
 										</tr>
 										<tr>
-											<td style="padding:5px; text-align:right; width:35%">Your Reporter</td>
+											<td style="padding:5px; text-align:right; width:35%">Your Line Manager</td>
 											<td style="padding:5px; text-align:center; width:4%">:</td>
 											<td style="padding:5px; text-align:left; width:48%">'.$LineManager.'</td>
 										</tr>

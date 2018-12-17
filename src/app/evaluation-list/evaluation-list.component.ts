@@ -55,10 +55,10 @@ export class EvaluationListComponent implements OnInit {
             },
             scrollCollapse: true,
             "oLanguage": {
-              "sLengthMenu": "_MENU_ Evaluation per Page",
-              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluation",
-              "sInfoFiltered": "(filtered from _MAX_ total Evaluation)",
-              "sInfoEmpty": "Showing 0 to 0 of 0 Evaluation"
+              "sLengthMenu": "_MENU_ Evaluations per Page",
+              "sInfo": "Showing _START_ to _END_ of _TOTAL_ Evaluations",
+              "sInfoFiltered": "(filtered from _MAX_ total Evaluations)",
+              "sInfoEmpty": "Showing 0 to 0 of 0 Evaluations"
             },
             dom: 'lBfrtip',
             buttons: [
