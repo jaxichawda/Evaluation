@@ -150,7 +150,7 @@ table.dataTable.no-footer {border-bottom: 0px!important;}
 .sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:focus{ background: rgba(0,0,0,0.2); transition: all .3s ease-in-out;}
 .sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a i.fa-angle-down:before{content:'\f107';}
 .sidebar_wrap .sidebar_box li.dropdown_menu a i.fa-angle-down:before{content:'\f106';}
-.sidebar_wrap .sidebar_box in.collapse{height: auto!important;}
+.sidebar_wrap .sidebar_box .in.collapse{height: auto!important;}
 
 .sidebar_wrap.small_menu{ padding-left:30px;width: 80px; transition:all 0.4s ease 0s; padding-top: 20px;}
 .sidebar_wrap.small_menu .sidebar_box{background:none; padding: 0; margin: 0; box-shadow: none;}

@@ -24,7 +24,7 @@ export class QuestionComponent implements OnInit {
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private QuestionService: QuestionService) { }
 
   ngOnInit() {
-    debugger
+    
     this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
@@ -33,6 +33,9 @@ export class QuestionComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+      $("#collapseExample3").addClass("in");
+      $("#test_question").removeClass("collapsed");
+      $("#test_question").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

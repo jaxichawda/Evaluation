@@ -34,7 +34,10 @@ export class JobTitleListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-    }, 1000);
+      $("#collapseExample6").addClass("in");
+      $("#test_job_title").removeClass("collapsed");
+      $("#test_job_title").attr("aria-expanded","true");
+    }, 100);
     this.globals.isLoading = true;
     this.JobTitleService.getAllJobTitle()
       .then((data) => {

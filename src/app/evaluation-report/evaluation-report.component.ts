@@ -38,7 +38,8 @@ export class EvaluationReportComponent implements OnInit {
       $('.modal').on('hidden.bs.modal', function () {
         $('.right_content_block').removeClass('style_position');
       });
-    }, 1000);
+      
+    }, 100);
     this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
