@@ -73,7 +73,7 @@ class Employee_model extends CI_Model {
 	public function getAllEmployee()
 	{
 		try{
-			$this->db->select('tu.UserId, tmur.RoleName, tmjt.JobTitleName, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive, CONCAT (tuu.FirstName, " ", tuu.LastName) as LineManager, (SELECT COUNT(tmee.EmployeeEvaluatorId) FROM tblmstempevaluator as tmee WHERE tu.UserId=tmee.EvaluatorId) as isdisabled');
+			$this->db->select('tu.UserId, tu.RoleId, tmur.RoleName, tmjt.JobTitleName, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive, CONCAT (tuu.FirstName, " ", tuu.LastName) as LineManager, (SELECT COUNT(tmee.EmployeeEvaluatorId) FROM tblmstempevaluator as tmee WHERE tu.UserId=tmee.EvaluatorId) as isdisabled');
 			$this->db->from('tbluser tu');
 			$this->db->join('tblmstuserrole tmur', 'tu.RoleId = tmur.RoleId', 'LEFT');
 			$this->db->join('tblmstjobtitle tmjt', 'tu.JobTitleId = tmjt.JobTitleId', 'LEFT');

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from '../services/question.service';
 declare var $, swal: any;
+declare var CKEDITOR: any, swal: any;
 
 @Component({
   selector: 'app-question',
@@ -20,6 +21,8 @@ export class QuestionComponent implements OnInit {
   evaluationtypeList;
   header;
   OptionList;
+  abcform;
+  des_valid;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private QuestionService: QuestionService) { }
 
@@ -37,6 +40,17 @@ export class QuestionComponent implements OnInit {
       $("#test_question").removeClass("collapsed");
       $("#test_question").attr("aria-expanded","true");
     }, 100);
+
+    CKEDITOR.replace('QuestionText', {
+      height: '300',
+      resize_enabled: 'false',
+      resize_maxHeight: '300',
+      resize_maxWidth: '948',
+      resize_minHeight: '300',
+      resize_minWidth: '948',
+      //extraAllowedContent: 'style;*[id,rel](*){*}'
+      extraAllowedContent: 'span;ul;li;table;td;style;*[id];*(*);*{*}'
+    });
 
     const body = document.querySelector('body');
     var count = $(window).height() - 270;
@@ -65,7 +79,7 @@ export class QuestionComponent implements OnInit {
       this.globals.isLoading = true;
       this.QuestionService.getById(id)
         .then((data) => {
-          
+
           this.questionEntity = data['question'];
           this.OptionList = data['option'];
 
@@ -74,6 +88,7 @@ export class QuestionComponent implements OnInit {
           } else {
             this.questionEntity.IsActive = '1';
           }
+          CKEDITOR.instances.QuestionText.setData(this.questionEntity.QuestionText);
           this.globals.isLoading = false;
         },
           (error) => {
@@ -109,7 +124,12 @@ export class QuestionComponent implements OnInit {
   }
   addQuestion(questionForm) {
     debugger
-    
+    this.questionEntity.QuestionText = CKEDITOR.instances.QuestionText.getData();
+    if (this.questionEntity.QuestionText != "") {
+      this.des_valid = false;
+    } else {
+      this.des_valid = true;
+    }
     let id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
@@ -122,8 +142,9 @@ export class QuestionComponent implements OnInit {
       this.submitted = true;
     }
 
-    if (questionForm.valid) {
+    if (questionForm.valid && this.des_valid == false) {
       this.btn_disable = true;
+      this.questionEntity.check = 0;
       var question = { 'question': this.questionEntity, 'option': this.OptionList };
       this.globals.isLoading = true;
       this.QuestionService.addQuestion(question)

@@ -115,7 +115,7 @@ table.dataTable.no-footer {border-bottom: 0px!important;}
 #Delete_Modal .modal-dialog{margin: 0% auto;}
 .modal-open .modal{overflow-x: hidden;overflow-y: auto;}
 .modal{z-index:1050;}
-.add_que .form-control{width:43%!important;display: inline-block!important;}
+.add_que .form-control{width:53%!important;display: inline-block!important;}
 .height_100_box {display: block;height: 100%;min-height: 100%;}
 .content-area {display: table;max-width: 100%;padding: 0px;width: 100%;}
 #main {padding: 5px 0;height: var(--screen-height);vertical-align: middle;display: table-cell;position: relative;width: inherit;}

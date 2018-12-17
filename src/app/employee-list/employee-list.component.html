@@ -47,16 +47,22 @@
                   <th style="width:5%;">Job Title</th>
                   <th style="width:5%;">Line Manager</th>
                   <th style="width:1%;" class="text-center">Is Active?</th>
-                  <th style="width:2%;" class="text-center">Actions</th>
+                  <th style="width:3%;" class="text-center">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let employee of employeeList; let i = index">
                   <td class="text-center">{{i+1}}</td>
-                  <td>{{employee.FirstName}} {{employee.LastName}}</td>
+                  <td>{{employee.FirstName}} {{employee.LastName}}
+                    <span *ngIf="employee.RoleId==1" class="fa fa-user tooltip_inline" title="Admin" data-toggle="tooltip"
+                      data-placement="bottom"></span>
+                    <span *ngIf="employee.RoleId==2" class="fa fa-user-circle tooltip_inline" title="HR" data-toggle="tooltip"
+                      data-placement="bottom"></span>
+                  </td>
                   <td>{{employee.EmailAddress}}</td>
                   <td>{{employee.JobTitleName}}</td>
-                  <td>{{employee.LineManager}}</td>
+                  <td *ngIf="employee.LineManager!=null">{{employee.LineManager}}</td>
+                  <td *ngIf="employee.LineManager==null">Not assigned</td>
                   <td class="text-center">
                     <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="employee.IsActive==1 ? 'Active' : 'Deactive'">
                       <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(employee,i)"
@@ -65,14 +71,29 @@
                     </div>
                   </td>
                   <td class="text-center">
+                    <div class="inline_delbtn tooltip_inline" title="You can't edit this user as He/She is either Admin or HR."
+                      data-toggle="tooltip" data-placement="bottom">
+                      <button *ngIf="(employee.RoleId!=3 && globals.authData.RoleId==2)" [disabled]="(employee.RoleId!=3 && globals.authData.RoleId==2)"
+                        class="btn btn-default btn-rounded btn-sm">
+                        <span class="fa fa-pencil"></span>
+                      </button>
+                    </div>
+                    <div class="inline_delbtn tooltip_inline" title="You can't edit this user as He/She is Admin."
+                      data-toggle="tooltip" data-placement="bottom">
+                      <button *ngIf="(employee.RoleId==1 && globals.authData.RoleId==1)" [disabled]="(employee.RoleId==1 && globals.authData.RoleId==1)"
+                        class="btn btn-default btn-rounded btn-sm">
+                        <span class="fa fa-pencil"></span>
+                      </button>
+                    </div>
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
-                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/employee/edit/{{employee.UserId}}">
+                      <button *ngIf="(employee.RoleId==3 && globals.authData.RoleId==2) || (employee.RoleId!=1 && globals.authData.RoleId==1)"
+                        class="btn btn-default btn-rounded btn-sm" routerLink="/employee/edit/{{employee.UserId}}">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
                     <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Employee can't be deleted as it is already assigned for Employee Evaluation.">
-                      <button *ngIf="employee.isdisabled>0" [disabled]="employee.isdisabled>0" data-type="Record"
-                        class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span class="fa fa-times"></span></button>
+                      <button *ngIf="employee.isdisabled>0" [disabled]="employee.isdisabled>0" data-type="Record" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span
+                          class="fa fa-times"></span></button>
                     </div>
                     <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
                       <button data-type="Record" *ngIf="employee.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
