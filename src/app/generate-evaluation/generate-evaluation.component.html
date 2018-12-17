@@ -32,10 +32,12 @@
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="generateEvaluation(evaluationForm)">
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label><span>*</span>Users</label>
+            <label><span>*</span>Users <i class="fa fa-info-circle tooltip_inline" title="For whom you want to take a evaluation"
+                data-toggle="tooltip" data-placement="right"></i> </label>
             <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
               name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
               (change)="onChange($event)">
+              <option value="">Select</option>
               <ng-container *ngFor="let user of userlist1">
                 <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
                 <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
@@ -54,7 +56,8 @@
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label>Evaluators</label>
+            <label>Evaluators <i class="fa fa-info-circle tooltip_inline" title="Invite employee to give evaluation for above details"
+                data-toggle="tooltip" data-placement="right"></i> </label>
             <ng-select [options]="userlist" [multiple]="true" [(ngModel)]="selectedCharacters" name="selectedCharacters"
               [ngClass]="{'red_border': showError}">
             </ng-select>
@@ -69,6 +72,7 @@
             <label><span>*</span>Evaluation type</label>
             <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="evaluationEntity.EvaluationTypeId"
               name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}">
+              <option value="">Select</option>
               <ng-container *ngFor="let type of evaluationtypelist">
                 <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}</option>
               </ng-container>
