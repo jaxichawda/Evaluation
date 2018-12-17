@@ -33,6 +33,21 @@ class PerformanceReview_model extends CI_Model {
 			return false;
 		}	
     }
+    public function getEvaluationStatus($Id=Null)
+	{
+	  if($Id)
+	  {
+        $this->db->select('ee.StatusId');
+            $this->db->where('ee.EmployeeEvaluatorId',$Id);
+            $result=$this->db->get('tblmstempevaluator ee');
+		
+          $res = array();
+          foreach($result->result() as $row) {
+              $res = $row;
+          }
+          return $res;
+        }
+    }
     public function insertPerformance($post_data)
 	{	
                     $PerformanceData=$post_data['PerformanceData'];

@@ -48,7 +48,13 @@ class GenerateEvaluation_model extends CI_Model
 	}
 	public function getEvaluationEmployee($evaluationId=Null) {
 		if($evaluationId) {
-			$result = $this->db->query("SELECT a.EvaluatorId, CONCAT(b.FirstName,' ',b.LastName) as name FROM tblmstempevaluator a left join tbluser b on a.EvaluatorId=b.UserId WHERE EvaluationId=".$evaluationId);			
+			$this->db->select('a.EvaluatorId, CONCAT(b.FirstName," ",b.LastName) as name');
+			$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');
+			$this->db->join('tbluser b','a.EvaluatorId=b.UserId','left');
+			$this->db->order_by('ea.EmployeeEvaluatorId','asc');
+			$this->db->group_by('ea.EmployeeEvaluatorId');
+			$this->db->where('a.EvaluationId',$evaluationId);
+			$result = $this->db->get('tblevaluationanswer as ea');	
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
 						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -66,18 +72,24 @@ class GenerateEvaluation_model extends CI_Model
 
 	public function getEvaluationReport($evaluationId=Null) {
 		if($evaluationId) {
-			$data = array(
-				'evaluationId' => $evaluationId,
-			);
-			$result = $this->db->query('call getReport1(?)',$data);			
-			$db_error = $this->db->error();
-					if (!empty($db_error) && !empty($db_error['code'])) { 
-						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-						return false; // unreachable return statement !!!
-					}
-			$res = array();
-			if($result->result()) {
-				$res = $result->result();
+			$this->db->select('ea.QuestionId,q.QuestionText');
+			$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');
+			$this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
+			$this->db->group_by('ea.QuestionId');
+			$this->db->order_by('ea.QuestionId','asc');
+			$this->db->where('a.EvaluationId',$evaluationId);
+			$result = $this->db->get('tblevaluationanswer as ea');	
+			$res = array();	
+			$result = json_decode(json_encode($result->result()), True);
+			foreach($result as $row) {
+				$this->db->select('ea.EmployeeEvaluatorId,ea.QuestionId,ea.AnswerText');
+				$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');
+				$this->db->order_by('ea.EmployeeEvaluatorId','asc');
+				$this->db->where('ea.QuestionId',$row['QuestionId']);
+				$this->db->where('a.EvaluationId',$evaluationId);
+				$result_child = $this->db->get('tblevaluationanswer as ea');
+				$row['child'] = $result_child->result();
+				array_push($res,$row);
 			}
 			return $res;
 		} else {
@@ -163,7 +175,7 @@ class GenerateEvaluation_model extends CI_Model
 		$this->db->join('tbluser u','u.UserId=ee.EvaluatorId','left');
 		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
 		$this->db->where('ee.EvaluationId',$post_data['EvaluationId']);
-		$this->db->where('ee.EvaluatorId!=',$post_data['UserId']);
+		//$this->db->where('ee.EvaluatorId!=',$post_data['UserId']);
 		$this->db->order_by('ee.EmployeeEvaluatorId','asc');
 		//$this->db->group_by('ee.EvaluationId');
 		$result = $this->db->get('tblmstempevaluator as ee');	

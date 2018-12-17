@@ -13,7 +13,7 @@
 <div class="review_block">
 <div class="que_form">
 
-	<button class="pull-left next_btn draft_btn" (click)="saveAsDraft()">Save as Draft</button>
+	<button class="pull-left next_btn draft_btn" *ngIf='Status.StatusId!="1"'  (click)="saveAsDraft()">Save as Draft</button>
 	<div class="clearfix"></div>
   <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
     <div id="main1" role="main">
@@ -30,29 +30,34 @@
               </div>
               <div *ngIf="que.AnswerTypeId==1">
                 <div class="ans_section">
-                  <textarea class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" maxlength="500"
+                  <span *ngIf='Status.StatusId=="1"'><b>Answer</b> - {{que.AnswerText}}</span>
+                  <textarea *ngIf='Status.StatusId!="1"' class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" maxlength="500" [disabled]='Status.StatusId=="1"'
                     required></textarea>
                 </div>
               </div>
               <div *ngIf="que.AnswerTypeId==2">
                 <div class="ans_section">
-                  <div class="col-md-4 col-sm-4">
-                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}"
+                  <span *ngIf='Status.StatusId=="1"'><b>Answer</b> - {{que.AnswerText}}</span>
+                  <div *ngIf='Status.StatusId!="1"' class="col-md-4 col-sm-4">
+                    <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" [disabled]='Status.StatusId=="1"'
                       required />
                   </div>
                 </div>
               </div>
               <div *ngIf="que.AnswerTypeId==3">
                 <div class="ans_section">
+                   <span *ngIf='Status.StatusId=="1"'><b>Answer</b> - {{que.AnswerText}}</span>
+                   <span *ngIf='Status.StatusId!="1"'>
                   <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
                     <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                       required />
-                    <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
+                    <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}" >{{ans.OptionValue}}</label>
                   </div>
+                  </span>
                 </div>
               </div>
               <div class="form-btn" *ngIf="last">
-                <button type="submit" class="next_btn margin_top">
+                <button  *ngIf='Status.StatusId!="1"' type="submit" class="next_btn margin_top">
                   <span>Submit</span>
                 </button>
               </div>

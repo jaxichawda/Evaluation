@@ -62,15 +62,15 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label><span class="required">*</span>Question Type</label>
-            <select class='select-option' required class="form-control" #QuestionTypeId="ngModel" [(ngModel)]="questionEntity.QuestionTypeId"
-              name="QuestionTypeId" [ngClass]="{red_border: (QuestionTypeId.dirty && QuestionTypeId.invalid) || (QuestionTypeId.pristine && submitted)}">
-              <option value="" ngSelected='questionEntity.QuestionTypeId==""'>Select</option>
+            <select class='select-option' required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
+              name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}">
+              <option value="" ngSelected='questionEntity.AnswerTypeId==""'>Select</option>
               <ng-container *ngFor='let questiontype of questiontypeList'>
-                <option class='option' [value]="questiontype.QuestionTypeId" ngSelected="questionEntity.QuestionTypeId==questiontype.QuestionTypeId">{{questiontype.QuestionTypeName}}</option>
+                <option class='option' [value]="questiontype.AnswerTypeId" ngSelected="questionEntity.AnswerTypeId==questiontype.AnswerTypeId">{{questiontype.QuestionTypeName}}</option>
               </ng-container>
             </select>
-            <span class="error_span" *ngIf="(QuestionTypeId.dirty && QuestionTypeId.invalid) || (QuestionTypeId.pristine && submitted)">
-              <span *ngIf="QuestionTypeId.errors.required || (QuestionTypeId.pristine && submitted)">Please select
+            <span class="error_span" *ngIf="(AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)">
+              <span *ngIf="AnswerTypeId.errors.required || (AnswerTypeId.pristine && submitted)">Please select
                 Question Type </span>
             </span>
           </div>
@@ -78,7 +78,7 @@
 
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <div *ngIf="questionEntity.QuestionTypeId==3">
+            <div *ngIf="questionEntity.AnswerTypeId==3">
               <label><span class="required">*</span>Enter MCQ Options</label>
               <div class="r-group add_que" *ngFor="let Question of OptionList; let i = index; let last = last;">
                 <input type="text" class="form-control" maxlength="100"

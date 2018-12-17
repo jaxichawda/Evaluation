@@ -52,4 +52,15 @@ export class DashboardComponent implements OnInit {
       });
    
   }
+  reviewById(EmployeeEvaluatorId){
+    debugger
+    this.DashboardService.reviewById(EmployeeEvaluatorId)
+      .then((data) => {
+        this.router.navigate(['/performance-review/'+EmployeeEvaluatorId]);
+      },
+      (error) => {
+        // this.globals.isLoading = false;
+        this.router.navigate(['/pagenotfound']);
+      });
+  }
 }
