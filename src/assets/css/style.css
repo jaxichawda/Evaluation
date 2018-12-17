@@ -126,6 +126,7 @@ table.dataTable.no-footer {border-bottom: 0px!important;}
 .style_position{position:relative!important;}
 
 .draft_btn{position: absolute; right: 30px; z-index: 9; top: 25px;}
+.draft_btn button{margin-left: 10px;}
 .margin_top{margin-top: 20px;}
 .review_block{background: url(../images/background.jpg) center center no-repeat; background-size: cover; height: var(--screen-height);}
 .review_block #slider{background:transparent; height: 84%;}

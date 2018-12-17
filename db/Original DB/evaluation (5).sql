@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2018 at 08:22 AM
+-- Generation Time: Dec 17, 2018 at 11:27 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -28,16 +28,31 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tblevaluationanswer` (
   `EvaluationAnswerId` int(11) NOT NULL,
-  `EvaluationId` int(11) NOT NULL,
-  `EvaluatorId` int(11) NOT NULL,
+  `EmployeeEvaluatorId` int(11) NOT NULL,
   `QuestionId` int(11) NOT NULL,
-  `AnswerText` text NOT NULL,
+  `AnswerText` text,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedBy` int(11) NOT NULL DEFAULT '1',
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tblevaluationanswer`
+--
+
+INSERT INTO `tblevaluationanswer` (`EvaluationAnswerId`, `EmployeeEvaluatorId`, `QuestionId`, `AnswerText`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(436, 68, 1, 'sdfghj', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(437, 68, 2, 'fghjfgh', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(438, 68, 3, 'Widow', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(439, 68, 4, 'No', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(440, 68, 5, 'Yes', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(441, 68, 6, 'No', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(442, 68, 7, 'asdfghj', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(443, 68, 8, 'bbbbbbbbbb', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(444, 68, 9, 'Yes', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28'),
+(445, 68, 10, 'bbbbbb', b'1', 1, '2018-12-14 12:49:10', 1, '2018-12-17 06:06:28');
 
 -- --------------------------------------------------------
 
@@ -124,7 +139,8 @@ CREATE TABLE `tblmstempevaluation` (
 --
 
 INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `EvaluationDate`, `EvaluationDescription`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(21, 5, 1, '2018-12-18 02:55:00', 'jaxi\'s evaluation', b'1', 4, '2018-12-13 14:15:54', 4, '2018-12-13 14:15:54');
+(21, 5, 1, '2018-12-18 02:55:00', 'jaxi\'s evaluation', b'1', 4, '2018-12-13 14:15:54', 1, '2018-12-17 09:25:42'),
+(23, 4, 2, '2018-12-31 15:15:00', 'Not mentioned!', b'1', 1, '2018-12-17 09:28:55', 1, '2018-12-17 09:28:55');
 
 -- --------------------------------------------------------
 
@@ -149,9 +165,10 @@ CREATE TABLE `tblmstempevaluator` (
 --
 
 INSERT INTO `tblmstempevaluator` (`EmployeeEvaluatorId`, `EvaluationId`, `EvaluatorId`, `StatusId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(68, 21, 4, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55'),
-(69, 21, 5, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55'),
-(70, 21, 6, 0, b'1', 4, '2018-12-13 14:15:55', 4, '2018-12-13 14:15:55');
+(74, 21, 4, 0, b'1', 1, '2018-12-17 09:25:42', 1, '2018-12-17 09:25:42'),
+(75, 21, 5, 0, b'1', 1, '2018-12-17 09:25:42', 1, '2018-12-17 09:25:42'),
+(76, 21, 6, 0, b'1', 1, '2018-12-17 09:25:42', 1, '2018-12-17 09:25:42'),
+(77, 23, 4, 0, b'1', 1, '2018-12-17 09:28:55', 1, '2018-12-17 09:28:55');
 
 -- --------------------------------------------------------
 
@@ -225,6 +242,7 @@ INSERT INTO `tblmstjobtitle` (`JobTitleId`, `DepartmentId`, `JobTitleName`, `IsA
 
 CREATE TABLE `tblmstquestion` (
   `QuestionId` int(11) NOT NULL,
+  `EvaluationTypeId` int(11) NOT NULL,
   `QuestionText` text NOT NULL,
   `AnswerTypeId` int(11) NOT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
@@ -238,17 +256,17 @@ CREATE TABLE `tblmstquestion` (
 -- Dumping data for table `tblmstquestion`
 --
 
-INSERT INTO `tblmstquestion` (`QuestionId`, `QuestionText`, `AnswerTypeId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, '<p>Has any of the following happened to you in the last 5 years?</p>\r\n\r\n<ol style=""list-style-type:circle;"">\r\n	<li>Fired from a job.</li>\r\n	<li>Quit a job after being told you&#39;d be fired.</li>\r\n	<li>Left a job by mutual agreement following allegations of misconduct.</li>\r\n	<li>Left a job by mutual agreement following allegations of unsatisfactory performance.</li>\r\n	<li>Left a job for other reasons under unfavorable circumstances.</li>\r\n</ol>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
-(2, '<p>List three people in the specific textbox who know you well and live in the state of Gujarat. They should be good friends, peers, colleagues, college roommates, etc., whose combined association with you covers as well as possible the last 5 years.&nbsp;</p>\r\n\r\n<p><strong>Note:</strong> In each text box, write people&#39;s details in order of their name, email address and contact number (like <strong>NAME, EMAIL ADDRESS, CONTACT NUMBER</strong>).&nbsp;</p>\r\n\r\n<p><strong>Do not</strong> list your spouse, former spouses, or other relatives, and try not to list anyone who is listed elsewhere on this form.</p>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
-(3, '<p>What is your current marital status?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
-(4, '<p>Have you served in the Indian Military?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
-(5, '<p>Have you served in the Indian Merchant Marine?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
-(6, '<p>In the last 5 years, have you been arrested for, charged with, or convicted of any criminal offense(s)?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
-(7, '<p>In the last 5 year, have you illegally used any controlled substance, for example, marijuana, cocaine, crack cocaine, hashish, narcotics (opium, morphine, codeine, heroin, etc.), amphetamines, depressants (barbiturates, methaqualone, tranquilizers, etc.), hallucinogenic (LSD, PCP, etc.), or prescription drugs?</p>', 1, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
-(8, '<p>In the last 5 years, have you been involved in the illegal purchase, manufacture, trafficking, production, transfer, shipping, receiving, or sale of any narcotic, depressant, stimulant, hallucinogen, or cannabis, for your own intended profit or that of another?</p>', 1, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
-(9, '<p>In the last 5 years, have you, or a company over which you exercised some control, filed for bankruptcy, been declared bankrupt, been subject to a tax lien, or had legal judgment rendered against you for a debt?</p>', 3, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30'),
-(10, '<p>Are you now over 180 days&rsquo; delinquent on any loan or financial obligation? Include loans or obligations funded or guaranteed by the Government?</p>"\r\n"12";"<p>Would you like to add any additional note for us?</p>', 1, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30');
+INSERT INTO `tblmstquestion` (`QuestionId`, `EvaluationTypeId`, `QuestionText`, `AnswerTypeId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(1, 0, '<p>Has any of the following happened to you in the last 5 years?</p>\r\n\r\n<ol style=""list-style-type:circle;"">\r\n	<li>Fired from a job.</li>\r\n	<li>Quit a job after being told you&#39;d be fired.</li>\r\n	<li>Left a job by mutual agreement following allegations of misconduct.</li>\r\n	<li>Left a job by mutual agreement following allegations of unsatisfactory performance.</li>\r\n	<li>Left a job for other reasons under unfavorable circumstances.</li>\r\n</ol>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
+(2, 0, '<p>List three people in the specific textbox who know you well and live in the state of Gujarat. They should be good friends, peers, colleagues, college roommates, etc., whose combined association with you covers as well as possible the last 5 years.&nbsp;</p>\r\n\r\n<p><strong>Note:</strong> In each text box, write people&#39;s details in order of their name, email address and contact number (like <strong>NAME, EMAIL ADDRESS, CONTACT NUMBER</strong>).&nbsp;</p>\r\n\r\n<p><strong>Do not</strong> list your spouse, former spouses, or other relatives, and try not to list anyone who is listed elsewhere on this form.</p>', 1, b'1', 1, '2018-12-14 06:21:12', 1, '2018-12-14 06:21:12'),
+(3, 0, '<p>What is your current marital status?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
+(4, 0, '<p>Have you served in the Indian Military?</p>', 3, b'1', 1, '2018-12-14 06:21:52', 1, '2018-12-14 06:21:52'),
+(5, 0, '<p>Have you served in the Indian Merchant Marine?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
+(6, 0, '<p>In the last 5 years, have you been arrested for, charged with, or convicted of any criminal offense(s)?</p>', 3, b'1', 1, '2018-12-14 06:25:09', 1, '2018-12-14 06:25:09'),
+(7, 0, '<p>In the last 5 year, have you illegally used any controlled substance, for example, marijuana, cocaine, crack cocaine, hashish, narcotics (opium, morphine, codeine, heroin, etc.), amphetamines, depressants (barbiturates, methaqualone, tranquilizers, etc.), hallucinogenic (LSD, PCP, etc.), or prescription drugs?</p>', 2, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
+(8, 0, '<p>In the last 5 years, have you been involved in the illegal purchase, manufacture, trafficking, production, transfer, shipping, receiving, or sale of any narcotic, depressant, stimulant, hallucinogen, or cannabis, for your own intended profit or that of another?</p>', 1, b'1', 1, '2018-12-14 06:25:43', 1, '2018-12-14 06:25:43'),
+(9, 0, '<p>In the last 5 years, have you, or a company over which you exercised some control, filed for bankruptcy, been declared bankrupt, been subject to a tax lien, or had legal judgment rendered against you for a debt?</p>', 3, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30'),
+(10, 0, '<p>Are you now over 180 days&rsquo; delinquent on any loan or financial obligation? Include loans or obligations funded or guaranteed by the Government?</p>"\r\n"12";"<p>Would you like to add any additional note for us?</p>', 1, b'1', 1, '2018-12-14 06:26:30', 1, '2018-12-14 06:26:30');
 
 -- --------------------------------------------------------
 
@@ -326,6 +344,7 @@ CREATE TABLE `tbluser` (
   `EmployeeId` varchar(50) DEFAULT '0',
   `EmailAddress` varchar(100) NOT NULL,
   `Password` varchar(100) DEFAULT NULL,
+  `ResetPasswordCode` varchar(10) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -337,13 +356,13 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobTitleId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 15, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
-(2, 2, 2, 0, 'HR', 'Admin', 'Developer', NULL, 'sparmar@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
-(4, 3, 10, 2, 'Uttam', '', 'Bhut', NULL, 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
-(5, 3, 5, 4, 'Jaxi', '', 'Chawda', NULL, 'jaxi.chawda@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
-(6, 3, 5, 4, 'Vidhi', '', 'Bathani', NULL, 'vidhi.bathani@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
-(7, 3, 5, 4, 'Nirav', '', 'Patel', NULL, 'nirav.patel@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11');
+INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobTitleId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `ResetPasswordCode`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+(1, 1, 15, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(2, 2, 2, 0, 'HR', 'Admin', 'Developer', NULL, 'sparmar@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(4, 3, 10, 2, 'Uttam', '', 'Bhut', NULL, 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(5, 3, 5, 4, 'Jaxi', '', 'Chawda', NULL, 'jaxi.chawda@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', '209977', b'1', 1, '2018-12-17 11:00:15', 1, '2018-12-17 11:00:15'),
+(6, 3, 5, 4, 'Vidhi', '', 'Bathani', NULL, 'vidhi.bathani@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
+(7, 3, 5, 4, 'Nirav', '', 'Patel', NULL, 'nirav.patel@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11');
 
 --
 -- Indexes for dumped tables
@@ -423,7 +442,7 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tblevaluationanswer`
 --
 ALTER TABLE `tblevaluationanswer`
-  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=451;
 --
 -- AUTO_INCREMENT for table `tblmstconfiguration`
 --
@@ -438,12 +457,12 @@ ALTER TABLE `tblmstdepartment`
 -- AUTO_INCREMENT for table `tblmstempevaluation`
 --
 ALTER TABLE `tblmstempevaluation`
-  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tblmstempevaluator`
 --
 ALTER TABLE `tblmstempevaluator`
-  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
 -- AUTO_INCREMENT for table `tblmstevaluationtype`
 --
