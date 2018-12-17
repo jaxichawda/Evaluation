@@ -25,6 +25,7 @@ export class PerformanceReviewComponent implements OnInit {
 		this.ans = [];
     this.ans.push(item);
     this.globals.isLoading = true;
+	$('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
@@ -50,6 +51,7 @@ export class PerformanceReviewComponent implements OnInit {
         animationLoop: false,
         slideshow: false,
         sync: "#carousel",
+    maxItems: 5,
         start: function (slider) {
           $('body').removeClass('loading');
         }

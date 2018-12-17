@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private authService : AuthService,private router: Router, public globals: Globals) { }
 
   canActivate(route,state:RouterStateSnapshot) { 
-
+$('.right_content_block').removeClass('performance_block');
 	this.globals.isLoading = false;	
 	$('footer').removeClass('footer_fixed');
 	if(state.url=='/login'){					   
