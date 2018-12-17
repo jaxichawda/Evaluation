@@ -29,19 +29,13 @@
   <div class="col-lg-12">
     <div class="form-bg">
       <form class="form-validate" role="form" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-8 ckeditor_block editor">
           <label><span class="required">*</span>Question</label>
           <textarea class="form-control" #QuestionText="ngModel" [(ngModel)]="questionEntity.QuestionText" name="QuestionText"
-            id="QuestionText" required maxlength="1000" rows="20"></textarea>
-          <span class="error_span" *ngIf="(QuestionText.dirty && QuestionText.invalid) || (QuestionText.pristine && submitted)">
-            <span *ngIf="QuestionText.errors.required || (QuestionText.pristine && submitted)">Please
-              enter Question</span>
-            <span class="error_span" *ngIf="QuestionText.errors && QuestionText.errors.pattern">
-              Please enter a valid Job Title
-            </span>
-          </span>
+            id="QuestionText" rows="10" cols="60" contenteditable="true"></textarea>
+          <span class="error_span" *ngIf="des_valid">Please enter Question</span>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <label><span class="required">*</span>Evaluation Type</label>
             <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="questionEntity.EvaluationTypeId"
@@ -59,7 +53,7 @@
             </span>
           </div>
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <label><span class="required">*</span>Question Type</label>
             <select class='select-option' required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
@@ -76,20 +70,19 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <div *ngIf="questionEntity.AnswerTypeId==3">
               <label><span class="required">*</span>Enter MCQ Options</label>
               <div class="r-group add_que" *ngFor="let Question of OptionList; let i = index; let last = last;">
-                <input type="text" class="form-control" maxlength="100"
-                  #QueOption="ngModel" [(ngModel)]="OptionList[i].QueOption" name="QueOption{{i}}" placeholder="Option {{i+1}}"
-                  required />
-                <button type="button" (click)="RemoveOption(Question)" *ngIf="i!=0"
-                  class="r-btnRemove btn btn-danger btn-rounded btn-sm" title="Remove Option">
+                <input type="text" class="form-control" maxlength="100" #QueOption="ngModel" [(ngModel)]="OptionList[i].QueOption"
+                  name="QueOption{{i}}" placeholder="Option {{i+1}}" required />
+                <button type="button" (click)="RemoveOption(Question)" *ngIf="i!=0" class="r-btnRemove btn btn-danger btn-rounded btn-sm"
+                  title="Remove Option">
                   <span class="fa fa-times"></span>
                 </button>
-                <button type="button" (click)="AddOption(i)" *ngIf="last"
-                  class="r-btnAdd btn btn-default btn-rounded btn-sm" title="Add Option">
+                <button type="button" (click)="AddOption(i)" *ngIf="last" class="r-btnAdd btn btn-default btn-rounded btn-sm"
+                  title="Add Option">
                   <span class="fa fa-plus"></span>
                 </button>
                 <div class="clearfix"></div>
@@ -118,7 +111,7 @@
 
 
         <div class="clearfix"></div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-8">
           <label><span class="required">*</span>Active ?</label>
           <div class="activeyes_box">
             <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive">
