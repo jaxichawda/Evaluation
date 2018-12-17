@@ -31,6 +31,9 @@ export class JobTitleComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+      $("#collapseExample6").addClass("in");
+      $("#test_job_title").removeClass("collapsed");
+      $("#test_job_title").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

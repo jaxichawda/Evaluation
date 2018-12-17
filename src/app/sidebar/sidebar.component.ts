@@ -37,37 +37,26 @@ export class SidebarComponent implements OnInit {
     }, 100);
   }
   closecollapse() {
-    // $(".dropdown_menu").addClass("collapsed");
-    // $(".dropdown_menu").attr("aria-expanded", "false");
-    // $(".collapse").removeClass("in");
+    $(".dropdown_menu").addClass("collapsed");
+    $(".dropdown_menu").attr("aria-expanded", "false");
+    $(".collapse").removeClass("in");
   }
 
-  checkcollapse(data){ debugger
+  checkcollapse(data,i){ 
     var check = $("#test_"+data).hasClass("collapsed");
     
     $(".dropdown_menu").addClass("collapsed");
     $(".dropdown_menu").attr("aria-expanded","false");
     $(".collapse").removeClass("in");
-
-    //$(".test").removeClass("active");
-    //$("#test"+i+j).parent().addClass("active");
-//alert(check);
     if(check){ 
       $("#test_"+data).addClass("collapsed");
       $("#test_"+data).attr("aria-expanded","false");
-      $("#collapseExample1").removeClass("in");
-      // $("#test_"+data).removeClass("collapsed");
-      // $("#test_"+data).attr("aria-expanded","true");
-      // $("#collapseExample1").addClass("in");
+      $("#collapseExample"+i).removeClass("in");
     } else {
       $("#test_"+data).removeClass("collapsed");
       $("#test_"+data).attr("aria-expanded","true");
-      $("#collapseExample1").addClass("in");
-      // $("#test_"+data).addClass("collapsed");
-      // $("#test_"+data).attr("aria-expanded","false");
-      // $("#collapseExample1").removeClass("in");
+      $("#collapseExample"+i).addClass("in");
     }
-
   }
 
 }

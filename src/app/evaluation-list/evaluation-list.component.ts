@@ -39,7 +39,10 @@ export class EvaluationListComponent implements OnInit {
       $('.modal').on('hidden.bs.modal', function () {
         $('.right_content_block').removeClass('style_position');
       });
-    }, 1000);
+          $("#collapseExample2").addClass("in");
+          $("#test_evaluation").removeClass("collapsed");
+      		$("#test_evaluation").attr("aria-expanded","true");
+    }, 100);
     this.globals.isLoading = true;
     this.GenerateEvaluationService.getAllEvaluation()
       .then((data) => {
