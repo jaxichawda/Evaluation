@@ -21,7 +21,7 @@ export class EvaluationTypeComponent implements OnInit {
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private EvaluationTypeService: EvaluationTypeService) { }
 
   ngOnInit() {
-    debugger
+    
     this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
@@ -30,6 +30,9 @@ export class EvaluationTypeComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+      $("#collapseExample4").addClass("in");
+      $("#test_evaluation_type").removeClass("collapsed");
+      $("#test_evaluation_type").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

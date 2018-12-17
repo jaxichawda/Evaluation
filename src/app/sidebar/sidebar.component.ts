@@ -42,4 +42,21 @@ export class SidebarComponent implements OnInit {
     $(".collapse").removeClass("in");
   }
 
+  checkcollapse(data,i){ 
+    var check = $("#test_"+data).hasClass("collapsed");
+    
+    $(".dropdown_menu").addClass("collapsed");
+    $(".dropdown_menu").attr("aria-expanded","false");
+    $(".collapse").removeClass("in");
+    if(check){ 
+      $("#test_"+data).addClass("collapsed");
+      $("#test_"+data).attr("aria-expanded","false");
+      $("#collapseExample"+i).removeClass("in");
+    } else {
+      $("#test_"+data).removeClass("collapsed");
+      $("#test_"+data).attr("aria-expanded","true");
+      $("#collapseExample"+i).addClass("in");
+    }
+  }
+
 }

@@ -35,7 +35,10 @@ export class QuestionListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-    }, 1000);
+      $("#collapseExample3").addClass("in");
+      $("#test_question").removeClass("collapsed");
+      $("#test_question").attr("aria-expanded","true");
+    }, 100);
     this.globals.isLoading = true;
     this.QuestionService.getAllQuestion()
       .then((data) => {

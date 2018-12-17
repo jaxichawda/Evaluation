@@ -45,6 +45,9 @@ export class GenerateEvaluationComponent implements OnInit {
       else {
         $('footer').removeClass('footer_fixed');
       }
+      $("#collapseExample2").addClass("in");
+      $("#test_evaluation").removeClass("collapsed");
+      $("#test_evaluation").attr("aria-expanded","true");
     }, 100);
 
     const body = document.querySelector('body');

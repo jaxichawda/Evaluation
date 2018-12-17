@@ -1,55 +1,55 @@
 <div class="sidebar_wrap" *ngIf="globals.authData!=undefined">
   <ul class="sidebar_box">
     <li class="sidebar_box_label"><span>General</span></li>
-    <li class="active"><a routerLink="/dashboard" title="Dashboard" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+    <li (click)="closecollapse()" [ngClass]="{'active':globals.currentLink=='/dashboard'}"><a routerLink="/dashboard" title="Dashboard" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
   </ul>
   <ul class="sidebar_box">
     <li class="sidebar_box_label"><span>Manage</span></li>
-    <li class="dropdown_menu collapsed" data-toggle="collapse" href="#collapseExample1" data-parent="#accordion"><a href="#" title="Employee" data-toggle="tooltip" (click)="closecollapse()" data-placement="right"><i class="fa fa-user"></i><span>Employee</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_employee" (click)="checkcollapse('employee',1)" data-toggle="collapse" href="#collapseExample1" data-parent="#accordion"><a href="#" title="Employee" data-toggle="tooltip" data-placement="right"><i class="fa fa-user"></i><span>Employee</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample1">
         <ul class="sub_menu">
-          <li> <a routerLink="/employee/add" title="Add Employee" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
-          <li> <a routerLink="/employee/list" title="View Employees" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/employee/add'}"> <a routerLink="/employee/add" title="Add Employee" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/employee/list'}"> <a routerLink="/employee/list" title="View Employees" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>
-    <li class="dropdown_menu collapsed" data-toggle="collapse" href="#collapseExample2" data-parent="#accordion"><a href="#" title="Evaluation" data-toggle="tooltip" (click)="closecollapse()" data-placement="right"><i class="fa fa-check"></i><span>Evaluation</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_evaluation" (click)="checkcollapse('evaluation',2)" data-toggle="collapse" href="#collapseExample2" data-parent="#accordion"><a href="#" title="Evaluation" data-toggle="tooltip" data-placement="right"><i class="fa fa-check"></i><span>Evaluation</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample2">
         <ul class="sub_menu">
-          <li> <a routerLink="/evaluation/generate" title="Generate Evaluation" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Generate</span></a> </li>
-          <li> <a routerLink="/evaluation/list" title="View Evaluations" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/evaluation/generate'}"> <a routerLink="/evaluation/generate" title="Generate Evaluation" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Generate</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/evaluation/list'}"> <a routerLink="/evaluation/list" title="View Evaluations" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>
-    <li class="dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample3" data-parent="#accordion"><a href="#" title="Evaluation Questions" data-toggle="tooltip" data-placement="right"><i class="fa fa-question"></i><span>Evaluation Questions</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_question" (click)="checkcollapse('question',3)" data-toggle="collapse" href="#collapseExample3" data-parent="#accordion"><a href="#" title="Evaluation Questions" data-toggle="tooltip" data-placement="right"><i class="fa fa-question"></i><span>Evaluation Questions</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample3">
         <ul class="sub_menu">
-          <li> <a routerLink="/question/add" title="Add Question" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
-          <li> <a routerLink="/question/list" title="View Questions" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/question/add'}"> <a routerLink="/question/add" title="Add Question" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/question/list'}"> <a routerLink="/question/list" title="View Questions" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>
-    <li class="dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample4" data-parent="#accordion"><a href="#" title="Evaluation Type" data-toggle="tooltip" data-placement="right"><i class="fa fa-list"></i><span>Evaluation Type</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_evaluation_type" (click)="checkcollapse('evaluation_type',4)" data-toggle="collapse" href="#collapseExample4" data-parent="#accordion"><a href="#" title="Evaluation Type" data-toggle="tooltip" data-placement="right"><i class="fa fa-list"></i><span>Evaluation Type</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample4">
         <ul class="sub_menu">
-          <li> <a routerLink="/evaluation-type/add" title="Add Evaluation Type" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
-          <li> <a routerLink="/evaluation-type/list" title="View Evaluation Types" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/evaluation-type/add'}"> <a routerLink="/evaluation-type/add" title="Add Evaluation Type" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/evaluation-type/list'}"> <a routerLink="/evaluation-type/list" title="View Evaluation Types" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>
-    <li class="dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample5" data-parent="#accordion"><a href="#" title="Department" data-toggle="tooltip" data-placement="right"><i class="fa fa-sitemap"></i><span>Department</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_department" (click)="checkcollapse('department',5)" data-toggle="collapse" href="#collapseExample5" data-parent="#accordion"><a href="#" title="Department" data-toggle="tooltip" data-placement="right"><i class="fa fa-sitemap"></i><span>Department</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample5">
         <ul class="sub_menu">
-          <li> <a routerLink="/department/add" title="Add Department" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
-          <li> <a routerLink="/department/list" title="View Departments" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/department/add'}"> <a routerLink="/department/add" title="Add Department" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/department/list'}"> <a routerLink="/department/list" title="View Departments" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>
-    <li class="dropdown_menu collapsed" (click)="closecollapse()" data-toggle="collapse" href="#collapseExample6" data-parent="#accordion"><a href="#" title="Job Title" data-toggle="tooltip" data-placement="right"><i class="fa fa-certificate"></i><span>Job Title</span><i class="fa fa-angle-down pull-right"></i></a>
+    <li class="dropdown_menu collapsed" id="test_job_title" (click)="checkcollapse('job_title',6)" data-toggle="collapse" href="#collapseExample6" data-parent="#accordion"><a href="#" title="Job Title" data-toggle="tooltip" data-placement="right"><i class="fa fa-certificate"></i><span>Job Title</span><i class="fa fa-angle-down pull-right"></i></a>
       <div class="collapse" id="collapseExample6">
         <ul class="sub_menu">
-          <li> <a routerLink="/job-title/add" title="Add Job Title" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
-          <li> <a routerLink="/job-title/list" title="View Job Titles" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/job-title/add'}"> <a routerLink="/job-title/add" title="Add Job Title" data-toggle="tooltip" data-placement="right"><i class="fa fa-plus"></i><span>Add</span></a> </li>
+          <li [ngClass]="{'active':globals.currentLink=='/job-title/list'}"> <a routerLink="/job-title/list" title="View Job Titles" data-toggle="tooltip" data-placement="right"><i class="fa fa-eye"></i><span>View</span></a> </li>
         </ul>
       </div>
     </li>

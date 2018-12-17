@@ -115,7 +115,7 @@ table.dataTable.no-footer {border-bottom: 0px!important;}
 #Delete_Modal .modal-dialog{margin: 0% auto;}
 .modal-open .modal{overflow-x: hidden;overflow-y: auto;}
 .modal{z-index:1050;}
-.add_que .form-control{width:43%!important;display: inline-block!important;}
+.add_que .form-control{width:53%!important;display: inline-block!important;}
 .height_100_box {display: block;height: 100%;min-height: 100%;}
 .content-area {display: table;max-width: 100%;padding: 0px;width: 100%;}
 #main {padding: 5px 0;height: var(--screen-height);vertical-align: middle;display: table-cell;position: relative;width: inherit;}
@@ -151,7 +151,7 @@ ng-select > div{border-radius: 4px; border: 1px solid #999!important; height: 34
 .sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li.active a,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:hover,.sidebar_wrap .sidebar_box li.dropdown_menu .sub_menu li a:focus{ background: rgba(0,0,0,0.2); transition: all .3s ease-in-out;}
 .sidebar_wrap .sidebar_box li.dropdown_menu.collapsed a i.fa-angle-down:before{content:'\f107';}
 .sidebar_wrap .sidebar_box li.dropdown_menu a i.fa-angle-down:before{content:'\f106';}
-.sidebar_wrap .sidebar_box in.collapse{height: auto!important;}
+.sidebar_wrap .sidebar_box .in.collapse{height: auto!important;}
 
 .sidebar_wrap.small_menu{ padding-left:30px;width: 80px; transition:all 0.4s ease 0s; padding-top: 20px;}
 .sidebar_wrap.small_menu .sidebar_box{background:none; padding: 0; margin: 0; box-shadow: none;}
