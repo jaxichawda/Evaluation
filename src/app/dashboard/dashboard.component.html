@@ -5,7 +5,7 @@
       <div class="breadcrumb_block">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="page_heading">
-            <h1>Feedback Requests</h1>
+            <h1>Evaluation Requests</h1>
           </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
@@ -47,8 +47,9 @@
 			      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" *ngFor="let evaluation of evaluationList">
               <div class="user_feedback_grid" [ngClass]="{'self_feedback':evaluation.UserId==globals.authData.UserId}">
                 <div class="user_title">
-                  <p><strong>Feedback for</strong>{{evaluation.FirstName}} {{evaluation.LastName}}</p>
-                  <p class="padding_15"><strong>Feedback Request date</strong>{{evaluation.EvaluationDate}}</p>
+                  <p *ngIf="evaluation.UserId!=globals.authData.UserId"><strong>Evaluation for</strong>{{evaluation.FirstName}} {{evaluation.LastName}}</p>
+                  <p *ngIf="evaluation.UserId==globals.authData.UserId"><strong>Evaluation for</strong>Self</p>
+                  <p class="padding_15"><strong>Evaluation Request date</strong>{{evaluation.EvaluationDate}}</p>
                 </div>
                 <button *ngIf="evaluation.StatusId==0" (click)="startEvaluation(evaluation.EmployeeEvaluatorId)" class="next_btn">Start</button>
                 <button *ngIf="evaluation.StatusId==1" (click)="reviewById(evaluation.EmployeeEvaluatorId)" class="back_btn">View</button>
