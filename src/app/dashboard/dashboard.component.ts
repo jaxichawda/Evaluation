@@ -30,9 +30,13 @@ export class DashboardComponent implements OnInit {
       }
     }, 1000);
     this.globals.isLoading = true;
+    this.evaluationList = [];
     this.DashboardService.getEvaluationsById(this.globals.authData.UserId)
       .then((data) => {
-        this.evaluationList = data;
+        if(data){
+          this.evaluationList = data;
+        } 
+        //this.evaluationList = data;
         this.globals.isLoading = false;
       },
         (error) => {

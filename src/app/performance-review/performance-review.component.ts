@@ -116,4 +116,15 @@ export class PerformanceReviewComponent implements OnInit {
           //this.submitted = false;
         });
   }
+  checkTextbox(queId, totalAns, que) {
+		// var count = 0;
+		// for (var i = 0; i < totalAns; i++) {
+		// 	if (que.child[i].AnswerText != '')
+		// 		count++;
+		// }
+		if (que.AnswerText != '')
+			que.child.checkActive = true;
+		else
+			que.child.checkActive = false;
+	}
 }

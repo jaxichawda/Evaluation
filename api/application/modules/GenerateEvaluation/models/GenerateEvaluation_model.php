@@ -376,9 +376,9 @@ class GenerateEvaluation_model extends CI_Model
 					$this->db->where('EvaluationId',$post_generate['EvaluationId']);
 					$res = $this->db->delete('tblmstempevaluator');
 
-					if(trim($post_generate['Check'])==1){
-						array_push($post_generate['EvaluatorsId'],$post_generate['UserId']);
-					}
+					// if(trim($post_generate['Check'])==1){
+					// 	array_push($post_generate['EvaluatorsId'],$post_generate['UserId']);
+					// }
 					foreach($post_generate['EvaluatorsId'] as $id){
 					$evaluator_data = array(
 						'EvaluationId' =>  $post_generate['EvaluationId'],

@@ -50,6 +50,9 @@ import { PerformanceReviewComponent } from './performance-review/performance-rev
 import { PerformanceReviewService } from './services/performance-review.service';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangePasswordService } from './services/change-password.service';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ForgotResetService } from './services/forgot-reset.service';
 
 
 //import { AuthGuard } from './services/auth-guard.service';
@@ -76,7 +79,9 @@ import { ChangePasswordService } from './services/change-password.service';
     EmployeeListComponent,
     PerformanceReviewComponent,
     ChangePasswordComponent,
-    EvaluationReportComponent
+    EvaluationReportComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
 
   ],
   imports: [
@@ -89,6 +94,7 @@ import { ChangePasswordService } from './services/change-password.service';
       
 
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+      { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
 
       { path: 'evaluation/generate', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
@@ -118,13 +124,14 @@ import { ChangePasswordService } from './services/change-password.service';
 
       { path: 'performance-review/:id', component: PerformanceReviewComponent, canActivate: [AuthGuard] },
       { path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+      { path: 'reset-password/:id', component: ResetPasswordComponent, canActivate: [AuthGuard] },
 
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login' }
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService, PerformanceReviewService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService, PerformanceReviewService, ForgotResetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
