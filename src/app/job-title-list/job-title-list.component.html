@@ -66,12 +66,14 @@
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Job Title can't be deleted as it is already used in Employee.">
-                      <button *ngIf="jobtitle.isdisabled>0" [disabled]="jobtitle.isdisabled>0" data-type="Record"
-                        class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span class="fa fa-times"></span></button>
+                    <div *ngIf="jobtitle.isdisabled>0" class="inline_delbtn tooltip_inline" data-toggle="tooltip"
+                      data-placement="bottom" title="Job Title can't be deleted as it is already used in Employee.">
+                      <button [disabled]="jobtitle.isdisabled>0" data-type="Record" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span
+                          class="fa fa-times"></span></button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                      <button data-type="Record" *ngIf="jobtitle.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
+                    <div *ngIf="jobtitle.isdisabled==0" class="inline_delbtn tooltip_inline" data-toggle="tooltip"
+                      data-placement="bottom" title="Delete">
+                      <button data-type="Record" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
                         (click)="deleteJobTitle(jobtitle)">
                         <span class="fa fa-times"></span>
                       </button>

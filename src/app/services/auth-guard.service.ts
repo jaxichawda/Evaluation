@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
 	debugger 
 	this.globals.isLoading = false;	
 	$('footer').removeClass('footer_fixed');
+	$('.right_content_block').removeClass('performance_block');
 	if(state.url=='/login'){					   
 		$("body").addClass("height_100");
 	} else {
