@@ -89,8 +89,8 @@ define('ACTIVE_GROUP', 'default'); // database mode
 define('BASE_URL', 'http://localhost:4200'); // local Base URL
 
 //   Development
- //  define('ACTIVE_GROUP', 'Development'); // database mode
- //  define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
+  //  define('ACTIVE_GROUP', 'Development'); // database mode
+  //  define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
 
 //   UAT
   // define('ACTIVE_GROUP', 'QA'); // database mode
