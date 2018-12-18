@@ -107,7 +107,7 @@ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Department Updated Successfully!',
+          title: 'Department updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })

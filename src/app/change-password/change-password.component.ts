@@ -66,7 +66,7 @@ export class ChangePasswordComponent implements OnInit {
             swal({
               type: 'warning',
               title: 'Oops...',
-              text: 'Your current password is incorrect!',
+              text: 'Your Current Password is incorrect!',
             })
             this.globals.isLoading = false;
             this.btn_disable = false;
@@ -84,7 +84,7 @@ export class ChangePasswordComponent implements OnInit {
             swal({
               position: 'top-end',
               type: 'success',
-              title: 'Your password has been changed!',
+              title: 'Your Password has been changed!',
               showConfirmButton: false,
               timer: 1500
             })

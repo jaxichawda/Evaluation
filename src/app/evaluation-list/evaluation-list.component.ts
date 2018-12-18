@@ -103,7 +103,7 @@ export class EvaluationListComponent implements OnInit {
   revokeEvaluation(evaluation) {
     swal({
       title: 'Are you sure?',
-      text: "You want to revoke this evaluation?",
+      text: "You want to revoke this Evaluation?",
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -138,7 +138,7 @@ export class EvaluationListComponent implements OnInit {
   revokeEvaluator(evaluators) {
     swal({
       title: 'Are you sure?',
-      text: "You want to revoke this evaluator?",
+      text: "You want to revoke this Evaluator?",
       type: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

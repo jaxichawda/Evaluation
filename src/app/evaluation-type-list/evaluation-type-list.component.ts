@@ -108,7 +108,7 @@ export class EvaluationTypeListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Evaluation Type Updated Successfully!',
+          title: 'Evaluation Type updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })
