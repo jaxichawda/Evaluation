@@ -97,6 +97,22 @@ class GenerateEvaluation_model extends CI_Model
 		}
 	}
 
+	public function getEmployeeData($evaluationId=Null) {
+		if($evaluationId) {
+			$this->db->select('u.UserId, CONCAT(u.FirstName," ",u.LastName) as EmployeeName');
+			$this->db->join('tbluser u','u.UserId=e.UserId','left');
+			$this->db->where('e.EvaluationId',$evaluationId);
+			$result = $this->db->get('tblmstempevaluation as e');
+			foreach($result->result() as $row){
+				$res = $row;
+			}
+			return $res;
+		} else {
+			return false;
+		}
+	}
+
+
 	public function revokeEvaluation($post_revoke) {
 		try{
 		if($post_revoke) {
