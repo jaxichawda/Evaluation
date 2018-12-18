@@ -64,14 +64,14 @@ export class JobTitleListComponent implements OnInit {
                 extend: 'excel',
                 title: 'Job Title List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2]
                 }
               },
               {
                 extend: 'print',
                 title: 'Job Title List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2]
                 }
               },
             ]
