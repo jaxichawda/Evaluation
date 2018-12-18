@@ -49,7 +49,8 @@
                 <div class="user_title">
                   <p *ngIf="evaluation.UserId!=globals.authData.UserId"><strong>Evaluation for</strong>{{evaluation.FirstName}} {{evaluation.LastName}}</p>
                   <p *ngIf="evaluation.UserId==globals.authData.UserId"><strong>Evaluation for</strong>Self</p>
-                  <p class="padding_15"><strong>Evaluation Request date</strong>{{evaluation.EvaluationDate}}</p>
+                  <p><strong>Evaluation Request date</strong>{{evaluation.EvaluationDate}}</p>
+				  <p class="last_day_p">Tomorrow is a last day to give this evaluation</p>
                 </div>
                 <button *ngIf="evaluation.StatusId==0" (click)="startEvaluation(evaluation.EmployeeEvaluatorId)" class="next_btn">Start</button>
                 <button *ngIf="evaluation.StatusId==1" (click)="reviewById(evaluation.EmployeeEvaluatorId)" class="back_btn">View</button>
