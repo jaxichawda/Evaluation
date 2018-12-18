@@ -17,6 +17,7 @@ export class PerformanceReviewComponent implements OnInit {
   QuestionList;
   ans;
   Status;
+  disabled;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
 
@@ -24,6 +25,7 @@ export class PerformanceReviewComponent implements OnInit {
     var item = { 'OptionValue': '' };
 		this.ans = [];
     this.ans.push(item);
+    this.disabled=true;
     this.globals.isLoading = true;
 	$('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
@@ -117,11 +119,15 @@ export class PerformanceReviewComponent implements OnInit {
         });
   }
   checkTextbox(queId, totalAns, que) {
-		// var count = 0;
-		// for (var i = 0; i < totalAns; i++) {
-		// 	if (que.child[i].AnswerText != '')
-		// 		count++;
-		// }
+		var count = 0;
+		for (var i = 0; i < this.QuestionList.length; i++) {
+			if (que.AnswerText != '')
+				count++;
+    }
+    console.log(count);
+    if(count==this.QuestionList.length){
+      this.disabled=false;
+    }
 		if (que.AnswerText != '')
 			que.child.checkActive = true;
 		else
