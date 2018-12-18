@@ -30,7 +30,7 @@ export class PerformanceReviewComponent implements OnInit {
     this.globals.isLoading = true;
 
 
-	//$('.right_content_block').addClass('performance_block');
+	$('.right_content_block').addClass('performance_block');
 
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -54,8 +54,6 @@ export class PerformanceReviewComponent implements OnInit {
             0:{
                 items:1
             },
-
-<<<<<<< HEAD
             300:{
                 items:1
             },
@@ -76,19 +74,8 @@ export class PerformanceReviewComponent implements OnInit {
             },
             1199:{
                 items:1
-            }
-=======
-      $('#slider').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        sync: "#carousel",
-        maxItems: 5,
-        start: function (slider) {
-          $('body').removeClass('loading');
->>>>>>> 02698a01e20bcfca60b687d323cd9d3c1a0eaca8
-        }
+            },
+		}
     })
 
     }, 1000);
