@@ -131,7 +131,6 @@ table.dataTable.no-footer {border-bottom: 0px!important;}
 .review_block{background: url(../images/background.jpg) center center no-repeat; background-size: cover; height: var(--screen-height);}
 .review_block #slider{background:transparent; height: 84%;}
 .review_block .que_form, .review_block .que_form form, .review_block .que_form #main1 , .review_block .que_form .slider{ position: relative; width: 100%; display: block; height: 100%;}
-.dashboard_block{padding-top: 20px;}
 .breadcrumb{padding: 8px 0;}
 .margin_btn_30{margin-bottom: 30px;}
 ng-select > div{border-radius: 4px; border: 1px solid #999!important; height: 34px;}
@@ -190,21 +189,26 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .right_content_block.front_block footer{width: 100%; margin-left: 0;}
 .right_content_block.front_block .bg_white_block{padding: 0;}
 .right_content_block.front_block .norowmargin{margin: 0;}
-.change_password{margin-top: 20px;}
-.user_dashboard{padding: 30px 0;}
+.norowmargin .breadcrumb_block{margin-top: 20px;}
+.right_content_block.front_block .dashboard_block{padding: 20px 0!important;}
+.right_content_block.front_block .dashboard_block .row{margin:0;}
 .user_dashboard .user_feedback_grid { padding: 10px 0px; border-radius: 5px; box-shadow: 0 5px 10px 1px rgba(88, 103, 221, 0.05); text-align: center; border: 1px solid #e3e3e3; margin-bottom: 30px;}
 .user_dashboard .user_feedback_grid .user_title { border-bottom: 1px solid #d6d6d6; margin-bottom: 15px; height: 110px;}
 .user_dashboard .user_feedback_grid .user_title p strong { display: block;}
 .user_dashboard .user_feedback_grid.self_feedback{background: #f4f4f4;}
 .panel{border: 0!important; box-shadow: none!important;}
-.sr_width{width: 5%;}
-.active_width{width: 8%;}
-.action_width{width: 8%;}
+.sr_width{width: 7%;}
+.active_width{width: 10%;}
+.action_width{width: 10%;}
 .qt_width{width: 10%;}
 .et_width{width: 12%;}
 .all_action{width:15%;}
 .right_content_block.performance_block .bg_white_block{padding: 0!important; width: 101%; margin-left: -15px;}
 #slider .que_section{margin-bottom:20px;}
+.dataTables_wrapper .dt-buttons {float:right!important; margin-left:15px;}
+.dt-buttons button.dt-button, .dt-buttons div.dt-button,.dt-buttons a.dt-button{ background: none!important; padding: 0!important; margin: 0 0 0 10px!important; font-size: 20px!important; color:#191919!important; width: 30px; border: 0!important; }
+.dt-buttons .buttons-print::before,.dt-buttons .buttons-excel::before{color:#191919!important; }
+
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/

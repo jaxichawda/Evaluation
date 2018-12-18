@@ -61,13 +61,7 @@ export class QuestionListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-
-            ]
-          });
-
-          var buttons = new $.fn.dataTable.Buttons(table, {
-            buttons: [
-              {
+{
                 extend: 'excel',
                 title: 'Question List',
                 exportOptions: {
@@ -82,7 +76,10 @@ export class QuestionListComponent implements OnInit {
                 }
               },
             ]
-          }).container().appendTo($('#buttons'));
+          });
+ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
+		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+
         }, 100);
 
         this.questionList = data;
