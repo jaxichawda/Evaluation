@@ -58,18 +58,18 @@
                       <label for="active{{i}}"></label>
                     </div>
                   </td>
-                  <td class=" text-center">
+                  <td class="text-center">
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-default btn-rounded btn-sm" routerLink="/department/edit/{{department.DepartmentId}}">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Department can't be deleted as it is already used in Job Title.">
-                      <button *ngIf="department.isdisabled>0" [disabled]="department.isdisabled>0" data-type="Record"
+                    <div *ngIf="department.isdisabled>0" class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Department can't be deleted as it is already used in Job Title.">
+                      <button [disabled]="department.isdisabled>0" data-type="Record"
                         class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"><span class="fa fa-times"></span></button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                      <button data-type="Record" *ngIf="department.isdisabled==0" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
+                    <div *ngIf="department.isdisabled==0" class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                      <button data-type="Record" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
                         (click)="deleteDepartment(department)">
                         <span class="fa fa-times"></span>
                       </button>
