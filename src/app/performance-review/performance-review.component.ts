@@ -22,10 +22,11 @@ export class PerformanceReviewComponent implements OnInit {
 
   ngOnInit() {
     var item = { 'OptionValue': '' };
-		this.ans = [];
+    this.QuestionList = [];
+    this.ans = [];
     this.ans.push(item);
     this.globals.isLoading = true;
-	$('.right_content_block').addClass('performance_block');
+    $('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
@@ -51,7 +52,7 @@ export class PerformanceReviewComponent implements OnInit {
         animationLoop: false,
         slideshow: false,
         sync: "#carousel",
-    maxItems: 5,
+        maxItems: 5,
         start: function (slider) {
           $('body').removeClass('loading');
         }
@@ -61,70 +62,74 @@ export class PerformanceReviewComponent implements OnInit {
     //this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
-    this.PerformanceReviewService.getAllQuestionData(id)
-      .then((data) => { debugger
-        this.QuestionList=data['QuestionData'];
-        this.Status=data['EvaluationStatus'];
-        console.log(this.Status);
-        this.globals.isLoading = false;
-      },
-      (error) => {
-        // this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
-      });
+      this.PerformanceReviewService.getAllQuestionData(id)
+        .then((data) => {
+          debugger
+          this.QuestionList = data['QuestionData'];
+          this.Status = data['EvaluationStatus'];
+          console.log(this.Status);
+          console.log(this.QuestionList);
+          for (var i = 0; i < this.QuestionList.length; i++) {
+            if (this.QuestionList[i].AnswerText != null) {
+              this.QuestionList[i].child.checkActive = true;
+            } else {
+              this.QuestionList[i].child.checkActive = false;
+            }
+          }
+          this.globals.isLoading = false;
+        },
+          (error) => {
+            // this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
+          });
     }
   }
-  addData(evaluationForm){
+  addData(evaluationForm) {
     debugger
     // this.globals.isLoading = true;
     console.log(this.QuestionList);
-		this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
-				.then((data) => {
-          // this.globals.isLoading = false;
-          swal({
-            position: 'top-end',
-            type: 'success',
-            title: 'Your Evaluation Submitted Successfully!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          this.router.navigate(['/dashboard']);
-        },
+    this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
+      .then((data) => {
+        // this.globals.isLoading = false;
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Your Evaluation Submitted Successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.router.navigate(['/dashboard']);
+      },
         (error) => {
           //this.btn_disable = false;
           //this.submitted = false;
         });
   }
-  saveAsDraft(){
+  saveAsDraft() {
     debugger
     // this.globals.isLoading = true;
     console.log(this.QuestionList);
-		this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
-				.then((data) => {
-          // this.globals.isLoading = false;
-          swal({
-            position: 'top-end',
-            type: 'success',
-            title: 'Your Evaluation saved Successfully!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          // this.router.navigate(['/dashboard']);
-        },
+    this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
+      .then((data) => {
+        // this.globals.isLoading = false;
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Your Evaluation saved Successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        // this.router.navigate(['/dashboard']);
+      },
         (error) => {
           //this.btn_disable = false;
           //this.submitted = false;
         });
   }
   checkTextbox(queId, totalAns, que) {
-		// var count = 0;
-		// for (var i = 0; i < totalAns; i++) {
-		// 	if (que.child[i].AnswerText != '')
-		// 		count++;
-		// }
-		if (que.AnswerText != '')
-			que.child.checkActive = true;
-		else
-			que.child.checkActive = false;
-	}
+    if (que.AnswerText != '')
+      que.child.checkActive = true;
+    else
+      que.child.checkActive = false;
+  }
 }
