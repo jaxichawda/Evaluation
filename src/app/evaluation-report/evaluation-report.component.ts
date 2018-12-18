@@ -17,6 +17,7 @@ export class EvaluationReportComponent implements OnInit {
   status;
   EvaluatorList;
   employeelist;
+  employeeData;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
@@ -45,6 +46,7 @@ export class EvaluationReportComponent implements OnInit {
     if (id) {
       this.GenerateEvaluationService.getEvaluationReport(id)
         .then((data) => {
+          this.employeeData = data['employeeData'];
           this.employeelist = data['employee'];
           this.evaluationList = data['report'];
           this.globals.isLoading = false;
@@ -72,28 +74,24 @@ export class EvaluationReportComponent implements OnInit {
                 "sInfoEmpty": "Showing 0 to 0 of 0 Question"
               },
               dom: 'lBfrtip',
-              buttons: [
-
-              ]
+              buttons: [{
+                extend: 'excel',
+                title: 'Question List',
+                  exportOptions: {
+                    columns: column_array
+                }
+              },
+              {
+                extend: 'print',
+                title: 'Question List',
+                  exportOptions: {
+                    columns: column_array
+                }
+              },
+            ]
             });
-            var buttons = new $.fn.dataTable.Buttons(table, {
-              buttons: [
-                {
-                  extend: 'excel',
-                  title: 'Question List',
-                  exportOptions: {
-                    columns: column_array
-                  }
-                },
-                {
-                  extend: 'print',
-                  title: 'Question List',
-                  exportOptions: {
-                    columns: column_array
-                  }
-                },
-              ]
-            }).container().appendTo($('#buttons'));
+            $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
+            $('.buttons-print').attr('data-original-title', 'Print').tooltip();
            }, 100);
         },
           (error) => {

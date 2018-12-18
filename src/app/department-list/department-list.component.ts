@@ -64,14 +64,14 @@ export class DepartmentListComponent implements OnInit {
                 extend: 'excel',
                 title: 'Department List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
               {
                 extend: 'print',
                 title: 'Department List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
             ]
