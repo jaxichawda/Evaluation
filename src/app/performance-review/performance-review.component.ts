@@ -29,7 +29,9 @@ export class PerformanceReviewComponent implements OnInit {
     this.disabled = true;
     this.globals.isLoading = true;
 
+
 	//$('.right_content_block').addClass('performance_block');
+
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
