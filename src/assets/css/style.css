@@ -202,7 +202,9 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .action_width{width: 8%;}
 .qt_width{width: 10%;}
 .et_width{width: 12%;}
+.all_action{width:15%;}
 .right_content_block.performance_block .bg_white_block{padding: 0!important; width: 101%; margin-left: -15px;}
+#slider .que_section{margin-bottom:20px;}
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/
