@@ -74,9 +74,10 @@
                         <span class="fa fa-refresh"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="Revoke" data-toggle="tooltip" data-placement="bottom">
-                      <button *ngIf="evaluation.StatusId=='0'" class="btn btn-info btn-rounded btn-sm" (click)="revokeEvaluation(evaluation)">
-                         <span class="fa fa-share"></span>
+                    <div *ngIf="evaluation.StatusId=='0'" class="inline_delbtn tooltip_inline" title="Revoke"
+                      data-toggle="tooltip" data-placement="bottom">
+                      <button class="btn btn-info btn-rounded btn-sm" (click)="revokeEvaluation(evaluation)">
+                        <span class="fa fa-share"></span>
                       </button>
                     </div>
                     <div class="inline_delbtn tooltip_inline" title="Report" data-toggle="tooltip" data-placement="bottom">
@@ -86,9 +87,9 @@
                     </div>
                   </td>
                 </tr>
-                <!-- <tr class="text-center" *ngIf="evaluationList.length <= 0">
-                  <td colspan="4">There is no record found.</td>
-                </tr> -->
+                <tr class="text-center" *ngIf="evaluationList.length <= 0">
+                  <td colspan="6">There is no record found.</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -131,9 +132,9 @@
                     <span class="fa fa-share"></span></button>
                 </td>
               </tr>
-              <!-- <tr *ngIf="EvaluatorList.length<=0">
-                        <td colspan="6" class="text-center">There is no record found</td>
-                      </tr> -->
+              <tr *ngIf="EvaluatorList.length<=0">
+                <td colspan="5" class="text-center">There is no record found.</td>
+              </tr>
             </tbody>
           </table>
         </div>

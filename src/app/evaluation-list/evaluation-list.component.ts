@@ -43,6 +43,8 @@ export class EvaluationListComponent implements OnInit {
           $("#test_evaluation").removeClass("collapsed");
       		$("#test_evaluation").attr("aria-expanded","true");
     }, 100);
+    this.evaluationList = [];
+    this.EvaluatorList = [];
     this.globals.isLoading = true;
     this.GenerateEvaluationService.getAllEvaluation()
       .then((data) => {
