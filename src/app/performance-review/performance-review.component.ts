@@ -69,8 +69,8 @@ export class PerformanceReviewComponent implements OnInit {
           debugger
           this.QuestionList = data['QuestionData'];
           this.Status = data['EvaluationStatus'];
-          console.log(this.Status);
-          console.log(this.QuestionList);
+          //console.log(this.Status);
+          //console.log(this.QuestionList);
           for (var i = 0; i < this.QuestionList.length; i++) {
             if (this.QuestionList[i].AnswerText != null) {
               this.QuestionList[i].child.checkActive = true;
@@ -88,11 +88,22 @@ export class PerformanceReviewComponent implements OnInit {
   }
   addData(evaluationForm) {
     debugger
-    // this.globals.isLoading = true;
-    console.log(this.QuestionList);
+    var count = 0; 
+    for (var i = 0; i < this.QuestionList.length; i++) {
+      if (this.QuestionList[i].child.checkActive == true)
+        count++;
+    }
+    //alert(count);
+    // if(count==this.QuestionList.length){
+    //   this.disabled=false;
+    // }
+    
+    if(count==this.QuestionList.length){
+     this.globals.isLoading = true;
+     
     this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
       .then((data) => {
-        // this.globals.isLoading = false;
+         this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',
@@ -106,11 +117,22 @@ export class PerformanceReviewComponent implements OnInit {
           //this.btn_disable = false;
           //this.submitted = false;
         });
+      }
+      else{
+        swal({
+          position: 'top-end',
+          type: 'warning',
+          title: 'Oops...',
+          text: 'Please fill all the answers!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
   }
   saveAsDraft() {
     debugger
     // this.globals.isLoading = true;
-    console.log(this.QuestionList);
+    //console.log(this.QuestionList);
     this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
       .then((data) => {
         // this.globals.isLoading = false;
@@ -128,19 +150,12 @@ export class PerformanceReviewComponent implements OnInit {
           //this.submitted = false;
         });
   }
-  checkTextbox(queId, totalAns, que) {
-		var count = 0;
-		for (var i = 0; i < this.QuestionList.length; i++) {
-			if (que.AnswerText != '')
-				count++;
-    }
-    console.log(count);
-    if(count==this.QuestionList.length){
-      this.disabled=false;
-    }
+  checkTextbox(queId, totalAns, que) { debugger
+	
 		if (que.AnswerText != '')
 			que.child.checkActive = true;
 		else
 			que.child.checkActive = false;
-	}
+
+  }
 }
