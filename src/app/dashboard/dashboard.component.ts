@@ -15,6 +15,8 @@ declare var $, Bloodhound: any;
 })
 export class DashboardComponent implements OnInit {
   evaluationList;
+  TodaysDate;
+  TomorrowsDate;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private DashboardService: DashboardService) { }
 
@@ -43,6 +45,9 @@ export class DashboardComponent implements OnInit {
           this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
+        this.TodaysDate = new Date();
+        this.TomorrowsDate = new Date();
+        this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);
   }
   startEvaluation(Id) {
     debugger
