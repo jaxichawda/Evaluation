@@ -127,9 +127,10 @@ export class PerformanceReviewComponent implements OnInit {
         });
   }
   checkTextbox(queId, totalAns, que) {
-    if (que.AnswerText != '')
+    if (que.AnswerText != '') {
       que.child.checkActive = true;
-    else
+    } else {
       que.child.checkActive = false;
+    }
   }
 }
