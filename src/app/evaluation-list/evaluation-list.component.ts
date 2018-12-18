@@ -50,6 +50,7 @@ export class EvaluationListComponent implements OnInit {
       .then((data) => {
         debugger
         setTimeout(function () {
+			
           var table = $('#dataTables-example').DataTable({
             // scrollY: '55vh',
             responsive: {
@@ -67,28 +68,25 @@ export class EvaluationListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-
-            ]
+                 {
+                 extend: 'excel',
+                 title: 'Users List',
+                 exportOptions: {
+                   columns: [ 0, 1, 2, 3, 4]
+                   }
+                 },
+                 {
+                 extend: 'print',
+                 title: 'Users List',
+                 exportOptions: {
+                   columns: [ 0, 1, 2, 3, 4 ]
+                   }
+                 },
+               ]
           });
 
-          var buttons = new $.fn.dataTable.Buttons(table, {
-            buttons: [
-              {
-                extend: 'excel',
-                title: 'Evaluation List',
-                exportOptions: {
-                  columns: [0, 1, 2, 3]
-                }
-              },
-              {
-                extend: 'print',
-                title: 'Evaluation List',
-                exportOptions: {
-                  columns: [0, 1, 2, 3]
-                }
-              },
-            ]
-          }).container().appendTo($('#buttons'));
+          $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
+		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
 
         this.evaluationList = data['evaluations'];
