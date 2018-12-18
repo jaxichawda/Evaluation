@@ -17,15 +17,19 @@ export class PerformanceReviewComponent implements OnInit {
   QuestionList;
   ans;
   Status;
+  disabled;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
 
   ngOnInit() {
     var item = { 'OptionValue': '' };
-		this.ans = [];
+    this.QuestionList = [];
+    this.ans = [];
     this.ans.push(item);
+    this.disabled = true;
     this.globals.isLoading = true;
-	$('.right_content_block').addClass('performance_block');
+
+	//$('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
@@ -35,52 +39,100 @@ export class PerformanceReviewComponent implements OnInit {
     //   }
     // }, 1000);
     setTimeout(function () {
-      $('#carousel').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 250,
-        itemMargin: 5,
-        asNavFor: '#slider'
-      });
+      $('.owl-carousel-review').owlCarousel({
+        loop:false,
+        autoPlay: false,
+        nav:true,
+        dots: false,
+		  autoHeight: true,
+        margin: 15,
+        stopOnHover : true,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1
+            },
 
+<<<<<<< HEAD
+            300:{
+                items:1
+            },
+            479:{
+                items:1
+            },
+            600:{
+                items:1
+            },
+            768:{
+                items:1
+            },
+            979:{
+                items:1
+            },
+            1024:{
+                items:1
+            },
+            1199:{
+                items:1
+            }
+=======
       $('#slider').flexslider({
         animation: "slide",
         controlNav: false,
         animationLoop: false,
         slideshow: false,
         sync: "#carousel",
-    maxItems: 5,
+        maxItems: 5,
         start: function (slider) {
           $('body').removeClass('loading');
+>>>>>>> 02698a01e20bcfca60b687d323cd9d3c1a0eaca8
         }
-      });
+    })
 
     }, 1000);
     //this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
-    this.PerformanceReviewService.getAllQuestionData(id)
-      .then((data) => { debugger
-        this.QuestionList=data['QuestionData'];
-        this.Status=data['EvaluationStatus'];
-        console.log(this.Status);
-        this.globals.isLoading = false;
-      },
-      (error) => {
-        // this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
-      });
+      this.PerformanceReviewService.getAllQuestionData(id)
+        .then((data) => {
+          debugger
+          this.QuestionList = data['QuestionData'];
+          this.Status = data['EvaluationStatus'];
+          //console.log(this.Status);
+          //console.log(this.QuestionList);
+          for (var i = 0; i < this.QuestionList.length; i++) {
+            if (this.QuestionList[i].AnswerText != null) {
+              this.QuestionList[i].child.checkActive = true;
+            } else {
+              this.QuestionList[i].child.checkActive = false;
+            }
+          }
+          this.globals.isLoading = false;
+        },
+          (error) => {
+            // this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
+          });
     }
   }
-  addData(evaluationForm){
+  addData(evaluationForm) {
     debugger
-    // this.globals.isLoading = true;
-    console.log(this.QuestionList);
-		this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
-				.then((data) => {
-          // this.globals.isLoading = false;
+    var count = 0;
+    for (var i = 0; i < this.QuestionList.length; i++) {
+      if (this.QuestionList[i].child.checkActive == true)
+        count++;
+    }
+    //alert(count);
+    // if(count==this.QuestionList.length){
+    //   this.disabled=false;
+    // }
+
+    if (count == this.QuestionList.length) {
+      this.globals.isLoading = true;
+
+      this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
+        .then((data) => {
+          this.globals.isLoading = false;
           swal({
             position: 'top-end',
             type: 'success',
@@ -90,41 +142,46 @@ export class PerformanceReviewComponent implements OnInit {
           })
           this.router.navigate(['/dashboard']);
         },
-        (error) => {
-          //this.btn_disable = false;
-          //this.submitted = false;
-        });
+          (error) => {
+            //this.btn_disable = false;
+            //this.submitted = false;
+          });
+    }
+    else {
+      swal({
+        type: 'warning',
+        title: 'Oops...',
+        text: 'Please Attempt all the Questions!',
+        showConfirmButton: true
+      })
+    }
   }
-  saveAsDraft(){
+  saveAsDraft() {
     debugger
-    // this.globals.isLoading = true;
-    console.log(this.QuestionList);
-		this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
-				.then((data) => {
-          // this.globals.isLoading = false;
-          swal({
-            position: 'top-end',
-            type: 'success',
-            title: 'Your Evaluation saved Successfully!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          // this.router.navigate(['/dashboard']);
-        },
+    this.globals.isLoading = true;
+    //console.log(this.QuestionList);
+    this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
+      .then((data) => {
+        this.globals.isLoading = false;
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Your Evaluation Saved Successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        // this.router.navigate(['/dashboard']);
+      },
         (error) => {
           //this.btn_disable = false;
           //this.submitted = false;
         });
   }
   checkTextbox(queId, totalAns, que) {
-		// var count = 0;
-		// for (var i = 0; i < totalAns; i++) {
-		// 	if (que.child[i].AnswerText != '')
-		// 		count++;
-		// }
-		if (que.AnswerText != '')
-			que.child.checkActive = true;
-		else
-			que.child.checkActive = false;
-	}
+    debugger
+    if (que.AnswerText != '')
+      que.child.checkActive = true;
+    else
+      que.child.checkActive = false;
+  }
 }

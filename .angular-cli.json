@@ -42,7 +42,7 @@
         "assets/js/select2.min.js",
         "assets/js/typeahead.bundle.js",
         "assets/js/jquery.bxslider.js",
-        "assets/js/jquery.flexslider.js"
+        "assets/js/owl.carousel.js"
   
       ],
       "environmentSource": "environments/environment.ts",

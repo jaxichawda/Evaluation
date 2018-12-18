@@ -57,6 +57,7 @@ class Employee extends CI_Controller {
 					$config['wordwrap'] = 'TRUE';
 					
 					$path = BASE_URL;
+					$loginpath = BASE_URL.'/login/';
 
 					$message = '
 					<table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
@@ -89,6 +90,23 @@ class Employee extends CI_Controller {
 										</tr>
 									</tbody>
 								</table>
+								<p style="color:#000; font-size: 14px; line-height:20px; padding: 0; margin:20px 0 0;">Use the button below to access your account:</p>
+								</td>
+							</tr>
+							<tr>
+								<td style="border-width:0; padding:0; text-align:center; vertical-align:middle">
+								<table border="0" cellpadding="0" cellspacing="0" style="border:0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto">
+									<tbody>
+										<tr>
+											<td style="background-color:#0061AF; background:#0061AF; border-radius:4px; border-width:0; clear:both; color:#ffffff; font-size:14px; line-height:13px; opacity:1; padding:10px; text-align:center; text-decoration:none; width:130px"><a href="'.$loginpath.'" style="color:#fff; text-decoration:none;">Login to Account</a></td>
+										</tr>
+									</tbody>
+								</table>
+								</td>
+							</tr>
+							<tr>
+								<td style="border-width:0; padding:20px 10px 10px 10px; text-align:center; vertical-align:middle">
+									<p style="color:#777; font-size: 12px; line-height:20px; padding: 0; margin: 0 0 10px; text-align: left;">If you&rsquo;re having trouble with the button above, copy and paste the URL below into your web browser. <a href="'.$loginpath.'" style="cursor:pointer;">click here</a></p>
 								</td>
 							</tr>
 							<tr>

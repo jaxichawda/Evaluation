@@ -42,10 +42,9 @@ class GenerateEvaluation extends CI_Controller {
     public function getEvaluationReport($evaluationId=null)
 	{	
 		if(!empty($evaluationId)) {
+            $data['employeeData']=$this->GenerateEvaluation_model->getEmployeeData($evaluationId);
             $data['employee']=$this->GenerateEvaluation_model->getEvaluationEmployee($evaluationId);
             $data['report']=$this->GenerateEvaluation_model->getEvaluationReport($evaluationId);
-            //echo "<pre>";
-            //print_r($data);
             echo json_encode($data);
 		}
     }
@@ -153,6 +152,7 @@ class GenerateEvaluation extends CI_Controller {
                     }
 
                     if($id==$post_generate['UserId']){
+                        $subject = 'Self-Employee evaluation';
                         $message = '
 
                         <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
@@ -173,12 +173,12 @@ class GenerateEvaluation extends CI_Controller {
                                                 <td style="padding:5px; text-align:left; width:48%">'.$evaluationtypename.'</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:5px; text-align:right; width:35%">Date</td>
+                                                <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:5px; text-align:right; width:35%">Description</td>
+                                                <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
                                             </tr>
@@ -194,6 +194,7 @@ class GenerateEvaluation extends CI_Controller {
                         ';
                     }
                     else{
+                        $subject = $firstname."'s Employee evaluation";
                         $message = '
 
                         <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
@@ -204,14 +205,14 @@ class GenerateEvaluation extends CI_Controller {
                                 <tr>
                                     <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
 
-                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please give evaluation for below Employee:</p>
+                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Congratulations! Please provide your feedback for below evaluation.</p>
 
                                     <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
                                         <tbody>
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Employee Name</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$firstname." ".$lastname.'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$firstname.' '.$lastname.'</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Evaluation Type:</td>
@@ -219,12 +220,12 @@ class GenerateEvaluation extends CI_Controller {
                                                 <td style="padding:5px; text-align:left; width:48%">'.$evaluationtypename.'</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:5px; text-align:right; width:35%">Date</td>
+                                                <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
                                             </tr>
                                             <tr>
-                                                <td style="padding:5px; text-align:right; width:35%">Description</td>
+                                                <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
                                             </tr>
@@ -254,7 +255,7 @@ class GenerateEvaluation extends CI_Controller {
             $this->email->initialize($config); 
             $this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
             $this->email->to($email);
-            $this->email->subject('Employee Evaluation');
+            $this->email->subject($subject);
             $this->email->message($message);
             if($this->email->send()){
                // return true;

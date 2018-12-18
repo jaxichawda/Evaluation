@@ -64,14 +64,14 @@ export class JobTitleListComponent implements OnInit {
                 extend: 'excel',
                 title: 'Job Title List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2]
                 }
               },
               {
                 extend: 'print',
                 title: 'Job Title List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2]
                 }
               },
             ]
@@ -108,7 +108,7 @@ export class JobTitleListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Job Title Updated Successfully!',
+          title: 'Job Title updated successfully!',
           showConfirmButton: false,
           timer: 1500
         })

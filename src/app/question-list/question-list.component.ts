@@ -109,7 +109,7 @@ export class QuestionListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Question Updated Successfully!',
+          title: 'Question updated successfully!',
           showConfirmButton: false,
           timer: 1500
         })

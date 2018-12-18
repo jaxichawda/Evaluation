@@ -60,19 +60,18 @@ export class EmployeeListComponent implements OnInit {
               "sInfoEmpty": "Showing 0 to 0 of 0 Employees"
             },
             dom: 'lBfrtip',
-            buttons: [
-{
+            buttons: [{
                 extend: 'excel',
                 title: 'Employee List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2, 3, 4]
                 }
               },
               {
                 extend: 'print',
                 title: 'Employee List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1, 2, 3, 4]
                 }
               },
             ]
@@ -107,7 +106,7 @@ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Employee Updated Successfully!',
+          title: 'Employee updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })

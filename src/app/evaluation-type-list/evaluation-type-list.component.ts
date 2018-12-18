@@ -65,14 +65,14 @@ export class EvaluationTypeListComponent implements OnInit {
                 extend: 'excel',
                 title: 'Evaluation Type List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
               {
                 extend: 'print',
                 title: 'Evaluation Type List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
             ]
@@ -108,7 +108,7 @@ export class EvaluationTypeListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Evaluation Type Updated Successfully!',
+          title: 'Evaluation Type updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })

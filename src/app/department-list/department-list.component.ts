@@ -64,14 +64,14 @@ export class DepartmentListComponent implements OnInit {
                 extend: 'excel',
                 title: 'Department List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
               {
                 extend: 'print',
                 title: 'Department List',
                 exportOptions: {
-                  columns: [0, 1, 2, 3]
+                  columns: [0, 1]
                 }
               },
             ]
@@ -107,7 +107,7 @@ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Department Updated Successfully!',
+          title: 'Department updated Successfully!',
           showConfirmButton: false,
           timer: 1500
         })

@@ -128,7 +128,7 @@ export class EmployeeComponent implements OnInit {
             swal({
               type: 'warning',
               title: 'Oops...',
-              text: 'You already added this employee!',
+              text: 'You already added this Employee!',
             })
             this.btn_disable = false;
             this.submitted = false;

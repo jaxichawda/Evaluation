@@ -209,7 +209,14 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .dataTables_wrapper .dt-buttons {float:right!important; margin-left:15px;}
 .dt-buttons button.dt-button, .dt-buttons div.dt-button,.dt-buttons a.dt-button{ background: none!important; padding: 0!important; margin: 0 0 0 10px!important; font-size: 20px!important; color:#191919!important; width: 30px; border: 0!important; }
 .dt-buttons .buttons-print::before,.dt-buttons .buttons-excel::before{color:#191919!important; }
-
+.box_qa{height: auto; border: 1px solid #999; background: #fff;; display: block; padding: 15px; margin: 0 0 30px;}
+.box_qa .que_section .que_title{margin: 0 0 10px; display: block; color: #a6ce39;}
+.box_qa .que_section .que_name{ height: auto; display: block; overflow-y: auto; margin-bottom: 15px;}
+.margin_bottom{margin-bottom: 30px;}
+.owl-carousel .owl-item .owl-item{width:100%;}
+.owl-carousel .owl-nav div.owl-prev{ background:url(../images/prev_small.png) left top no-repeat; width:32px; height:32px; display:inline-block; position:absolute; left:15px; bottom:35px; background-size:100%;} 
+.owl-carousel .owl-nav div.owl-next{ background:url(../images/next_small.png) left top no-repeat; width:32px; height:32px; display:inline-block;  position:absolute; right:15px; bottom:35px; background-size:100%;} 
+.last_btn_class{height: 70px;}
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/

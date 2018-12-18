@@ -86,7 +86,7 @@
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label><span>*</span>Evaluation Date</label>
+            <label><span>*</span>Scheduled Evaluation Date</label>
             <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date"
               #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate"
               [ngClass]="{'red_border': DateValid}">
@@ -99,7 +99,7 @@
         <div class="clearfix"></div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label>Description</label>
+            <label>Note</label>
             <textarea class="form-control" #EvaluationDescription="ngModel" [(ngModel)]="evaluationEntity.EvaluationDescription"
               name="EvaluationDescription" maxlength="1000"></textarea>
           </div>

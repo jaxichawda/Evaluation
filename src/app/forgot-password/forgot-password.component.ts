@@ -49,7 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
             swal({
               type: 'warning',
               title: 'Oops...',
-              text: 'Could not find your email address!',
+              text: 'Could not find your Email Address!',
               })
               this.globals.isLoading = false;
             this.router.navigate(['/forgot-password']);

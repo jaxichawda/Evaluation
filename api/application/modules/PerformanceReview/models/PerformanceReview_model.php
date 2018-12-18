@@ -72,13 +72,18 @@ class PerformanceReview_model extends CI_Model {
     public function saveAsDraft($post_data)
 	{	
                     $PerformanceData=$post_data['PerformanceData'];
+                    
                     //$performance_data= array();
 					foreach($PerformanceData as $data){
+                        if ($data['AnswerText'] == '')
+                        $AnswerText = null;
+                            else
+                        $AnswerText = $data['AnswerText'];
 						//$child = $data['child'];
 							$data1=array(
 								"EmployeeEvaluatorId"=>$data['EmployeeEvaluatorId'],
 								"QuestionId"=>$data['QuestionId'],
-								"AnswerText"=>$data['AnswerText'],
+								"AnswerText"=>$AnswerText,
 								"IsActive"=>1,
 								"UpdatedOn"=>date('y-m-d H:i:s')
                                 );	
