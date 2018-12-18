@@ -45,7 +45,16 @@ export class EvaluationReportComponent implements OnInit {
     if (id) {
       this.GenerateEvaluationService.getEvaluationReport(id)
         .then((data) => {
-          
+          this.employeelist = data['employee'];
+          this.evaluationList = data['report'];
+          this.globals.isLoading = false;
+          var column_length = this.employeelist.length;
+          var column_array = [0, 1];
+          if(column_length>0){
+            for(var i=2; i<=column_length+1; i++){
+              column_array.push(i);
+            }
+          }  
           setTimeout(function () {
             var table = $('#dataTables-example').DataTable({
               // scrollY: '55vh',
@@ -73,22 +82,19 @@ export class EvaluationReportComponent implements OnInit {
                   extend: 'excel',
                   title: 'Question List',
                   exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: column_array
                   }
                 },
                 {
                   extend: 'print',
                   title: 'Question List',
                   exportOptions: {
-                    columns: [0, 1, 2, 3]
+                    columns: column_array
                   }
                 },
               ]
             }).container().appendTo($('#buttons'));
            }, 100);
-           this.employeelist = data['employee'];
-          this.evaluationList = data['report'];
-          this.globals.isLoading = false;
         },
           (error) => {
             this.globals.isLoading = false;
