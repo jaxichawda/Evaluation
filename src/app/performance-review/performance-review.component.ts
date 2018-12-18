@@ -26,7 +26,7 @@ export class PerformanceReviewComponent implements OnInit {
     this.QuestionList = [];
     this.ans = [];
     this.ans.push(item);
-    this.disabled=true;
+    this.disabled = true;
     this.globals.isLoading = true;
     $('.right_content_block').addClass('performance_block');
     // setTimeout(function () {
@@ -88,7 +88,7 @@ export class PerformanceReviewComponent implements OnInit {
   }
   addData(evaluationForm) {
     debugger
-    var count = 0; 
+    var count = 0;
     for (var i = 0; i < this.QuestionList.length; i++) {
       if (this.QuestionList[i].child.checkActive == true)
         count++;
@@ -97,49 +97,47 @@ export class PerformanceReviewComponent implements OnInit {
     // if(count==this.QuestionList.length){
     //   this.disabled=false;
     // }
-    
-    if(count==this.QuestionList.length){
-     this.globals.isLoading = true;
-     
-    this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
-      .then((data) => {
-         this.globals.isLoading = false;
-        swal({
-          position: 'top-end',
-          type: 'success',
-          title: 'Your Evaluation Submitted Successfully!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-        this.router.navigate(['/dashboard']);
-      },
-        (error) => {
-          //this.btn_disable = false;
-          //this.submitted = false;
-        });
-      }
-      else{
-        swal({
-          position: 'top-end',
-          type: 'warning',
-          title: 'Oops...',
-          text: 'Please fill all the answers!',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      }
+
+    if (count == this.QuestionList.length) {
+      this.globals.isLoading = true;
+
+      this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
+        .then((data) => {
+          this.globals.isLoading = false;
+          swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Your Evaluation Submitted Successfully!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.router.navigate(['/dashboard']);
+        },
+          (error) => {
+            //this.btn_disable = false;
+            //this.submitted = false;
+          });
+    }
+    else {
+      swal({
+        type: 'warning',
+        title: 'Oops...',
+        text: 'Please Attempt all the Questions!',
+        showConfirmButton: true
+      })
+    }
   }
   saveAsDraft() {
     debugger
-    // this.globals.isLoading = true;
+    this.globals.isLoading = true;
     //console.log(this.QuestionList);
     this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
       .then((data) => {
-        // this.globals.isLoading = false;
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Your Evaluation saved Successfully!',
+          title: 'Your Evaluation Saved Successfully!',
           showConfirmButton: false,
           timer: 1500
         })
@@ -150,12 +148,11 @@ export class PerformanceReviewComponent implements OnInit {
           //this.submitted = false;
         });
   }
-  checkTextbox(queId, totalAns, que) { debugger
-	
-		if (que.AnswerText != '')
-			que.child.checkActive = true;
-		else
-			que.child.checkActive = false;
-
+  checkTextbox(queId, totalAns, que) {
+    debugger
+    if (que.AnswerText != '')
+      que.child.checkActive = true;
+    else
+      que.child.checkActive = false;
   }
 }
