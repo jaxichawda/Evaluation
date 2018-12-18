@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
             swal({
               type: 'warning',
               title: 'Oops...',
-              text: 'Either username or password is incorrect!',
+              text: 'Either Username or Password is incorrect!',
             })
             this.globals.isLoading = false;
             this.btn_disable = false;

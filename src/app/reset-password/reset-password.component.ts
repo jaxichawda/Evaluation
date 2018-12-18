@@ -79,7 +79,7 @@ export class ResetPasswordComponent implements OnInit {
 					swal({
 						position: 'top-end',
 									type: 'success',
-									title: 'Your Password Changed Successfully!',
+									title: 'Your Password changed successfully!',
 									showConfirmButton: false,
 									timer: 1500
 					}) 

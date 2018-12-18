@@ -108,7 +108,7 @@ export class JobTitleListComponent implements OnInit {
         swal({
           position: 'top-end',
           type: 'success',
-          title: 'Job Title Updated Successfully!',
+          title: 'Job Title updated successfully!',
           showConfirmButton: false,
           timer: 1500
         })
