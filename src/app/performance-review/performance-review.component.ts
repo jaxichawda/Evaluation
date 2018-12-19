@@ -116,8 +116,10 @@ export class PerformanceReviewComponent implements OnInit {
     for (var i = 0; i < this.QuestionList.length; i++) {
       for (var j = 0; j < this.QuestionList[i].row.length; j++) {
        totalQues++;
-        if (this.QuestionList[i].row[j].AnswerText != '')
+        if ((this.QuestionList[i].row[j].AnswerText == '') || (this.QuestionList[i].row[j].AnswerText == null) || (this.QuestionList[i].row[j].AnswerText == undefined))
         {
+        }
+        else{
           count++;
         }
         //alert(count);
