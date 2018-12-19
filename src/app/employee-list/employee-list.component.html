@@ -10,7 +10,11 @@
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="fa fa-home"></i></a></li>
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard">
+                <i class="fa fa-home"></i>
+              </a>
+            </li>
             <li class="breadcrumb-item active">Employee</li>
           </ol>
           <div class="clearfix"></div>
@@ -55,38 +59,42 @@
                 <tr *ngFor="let employee of employeeList; let i = index">
                   <td class="text-center">{{i+1}}</td>
                   <td>{{employee.FirstName}} {{employee.LastName}}
-                    <span *ngIf="employee.RoleId==1" class="fa fa-user tooltip_inline" title="Admin" data-toggle="tooltip"
-                      data-placement="bottom"></span>
-                    <span *ngIf="employee.RoleId==2" class="fa fa-user-circle tooltip_inline" title="HR" data-toggle="tooltip"
-                      data-placement="bottom"></span>
+                    <span *ngIf="employee.RoleId==1" class="fa fa-user tooltip_inline" title="Admin" data-toggle="tooltip" data-placement="bottom"></span>
+                    <span *ngIf="employee.RoleId==2" class="fa fa-user-circle tooltip_inline" title="HR" data-toggle="tooltip" data-placement="bottom"></span>
                   </td>
                   <td>{{employee.EmailAddress}}</td>
                   <td>{{employee.JobTitleName}}</td>
                   <td *ngIf="employee.LineManager!=null">{{employee.LineManager}}</td>
                   <td *ngIf="employee.LineManager==null">Not assigned</td>
                   <td class="text-center">
-                    <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="employee.IsActive==1 ? 'Active' : 'Deactive'">
-                      <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(employee,i)"
-                        [checked]="employee.IsActive==1" value="Yes">
+                    <div *ngIf="(employee.RoleId!=1 && globals.authData.RoleId==1)" class="activeyes_box" data-toggle="tooltip" data-placement="top"
+                      [attr.title]="employee.IsActive==1 ? 'Active' : 'Deactive'">
+                      <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(employee,i)" [checked]="employee.IsActive==1"
+                        value="Yes">
+                      <label for="active{{i}}"></label>
+                    </div>
+                    <div *ngIf="(employee.RoleId==3 && globals.authData.RoleId==2)" class="activeyes_box" data-toggle="tooltip" data-placement="top"
+                      [attr.title]="employee.IsActive==1 ? 'Active' : 'Deactive'">
+                      <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(employee,i)" [checked]="employee.IsActive==1"
+                        value="Yes">
                       <label for="active{{i}}"></label>
                     </div>
                   </td>
                   <td class="text-center">
-                    <div *ngIf="(employee.RoleId!=3 && globals.authData.RoleId==2)" class="inline_delbtn tooltip_inline"
-                      title="You can't edit this user as He/She is either Admin or HR." data-toggle="tooltip"
-                      data-placement="bottom">
+                    <div *ngIf="(employee.RoleId!=3 && globals.authData.RoleId==2)" class="inline_delbtn tooltip_inline" title="You can't edit this user as He/She is either Admin or HR."
+                      data-toggle="tooltip" data-placement="bottom">
                       <button [disabled]="(employee.RoleId!=3 && globals.authData.RoleId==2)" class="btn btn-default btn-rounded btn-sm">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
-                    <div *ngIf="(employee.RoleId==1 && globals.authData.RoleId==1)" class="inline_delbtn tooltip_inline"
-                      title="You can't edit this user as He/She is Admin." data-toggle="tooltip" data-placement="bottom">
+                    <div *ngIf="(employee.RoleId==1 && globals.authData.RoleId==1)" class="inline_delbtn tooltip_inline" title="You can't edit this user as He/She is Admin."
+                      data-toggle="tooltip" data-placement="bottom">
                       <button [disabled]="(employee.RoleId==1 && globals.authData.RoleId==1)" class="btn btn-default btn-rounded btn-sm">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>
-                    <div *ngIf="(employee.RoleId==3 && globals.authData.RoleId==2) || (employee.RoleId!=1 && globals.authData.RoleId==1)"
-                      class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
+                    <div *ngIf="(employee.RoleId==3 && globals.authData.RoleId==2) || (employee.RoleId!=1 && globals.authData.RoleId==1)" class="inline_delbtn tooltip_inline"
+                      title="Edit" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-default btn-rounded btn-sm" routerLink="/employee/edit/{{employee.UserId}}">
                         <span class="fa fa-pencil"></span>
                       </button>
