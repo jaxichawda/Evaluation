@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row norowmargin">
   <div class="col-lg-12">
     <div class="breadcrumb_block">
       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -26,7 +26,7 @@
     <div class="clearfix"></div>
   </div>
 </div>
-<div class="row">
+<div class="row norowmargin">
   <div class="col-lg-12">
     <div class="form-bg">
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
@@ -55,6 +55,16 @@
                         <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" [disabled]='Status.StatusId=="1"'
                         required pattern="^[0-9]*$" maxlength="6" (change)="checkTextbox(i,que.child.length,que)" />
                         <span class="error_span" *ngIf="AnswerText.errors && AnswerText.errors.pattern"> Please enter numeric value </span> </div>
+                    </div>
+                  </div>
+                  <div *ngIf="que.AnswerTypeId==3">
+                    <div class="ans_section"> <span *ngIf='Status.StatusId=="1"'> <b>Answer</b> - {{que.AnswerText}}</span> <span *ngIf='Status.StatusId!="1"'>
+                      <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
+                        <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          required (change)="que.child.checkActive=true" />
+                        <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
+                      </div>
+                      </span> </div>
                     </div>
                   </div> -->
                   <div *ngIf="que.AnswerTypeId==2">

@@ -68,15 +68,15 @@ export class EvaluationReportComponent implements OnInit {
               },
               scrollCollapse: true,
               "oLanguage": {
-                "sLengthMenu": "_MENU_ Question per Page",
-                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Question",
-                "sInfoFiltered": "(filtered from _MAX_ total Question)",
-                "sInfoEmpty": "Showing 0 to 0 of 0 Question"
+                "sLengthMenu": "_MENU_ Questions per Page",
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Questions",
+                "sInfoFiltered": "(filtered from _MAX_ total Questions)",
+                "sInfoEmpty": "Showing 0 to 0 of 0 Questions"
               },
               dom: 'lBfrtip',
               buttons: [{
                 extend: 'excel',
-                title: 'Question List',
+                title: 'Evaluation Report of {{employeeData.EmployeeName}}',
                   exportOptions: {
                     columns: column_array
                 }
