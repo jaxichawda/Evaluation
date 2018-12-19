@@ -10,19 +10,31 @@ class PerformanceReview_model extends CI_Model {
             $this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
             $this->db->where('ea.EmployeeEvaluatorId',$Id);
             $this->db->where('q.IsActive',1);
-            $result=$this->db->get('tblevaluationanswer ea');
+            $query=$this->db->get('tblevaluationanswer ea');
             
-            $res=array();
-            foreach($result->result() as $row)
+            //$res=array();
+            if($query->result())
             {
-                $this->db->select('o.QuestionOptionId, o.QuestionId, o.OptionValue');
-                $this->db->where('o.QuestionId',$row->QuestionId);
-                $result1=$this->db->get('tblquestionoptions o');
-                //$res=$row;
-                $row->child=$result1->result();
-                array_push($res,$row);
+                $result = $query->result();
+                $res2 = array();
+                    $j = -1;
+                    for($i=0; $i<$query->num_rows(); $i++) {
+                        $query_ans = array();
+                        $this->db->select('o.QuestionOptionId, o.QuestionId, o.OptionValue');
+                        $this->db->where('o.QuestionId',$result[$i]->QuestionId);
+                        $query_ans=$this->db->get('tblquestionoptions o');
+                        
+                        if($i==0 || $i%4==0){
+                            $res = array();
+                            $j++;
+                        }					
+                        $result[$i]->answer = $query_ans->result();				
+						array_push($res,$result[$i]);			
+						$res2[$j]['row'] = $res;
+                    }
+                    return $res2;
             }
-            return $res;
+            
             }
             else
             {
@@ -75,21 +87,22 @@ class PerformanceReview_model extends CI_Model {
                     
                     //$performance_data= array();
 					foreach($PerformanceData as $data){
-                        if ($data['AnswerText'] == '')
+                        foreach($data as $value){
+                        if ($value['AnswerText'] == '')
                         $AnswerText = null;
                             else
                         $AnswerText = $data['AnswerText'];
 						//$child = $data['child'];
 							$data1=array(
-								"EmployeeEvaluatorId"=>$data['EmployeeEvaluatorId'],
-								"QuestionId"=>$data['QuestionId'],
+								"EmployeeEvaluatorId"=>$value['EmployeeEvaluatorId'],
+								"QuestionId"=>$value['QuestionId'],
 								"AnswerText"=>$AnswerText,
 								"IsActive"=>1,
 								"UpdatedOn"=>date('y-m-d H:i:s')
                                 );	
-                                $this->db->where('EvaluationAnswerId',trim($data['EvaluationAnswerId']));
+                                $this->db->where('EvaluationAnswerId',trim($value['EvaluationAnswerId']));
                                 $res1=$this->db->update('tblevaluationanswer',$data1);
-
+                            }
                     } 
                     //$result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$data['EmployeeEvaluatorId']);
                     return true;

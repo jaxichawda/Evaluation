@@ -89,13 +89,13 @@ export class PerformanceReviewComponent implements OnInit {
           this.Status = data['EvaluationStatus'];
           //console.log(this.Status);
           //console.log(this.QuestionList);
-          for (var i = 0; i < this.QuestionList.length; i++) {
-            if (this.QuestionList[i].AnswerText != null) {
-              this.QuestionList[i].child.checkActive = true;
-            } else {
-              this.QuestionList[i].child.checkActive = false;
-            }
-          }
+          // for (var i = 0; i < this.QuestionList.length; i++) {
+          //   if (this.QuestionList[i].AnswerText != null) {
+          //     this.QuestionList[i].child.checkActive = true;
+          //   } else {
+          //     this.QuestionList[i].child.checkActive = false;
+          //   }
+          // }
           this.globals.isLoading = false;
         },
           (error) => {
@@ -149,7 +149,7 @@ export class PerformanceReviewComponent implements OnInit {
     debugger
     this.globals.isLoading = true;
     //console.log(this.QuestionList);
-    this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList })
+    this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList.row })
       .then((data) => {
         this.globals.isLoading = false;
         swal({
@@ -166,11 +166,11 @@ export class PerformanceReviewComponent implements OnInit {
           //this.submitted = false;
         });
   }
-  checkTextbox(queId, totalAns, que) {
-    debugger
-    if (que.AnswerText != '')
-      que.child.checkActive = true;
-    else
-      que.child.checkActive = false;
-  }
+  // checkTextbox(queId, totalAns, que) {
+  //   debugger
+  //   if (que.AnswerText != '')
+  //     que.child.checkActive = true;
+  //   else
+  //     que.child.checkActive = false;
+  // }
 }

@@ -32,11 +32,11 @@
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
         <div id="main1" role="main">
           <div class="owl-carousel-review">
-            <div class="owl-item" *ngFor="let que of QuestionList; let k=index; let i = index; let last = last">
-              <div class="col-md-12 col-sm-12">
+            <div class="owl-item" *ngFor="let question of QuestionList; let k=index;">
+              <div class="col-md-12 col-sm-12" *ngFor="let que of question.row; let i = index;">
                 <div class="box_qa">
                   <div class="que_section">
-                    <h4 class="que_title">Question {{i+1}}</h4>
+                    <h4 class="que_title">Question {{(4*k)+i+1}}</h4>
                     <p class="que_name">
                       <span [innerHTML]="que.QuestionText"></span>
                     </p>
@@ -45,7 +45,7 @@
                     <div class="ans_section">
                       <span *ngIf='Status.StatusId=="1"'>
                         <b>Answer</b> - {{que.AnswerText}}</span>
-                      <textarea *ngIf='Status.StatusId!="1"' class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}"
+                      <textarea *ngIf='Status.StatusId!="1"' class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}{{i}}"
                         maxlength="500" [disabled]='Status.StatusId=="1"' required (change)="checkTextbox(i,que.child.length,que)"></textarea>
                     </div>
                   </div>
@@ -63,68 +63,55 @@
                         <b>Answer</b> - {{que.AnswerText}}</span>
                       <div *ngIf='Status.StatusId!="1"' class="col-md-12 col-sm-12">
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating1of{{k}}" value="1" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating1of{{k}}{{i}}" value="1" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating1of{{k}}" title="1">1</label>
+                          <label for="rating1of{{k}}{{i}}" title="1">1</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating2of{{k}}" value="2" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating2of{{k}}{{i}}" value="2" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating2of{{k}}" title="2">2</label>
+                          <label for="rating2of{{k}}{{i}}" title="2">2</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating3of{{k}}" value="3" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating3of{{k}}{{i}}" value="3" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating3of{{k}}" title="3">3</label>
+                          <label for="rating3of{{k}}{{i}}" title="3">3</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating4of{{k}}" value="4" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating4of{{k}}{{i}}" value="4" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating4of{{k}}" title="4">4</label>
+                          <label for="rating4of{{k}}{{i}}" title="4">4</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating5of{{k}}" value="5" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating5of{{k}}{{i}}" value="5" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating5of{{k}}" title="5">5</label>
+                          <label for="rating5of{{k}}{{i}}" title="5">5</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating6of{{k}}" value="6" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating6of{{k}}{{i}}" value="6" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating6of{{k}}" title="6">6</label>
+                          <label for="rating6of{{k}}{{i}}" title="6">6</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating7of{{k}}" value="7" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating7of{{k}}{{i}}" value="7" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating7of{{k}}" title="7">7</label>
+                          <label for="rating7of{{k}}{{i}}" title="7">7</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating8of{{k}}" value="8" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating8of{{k}}{{i}}" value="8" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating8of{{k}}" title="8">8</label>
+                          <label for="rating8of{{k}}{{i}}" title="8">8</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating9of{{k}}" value="9" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating9of{{k}}{{i}}" value="9" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating9of{{k}}" title="9">9</label>
+                          <label for="rating9of{{k}}{{i}}" title="9">9</label>
                         </div>
                         <div class="radio_box">
-                          <input type="radio" name="AnswerText{{k}}" id="rating10of{{k}}" value="10" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating10of{{k}}{{i}}" value="10" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="rating10of{{k}}" title="10">10</label>
+                          <label for="rating10of{{k}}{{i}}" title="10">10</label>
                         </div>
-                      </div>
-                    </div>
-                    <div *ngIf="que.AnswerTypeId==3">
-                      <div class="ans_section">
-                        <span *ngIf='Status.StatusId=="1"'>
-                          <b>Answer</b> - {{que.AnswerText}}</span>
-                        <span *ngIf='Status.StatusId!="1"'>
-                          <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
-                            <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
-                              required (change)="que.child.checkActive=true" />
-                            <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
-                          </div>
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -133,10 +120,10 @@
                       <span *ngIf='Status.StatusId=="1"'>
                         <b>Answer</b> - {{que.AnswerText}}</span>
                       <span *ngIf='Status.StatusId!="1"'>
-                        <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
-                          <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                        <div class="radio_box" *ngFor="let ans of que.answer; let j=index;  ">
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="role{{k}}{{i}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
                             required (change)="que.child.checkActive=true" />
-                          <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
+                          <label for="role{{k}}{{i}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
                         </div>
                       </span>
                     </div>
