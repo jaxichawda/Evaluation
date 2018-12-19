@@ -18,6 +18,9 @@ export class PerformanceReviewComponent implements OnInit {
   ans;
   Status;
   disabled;
+  Name;
+  UserId;
+  //PerformanceData;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
 
@@ -86,7 +89,9 @@ export class PerformanceReviewComponent implements OnInit {
         .then((data) => {
           debugger
           this.QuestionList = data['QuestionData'];
-          this.Status = data['EvaluationStatus'];
+          this.Status = data['EvaluationStatus']['StatusId'];
+          this.Name = data['EvaluationStatus']['Name'];
+          this.UserId = data['EvaluationStatus']['UserId'];
           //console.log(this.Status);
           //console.log(this.QuestionList);
           // for (var i = 0; i < this.QuestionList.length; i++) {
@@ -107,19 +112,26 @@ export class PerformanceReviewComponent implements OnInit {
   addData(evaluationForm) {
     debugger
     var count = 0;
+    var totalQues=0;
     for (var i = 0; i < this.QuestionList.length; i++) {
-      if (this.QuestionList[i].child.checkActive == true)
-        count++;
+      for (var j = 0; j < this.QuestionList[i].row.length; j++) {
+       totalQues++;
+        if (this.QuestionList[i].row[j].AnswerText != '')
+        {
+          count++;
+        }
+        //alert(count);
     }
+  }
     //alert(count);
     // if(count==this.QuestionList.length){
     //   this.disabled=false;
     // }
 
-    if (count == this.QuestionList.length) {
+    if (count == totalQues) {
       this.globals.isLoading = true;
 
-      this.PerformanceReviewService.insertPerformance({ 'PerformanceData': this.QuestionList })
+      this.PerformanceReviewService.insertPerformance(this.QuestionList)
         .then((data) => {
           this.globals.isLoading = false;
           swal({
@@ -149,7 +161,7 @@ export class PerformanceReviewComponent implements OnInit {
     debugger
     this.globals.isLoading = true;
     //console.log(this.QuestionList);
-    this.PerformanceReviewService.saveAsDraft({ 'PerformanceData': this.QuestionList.row })
+    this.PerformanceReviewService.saveAsDraft(this.QuestionList)
       .then((data) => {
         this.globals.isLoading = false;
         swal({
