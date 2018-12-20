@@ -41,6 +41,11 @@ class Question extends CI_Controller {
 		$data=$this->Question_model->getAllEvaluationType();
 		echo json_encode($data);
 	}
+	public function getAllEvaluatorType()
+	{
+		$data=$this->Question_model->getAllEvaluatorType();
+		echo json_encode($data);
+	}
 	public function getById($QuestionId=null)
 	{	
 		if(!empty($QuestionId)) {

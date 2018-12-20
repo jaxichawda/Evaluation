@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit {
   submitted;
   btn_disable;
   questiontypeList;
+  evaluatortypeList;
   evaluationtypeList;
   header;
   OptionList;
@@ -27,7 +28,7 @@ export class QuestionComponent implements OnInit {
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private QuestionService: QuestionService) { }
 
   ngOnInit() {
-    
+
     this.globals.isLoading = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
@@ -38,9 +39,9 @@ export class QuestionComponent implements OnInit {
       }
       $("#collapseExample3").addClass("in");
       $("#test_question").removeClass("collapsed");
-      $("#test_question").attr("aria-expanded","true");
+      $("#test_question").attr("aria-expanded", "true");
     }, 100);
-    
+
     CKEDITOR.replace('QuestionText', {
       height: '300',
       resize_enabled: 'false',
@@ -67,6 +68,13 @@ export class QuestionComponent implements OnInit {
     this.QuestionService.getAllEvaluationType()
       .then((data) => {
         this.evaluationtypeList = data;
+      },
+        (error) => {
+          //alert('error');
+        });
+    this.QuestionService.getAllEvaluatorType()
+      .then((data) => {
+        this.evaluatortypeList = data;
         this.globals.isLoading = false;
       },
         (error) => {
@@ -105,6 +113,7 @@ export class QuestionComponent implements OnInit {
       this.questionEntity.QuestionTypeId = '';
       this.questionEntity.AnswerTypeId = '';
       this.questionEntity.EvaluationTypeId = '';
+      this.questionEntity.EvaluatorTypeId = '';
       this.questionEntity.IsActive = '1';
       this.questionEntity.QuestionId = '';
       var item = { 'QueOption': '' };
