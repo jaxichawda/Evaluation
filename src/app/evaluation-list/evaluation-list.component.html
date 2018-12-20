@@ -62,16 +62,16 @@
                   <td *ngIf="evaluation.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
                   <td *ngIf="evaluation.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
                   <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
--->
+                  -->
                   <td class="text-center">
                     <div class="inline_delbtn tooltip_inline" title="View Details" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-primary btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
-                         <span class="fa fa-eye"></span>
+                        <span class="fa fa-eye"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="Re-Generate" data-toggle="tooltip" data-placement="bottom">
-                      <button class="btn btn-success btn-rounded btn-sm" routerLink="/evaluation/edit/{{evaluation.EvaluationId}}">
-                        <span class="fa fa-refresh"></span>
+                    <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
+                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/evaluation/edit/{{evaluation.EvaluationId}}">
+                        <span class="fa fa-pencil"></span>
                       </button>
                     </div>
                     <div *ngIf="evaluation.StatusId=='0'" class="inline_delbtn tooltip_inline" title="Revoke"
@@ -128,7 +128,8 @@
                 <td *ngIf="evaluators.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
                 <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
                 <td class="text-center">
-                  <button *ngIf="evaluators.StatusId=='0'" type="button" class="btn btn-info btn-rounded btn-sm" title="Revoke" data-toggle="tooltip" data-placement="bottom" (click)="revokeEvaluator(evaluators)">
+                  <button *ngIf="evaluators.StatusId=='0'" type="button" class="btn btn-info btn-rounded btn-sm" title="Revoke"
+                    data-toggle="tooltip" data-placement="bottom" (click)="revokeEvaluator(evaluators)">
                     <span class="fa fa-share"></span></button>
                 </td>
               </tr>
