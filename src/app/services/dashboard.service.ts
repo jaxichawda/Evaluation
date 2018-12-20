@@ -26,10 +26,10 @@ export class DashboardService {
     });
     return promise;
   }
-  insertQuestions(Id) {
+  insertQuestions(obj) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'Dashboard/insertQuestions/' + Id)
+      this.http.post(this.globals.baseAPIUrl + 'Dashboard/insertQuestions' , obj)
         .toPromise()
         .then(
           res => { // Success

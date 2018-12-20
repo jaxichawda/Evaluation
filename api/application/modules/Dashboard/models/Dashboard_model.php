@@ -15,14 +15,14 @@ class Dashboard_model extends CI_Model {
           return $res;
         }
     }
-    public function insertQuestions($Id=Null)
+    public function insertQuestions($post_data)
 	{
-	  if($Id)
+	  if($post_data)
 	  {  
-        $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId) SELECT ".$Id.",QuestionId FROM tblmstquestion");
+        $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId) SELECT ".$post_data['Id'].",QuestionId FROM tblmstquestion where EvaluationTypeId=".$post_data['TypeId']);
         
         if($result1) {
-            $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$Id);
+            $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$post_data['Id']);
             if($result){
                 return true; 
             }
