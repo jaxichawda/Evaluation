@@ -20,13 +20,15 @@ class Dashboard extends CI_Controller {
 			echo json_encode($data);
 		}
 	}
-	public function insertQuestions($Id=null)
+	public function insertQuestions()
 	{	
-		if(!empty($Id)) {
-			$data=[];
-			$data=$this->Dashboard_model->insertQuestions($Id);
+		$post_data= json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_data)
+		{
+			$data=$this->Dashboard_model->insertQuestions($post_data);
 			echo json_encode($data);
 		}
+		
 	}
 	public function reviewById($EmployeeEvaluatorId=null)
 	{	

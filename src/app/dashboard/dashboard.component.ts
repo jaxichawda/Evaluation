@@ -49,10 +49,11 @@ export class DashboardComponent implements OnInit {
         this.TomorrowsDate = new Date();
         this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);
   }
-  startEvaluation(Id) {
+  startEvaluation(Id,typeId) {
     debugger
     this.globals.isLoading = true;
-    this.DashboardService.insertQuestions(Id)
+    var obj = { 'Id': Id, 'TypeId': typeId };
+    this.DashboardService.insertQuestions(obj)
       .then((data) => {
         this.globals.isLoading = false;
         this.router.navigate(['/performance-review/' + Id]);
@@ -67,7 +68,7 @@ export class DashboardComponent implements OnInit {
     debugger
     this.DashboardService.reviewById(EmployeeEvaluatorId)
       .then((data) => {
-        this.router.navigate(['/performance-review/'+EmployeeEvaluatorId]);
+        this.router.navigate(['/evaluation/view/'+EmployeeEvaluatorId]);
       },
       (error) => {
         // this.globals.isLoading = false;

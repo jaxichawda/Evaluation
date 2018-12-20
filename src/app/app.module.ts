@@ -53,6 +53,7 @@ import { ChangePasswordService } from './services/change-password.service';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ForgotResetService } from './services/forgot-reset.service';
+import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.component';
 
 
 //import { AuthGuard } from './services/auth-guard.service';
@@ -81,7 +82,8 @@ import { ForgotResetService } from './services/forgot-reset.service';
     ChangePasswordComponent,
     EvaluationReportComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ViewEvaluationComponent
 
   ],
   imports: [
@@ -101,6 +103,7 @@ import { ForgotResetService } from './services/forgot-reset.service';
       { path: 'evaluation/edit/:id', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/list', component: EvaluationListComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/report/:id', component: EvaluationReportComponent, canActivate: [AuthGuard] },
+      { path: 'evaluation/view/:id', component: ViewEvaluationComponent, canActivate: [AuthGuard] },
 
       { path: 'department/add', component: DepartmentComponent, canActivate: [AuthGuard] },
       { path: 'department/edit/:id', component: DepartmentComponent, canActivate: [AuthGuard] },
