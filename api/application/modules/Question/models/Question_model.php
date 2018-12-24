@@ -19,6 +19,7 @@ class Question_model extends CI_Model {
 				$question_data=array(
 				"QuestionText"=>trim($question['QuestionText']),
 				"EvaluationTypeId"=>trim($question['EvaluationTypeId']),
+				"EvaluatorTypeId"=>trim($question['EvaluatorTypeId']),
 				"AnswerTypeId"=>trim($question['AnswerTypeId']),
 				"IsActive"=>$IsActive,
 				"CreatedBy" => trim($question['CreatedBy']),
@@ -112,6 +113,31 @@ class Question_model extends CI_Model {
 		}
 	}
 
+	public function getAllEvaluatorType() 
+	{
+		try{
+			$this->db->select('Value as EvaluatorTypeId, DisplayText as EvaluatorTypeName');
+			$this->db->where('IsActive',1);
+			$this->db->where('Key','EvaluatorType');
+			$this->db->order_by('EvaluatorTypeName','asc');
+			$result = $this->db->get('tblmstconfiguration');
+			$db_error = $this->db->error();
+					if (!empty($db_error) && !empty($db_error['code'])) { 
+						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+						return false; // unreachable return statement !!!
+					}
+			$res=array();
+			if($result->result())
+			{
+				$res=$result->result();
+			}
+			return $res;
+		}catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+
 	public function editQuestion($post_Question) 
 	{
 		try{
@@ -130,6 +156,7 @@ class Question_model extends CI_Model {
 				$question_data=array(
 				"QuestionText"=>trim($question['QuestionText']),
 				"EvaluationTypeId"=>trim($question['EvaluationTypeId']),
+				"EvaluatorTypeId"=>trim($question['EvaluatorTypeId']),
 				"AnswerTypeId"=>trim($question['AnswerTypeId']),
 				"IsActive"=>$IsActive,
 				"UpdatedBy" => trim($question['UpdatedBy']),
@@ -185,7 +212,7 @@ class Question_model extends CI_Model {
 	{
 	  if($QuestionId)
 	  {
-		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive');
+		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.EvaluatorTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive');
 		 $this->db->where('tmq.QuestionId',$QuestionId);
 		 $result=$this->db->get('tblmstquestion tmq');
 		 $question_data= array();
@@ -222,12 +249,14 @@ class Question_model extends CI_Model {
 	public function getAllQuestion()
 	{
 		try{
-			$this->db->select('tmq.QuestionId, COALESCE(tmet.EvaluationTypeName,"All (Common for all Evaluation)") as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
+			$this->db->select('tmq.QuestionId, COALESCE(tmet.EvaluationTypeName,"All (Common for all Evaluation)") as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmcc.DisplayText as EvaluatorType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
 			//$this->db->select('tmq.QuestionId, tmet.EvaluationTypeName as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
 			$this->db->from('tblmstquestion tmq');
 			$this->db->join('tblmstevaluationtype tmet', 'tmet.EvaluationTypeId=tmq.EvaluationTypeId', 'LEFT');
 			$this->db->join('tblmstconfiguration tmc', 'tmc.Value=tmq.AnswerTypeId', 'LEFT');
+			$this->db->join('tblmstconfiguration tmcc', 'tmcc.Value=tmq.EvaluatorTypeId', 'LEFT');
 			$this->db->where('tmc.Key','AnswerType');
+			$this->db->where('tmcc.Key','EvaluatorType');
 			$this->db->order_by('tmq.QuestionId');
 			$result = $this->db->get();
 			$db_error = $this->db->error();

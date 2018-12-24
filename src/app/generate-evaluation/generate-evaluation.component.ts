@@ -56,7 +56,7 @@ export class GenerateEvaluationComponent implements OnInit {
 
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.header = 'ReGenerate';
+      this.header = 'Edit';
       this.globals.isLoading = true;
       this.GenerateEvaluationService.getEvaluationById(id)
         .then((data) => {
@@ -133,10 +133,15 @@ export class GenerateEvaluationComponent implements OnInit {
     } else {
       this.DateValid = false;
     }
-    if (this.evaluationEntity.EvaluationDescription == "" || this.evaluationEntity.EvaluationDescription == null || this.evaluationEntity.EvaluationDescription == undefined) {
-      this.evaluationEntity.EvaluationDescription = null;
+    if (this.evaluationEntity.UserNote == "" || this.evaluationEntity.UserNote == null || this.evaluationEntity.UserNote == undefined) {
+      this.evaluationEntity.UserNote = null;
     } else {
-      this.evaluationEntity.EvaluationDescription = this.evaluationEntity.EvaluationDescription;
+      this.evaluationEntity.UserNote = this.evaluationEntity.UserNote;
+    }
+    if (this.evaluationEntity.EvaluatorNote == "" || this.evaluationEntity.EvaluatorNote == null || this.evaluationEntity.EvaluatorNote == undefined) {
+      this.evaluationEntity.EvaluatorNote = null;
+    } else {
+      this.evaluationEntity.EvaluatorNote = this.evaluationEntity.EvaluatorNote;
     }
     if (this.evaluationEntity.EvaluatorsId.length == 0 || this.evaluationEntity.EvaluatorsId == "" || this.evaluationEntity.EvaluatorsId == null || this.evaluationEntity.EvaluatorsId == undefined) {
       this.showError = true;
@@ -170,7 +175,7 @@ export class GenerateEvaluationComponent implements OnInit {
             swal({
               position: 'top-end',
               type: 'success',
-              title: 'Evaluation re-generated successfully!',
+              title: 'Evaluation updated successfully!',
               showConfirmButton: false,
               timer: 1500
             })

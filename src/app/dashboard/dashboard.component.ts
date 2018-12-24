@@ -58,10 +58,10 @@ export class DashboardComponent implements OnInit {
         this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);
         
   }
-  startEvaluation(Id,typeId) {
+  startEvaluation(Id,typeId,evaluatorType) {
     debugger
     this.globals.isLoading = true;
-    var obj = { 'Id': Id, 'TypeId': typeId };
+    var obj = { 'Id': Id, 'TypeId': typeId, 'EvaluatorType': evaluatorType};
     this.DashboardService.insertQuestions(obj)
       .then((data) => {
         this.globals.isLoading = false;

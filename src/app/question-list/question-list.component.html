@@ -45,6 +45,7 @@
                   <th>Question</th>
                   <th class="qt_width">Question Type</th>
                   <th class="et_width">Evaluation Type</th>
+                  <th class="et_width">Question For</th>
                   <th class="text-center active_width">Is Active?</th>
                   <th class="text-center action_width">Actions</th>
                 </tr>
@@ -55,6 +56,8 @@
                   <td><span [innerHTML]="question.QuestionText"></span></td>
                   <td>{{question.QuestionType}}</td>
                   <td>{{question.EvaluationType}}</td>
+                  <td>{{question.EvaluatorType}}</td>
+                  <!-- <td>Both</td> -->
                   <td class="text-center">
                     <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="question.IsActive==1 ? 'Active' : 'Deactive'">
                       <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(question,i)"

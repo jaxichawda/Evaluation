@@ -30,7 +30,7 @@ class GenerateEvaluation_model extends CI_Model
 	{
 	  if($evaluationId)
 	  {
-		$result=$this->db->query("SELECT e.EvaluationId,(SELECT COUNT(ee.EvaluatorId) FROM tblmstempevaluator ee WHERE ee.EvaluationId=e.EvaluationId and ee.EvaluatorId=e.UserId) as self,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,e.IsActive,
+		$result=$this->db->query("SELECT e.EvaluationId,(SELECT COUNT(ee.EvaluatorId) FROM tblmstempevaluator ee WHERE ee.EvaluationId=e.EvaluationId and ee.EvaluatorId=e.UserId) as self,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.UserNote,e.EvaluatorNote,e.IsActive,
 		GROUP_CONCAT(ee.EvaluatorId) evalutor FROM tblmstempevaluation as e INNER JOIN tblmstempevaluator as ee on find_in_set(ee.EvaluationId, e.EvaluationId) > 0  Where e.EvaluationId=".$evaluationId." GROUP BY e.EvaluationId;");
 		 $evaluation_data= array();
 		 $array = json_decode(json_encode($result->result()), True);
@@ -172,7 +172,7 @@ class GenerateEvaluation_model extends CI_Model
 			}	
 			}
 	public function getAllEvaluation() {
-		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.EvaluationDescription,et.EvaluationTypeName');
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,e.EvaluationId,e.UserId,e.EvaluationTypeId,e.EvaluationDate,e.UserNote,e.EvaluatorNote,et.EvaluationTypeName');
 		$this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
 		//$this->db->join('tblmstempevaluator ee','(ee.EvaluationId=e.EvaluationId) AND (ee.EvaluatorId=e.UserId)','left');
 		$this->db->join('tbluser u','u.UserId=e.UserId','left');
@@ -297,17 +297,23 @@ class GenerateEvaluation_model extends CI_Model
 			} else {
 				$IsActive = false;
 			}
-			if($post_generate['EvaluationDescription'] == null) {
-				$EvaluationDescription = 'Not mentioned!';
+			if($post_generate['UserNote'] == null) {
+				$UserNote = 'Not mentioned!';
 			} else {
-				$EvaluationDescription = trim($post_generate['EvaluationDescription']);
+				$UserNote = trim($post_generate['UserNote']);
+			}
+			if($post_generate['EvaluatorNote'] == null) {
+				$EvaluatorNote = 'Not mentioned!';
+			} else {
+				$EvaluatorNote = trim($post_generate['EvaluatorNote']);
 			}
 			$EvaluationDate = strtotime($post_generate['EvaluationDate']);
 				$generate_data = array(
 					'UserId' =>  trim($post_generate['UserId']),
 					'EvaluationTypeId' =>  trim($post_generate['EvaluationTypeId']),
 					'EvaluationDate' =>  date('Y-m-d H:i:s', $EvaluationDate),
-					'EvaluationDescription' =>  $EvaluationDescription,
+					'UserNote' =>  $UserNote,
+					'EvaluatorNote' =>  $EvaluatorNote,
 					'IsActive' =>  $IsActive,
 					'CreatedBy' => trim($post_generate['CreatedBy']),
 					'CreatedOn' => date('y-m-d H:i:s'),
@@ -365,17 +371,23 @@ class GenerateEvaluation_model extends CI_Model
 			} else {
 				$IsActive = false;
 			}
-			if($post_generate['EvaluationDescription'] == null) {
-				$EvaluationDescription = 'Not mentioned!';
+			if($post_generate['UserNote'] == null) {
+				$UserNote = 'Not mentioned!';
 			} else {
-				$EvaluationDescription = trim($post_generate['EvaluationDescription']);
+				$UserNote = trim($post_generate['UserNote']);
+			}
+			if($post_generate['EvaluatorNote'] == null) {
+				$EvaluatorNote = 'Not mentioned!';
+			} else {
+				$EvaluatorNote = trim($post_generate['EvaluatorNote']);
 			}
 			$EvaluationDate = strtotime($post_generate['EvaluationDate']);
 				$generate_data = array(
 					'UserId' =>  trim($post_generate['UserId']),
 					'EvaluationTypeId' =>  trim($post_generate['EvaluationTypeId']),
 					'EvaluationDate' =>  date('Y-m-d H:i:s', $EvaluationDate),
-					'EvaluationDescription' =>  $EvaluationDescription,
+					'UserNote' =>  $UserNote,
+					'EvaluatorNote' =>  $EvaluatorNote,
 					'IsActive' =>  $IsActive,
 					'UpdatedBy' => trim($post_generate['UpdatedBy']),
 					'UpdatedOn' => date('y-m-d H:i:s'),

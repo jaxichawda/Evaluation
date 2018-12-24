@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a routerLink="/dashboard"><i class="fa fa-home"></i></a></li>
           <li class="breadcrumb-item"><a routerLink="/question/list">Question</a></li>
-          <li class="breadcrumb-item active">Add</li>
+          <li class="breadcrumb-item active">{{ header }}</li>
         </ol>
         <div class="clearfix"></div>
       </div>
@@ -49,6 +49,22 @@
             </select>
             <span class="error_span" *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
               <span *ngIf="EvaluationTypeId.errors.required || (EvaluationTypeId.pristine && submitted)">Please select
+                Evaluation Type </span>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <div class="form-group">
+            <label><span class="required">*</span>Question For</label>
+            <select class='select-option' required class="form-control" #EvaluatorTypeId="ngModel" [(ngModel)]="questionEntity.EvaluatorTypeId"
+              name="EvaluatorTypeId" [ngClass]="{red_border: (EvaluatorTypeId.dirty && EvaluatorTypeId.invalid) || (EvaluatorTypeId.pristine && submitted)}">
+              <option value="" ngSelected='questionEntity.EvaluatorTypeId==""'>Select</option>
+              <ng-container *ngFor='let evaluatortype of evaluatortypeList'>
+                <option class='option' [value]="evaluatortype.EvaluatorTypeId" ngSelected="questionEntity.EvaluatorTypeId==evaluatortype.EvaluatorTypeId">{{evaluatortype.EvaluatorTypeName}}</option>
+              </ng-container>
+            </select>
+            <span class="error_span" *ngIf="(EvaluatorTypeId.dirty && EvaluatorTypeId.invalid) || (EvaluatorTypeId.pristine && submitted)">
+              <span *ngIf="EvaluatorTypeId.errors.required || (EvaluatorTypeId.pristine && submitted)">Please select
                 Evaluation Type </span>
             </span>
           </div>

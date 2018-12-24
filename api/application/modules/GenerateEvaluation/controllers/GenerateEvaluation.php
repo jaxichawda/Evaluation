@@ -120,6 +120,7 @@ class GenerateEvaluation extends CI_Controller {
             $config['charset'] = 'iso-8859-1';
             $config['newline']="\r\n";
             $config['wordwrap'] = 'TRUE';
+            $dashboardpath = BASE_URL.'/dashboard/';
 
             $this->db->select('et.EvaluationTypeName');
                 $this->db->where('et.EvaluationTypeId',$post_generate['EvaluationTypeId']);
@@ -145,10 +146,15 @@ class GenerateEvaluation extends CI_Controller {
                
                     $email = $row1->EmailAddress;
 
-                    if($post_generate['EvaluationDescription'] == null) {
-                        $EvaluationDescription = 'Not mentioned!';
+                    if($post_generate['UserNote'] == null) {
+                        $UserNote = 'Not mentioned!';
                     } else {
-                        $EvaluationDescription = $post_generate['EvaluationDescription'];
+                        $UserNote = $post_generate['UserNote'];
+                    }
+                    if($post_generate['EvaluatorNote'] == null) {
+                        $EvaluatorNote = 'Not mentioned!';
+                    } else {
+                        $EvaluatorNote = $post_generate['EvaluatorNote'];
                     }
 
                     if($id==$post_generate['UserId']){
@@ -163,7 +169,7 @@ class GenerateEvaluation extends CI_Controller {
                                 <tr>
                                     <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
 
-                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please give your below evaluation:</p>
+                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Congratulations! Please give feedback for below evaluation.</p>
 
                                     <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
                                         <tbody>
@@ -180,10 +186,27 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$UserNote.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <p style="color:#000; font-size: 14px; line-height:20px; padding: 0; margin:20px 0 0;">Use the button below to give evaluation:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:0; text-align:center; vertical-align:middle">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="border:0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto">
+                                        <tbody>
+                                            <tr>
+                                                <td style="background-color:#0061AF; background:#0061AF; border-radius:4px; border-width:0; clear:both; color:#ffffff; font-size:14px; line-height:13px; opacity:1; padding:10px; text-align:center; text-decoration:none; width:130px"><a href="'.$dashboardpath.'" style="color:#fff; text-decoration:none;">Give Evaluation</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center; vertical-align:middle">
+                                        <p style="color:#777; font-size: 12px; line-height:20px; padding: 0; margin: 0 0 10px; text-align: left;">If you&rsquo;re having trouble with the button above, copy and paste the URL below into your web browser. <a href="'.$dashboardpath.'" style="cursor:pointer;">click here</a></p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,7 +228,7 @@ class GenerateEvaluation extends CI_Controller {
                                 <tr>
                                     <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
 
-                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Congratulations! Please provide your feedback for below evaluation.</p>
+                                    <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please provide feedback for below employee.</p>
 
                                     <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
                                         <tbody>
@@ -227,10 +250,27 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluationDescription.'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluatorNote.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <p style="color:#000; font-size: 14px; line-height:20px; padding: 0; margin:20px 0 0;">Use the button below to give evaluation:</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:0; text-align:center; vertical-align:middle">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="border:0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto">
+                                        <tbody>
+                                            <tr>
+                                                <td style="background-color:#0061AF; background:#0061AF; border-radius:4px; border-width:0; clear:both; color:#ffffff; font-size:14px; line-height:13px; opacity:1; padding:10px; text-align:center; text-decoration:none; width:130px"><a href="'.$dashboardpath.'" style="color:#fff; text-decoration:none;">Give Evaluation</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center; vertical-align:middle">
+                                        <p style="color:#777; font-size: 12px; line-height:20px; padding: 0; margin: 0 0 10px; text-align: left;">If you&rsquo;re having trouble with the button above, copy and paste the URL below into your web browser. <a href="'.$dashboardpath.'" style="cursor:pointer;">click here</a></p>
                                     </td>
                                 </tr>
                                 <tr>
