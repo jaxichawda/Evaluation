@@ -217,7 +217,7 @@ class GenerateEvaluation extends CI_Controller {
                         ';
                     }
                     else{
-                        $subject = $firstname."'s Employee evaluation";
+                        $subject = $firstname.' '.$lastname."'s Employee evaluation";
                         $message = '
 
                         <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
