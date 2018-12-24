@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
 
         this.newTime = new Date();
         this.newTime.setMinutes(this.newTime.getMinutes() + 60);
-        console.log(this.newTime);
+        //console.log(this.newTime);
 
         this.TomorrowsDate = new Date();
         this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);

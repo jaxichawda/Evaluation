@@ -56,7 +56,8 @@ export class EvaluationReportComponent implements OnInit {
             for(var i=2; i<=column_length+1; i++){
               column_array.push(i);
             }
-          }  
+          } 
+          var employeeName= this.employeeData.EmployeeName;
           setTimeout(function () {
             var table = $('#dataTables-example').DataTable({
               // scrollY: '55vh',
@@ -76,7 +77,7 @@ export class EvaluationReportComponent implements OnInit {
               dom: 'lBfrtip',
               buttons: [{
                 extend: 'excel',
-                title: 'Evaluation Report of {{employeeData.EmployeeName}}',
+                title: 'Evaluation Report of ' + employeeName,
                   exportOptions: {
                     columns: column_array
                 }
