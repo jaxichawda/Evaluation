@@ -19,7 +19,7 @@ class Dashboard_model extends CI_Model {
 	{
 	  if($post_data)
 	  {  
-        $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId) SELECT ".$post_data['Id'].",QuestionId FROM tblmstquestion where EvaluationTypeId=".$post_data['TypeId']." && EvaluatorTypeId!=".$post_data['EvaluatorType']." && IsActive=1;");
+        $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId, CreatedBy, UpdatedBy) SELECT ".$post_data['Id'].",QuestionId,".$post_data['UserId'].",".$post_data['UserId']." FROM tblmstquestion where EvaluationTypeId=".$post_data['TypeId']." && EvaluatorTypeId!=".$post_data['EvaluatorType']." && IsActive=1;");
         
         if($result1) {
             $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$post_data['Id']);

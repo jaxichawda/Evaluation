@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
   startEvaluation(Id,typeId,evaluatorType) {
     debugger
     this.globals.isLoading = true;
-    var obj = { 'Id': Id, 'TypeId': typeId, 'EvaluatorType': evaluatorType};
+    var obj = { 'Id': Id, 'TypeId': typeId, 'EvaluatorType': evaluatorType, 'UserId': this.globals.authData.UserId};
     this.DashboardService.insertQuestions(obj)
       .then((data) => {
         this.globals.isLoading = false;
