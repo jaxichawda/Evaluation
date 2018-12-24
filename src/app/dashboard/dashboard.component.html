@@ -51,11 +51,12 @@
                   <p *ngIf="evaluation.UserId==globals.authData.UserId"><strong>Evaluation for</strong>Self</p>
                   <p><strong>Scheduled Evaluation Date</strong>{{evaluation.EvaluationDate}}</p>
                   <p class="last_day_p" *ngIf = "(evaluation.StatusId==0 || evaluation.StatusId==2) && ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') == (TomorrowsDate | date : 'yyyy/MM/dd'))"><strong>Tomorrow is a last day to give this evaluation</strong></p>
-                  <p class="last_day_p" *ngIf = "(evaluation.StatusId==0 || evaluation.StatusId==2) && ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') == (TodaysDate | date : 'yyyy/MM/dd'))"><strong>Today is a last day to give this evaluation</strong></p>
+                  <p class="last_day_p" *ngIf = "(evaluation.StatusId==0 || evaluation.StatusId==2) && ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') == (TodaysDate | date : 'yyyy/MM/dd')) && ((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') > (newTime | date : 'yyyy/MM/dd HH:mm'))"><strong>Today is a last day to give this evaluation</strong></p>
+                  <p class="last_day_p" *ngIf = "(evaluation.StatusId==0 || evaluation.StatusId==2) && ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd')) || ((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm'))"><strong>You can not give this evaluation now</strong></p>
                 </div>
-                <button *ngIf="evaluation.StatusId==0" (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId)" class="next_btn">Start</button>
-                <button *ngIf="evaluation.StatusId==1" (click)="reviewById(evaluation.EmployeeEvaluatorId)" class="back_btn">View</button>
-                <button *ngIf="evaluation.StatusId==2" routerLink="/performance-review/{{evaluation.EmployeeEvaluatorId}}" class="next_btn">Continue</button>
+                <button *ngIf="evaluation.StatusId==0" (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId)" [disabled]="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm')) || ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))" class="btn next_btn">Start</button>
+                <button *ngIf="evaluation.StatusId==1" (click)="reviewById(evaluation.EmployeeEvaluatorId)" class="btn back_btn">View</button>
+                <button *ngIf="evaluation.StatusId==2" routerLink="/performance-review/{{evaluation.EmployeeEvaluatorId}}" [disabled]="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm')) || ((evaluation.EvaluationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))" class="btn next_btn">Continue</button>
                 <span class="last_day_p" *ngIf="evaluation.StatusId==3">Revoked</span>
               </div>
             </div>

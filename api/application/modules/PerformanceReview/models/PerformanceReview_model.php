@@ -1,14 +1,21 @@
 <?php
 
 class PerformanceReview_model extends CI_Model {
-    public function getAllQuestionData($Id=Null)
+    public function getAllQuestionData($post_data)
 	{
 		try{
-            if($Id)
+            if($post_data)
 	        { 
+            $this->db->select('ee.EmployeeEvaluatorId');
+            $this->db->where('ee.EmployeeEvaluatorId',$post_data['Id']);
+            $this->db->where('ee.EvaluatorId',$post_data['UserId']);
+            $getUser=$this->db->get('tblmstempevaluator ee');
+            if ($getUser->num_rows() == 1) 
+				{
+
             $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive');
             $this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
-            $this->db->where('ea.EmployeeEvaluatorId',$Id);
+            $this->db->where('ea.EmployeeEvaluatorId',$post_data['Id']);
             $this->db->where('q.IsActive',1);
             $query=$this->db->get('tblevaluationanswer ea');
             
@@ -34,24 +41,28 @@ class PerformanceReview_model extends CI_Model {
                     }
                     return $res2;
             }
-            }
             else
             {
                 return false;
             }
+        }
+        else{
+        return 'error';
+        }
+    }
 		}catch(Exception $e){
 			trigger_error($e->getMessage(), E_USER_ERROR);
 			return false;
 		}	
     }
-    public function getEvaluationStatus($Id=Null)
+    public function getEvaluationStatus($post_data)
 	{
-	  if($Id)
+	  if($post_data)
 	  {
         $this->db->select('ee.StatusId,e.UserId,CONCAT(u.FirstName," ",u.LastName) as Name');
         $this->db->join('tblmstempevaluation e','e.EvaluationId=ee.EvaluationId','left');
         $this->db->join('tbluser u','u.UserId=e.UserId','left');
-            $this->db->where('ee.EmployeeEvaluatorId',$Id);
+            $this->db->where('ee.EmployeeEvaluatorId',$post_data['Id']);
             $result=$this->db->get('tblmstempevaluator ee');
 		
           $res = array();
