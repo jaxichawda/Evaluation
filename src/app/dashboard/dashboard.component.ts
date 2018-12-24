@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   evaluationList;
   TodaysDate;
   TomorrowsDate;
+  newTime;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private DashboardService: DashboardService) { }
 
@@ -33,8 +34,10 @@ export class DashboardComponent implements OnInit {
     }, 1000);
     this.globals.isLoading = true;
     this.evaluationList = [];
+    debugger
     this.DashboardService.getEvaluationsById(this.globals.authData.UserId)
       .then((data) => {
+        debugger
         if(data){
           this.evaluationList = data;
         } 
@@ -46,8 +49,14 @@ export class DashboardComponent implements OnInit {
           this.router.navigate(['/pagenotfound']);
         });
         this.TodaysDate = new Date();
+
+        this.newTime = new Date();
+        this.newTime.setMinutes(this.newTime.getMinutes() + 60);
+        console.log(this.newTime);
+
         this.TomorrowsDate = new Date();
         this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);
+        
   }
   startEvaluation(Id,typeId,evaluatorType) {
     debugger

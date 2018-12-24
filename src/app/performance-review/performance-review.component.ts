@@ -84,14 +84,16 @@ export class PerformanceReviewComponent implements OnInit {
     }, 1000);
     //this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
+    var obj = { 'Id': id, 'UserId': this.globals.authData.UserId };
     if (id) {
-      this.PerformanceReviewService.getAllQuestionData(id)
+      this.PerformanceReviewService.getAllQuestionData(obj)
         .then((data) => {
           debugger
           this.QuestionList = data['QuestionData'];
           this.Status = data['EvaluationStatus']['StatusId'];
           this.Name = data['EvaluationStatus']['Name'];
           this.UserId = data['EvaluationStatus']['UserId'];
+          
           //console.log(this.Status);
           //console.log(this.QuestionList);
           // for (var i = 0; i < this.QuestionList.length; i++) {
@@ -102,6 +104,9 @@ export class PerformanceReviewComponent implements OnInit {
           //   }
           // }
           this.globals.isLoading = false;
+        if(this.QuestionList=='error'){
+          this.router.navigate(['/dashboard']);
+        }
         },
           (error) => {
             // this.globals.isLoading = false;
