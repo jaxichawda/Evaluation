@@ -35,12 +35,6 @@ export class PerformanceReviewComponent implements OnInit {
 
 	$('.right_content_block').addClass('performance_block');
 
-	$('.write_review :radio').change(function() {
-		console.log('New star rating: ' + this.value);
-	});
-	$('.clear_rating').click(function(){
-		$('.write_review input[type="radio"]').prop( "checked", false );	
-	});
 	
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
