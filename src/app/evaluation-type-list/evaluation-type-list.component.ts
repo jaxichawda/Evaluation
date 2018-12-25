@@ -100,7 +100,7 @@ export class EvaluationTypeListComponent implements OnInit {
       changeEntity.IsActive = 1;
     }
     this.globals.isLoading = true;
-    changeEntity.UpdatedBy = 1;
+    changeEntity.UpdatedBy = this.globals.authData.UserId;
 
     this.EvaluationTypeService.isActiveChange(changeEntity)
       .then((data) => {

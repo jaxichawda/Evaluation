@@ -101,7 +101,7 @@ export class QuestionListComponent implements OnInit {
       changeEntity.IsActive = 1;
     }
     this.globals.isLoading = true;
-    changeEntity.UpdatedBy = 1;
+    changeEntity.UpdatedBy = this.globals.authData.UserId;
 
     this.QuestionService.isActiveChange(changeEntity)
       .then((data) => {

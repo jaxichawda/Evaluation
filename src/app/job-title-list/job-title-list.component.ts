@@ -100,7 +100,7 @@ export class JobTitleListComponent implements OnInit {
       changeEntity.IsActive = 1;
     }
     this.globals.isLoading = true;
-    changeEntity.UpdatedBy = 1;
+    changeEntity.UpdatedBy = this.globals.authData.UserId;
 
     this.JobTitleService.isActiveChange(changeEntity)
       .then((data) => {
