@@ -97,6 +97,39 @@ class GenerateEvaluation_model extends CI_Model
 		}
 	}
 
+	public function statusChange($post_data) {
+		try{
+			if($post_data) {
+				if(trim($post_data['StatusId'])==1){
+					$StatusId = 1;
+				} else {
+					$StatusId = 2;
+				}
+				$data = array(
+					'StatusId' => $StatusId,
+					'UpdatedOn' => date('y-m-d H:i:s'),
+				);			
+				$this->db->where('EmployeeEvaluatorId',trim($post_data['EmployeeEvaluatorId']));
+				$res = $this->db->update('tblmstempevaluator',$data);
+				$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}	
+		}catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}
+	}
+
 	public function getEmployeeData($evaluationId=Null) {
 		if($evaluationId) {
 			$this->db->select('u.UserId, CONCAT(u.FirstName," ",u.LastName) as EmployeeName');

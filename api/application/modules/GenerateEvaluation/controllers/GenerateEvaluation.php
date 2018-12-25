@@ -39,6 +39,15 @@ class GenerateEvaluation extends CI_Controller {
 			echo json_encode($data);
 		}
     }
+    public function statusChange() {
+		$post_data = json_decode(trim(file_get_contents('php://input')), true);	
+		if ($post_data) {
+			$result = $this->GenerateEvaluation_model->statusChange($post_data);
+			if($result) {
+				echo json_encode('success');	
+			}						
+		}		
+	}
     public function getEvaluationReport($evaluationId=null)
 	{	
 		if(!empty($evaluationId)) {
