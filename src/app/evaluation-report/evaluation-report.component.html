@@ -52,7 +52,9 @@
                 <tr *ngFor="let evaluation of evaluationList; let i = index">
                   <td class="text-center">{{i+1}}</td>
                   <td><span [innerHTML]="evaluation.QuestionText"></span></td>
-                  <td *ngFor="let ans of evaluation.child;">{{ans.AnswerText}}</td>
+                  <td *ngFor="let ans of evaluation.child;">
+                    <div>{{ans.AnswerText}}</div>
+                  </td>
                 </tr>
                 <tr class="text-center" *ngIf="evaluationList.length <= 0">
                   <td colspan="4">There is no record found.</td>
