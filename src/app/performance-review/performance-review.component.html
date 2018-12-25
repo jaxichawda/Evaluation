@@ -53,113 +53,85 @@
                         name="AnswerText{{k}}{{i}}" maxlength="500" [disabled]='Status=="1"' required></textarea>
                     </div>
                   </div>
-                  <!-- <div *ngIf="que.AnswerTypeId==2">
-                    <div class="ans_section"> <span *ngIf='Status.StatusId=="1"'> <b>Answer</b> - {{que.AnswerText}}</span>
-                      <div *ngIf='Status.StatusId!="1"' class="col-md-4 col-sm-4">
-                        <input type="text" class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText" name="AnswerText{{k}}" [disabled]='Status.StatusId=="1"'
-                        required pattern="^[0-9]*$" maxlength="6" (change)="checkTextbox(i,que.child.length,que)" />
-                        <span class="error_span" *ngIf="AnswerText.errors && AnswerText.errors.pattern"> Please enter numeric value </span> </div>
-                    </div>
-                  </div>
-                  <div *ngIf="que.AnswerTypeId==3">
-                    <div class="ans_section"> <span *ngIf='Status.StatusId=="1"'> <b>Answer</b> - {{que.AnswerText}}</span> <span *ngIf='Status.StatusId!="1"'>
-                      <div class="radio_box" *ngFor="let ans of que.child; let j=index; let last=last;">
-                        <input type="radio" name="AnswerText{{k}}" id="role{{k}}{{j}}" value="{{ans.OptionValue}}" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
-                          required (change)="que.child.checkActive=true" />
-                        <label for="role{{k}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
-                      </div>
-                      </span> </div>
-                    </div>
-                  </div> -->
                   <div *ngIf="que.AnswerTypeId==2">
                     <div class="ans_section">
                       <span *ngIf='Status=="1"'>
                         <b>Answer</b> - {{que.AnswerText}}</span>
                       <div *ngIf='Status!="1"' class="col-md-12 col-sm-12">
-
-                        <div class="radio_box" *ngFor="let scale of [1,2,3,4,5]">
-                          <input type="radio" name="AnswerText{{k}}{{i}}" id="rating{{scale}}of{{k}}{{i}}" value="{{scale}}"
-                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
-
-
-                          <div class="write_review">
-
-                            <div class="rating">
-                              <label>
-                                <input type="radio" name="stars" value="1" />
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                              </label>
-                              <label>
-                                <input type="radio" name="stars" value="2" />
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                              </label>
-                              <label>
-                                <input type="radio" name="stars" value="3" />
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                              </label>
-                              <label>
-                                <input type="radio" name="stars" value="4" />
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                              </label>
-                              <label>
-                                <input type="radio" name="stars" value="5" />
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                                <span class="icon"><i class="fa fa-star"></i></span>
-                              </label>
-
-                            </div><span class="clear_rating">Clear</span>
+                        <div class="write_review">
+                          <div class="rating">
+                            <label>
+                              <input type="radio" name="AnswerText{{k}}{{i}}" id="rating1of{{k}}{{i}}" value="1"
+                                #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="AnswerText{{k}}{{i}}" id="rating2of{{k}}{{i}}" value="2"
+                                #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="AnswerText{{k}}{{i}}" id="rating3of{{k}}{{i}}" value="3"
+                                #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="AnswerText{{k}}{{i}}" id="rating4of{{k}}{{i}}" value="4"
+                                #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                            </label>
+                            <label>
+                              <input type="radio" name="AnswerText{{k}}{{i}}" id="rating5of{{k}}{{i}}" value="5"
+                                #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                              <span class="icon"><i class="fa fa-star"></i></span>
+                            </label>
                           </div>
                           <div class="form-group">
                             <label><span>*</span>Comment</label>
-                            <input type="text" class="form-control" />
-                          </div>
-
-
-
-                          <div class="radio_box" *ngFor="let scale of [1,2,3,4,5,6,7,8,9,10]">
-                            <input type="radio" name="AnswerText{{k}}{{i}}" id="rating{{scale}}of{{k}}{{i}}" value="{{scale}}"
-                              #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
-                            <label for="rating{{scale}}of{{k}}{{i}}" title="{{scale}}">{{scale}}</label>
+                            <textarea *ngIf='Status!="1"' class="form-control" #Comments="ngModel" [(ngModel)]="que.Comments"
+                              name="Comments{{k}}{{i}}" maxlength="500" [disabled]='Status=="1"' required></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div *ngIf="que.AnswerTypeId==3">
-                      <div class="ans_section">
-                        <span *ngIf='Status=="1"'>
-                          <b>Answer</b> - {{que.AnswerText}}</span>
-                        <span *ngIf='Status!="1"'>
-                          <div class="radio_box" *ngFor="let ans of que.answer; let j=index;  ">
-                            <input type="radio" name="AnswerText{{k}}{{i}}" id="role{{k}}{{i}}{{j}}" value="{{ans.OptionValue}}"
-                              #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
-                            <label for="role{{k}}{{i}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
-                          </div>
-                        </span>
-                      </div>
+                  </div>
+                  <div *ngIf="que.AnswerTypeId==3">
+                    <div class="ans_section">
+                      <span *ngIf='Status=="1"'>
+                        <b>Answer</b> - {{que.AnswerText}}</span>
+                      <span *ngIf='Status!="1"'>
+                        <div class="radio_box" *ngFor="let ans of que.answer; let j=index;  ">
+                          <input type="radio" name="AnswerText{{k}}{{i}}" id="role{{k}}{{i}}{{j}}" value="{{ans.OptionValue}}"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                          <label for="role{{k}}{{i}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
+                        </div>
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
-                <div class="form-btn last_btn_class text-center">
-                  <div *ngIf="last">
-                    <button *ngIf='Status!="1"' type="submit" class="next_btn margin_bottom">
-                      <span>Submit</span>
-                    </button>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
               </div>
+              <div class="clearfix"></div>
+              <div class="form-btn last_btn_class text-center">
+                <div *ngIf="last">
+                  <button *ngIf='Status!="1"' type="submit" class="next_btn margin_bottom">
+                    <span>Submit</span>
+                  </button>
+                </div>
+              </div>
+              <div class="clearfix"></div>
             </div>
           </div>
+        </div>
       </form>
     </div>
   </div>
