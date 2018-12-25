@@ -100,7 +100,7 @@ table .activeyes_box input[type="checkbox"]:checked + label:after{left :62%;}
 .rate_stars > label {float: right; margin-bottom:0;}
 .rate_stars > label:before { display: inline-block;  font-size:20px; padding:5px; margin: 0; cursor: pointer; font-family: FontAwesome; content: "\f005 ";}
 .rate_stars .half:before { content: "\f089 "; position: absolute; padding-right: 0;}
-.rate_stars input:checked ~ label,.rate_stars label:hover, .rate_stars label:hover ~ label { color: #73B100;}
+.rate_stars input:checked ~ label,.rate_stars label:hover, .rate_stars label:hover ~ label { color: #a6ce39;}
 .rate_stars input:checked + label:hover, .rate_stars input:checked ~ label:hover,.rate_stars input:checked ~ label:hover ~ label,.rate_stars label:hover ~ input:checked ~ label { color: #A6E72D;} 
 /*Rating Stars*/
 /*------------Form Fields------------------*/
@@ -220,7 +220,7 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .dt-buttons .buttons-print::before,.dt-buttons .buttons-excel::before{color:#191919!important; }
 .box_qa{height: auto; border: 1px solid #999; background: #fff;; display: block; padding: 15px; margin: 0 0 30px;}
 .box_qa .que_section .que_title{margin: 0 0 10px; display: block; color: #a6ce39;}
-.box_qa .que_section .que_name{ height: auto; display: block; overflow-y: auto; margin-bottom: 15px;}
+.box_qa .que_section .que_name{ height: auto; display: block; overflow-y: auto; margin-bottom: 10px;}
 .margin_bottom{margin-bottom: 30px;}
 .owl-carousel .owl-item .owl-item{width:100%;}
 .owl-carousel .owl-nav div.owl-prev{ background:url(../images/prev_small.png) left top no-repeat; width:32px; height:32px; display:inline-block; position:absolute; left:15px; bottom:35px; background-size:100%;} 
