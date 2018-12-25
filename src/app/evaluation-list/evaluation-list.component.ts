@@ -171,6 +171,34 @@ export class EvaluationListComponent implements OnInit {
 
     })
   }
+  statusChange(changeEntity, i) {
+    if (this.EvaluatorList[i].StatusId == 1) {
+      this.EvaluatorList[i].StatusId = 2;
+      changeEntity.StatusId = 2;
+    } else {
+      this.EvaluatorList[i].StatusId = 1;
+      changeEntity.StatusId = 1;
+    }
+    this.globals.isLoading = true;
+
+    this.GenerateEvaluationService.statusChange(changeEntity)
+      .then((data) => {
+        this.globals.isLoading = false;	
+        swal({
+          position: 'top-end',
+          type: 'success',
+          title: 'Status updated Successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      },
+        (error) => {
+          this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+  }
+
   showEvaluators(evaluation) {
     var obj = { 'UserId': evaluation.UserId, 'EvaluationId': evaluation.EvaluationId };
     this.globals.isLoading = true;
