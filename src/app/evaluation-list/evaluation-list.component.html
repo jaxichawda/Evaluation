@@ -130,7 +130,7 @@
                 <td>{{evaluators.JobTitleName}}</td>
                 <td *ngIf="evaluators.StatusId=='1'">
                   <span class="submit_status">{{status.submitted}}</span>
-                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Submitted' : 'In Progress'">
+                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to Progress' : 'Change to Submit'">
                     <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)" [checked]="evaluators.StatusId==1" value="Yes">
                     <label for="status{{i}}"></label>
                   </div>
@@ -138,7 +138,7 @@
                 <td *ngIf="evaluators.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
                 <td *ngIf="evaluators.StatusId=='2'">
                   <span class="inprogress_status">{{status.inprogress}}</span>
-                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Submitted' : 'In Progress'">
+                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to Progress' : 'Change to Submit'">
                     <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)" [checked]="evaluators.StatusId==1" value="Yes">
                     <label for="status{{i}}"></label>
                   </div>

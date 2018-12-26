@@ -170,6 +170,7 @@ class GenerateEvaluation_model extends CI_Model
 				}
 				$data = array(
 					'StatusId' => $StatusId,
+					'UpdatedBy' => $post_data['UpdatedBy'],
 					'UpdatedOn' => date('y-m-d H:i:s'),
 				);			
 				$this->db->where('EmployeeEvaluatorId',trim($post_data['EmployeeEvaluatorId']));
