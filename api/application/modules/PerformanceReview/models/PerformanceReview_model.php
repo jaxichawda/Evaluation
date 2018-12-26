@@ -13,7 +13,20 @@ class PerformanceReview_model extends CI_Model {
             if ($getUser->num_rows() == 1) 
 				{
 
-            $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,ea.Comments,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive');
+            $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,ea.Comments,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive,
+                (SELECT ROUND(AVG(tea.AnswerText),1) as EvaluatorAvg FROM tblevaluationanswer tea 
+                LEFT JOIN tblmstquestion tmq
+                ON tmq.QuestionId = tea.QuestionId
+                WHERE tmq.AnswerTypeId=2 && 
+                tea.QuestionId=q.QuestionId && 
+                tea.EmployeeEvaluatorId!=
+                    (SELECT tmea.UserId 
+                    FROM tblmstempevaluator tmee
+                    LEFT JOIN tblmstempevaluation tmea
+                    ON tmea.EvaluationId=tmee.EvaluationId
+                    WHERE tmee.EmployeeEvaluatorId='.$post_data['Id'].')
+                )
+            as EvaluatorAvg');
             $this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
             $this->db->where('ea.EmployeeEvaluatorId',$post_data['Id']);
             $this->db->where('q.IsActive',1);
