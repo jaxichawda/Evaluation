@@ -42,10 +42,13 @@
             <table class="table table-bordered" id="dataTables-example">
               <thead>
                 <tr>
-                  <th style="width:1%;" class="text-center">#</th>
-                  <th style="width:5%;">Question</th>
-                  <th *ngFor="let emp of employeelist;" style="width:4%;">
+                  <th class="text-center">#</th>
+                  <th>Question</th>
+                  <th *ngFor="let emp of employeelist;">
                     {{emp.name}}
+                  </th>
+                  <th>
+                    Average
                   </th>
                 </tr>
               </thead>
@@ -56,6 +59,13 @@
                   <td *ngFor="let ans of evaluation.child;">
                     <div>{{ans.AnswerText}}</div>
                   </td>
+                  <td *ngFor="let ans of evaluation.child;">
+                    <div>{{ans.EvaluatorAvg}}</div>
+                  </td>
+                  <!-- <div *ngFor="let ans of evaluation.child;">
+                    <td>{{ans.AnswerText}}</td>
+                    <td>{{ans.EvaluatorAvg}}</td>
+                  </div> -->
                 </tr>
                 <tr class="text-center" *ngIf="evaluationList.length <= 0">
                   <td colspan="4">There is no record found.</td>

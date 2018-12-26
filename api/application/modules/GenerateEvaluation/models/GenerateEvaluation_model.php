@@ -101,7 +101,7 @@ class GenerateEvaluation_model extends CI_Model
 
 	public function getEvaluationReport($evaluationId=Null) {
 		if($evaluationId) {
-			$this->db->select('ea.QuestionId,q.QuestionText');
+			$this->db->select('ea.QuestionId,q.QuestionText,q.AnswerTypeId');
 			$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');
 			$this->db->join('tblmstempevaluation ee','ee.EvaluationId=a.EvaluationId','left');
 			$this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
@@ -113,7 +113,18 @@ class GenerateEvaluation_model extends CI_Model
 			$res = array();	
 			$result = json_decode(json_encode($result->result()), True);
 			foreach($result as $row) {
-				$this->db->select('ea.EmployeeEvaluatorId,ea.QuestionId,ea.AnswerText');
+				$this->db->select('ea.EmployeeEvaluatorId,ea.QuestionId,ea.AnswerText,
+				(SELECT ROUND(AVG(tea.AnswerText),1) as EvaluatorAvg FROM tblevaluationanswer tea 
+                LEFT JOIN tblmstquestion tmq
+                ON tmq.QuestionId = tea.QuestionId
+                WHERE tmq.AnswerTypeId=2 && 
+                tea.QuestionId=ea.QuestionId && 
+                tea.EmployeeEvaluatorId!=
+                    (SELECT tmea.UserId 
+                    FROM tblmstempevaluation tmea
+                    WHERE tmea.EvaluationId='.$evaluationId.')
+                )
+            as EvaluatorAvg');
 				$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');
 				$this->db->join('tblmstempevaluation ee','ee.EvaluationId=a.EvaluationId','left');
 				$this->db->order_by('ea.EmployeeEvaluatorId','asc');
