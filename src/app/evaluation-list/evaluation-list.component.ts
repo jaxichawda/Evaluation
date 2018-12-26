@@ -181,6 +181,8 @@ export class EvaluationListComponent implements OnInit {
     }
     this.globals.isLoading = true;
 
+    changeEntity.UpdatedBy = this.globals.authData.UserId;
+
     this.GenerateEvaluationService.statusChange(changeEntity)
       .then((data) => {
         this.globals.isLoading = false;	

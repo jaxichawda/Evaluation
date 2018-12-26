@@ -18,6 +18,7 @@ h1{text-transform:capitalize!important;font-size: 28px;line-height: 35px;font-we
 .mt-5{margin-top: 5px;}
 .container {width: 100%;max-width: 100%;padding: 0 30px;}
 .breadcrumb{background-color:transparent;margin-bottom:0px;}
+.tooltip { z-index: 1151 !important; }
 /* ========== Do Not Touch In Css End ========== */
 
 /*--------------Header and Navigation--------------------*/
@@ -230,6 +231,8 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .box_qa .rating_section .ans_section{text-align: center;}
 .box_qa .rating_section .ans_section span{display: block;}
 .box_qa .rating_section .ans_section strong{font-size: 20px;}
+
+
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/
