@@ -17,6 +17,7 @@ import { GenerateEvaluationComponent } from './generate-evaluation/generate-eval
 import { GenerateEvaluationService } from './services/generate-evaluation.service';
 import { EvaluationListComponent } from './evaluation-list/evaluation-list.component';
 import { EvaluationReportComponent } from './evaluation-report/evaluation-report.component';
+import { EmployeeReportComponent } from './employee-report/employee-report.component';
 
 
 
@@ -56,6 +57,7 @@ import { ForgotResetService } from './services/forgot-reset.service';
 import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.component';
 
 
+
 //import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
@@ -83,7 +85,8 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
     EvaluationReportComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ViewEvaluationComponent
+    ViewEvaluationComponent,
+    EmployeeReportComponent
 
   ],
   imports: [
@@ -103,6 +106,7 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
       { path: 'evaluation/edit/:id', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/list', component: EvaluationListComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/report/:id', component: EvaluationReportComponent, canActivate: [AuthGuard] },
+      { path: 'employee/report/:id', component: EmployeeReportComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/view/:id', component: ViewEvaluationComponent, canActivate: [AuthGuard] },
 
       { path: 'department/add', component: DepartmentComponent, canActivate: [AuthGuard] },
