@@ -33,9 +33,9 @@ export class PerformanceReviewComponent implements OnInit {
     this.globals.isLoading = true;
 
 
-	$('.right_content_block').addClass('performance_block');
+    $('.right_content_block').addClass('performance_block');
 
-	
+
     // setTimeout(function () {
     //   if ($(".bg_white_block").hasClass("ps--active-y")) {
     //     $('footer').removeClass('footer_fixed');
@@ -46,41 +46,41 @@ export class PerformanceReviewComponent implements OnInit {
     // }, 1000);
     setTimeout(function () {
       $('.owl-carousel-review').owlCarousel({
-        loop:false,
+        loop: false,
         autoPlay: false,
-        nav:true,
-        dots: false,
-		  autoHeight: true,
+        nav: true,
+        dots: true,
+        autoHeight: true,
         margin: 15,
-        stopOnHover : true,
-        responsiveClass:true,
-        responsive:{
-            0:{
-                items:1
-            },
-            300:{
-                items:1
-            },
-            479:{
-                items:1
-            },
-            600:{
-                items:1
-            },
-            768:{
-                items:1
-            },
-            979:{
-                items:1
-            },
-            1024:{
-                items:1
-            },
-            1199:{
-                items:1
-            },
-		}
-    })
+        stopOnHover: true,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          300: {
+            items: 1
+          },
+          479: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          768: {
+            items: 1
+          },
+          979: {
+            items: 1
+          },
+          1024: {
+            items: 1
+          },
+          1199: {
+            items: 1
+          },
+        }
+      })
 
     }, 1000);
     //this.globals.isLoading = true;
@@ -94,7 +94,7 @@ export class PerformanceReviewComponent implements OnInit {
           this.Status = data['EvaluationStatus']['StatusId'];
           this.Name = data['EvaluationStatus']['Name'];
           this.UserId = data['EvaluationStatus']['UserId'];
-          
+
           //console.log(this.Status);
           //console.log(this.QuestionList);
           // for (var i = 0; i < this.QuestionList.length; i++) {
@@ -105,9 +105,9 @@ export class PerformanceReviewComponent implements OnInit {
           //   }
           // }
           this.globals.isLoading = false;
-        if(this.QuestionList=='error'){
-          this.router.navigate(['/dashboard']);
-        }
+          if (this.QuestionList == 'error') {
+            this.router.navigate(['/dashboard']);
+          }
         },
           (error) => {
             // this.globals.isLoading = false;
@@ -118,19 +118,18 @@ export class PerformanceReviewComponent implements OnInit {
   addData(evaluationForm) {
     debugger
     var count = 0;
-    var totalQues=0;
+    var totalQues = 0;
     for (var i = 0; i < this.QuestionList.length; i++) {
       for (var j = 0; j < this.QuestionList[i].row.length; j++) {
-       totalQues++;
-        if ((this.QuestionList[i].row[j].AnswerText == '') || (this.QuestionList[i].row[j].AnswerText == null) || (this.QuestionList[i].row[j].AnswerText == undefined))
-        {
+        totalQues++;
+        if ((this.QuestionList[i].row[j].AnswerText == '') || (this.QuestionList[i].row[j].AnswerText == null) || (this.QuestionList[i].row[j].AnswerText == undefined)) {
         }
-        else{
+        else {
           count++;
         }
         //alert(count);
+      }
     }
-  }
     //alert(count);
     // if(count==this.QuestionList.length){
     //   this.disabled=false;

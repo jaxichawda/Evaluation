@@ -41,8 +41,52 @@
                     <span [innerHTML]="que.QuestionText"></span>
                   </p>
                 </div>
-                <div class="ans_section">
-                  <b>Answer</b> - {{que.AnswerText}}
+                <div *ngIf="que.AnswerTypeId==1">
+                  <div class="ans_section">
+                    <b>Your Answer</b> : {{que.AnswerText}}
+                  </div>
+                </div>
+                <div *ngIf="que.AnswerTypeId==2">
+
+                  <div class="rate_stars">
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating5{{k}}{{i}}" value="5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label for="rating5{{k}}{{i}}" title="5 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating45{{k}}{{i}}" value="4.5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label class="half" for="rating45{{k}}{{i}}" title="4.5 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating4{{k}}{{i}}" value="4" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label for="rating4{{k}}{{i}}" title="4 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating35{{k}}{{i}}" value="3.5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label class="half" for="rating35{{k}}{{i}}" title="3.5 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating3{{k}}{{i}}" value="3" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label for="rating3{{k}}{{i}}" title="3 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating25{{k}}{{i}}" value="2.5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label class="half" for="rating25{{k}}{{i}}" title="2.5 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating2{{k}}{{i}}" value="2" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label for="rating2{{k}}{{i}}" title="2 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating15{{k}}{{i}}" value="1.5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label class="half" for="rating15{{k}}{{i}}" title="1.5 stars"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating1{{k}}{{i}}" value="1" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label for="rating1{{k}}{{i}}" title="1 star"></label>
+                    <input type="radio" name="AnswerText{{k}}{{i}}" id="rating05{{k}}{{i}}" value="0.5" #AnswerText="ngModel"
+                      [(ngModel)]="que.AnswerText" required />
+                    <label class="half" for="rating05{{k}}{{i}}" title="0.5 star"></label>
+                  </div>
+                  <strong>{{que.AnswerText}}</strong>
+                  <div class="ans_section">
+                    <b>Average Rating of your Evaluator</b> : {{que.EvaluatorAvg}}
+                  </div>
+                  <div class="ans_section" *ngIf="que.Comments!=null && que.Comments!=''">
+                    <b>Your Comments</b> : {{que.Comments}}
+                  </div>
                 </div>
               </div>
             </div>
