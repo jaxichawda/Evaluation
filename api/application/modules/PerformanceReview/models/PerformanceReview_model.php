@@ -13,7 +13,7 @@ class PerformanceReview_model extends CI_Model {
             if ($getUser->num_rows() == 1) 
 				{
 
-            $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive');
+            $this->db->select('ea.EvaluationAnswerId,ea.EmployeeEvaluatorId,ea.AnswerText,ea.Comments,q.QuestionId,q.QuestionText, q.AnswerTypeId, q.IsActive');
             $this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
             $this->db->where('ea.EmployeeEvaluatorId',$post_data['Id']);
             $this->db->where('q.IsActive',1);
@@ -80,11 +80,17 @@ class PerformanceReview_model extends CI_Model {
                         $AnswerText = null;
                             else
                         $AnswerText = $value['AnswerText'];
+
+                        if ($value['Comments'] == null)
+                        $Comments = null;
+                            else
+                        $Comments = $value['Comments'];
                         //$child = $data['child'];
                             $data1=array(
                                 "EmployeeEvaluatorId"=>$value['EmployeeEvaluatorId'],
                                 "QuestionId"=>$value['QuestionId'],
                                 "AnswerText"=>$AnswerText,
+                                "Comments"=>$Comments,
                                 "IsActive"=>1,
                                 "UpdatedOn"=>date('y-m-d H:i:s')
                                 );	
@@ -104,11 +110,17 @@ class PerformanceReview_model extends CI_Model {
                         $AnswerText = null;
                             else
                         $AnswerText = $value['AnswerText'];
+
+                        if ($value['Comments'] == null)
+                        $Comments = null;
+                            else
+                        $Comments = $value['Comments'];
 						//$child = $data['child'];
 							$data1=array(
 								"EmployeeEvaluatorId"=>$value['EmployeeEvaluatorId'],
 								"QuestionId"=>$value['QuestionId'],
-								"AnswerText"=>$AnswerText,
+                                "AnswerText"=>$AnswerText,
+                                "Comments"=>$Comments,
 								"IsActive"=>1,
 								"UpdatedOn"=>date('y-m-d H:i:s')
                                 );	
