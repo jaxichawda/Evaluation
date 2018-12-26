@@ -57,7 +57,19 @@
                     <div class="ans_section">
                       <span *ngIf='Status=="1"'>
                         <b>Answer</b> - {{que.AnswerText}}</span>
-                      <div *ngIf='Status!="1"' class="col-md-12 col-sm-12">
+                      <div *ngIf='Status!="1"'>
+					  <div class="rate_stars">
+						<input type="radio" id="rating5" name="rating" value="5" /><label for="rating5" title="5 stars"></label>
+						<input type="radio" id="rating45" name="rating" value="4.5" /><label class="half" for="rating45" title="4.5 stars"></label>
+						<input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="4 stars"></label>
+						<input type="radio" id="rating35" name="rating" value="3.5" /><label class="half" for="rating35" title="3.5 stars"></label>
+						<input type="radio" id="rating3" name="rating" value="3" /><label for="rating3" title="3 stars"></label>
+						<input type="radio" id="rating25" name="rating" value="2.5" /><label class="half" for="rating25" title="2.5 stars"></label>
+						<input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="2 stars"></label>
+						<input type="radio" id="rating15" name="rating" value="1.5" /><label class="half" for="rating15" title="1.5 stars"></label>
+						<input type="radio" id="rating1" name="rating" value="1" /><label for="rating1" title="1 star"></label>
+						<input type="radio" id="rating05" name="rating" value="0.5" /><label class="half" for="rating05" title="0.5 star"></label>
+					</div>
                         <div class="write_review">
                           <div class="rating">
                             <label>
