@@ -1,7 +1,7 @@
 <div class="sidebar_wrap" *ngIf="globals.authData!=undefined">
   <ul class="sidebar_box">
-    <li class="sidebar_box_label"><span>General</span></li>
-    <li (click)="closecollapse()" [ngClass]="{'active':globals.currentLink=='/dashboard'}"><a routerLink="/dashboard" title="Dashboard" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+    <li class="sidebar_box_label"><span>Dashboard</span></li>
+    <li (click)="closecollapse()" [ngClass]="{'active':globals.currentLink=='/dashboard'}"><a routerLink="/dashboard" title="Evaluation Requests" data-toggle="tooltip" data-placement="right"><i class="fa fa-tachometer"></i><span>Evaluation Requests</span></a></li>
   </ul>
   <ul class="sidebar_box">
     <li class="sidebar_box_label"><span>Manage</span></li>
