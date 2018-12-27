@@ -31,8 +31,9 @@ export class PerformanceReviewComponent implements OnInit {
     this.ans.push(item);
     this.disabled = true;
     this.globals.isLoading = true;
-
-
+	  
+$(document.getElementById("progress")).css("width", "30%");
+	  
     $('.right_content_block').addClass('performance_block');
 
 
@@ -45,43 +46,26 @@ export class PerformanceReviewComponent implements OnInit {
     //   }
     // }, 1000);
     setTimeout(function () {
-      $('.owl-carousel-review').owlCarousel({
-        loop: false,
-        autoPlay: false,
-        nav: true,
-        dots: true,
-        autoHeight: true,
-        margin: 15,
-        stopOnHover: true,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1
-          },
-          300: {
-            items: 1
-          },
-          479: {
-            items: 1
-          },
-          600: {
-            items: 1
-          },
-          768: {
-            items: 1
-          },
-          979: {
-            items: 1
-          },
-          1024: {
-            items: 1
-          },
-          1199: {
-            items: 1
-          },
-        }
-      })
+     $('#carousel').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+        itemWidth: 120,
+		minItems: 1,
+    	maxItems: 7,
+        itemMargin: 5,
+        asNavFor: '#slider'
+      });
 
+      $('#slider').flexslider({
+        animation: "slide",
+        controlNav: false,
+        animationLoop: false,
+        slideshow: false,
+		smoothHeight: true,
+        sync: "#carousel"
+      });
     }, 1000);
     //this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');

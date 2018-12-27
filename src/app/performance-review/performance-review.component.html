@@ -11,27 +11,121 @@
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12 text-right">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a routerLink="/dashboard">
-              <i class="fa fa-home"></i>
-            </a>
-          </li>
+          <li class="breadcrumb-item"> <a routerLink="/dashboard"> <i class="fa fa-home"></i> </a> </li>
           <li class="breadcrumb-item active">Evaluation</li>
         </ol>
         <div class="clearfix"></div>
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="btn-group pull-right add-right addpage_backbtn">
-      <a routerLink="/dashboard" class="back_btn"> Back to Dashboard </a>
-      <button class="pull-left next_btn" *ngIf='Status!="1"' (click)="saveAsDraft()">Save as Draft</button>
-    </div>
     <div class="clearfix"></div>
   </div>
 </div>
-<div class="row norowmargin">
+<div class="row norowmargin assessment_bg">
   <div class="col-lg-12">
-    <div class="form-bg">
+    <div class="col-lg-12">
+      <div id="progress_bar">
+        <div id="progress"> 30% </div>
+      </div>
+    </div>
+    <div id="carousel" class="flexslider ksa_list_block">
+      <ul class="slides">
+        <li>
+          <div class="ksa_numbers">1-4</div>
+          <div class="ksa_completes"><i id="q1_dots" class="fa fa-circle activei"></i><i id="q2_dots" class="fa fa-circle  activei"></i><i id="q3_dots" class="fa fa-circle-o"></i><i id="q4_dots" class="fa fa-circle-o"></i></div>
+        </li>
+        <li>
+          <div class="ksa_numbers">5-8</div>
+          <div class="ksa_completes"><i id="q5_dots" class="fa fa-circle-o"></i><i id="q6_dots" class="fa fa-circle-o"></i><i id="q7_dots" class="fa fa-circle-o"></i><i id="q8_dots" class="fa fa-circle-o"></i></div>
+        </li>
+        <li>
+          <div class="ksa_numbers">9</div>
+          <div class="ksa_completes"><i id="q9_dots" class="fa fa-circle-o"></i></div>
+        </li>
+      </ul>
+    </div>
+    <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
+      <div id="slider" class="flexslider">
+        <ul class="slides">
+          <li *ngFor="let question of QuestionList; let k=index; let last = last;">
+            <div class="col-md-6 col-sm-6" *ngFor="let que of question.row; let i = index;">
+              <div class="ksa_box">
+                <div class="ksa_text"><span>{{(4*k)+i+1}}</span>
+                  <p [innerHTML]="que.QuestionText"></p>
+                </div>
+                <div *ngIf="que.AnswerTypeId==1">
+                  <div class="ans_section"> <span *ngIf='Status=="1"'> <b>Answer</b> - {{que.AnswerText}} </span>
+                    <div class="form-group">
+                      <label>Your Answer</label>
+                      <textarea *ngIf='Status!="1"' class="form-control" #AnswerText="ngModel" [(ngModel)]="que.AnswerText"
+                        name="AnswerText{{k}}{{i}}" maxlength="500" [disabled]='Status=="1"' required></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="que.AnswerTypeId==2">
+                  <div class="ans_section"> <span *ngIf='Status=="1"'> <b>Answer</b> - {{que.AnswerText}}</span>
+                    <div *ngIf='Status!="1"'>
+                      <div class="rate_stars">
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating5{{k}}{{i}}" value="5" #AnswerText="ngModel"
+                            [(ngModel)]="que.AnswerText" required />
+                        <label for="rating5{{k}}{{i}}" title="5 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating45{{k}}{{i}}" value="4.5"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                        <label class="half" for="rating45{{k}}{{i}}" title="4.5 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating4{{k}}{{i}}" value="4" #AnswerText="ngModel"
+                            [(ngModel)]="que.AnswerText" required />
+                        <label for="rating4{{k}}{{i}}" title="4 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating35{{k}}{{i}}" value="3.5"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                        <label class="half" for="rating35{{k}}{{i}}" title="3.5 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating3{{k}}{{i}}" value="3" #AnswerText="ngModel"
+                            [(ngModel)]="que.AnswerText" required />
+                        <label for="rating3{{k}}{{i}}" title="3 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating25{{k}}{{i}}" value="2.5"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                        <label class="half" for="rating25{{k}}{{i}}" title="2.5 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating2{{k}}{{i}}" value="2" #AnswerText="ngModel"
+                            [(ngModel)]="que.AnswerText" required />
+                        <label for="rating2{{k}}{{i}}" title="2 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating15{{k}}{{i}}" value="1.5"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                        <label class="half" for="rating15{{k}}{{i}}" title="1.5 stars"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating1{{k}}{{i}}" value="1" #AnswerText="ngModel"
+                            [(ngModel)]="que.AnswerText" required />
+                        <label for="rating1{{k}}{{i}}" title="1 star"></label>
+                        <input type="radio" name="AnswerText{{k}}{{i}}" id="rating05{{k}}{{i}}" value="0.5"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                        <label class="half" for="rating05{{k}}{{i}}" title="0.5 star"></label>
+                      </div>
+                      <div class="form-group">
+                        <label>Comment</label>
+                        <textarea *ngIf='Status!="1"' class="form-control" #Comments="ngModel" [(ngModel)]="que.Comments"
+                            name="Comments{{k}}{{i}}" maxlength="500" [disabled]='Status=="1"' required></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="que.AnswerTypeId==3">
+                  <div class="ans_section"> <span *ngIf='Status=="1"'> <b>Answer</b> - {{que.AnswerText}}</span> <span *ngIf='Status!="1"'>
+                    <div class="radio_box" *ngFor="let ans of que.answer; let j=index;  ">
+                      <input type="radio" name="AnswerText{{k}}{{i}}" id="role{{k}}{{i}}{{j}}" value="{{ans.OptionValue}}"
+                            #AnswerText="ngModel" [(ngModel)]="que.AnswerText" required />
+                      <label for="role{{k}}{{i}}{{j}}" title="{{ans.OptionValue}}">{{ans.OptionValue}}</label>
+                    </div>
+                    </span> </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </li>
+        </ul>
+      </div>
+      <div class="form-btn last_btn_class text-center">
+        <button class="next_btn" *ngIf='Status!="1"' (click)="saveAsDraft()">Save as Draft</button>
+        <button type="submit" class="back_btn margin_bottom"> Submit</button>
+      </div>
+    </form>
+    <!--<div class="form-bg">
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="addData(evaluationForm)">
         <div id="main1" role="main">
           <div class="owl-carousel-review">
@@ -126,7 +220,7 @@
           </div>
         </div>
       </form>
-    </div>
+    </div>--> 
   </div>
 </div>
 <div class="clearfix"></div>
