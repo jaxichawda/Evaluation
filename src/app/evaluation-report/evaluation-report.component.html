@@ -61,7 +61,8 @@
                   </td>
                   <ng-container *ngFor="let avgans of evaluation.child; let first=first;">
                   <td *ngIf="first">
-                    <div>{{avgans.EvaluatorAvg}}</div>
+                    <div *ngIf="avgans.EvaluatorAvg!=null">{{avgans.EvaluatorAvg}}</div>
+                    <div *ngIf="avgans.EvaluatorAvg==null"> - </div>
                   </td>
                 </ng-container>
                 </tr>

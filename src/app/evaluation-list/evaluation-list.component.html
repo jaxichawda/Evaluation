@@ -64,7 +64,7 @@
                   <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
                   -->
                   <td class="text-center">
-                    <div class="inline_delbtn tooltip_inline" title="View Details" data-toggle="tooltip" data-placement="bottom">
+                    <div class="inline_delbtn tooltip_inline" title="View Evaluator" data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-primary btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
                         <span class="fa fa-eye"></span>
                       </button>
@@ -80,7 +80,8 @@
                         <span class="fa fa-share"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="Evaluators Report" data-toggle="tooltip" data-placement="bottom">
+                    <div class="inline_delbtn tooltip_inline" title="Evaluators Report" data-toggle="tooltip"
+                      data-placement="bottom">
                       <button class="btn btn-warning btn-rounded btn-sm" routerLink="/evaluation/report/{{evaluation.EvaluationId}}">
                         <span class="fa fa-table"></span>
                       </button>
@@ -120,6 +121,7 @@
                 <th>Evaluator Name</th>
                 <th>Evaluator Position</th>
                 <th>Status</th>
+                <th class="text-center active_width">Change Status</th>
                 <th class="text-center action_width">Revoke</th>
               </tr>
             </thead>
@@ -130,25 +132,43 @@
                 <td>{{evaluators.JobTitleName}}</td>
                 <td *ngIf="evaluators.StatusId=='1'">
                   <span class="submit_status">{{status.submitted}}</span>
-                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to Progress' : 'Change to Submit'">
-                    <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)" [checked]="evaluators.StatusId==1" value="Yes">
-                    <label for="status{{i}}"></label>
-                  </div>
                 </td>
                 <td *ngIf="evaluators.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
-                <td *ngIf="evaluators.StatusId=='2'">
-                  <span class="inprogress_status">{{status.inprogress}}</span>
-                  <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to Progress' : 'Change to Submit'">
-                    <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)" [checked]="evaluators.StatusId==1" value="Yes">
+                <td *ngIf="evaluators.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
+                <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
+
+                <td class="text-center">
+                  <div *ngIf="evaluators.StatusId=='1'" class="activeyes_box" data-toggle="tooltip" data-placement="top"
+                    [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submit'">
+                    <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)"
+                      [checked]="evaluators.StatusId==1" value="Yes">
+                    <label for="status{{i}}"></label>
+                  </div>
+                  <div *ngIf="evaluators.StatusId=='2'" class="activeyes_box" data-toggle="tooltip" data-placement="top"
+                    [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submit'">
+                    <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)"
+                      [checked]="evaluators.StatusId==1" value="Yes">
                     <label for="status{{i}}"></label>
                   </div>
                 </td>
-                <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
+
                 <td class="text-center">
-                  <button *ngIf="evaluators.StatusId=='0'" type="button" class="btn btn-info btn-rounded btn-sm" title="Revoke"
-                    data-toggle="tooltip" data-placement="bottom" (click)="revokeEvaluator(evaluators)">
-                    <span class="fa fa-share"></span></button>
+                  <div *ngIf="evaluators.StatusId=='3'" class="revoke_status">
+                    {{status.revoked}}
+                  </div>
+                  <div *ngIf="evaluators.StatusId=='1' || evaluators.StatusId=='2'" class="inline_delbtn tooltip_inline"
+                    data-toggle="tooltip" data-placement="bottom" title="You can't revoke as evaluation already started by {{evaluators.Name}}.">
+                    <button [disabled]="evaluators.StatusId!='0'" data-type="Record" class="btn btn-info btn-rounded btn-sm"><span
+                        class="fa fa-share"></span></button>
+                  </div>
+                  <div *ngIf="evaluators.StatusId=='0'" class="inline_delbtn tooltip_inline" data-toggle="tooltip"
+                    data-placement="bottom" title="Revoke">
+                    <button data-type="Record" class="btn btn-info btn-rounded btn-sm" (click)="revokeEvaluator(evaluators)">
+                      <span class="fa fa-share"></span>
+                    </button>
+                  </div>
                 </td>
+
               </tr>
               <tr *ngIf="EvaluatorList.length<=0">
                 <td colspan="5" class="text-center">There is no record found.</td>
@@ -158,7 +178,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="next_btn" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button" data-dismiss="modal"><span class="fa fa-times"></span></button>
       </div>
     </div>
   </div>

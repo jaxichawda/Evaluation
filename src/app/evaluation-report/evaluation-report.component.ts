@@ -54,7 +54,7 @@ export class EvaluationReportComponent implements OnInit {
           var column_length = this.employeelist.length;
           var column_array = [0, 1];
           if(column_length>0){
-            for(var i=2; i<=column_length+1; i++){
+            for(var i=2; i<=column_length+2; i++){
               column_array.push(i);
             }
           } 
