@@ -99,7 +99,7 @@ table .activeyes_box input[type="checkbox"]:checked + label:after{left :62%;}
 .rate_stars { display: inline-block; border: 0;}
 .rate_stars > input {display: none;}
 .rate_stars > label {float: right; margin-bottom:0;}
-.rate_stars > label:before { display: inline-block;  font-size:20px; padding:5px; margin: 0; cursor: pointer; font-family: FontAwesome; content: "\f005 ";}
+.rate_stars > label:before { display: inline-block;  font-size:20px; padding:0 5px; margin: 0; cursor: pointer; font-family: FontAwesome; content: "\f005 ";}
 .rate_stars .half:before { content: "\f089 "; position: absolute; padding-right: 0;}
 .rate_stars input:checked ~ label,.rate_stars label:hover, .rate_stars label:hover ~ label { color: #a6ce39;}
 .rate_stars input:checked + label:hover, .rate_stars input:checked ~ label:hover,.rate_stars input:checked ~ label:hover ~ label,.rate_stars label:hover ~ input:checked ~ label { color: #A6E72D;} 
@@ -200,7 +200,8 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .right_content_block.front_block footer{width: 100%; margin-left: 0;}
 .right_content_block.front_block .bg_white_block{padding: 0 0 50px 0;}
 .right_content_block.front_block .norowmargin{margin: 0;}
-.norowmargin .breadcrumb_block{margin-top: 20px;}
+.norowmargin .breadcrumb_block{margin-top: 15px;}
+.right_content_block.performance_block .bg_white_block{padding-top: 0!important;}
 .right_content_block.front_block .dashboard_block{padding: 20px 0!important;}
 .right_content_block.front_block .dashboard_block .row{margin:0;}
 .user_dashboard .user_feedback_grid { padding: 10px 0px; border-radius: 5px; box-shadow: 0 5px 10px 1px rgba(88, 103, 221, 0.05); text-align: center; border: 1px solid #e3e3e3; margin-bottom: 30px;}
@@ -231,8 +232,6 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .box_qa .rating_section .ans_section{text-align: center;}
 .box_qa .rating_section .ans_section span{display: block;}
 .box_qa .rating_section .ans_section strong{font-size: 20px;}
-
-
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/

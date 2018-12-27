@@ -23,47 +23,8 @@
 }
 .flexslider .slides > li {
   display: none;
-  -webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; opacity:1!important;
 }
-
-#slider{  width: 100%;
-  height: 100%;
-  padding:25px 50px;
-  
-}
-
-#carousel .slides > li{padding:15px 25px;}
-
-#carousel .slides > li{  width: 100%;
-  height: 100%;
-  position:relative;
-  overflow:hidden;
-  background: url(../images/background1.jpg) center center no-repeat;
-  background-size: cover;
-}
-
-#carousel .slides > li span{width: 40px;
-background: #fff;
-height: 40px;
-color: #0061af;
-font-size: 16px;
-text-align: center;
-line-height: 40px !important;
-position: absolute;
-left: -3%;
-top: -3%;
-border-bottom-right-radius: 70%;}
-
-#carousel .slides > li p{text-align:center;color:#fff;}
-#carousel .slides > li p i{margin:0px 10px;}
-
-#slider textarea{background:transparent;}
-#slider .que_section{color:#111;}
-#slider .que_section h3,#slider .ans_section h3{font-family: 'Titillium Web', sans-serif;}
-#slider .que_section h1,#slider .que_section p{color:#111;}
-#slider .ans_section{color:#111;}
-#slider .ans_section .radio_box label{color:#111;}
-
 .flexslider .slides img {
   width: 100%;
   display: block;
@@ -89,10 +50,7 @@ html[xmlns] .flexslider .slides {
  * DEFAULT THEME
  * ====================================================================================================================*/
 .flexslider {
-  margin: 0 0 5px;
-  background: #fff;
   position: relative;
-  zoom: 1;
 }
 .flexslider .slides {
   zoom: 1;
@@ -113,57 +71,56 @@ html[xmlns] .flexslider .slides {
 .flex-direction-nav {
   *height: 0;
 }
+.flex-direction-nav li{
+opacity:1!important;}
 .flex-direction-nav a {
   text-decoration: none;
   display: block;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 45px;
   margin: 0px 0 0;
   position: absolute;
-  top: 45%;
+  top: 15%;
   z-index: 10;
   overflow: hidden;
   opacity: 1;
   cursor: pointer;
-  color: #111;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-#carousel .flex-direction-nav a{top: 25%!important;}
-
-#carousel .slides > li.active{opacity: 0.75;border: 2px solid #b2cc20;}
-#carousel .slides > li.active span{background: #b2cc20;color: #fff;}
-
 .flex-direction-nav a:before {
   font-family: "FontAwesome";
-  font-size: 40px;
+  font-size: 33px;
   display: inline-block;
   content: '\f100';
-  color: #111;
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 .flex-direction-nav a.flex-next:before {
   content: '\f101';
 }
 .flex-direction-nav .flex-prev {
-  left: 10px;
+  left: 3px;
 }
 .flex-direction-nav .flex-next {
-  right: 10px;
+  right: 3px;
   text-align: right;
 }
 .flexslider:hover .flex-direction-nav .flex-prev {
   opacity: 1;
-  left: 10px;
+  left: 3px;
 }
 .flexslider:hover .flex-direction-nav .flex-prev:hover {
   opacity: 1;
 }
 .flexslider:hover .flex-direction-nav .flex-next {
   opacity: 1;
-  right: 10px;
+  right: 3px;
 }
 .flexslider:hover .flex-direction-nav .flex-next:hover {
   opacity: 1;
@@ -209,7 +166,7 @@ html[xmlns] .flexslider .slides {
   margin: 0 6px;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  *display: inline; opacity:1!important;
 }
 .flex-control-paging li a {
   width: 11px;
@@ -244,7 +201,7 @@ html[xmlns] .flexslider .slides {
 .flex-control-thumbs li {
   width: 25%;
   float: left;
-  margin: 0;
+  margin: 0; opacity:1!important;
 }
 .flex-control-thumbs img {
   width: 100%;
@@ -266,3 +223,25 @@ html[xmlns] .flexslider .slides {
   opacity: 1;
   cursor: default;
 }
+
+#progress_bar{ width:100%; box-shadow:1px 1px 10px rgba(0, 0, 0, 0.6) inset;}
+#progress {background:#799528; height:18px; width:0%; transition:all 0.5s ease 0s; color: #fff; font-size: 12px; text-align: right; padding:0px 5px 0 0;}
+
+.ksa_list_block{margin:10px 0;}
+.ksa_list_block .ksa_numbers{ box-shadow:1px 1px 2px rgba(0, 0, 0, 0.6); padding:10px; width:100px; height:40px; text-align:center; display:block; margin:15px auto 10px; border-radius:10px; cursor:pointer; background:#f4f4f4;}
+.ksa_list_block .flex-active-slide .ksa_numbers{ background:#0061af; color:#fff;}
+.ksa_list_block .ksa_completes{text-align:center; display:block;}
+.ksa_list_block .ksa_completes i{margin:0 2px; opacity:0.4; font-size:13px;}
+.ksa_list_block .ksa_completes i.activei{ opacity:1; color: #799628;}
+
+.assessment_bg .col-md-6{float:none; display:inline-block; vertical-align:top; width:49.5%;}
+.assessment_bg .ksa_box{ display:block; position:relative; background:#fff; overflow:hidden; box-shadow:1px 1px 5px #ccc; border:1px solid #ccc; border-radius:10px; margin-bottom:30px; text-align:left;}
+.assessment_bg .ksa_box .ksa_text{ height:100px; font-size:15px; color:#000; line-height:20px; padding:15px 15px 15px 40px; border-bottom:1px solid #d2d2d2; overflow-y: auto; position:relative;} 
+.assessment_bg .ksa_box .ksa_text span{ text-align:center; color:#0061af; background:#f4f4f4; width:30px; height:30px; display:block; padding:5px; font-size: 20px; position:absolute; left:0; top:0;}
+.assessment_bg .ksa_box .ans_section{padding: 10px; height:115px;}
+.assessment_bg .ksa_box .ans_section .form-group{margin: 0;}
+
+#slider .flex-direction-nav a{top:auto!important; bottom: -35px; }
+#slider .flex-direction-nav .flex-next{ right:10px;}
+#slider .flex-direction-nav .flex-prev{ left:10px; }
+.last_btn_class button {min-width:120px;}
