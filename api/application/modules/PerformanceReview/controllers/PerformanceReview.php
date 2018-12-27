@@ -17,7 +17,7 @@ class PerformanceReview extends CI_Controller {
 		$post_data= json_decode(trim(file_get_contents('php://input')), true);
 		if ($post_data)
 		{
-		$data['QuestionData']=$this->PerformanceReview_model->getAllQuestionData($post_data);
+		$data['Questions']=$this->PerformanceReview_model->getAllQuestionData($post_data);
 		$data['EvaluationStatus']=$this->PerformanceReview_model->getEvaluationStatus($post_data);
         echo json_encode($data);
         }

@@ -20,6 +20,10 @@ export class PerformanceReviewComponent implements OnInit {
   disabled;
   Name;
   UserId;
+  addprogess;
+  TotalQuestion;
+  percent;
+  submit_true;
   //PerformanceData;
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private PerformanceReviewService: PerformanceReviewService) { }
@@ -31,63 +35,64 @@ export class PerformanceReviewComponent implements OnInit {
     this.ans.push(item);
     this.disabled = true;
     this.globals.isLoading = true;
-	  
-$(document.getElementById("progress")).css("width", "30%");
-	  
+
     $('.right_content_block').addClass('performance_block');
 
 
-    // setTimeout(function () {
-    //   if ($(".bg_white_block").hasClass("ps--active-y")) {
-    //     $('footer').removeClass('footer_fixed');
-    //   }
-    //   else {
-    //     $('footer').addClass('footer_fixed');
-    //   }
-    // }, 1000);
-    setTimeout(function () {
-     $('#carousel').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-        itemWidth: 120,
-		minItems: 1,
-    	maxItems: 7,
-        itemMargin: 5,
-        asNavFor: '#slider'
-      });
-
-      $('#slider').flexslider({
-        animation: "slide",
-        controlNav: false,
-        animationLoop: false,
-        slideshow: false,
-		smoothHeight: true,
-        sync: "#carousel"
-      });
-    }, 1000);
-    //this.globals.isLoading = true;
+    var progress = document.getElementById("progress");
+    $(progress).css("width", "0%");
     let id = this.route.snapshot.paramMap.get('id');
     var obj = { 'Id': id, 'UserId': this.globals.authData.UserId };
     if (id) {
       this.PerformanceReviewService.getAllQuestionData(obj)
         .then((data) => {
           debugger
-          this.QuestionList = data['QuestionData'];
+          setTimeout(function () {
+            "use strict";
+            $('#carousel').flexslider({
+              animation: "slide",
+              controlNav: false,
+              animationLoop: false,
+              slideshow: false,
+              itemWidth: 120,
+              minItems: 1,
+              maxItems: 7,
+              itemMargin: 5,
+              asNavFor: '#slider'
+            });
+
+            $('#slider').flexslider({
+              animation: "slide",
+              controlNav: false,
+              animationLoop: false,
+              slideshow: false,
+              smoothHeight: true,
+              sync: "#carousel"
+            });
+          }, 100);
+
+          this.QuestionList = data['Questions']['QuestionData'];
+          console.log(this.QuestionList);
           this.Status = data['EvaluationStatus']['StatusId'];
           this.Name = data['EvaluationStatus']['Name'];
           this.UserId = data['EvaluationStatus']['UserId'];
+          this.TotalQuestion = data['Questions']['TotalQuestion'];
+          this.addprogess = 100 / this.TotalQuestion;
 
-          //console.log(this.Status);
-          //console.log(this.QuestionList);
-          // for (var i = 0; i < this.QuestionList.length; i++) {
-          //   if (this.QuestionList[i].AnswerText != null) {
-          //     this.QuestionList[i].child.checkActive = true;
-          //   } else {
-          //     this.QuestionList[i].child.checkActive = false;
-          //   }
-          // }
+          for (let obj of this.QuestionList) {
+            let j = this.QuestionList.indexOf(obj);
+            for (let child of obj.row) {
+              let i = this.QuestionList[j].row.indexOf(child);
+              if (child.AnswerText != null) {
+                setTimeout(function () {
+                  $('#question' + ((4 * j) + i + 1) + '_dots').removeClass('fa-circle-o');
+                  $('#question' + ((4 * j) + i + 1) + '_dots').addClass('fa-dot-circle-o');
+                }, 100);
+              }
+            }
+          }
+          this.checkprogress();
+
           this.globals.isLoading = false;
           if (this.QuestionList == 'error') {
             this.router.navigate(['/dashboard']);
@@ -169,11 +174,36 @@ $(document.getElementById("progress")).css("width", "30%");
           //this.submitted = false;
         });
   }
-  // checkTextbox(queId, totalAns, que) {
-  //   debugger
-  //   if (que.AnswerText != '')
-  //     que.child.checkActive = true;
-  //   else
-  //     que.child.checkActive = false;
-  // }
+
+  selectRadio(no, que, i, j) {
+    if (que.AnswerText != '') {
+      $('#question' + no + '_dots').removeClass('fa-circle-o');
+      $('#question' + no + '_dots').addClass('fa-dot-circle-o');
+    } else {
+      $('#question' + no + '_dots').removeClass('fa-dot-circle-o');
+      $('#question' + no + '_dots').addClass('fa-circle-o');
+    }
+    this.checkprogress();
+  }
+
+  checkprogress() {
+    let k = 0;
+    for (let i = 1; i <= this.TotalQuestion; i++) {
+      setTimeout(() => {
+        let q = ($('#question' + i + '_dots').hasClass('fa-dot-circle-o'));
+        if (q) {
+          k++;
+        }
+        let addpro = (100 * k) / this.TotalQuestion;
+        this.percent = Math.round(addpro);
+        var progress = document.getElementById("progress");
+        $(progress).css("width", addpro + "%");
+        if (k == this.TotalQuestion) {
+          this.submit_true = false;
+        } else {
+          this.submit_true = true;
+        }
+      }, 100);
+    }
+  }
 }

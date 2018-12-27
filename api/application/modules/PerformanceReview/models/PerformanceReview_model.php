@@ -52,7 +52,9 @@ class PerformanceReview_model extends CI_Model {
 						array_push($res,$result[$i]);			
 						$res2[$j]['row'] = $res;
                     }
-                    return $res2;
+                    $data1['QuestionData']=$res2;
+                    $data1['TotalQuestion']=$query->num_rows();
+                    return $data1;
             }
             else
             {
