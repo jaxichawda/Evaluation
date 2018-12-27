@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2018 at 02:37 PM
+-- Generation Time: Dec 27, 2018 at 07:06 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -46,30 +46,36 @@ CREATE TABLE `tblevaluationanswer` (
 --
 
 INSERT INTO `tblevaluationanswer` (`EvaluationAnswerId`, `EmployeeEvaluatorId`, `QuestionId`, `AnswerText`, `Comments`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 2, 13, '4', NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:52'),
-(2, 2, 14, '3', NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(3, 2, 15, '5', NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(4, 2, 16, '5', NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(5, 2, 17, '2', NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(6, 2, 18, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(7, 2, 19, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(8, 2, 20, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(9, 2, 21, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(10, 2, 22, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(11, 2, 23, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(12, 2, 24, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(13, 2, 25, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(14, 2, 26, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(15, 2, 27, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(16, 2, 28, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(17, 2, 29, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:53'),
-(18, 2, 30, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(19, 2, 31, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(20, 2, 32, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(21, 2, 33, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(22, 2, 34, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(23, 2, 37, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54'),
-(24, 2, 39, NULL, NULL, b'1', 3, '2018-12-25 12:54:17', 3, '2018-12-25 13:33:54');
+(1, 1, 13, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:01'),
+(2, 1, 14, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:01'),
+(3, 1, 15, '5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:01'),
+(4, 1, 16, '4.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:01'),
+(5, 1, 29, '4.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:02'),
+(6, 1, 30, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:02'),
+(7, 1, 31, '5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:02'),
+(8, 1, 32, '3.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:02'),
+(9, 1, 39, 'Answer 9', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-26 07:00:02'),
+(16, 3, 7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(17, 3, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaeca.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(18, 3, 13, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(19, 3, 14, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(20, 3, 15, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(21, 3, 16, '4.5', ' dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur i.', b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(22, 3, 29, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(23, 3, 30, '4.5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(24, 3, 31, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(25, 3, 32, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(26, 3, 38, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(27, 3, 39, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
+(31, 2, 13, '3', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:18'),
+(32, 2, 14, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(33, 2, 15, '5', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(34, 2, 16, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(35, 2, 29, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(36, 2, 30, '5', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(37, 2, 31, '3', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(38, 2, 32, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
+(39, 2, 39, 'Answer 9', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19');
 
 -- --------------------------------------------------------
 
@@ -160,9 +166,7 @@ CREATE TABLE `tblmstempevaluation` (
 --
 
 INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `EvaluationDate`, `UserNote`, `EvaluatorNote`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 2, 2, '2018-12-26 11:13:12', 'This is test note for User', 'This is test note for Evaluator', b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-20 07:24:56'),
-(2, 3, 2, '2018-12-31 11:13:40', 'This is test note for User', 'This is test note for Evaluator', b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-20 07:24:56'),
-(3, 1, 2, '2018-12-26 09:20:00', 'Not mentioned!', 'Not mentioned!', b'1', 1, '2018-12-25 12:15:57', 1, '2018-12-25 12:15:57');
+(1, 3, 2, '2018-12-29 14:30:00', 'Note for User', 'Note for Evaluator', b'1', 1, '2018-12-26 06:56:57', 1, '2018-12-26 06:56:57');
 
 -- --------------------------------------------------------
 
@@ -187,12 +191,9 @@ CREATE TABLE `tblmstempevaluator` (
 --
 
 INSERT INTO `tblmstempevaluator` (`EmployeeEvaluatorId`, `EvaluationId`, `EvaluatorId`, `StatusId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 2, 0, b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-25 05:50:08'),
-(2, 1, 3, 2, b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-25 05:50:05'),
-(3, 2, 3, 0, b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-25 05:59:42'),
-(4, 2, 2, 0, b'1', 2, '2018-12-20 07:24:56', 2, '2018-12-25 05:50:15'),
-(5, 3, 1, 0, b'1', 1, '2018-12-25 12:15:57', 1, '2018-12-25 12:15:57'),
-(6, 3, 3, 0, b'1', 1, '2018-12-25 12:15:57', 1, '2018-12-25 12:15:57');
+(1, 1, 1, 1, b'1', 1, '2018-12-26 06:56:57', 1, '2018-12-26 13:56:44'),
+(2, 1, 2, 1, b'1', 1, '2018-12-26 06:56:58', 1, '2018-12-26 06:56:58'),
+(3, 1, 3, 1, b'1', 1, '2018-12-26 06:56:58', 1, '2018-12-26 13:54:42');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,7 @@ CREATE TABLE `tblmstevaluationtype` (
 
 INSERT INTO `tblmstevaluationtype` (`EvaluationTypeId`, `EvaluationTypeName`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (1, 'Monthly Evaluation', b'1', 1, '2018-12-07 13:42:24', 1, '2018-12-07 13:42:24'),
-(2, 'Yearly Evaluation', b'1', 1, '2018-12-07 13:42:24', 1, '2018-12-07 13:42:24');
+(2, 'Yearly Evaluation', b'1', 1, '2018-12-07 13:42:24', 1, '2018-12-26 13:14:45');
 
 -- --------------------------------------------------------
 
@@ -284,35 +285,35 @@ CREATE TABLE `tblmstquestion` (
 INSERT INTO `tblmstquestion` (`QuestionId`, `EvaluationTypeId`, `QuestionText`, `AnswerTypeId`, `EvaluatorTypeId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (7, 2, '<p>What were your major achievements in the past year? &nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:47:46', 1, '2018-12-20 07:05:15'),
 (8, 2, '<p>What was your goal? Did you reach to your goal? Personally and Professionally. &nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:52:59', 1, '2018-12-20 07:06:39'),
-(9, 2, '<p>What are the areas of your performance (behaviors and results) on which you could improve? Please describe. &nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:53:09', 1, '2018-12-20 07:07:12'),
-(10, 2, '<p>What you have done to accomplish company&rsquo;s goal? Did you find any difficulties to complete any task/ project?&nbsp;<br />\n&nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:53:19', 1, '2018-12-20 07:07:45'),
-(11, 2, '<p>Are there additional skills or knowledge that would help you more effectively perform your present job or enhance your skill opportunities? If yes, please list. &nbsp;<br />\n&nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:53:30', 1, '2018-12-20 07:08:17'),
-(12, 2, '<p>What goals (specific measurable results) do you expect to accomplish during the next year? &nbsp;<br />\n&nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:53:42', 1, '2018-12-20 07:08:51'),
+(9, 2, '<p>What are the areas of your performance (behaviors and results) on which you could improve? Please describe. &nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:09', 1, '2018-12-26 06:57:29'),
+(10, 2, '<p>What you have done to accomplish company&rsquo;s goal? Did you find any difficulties to complete any task/ project?&nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:19', 1, '2018-12-26 06:57:30'),
+(11, 2, '<p>Are there additional skills or knowledge that would help you more effectively perform your present job or enhance your skill opportunities? If yes, please list. &nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:30', 1, '2018-12-26 06:57:32'),
+(12, 2, '<p>What goals (specific measurable results) do you expect to accomplish during the next year? &nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:42', 1, '2018-12-26 06:57:37'),
 (13, 2, '<p>Rate out of 10 -&nbsp;COMMUNICATION</p>', 2, 0, b'1', 1, '2018-12-18 23:54:43', 1, '2018-12-18 23:59:54'),
 (14, 2, '<p>Rate out of 10 - AMBITION / INITIATIVE</p>', 2, 0, b'1', 1, '2018-12-18 23:59:40', 1, '2018-12-18 13:29:40'),
 (15, 2, '<p>Rate out of 10 - ATTENDANCE</p>', 2, 0, b'1', 1, '2018-12-19 00:02:38', 1, '2018-12-18 13:32:38'),
 (16, 2, '<p>Rate out of 10 - ATTITUDE / COOPERATION</p>', 2, 0, b'1', 1, '2018-12-19 00:02:47', 1, '2018-12-18 13:32:47'),
-(17, 2, '<p>Rate out of 10 - DEPARTMENT AND COMPANY ORIENTED</p>', 2, 0, b'1', 1, '2018-12-19 00:03:08', 1, '2018-12-18 13:33:08'),
-(18, 2, '<p>Rate out of 10 - FOCUS</p>', 2, 0, b'1', 1, '2018-12-19 00:03:17', 1, '2018-12-18 13:33:17'),
-(19, 2, '<p>Rate out of 10 - IMPROVEMENT FROM PREVIOUS EVALUATION</p>', 2, 0, b'1', 1, '2018-12-19 00:03:48', 1, '2018-12-18 13:33:48'),
-(20, 2, '<p>Rate out of 10 - INTEGRITY</p>', 2, 0, b'1', 1, '2018-12-19 00:03:56', 1, '2018-12-18 13:33:56'),
-(21, 2, '<p>Rate out of 10 - LEVEL OF (TECHNICAL) KNOWLEDGE</p>', 2, 0, b'1', 1, '2018-12-19 00:04:06', 1, '2018-12-18 13:34:06'),
-(22, 2, '<p>Rate out of 10 - PRODUCTIVITY / DEADLINE</p>', 2, 0, b'1', 1, '2018-12-19 00:06:22', 1, '2018-12-18 13:36:22'),
-(23, 2, '<p>Rate out of 10 - QUALITY OF WORK</p>', 2, 0, b'1', 1, '2018-12-19 00:06:32', 1, '2018-12-18 13:36:32'),
-(24, 2, '<p>Rate out of 10 - RELIABILITY / GO-TO PERSON</p>', 2, 0, b'1', 1, '2018-12-19 00:06:40', 1, '2018-12-18 13:36:40'),
-(25, 2, '<p>Rate out of 10 - STRESS MANAGEMENT</p>', 2, 0, b'1', 1, '2018-12-19 00:06:48', 1, '2018-12-18 13:36:48'),
-(26, 2, '<p>Rate out of 10 - TEAMWORK</p>', 2, 0, b'1', 1, '2018-12-19 00:06:56', 1, '2018-12-18 13:36:56'),
-(27, 2, '<p>Rate out of 10 - PRESENTATION</p>', 2, 0, b'1', 1, '2018-12-19 00:07:04', 1, '2018-12-18 13:37:04'),
-(28, 2, '<p>List the subjects you would like to discuss during your annual performance evaluation meeting:&nbsp;</p>', 1, 0, b'1', 1, '2018-12-19 00:07:38', 1, '2018-12-18 13:37:38'),
+(17, 2, '<p>Rate out of 10 - DEPARTMENT AND COMPANY ORIENTED</p>', 2, 0, b'0', 1, '2018-12-19 00:03:08', 1, '2018-12-26 06:57:47'),
+(18, 2, '<p>Rate out of 10 - FOCUS</p>', 2, 0, b'0', 1, '2018-12-19 00:03:17', 1, '2018-12-26 06:57:48'),
+(19, 2, '<p>Rate out of 10 - IMPROVEMENT FROM PREVIOUS EVALUATION</p>', 2, 0, b'0', 1, '2018-12-19 00:03:48', 1, '2018-12-26 06:57:50'),
+(20, 2, '<p>Rate out of 10 - INTEGRITY</p>', 2, 0, b'0', 1, '2018-12-19 00:03:56', 1, '2018-12-26 06:57:51'),
+(21, 2, '<p>Rate out of 10 - LEVEL OF (TECHNICAL) KNOWLEDGE</p>', 2, 0, b'0', 1, '2018-12-19 00:04:06', 1, '2018-12-26 06:57:53'),
+(22, 2, '<p>Rate out of 10 - PRODUCTIVITY / DEADLINE</p>', 2, 0, b'0', 1, '2018-12-19 00:06:22', 1, '2018-12-26 06:57:56'),
+(23, 2, '<p>Rate out of 10 - QUALITY OF WORK</p>', 2, 0, b'0', 1, '2018-12-19 00:06:32', 1, '2018-12-26 06:57:57'),
+(24, 2, '<p>Rate out of 10 - RELIABILITY / GO-TO PERSON</p>', 2, 0, b'0', 1, '2018-12-19 00:06:40', 1, '2018-12-26 06:57:59'),
+(25, 2, '<p>Rate out of 10 - STRESS MANAGEMENT</p>', 2, 0, b'0', 1, '2018-12-19 00:06:48', 1, '2018-12-26 06:58:01'),
+(26, 2, '<p>Rate out of 10 - TEAMWORK</p>', 2, 0, b'0', 1, '2018-12-19 00:06:56', 1, '2018-12-26 06:58:04'),
+(27, 2, '<p>Rate out of 10 - PRESENTATION</p>', 2, 0, b'0', 1, '2018-12-19 00:07:04', 1, '2018-12-26 06:58:13'),
+(28, 2, '<p>List the subjects you would like to discuss during your annual performance evaluation meeting:&nbsp;</p>', 1, 0, b'0', 1, '2018-12-19 00:07:38', 1, '2018-12-26 06:58:09'),
 (29, 2, '<p>Quality of work: Consider quality of work produced and the promptness with which it is completed</p>', 2, 0, b'1', 1, '2018-12-19 00:08:27', 1, '2018-12-18 13:38:27'),
 (30, 2, '<p>Productivity: Consider the ability to produce a quantity of accepted work which meets company standards.</p>', 2, 0, b'1', 1, '2018-12-19 00:09:09', 1, '2018-12-18 13:39:09'),
 (31, 2, '<p>Knowledge of job: Consider the knowledge of present job of other work closely related to it and of the equipment necessary to perform job functions.</p>', 2, 0, b'1', 1, '2018-12-19 00:10:03', 1, '2018-12-18 13:40:03'),
 (32, 2, '<p>Reliability and Dependability: Consider the amount of supervision required and job performance regarding timely completion and follow-ups.</p>', 2, 0, b'1', 1, '2018-12-19 00:10:45', 1, '2018-12-19 00:11:05'),
-(33, 2, '<p>Attendance: Consider overall attendance record and punctuality.</p>', 2, 0, b'1', 1, '2018-12-19 00:11:43', 1, '2018-12-18 13:41:43'),
-(34, 2, '<p>Initiative: Consider the extent to which new work assignments and additional duties are sought out when necessary.</p>', 2, 0, b'1', 1, '2018-12-19 00:12:13', 1, '2018-12-18 13:42:13'),
-(35, 2, '<p>The job timings are suitable for me.</p>', 2, 1, b'1', 1, '2018-12-19 00:12:38', 1, '2018-12-20 07:10:12'),
-(36, 2, '<p>I am satisfied with my pay and other perks of this job.</p>', 2, 1, b'1', 1, '2018-12-19 00:13:10', 1, '2018-12-20 07:11:40'),
-(37, 2, '<p>List your key strengths:</p>', 1, 0, b'1', 1, '2018-12-19 00:13:20', 1, '2018-12-18 13:43:20'),
+(33, 2, '<p>Attendance: Consider overall attendance record and punctuality.</p>', 2, 0, b'0', 1, '2018-12-19 00:11:43', 1, '2018-12-26 06:58:22'),
+(34, 2, '<p>Initiative: Consider the extent to which new work assignments and additional duties are sought out when necessary.</p>', 2, 0, b'0', 1, '2018-12-19 00:12:13', 1, '2018-12-26 06:58:24'),
+(35, 2, '<p>The job timings are suitable for me.</p>', 2, 1, b'0', 1, '2018-12-19 00:12:38', 1, '2018-12-26 06:58:26'),
+(36, 2, '<p>I am satisfied with my pay and other perks of this job.</p>', 2, 1, b'0', 1, '2018-12-19 00:13:10', 1, '2018-12-26 06:58:28'),
+(37, 2, '<p>List your key strengths:</p>', 1, 0, b'0', 1, '2018-12-19 00:13:20', 1, '2018-12-26 06:58:39'),
 (38, 2, '<p>List your performance areas that need further development.</p>', 1, 1, b'1', 1, '2018-12-19 00:13:35', 1, '2018-12-20 07:13:08'),
 (39, 2, '<p>Mention any skills&nbsp;according to you are not utilised or under utilised for&nbsp;your role,&nbsp;if any.&nbsp;</p>', 1, 0, b'1', 1, '2018-12-19 00:20:52', 1, '2018-12-18 13:50:52');
 
@@ -470,7 +471,7 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tblevaluationanswer`
 --
 ALTER TABLE `tblevaluationanswer`
-  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tblmstconfiguration`
@@ -488,13 +489,13 @@ ALTER TABLE `tblmstdepartment`
 -- AUTO_INCREMENT for table `tblmstempevaluation`
 --
 ALTER TABLE `tblmstempevaluation`
-  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tblmstempevaluator`
 --
 ALTER TABLE `tblmstempevaluator`
-  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblmstevaluationtype`
