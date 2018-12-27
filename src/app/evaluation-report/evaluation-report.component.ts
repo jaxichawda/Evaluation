@@ -46,6 +46,7 @@ export class EvaluationReportComponent implements OnInit {
     if (id) {
       this.GenerateEvaluationService.getEvaluationReport(id)
         .then((data) => {
+          console.log(data);
           this.employeeData = data['employeeData'];
           this.employeelist = data['employee'];
           this.evaluationList = data['report'];

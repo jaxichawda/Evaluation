@@ -48,7 +48,7 @@
                     {{emp.name}}
                   </th>
                   <th>
-                    Average
+                    Average Rating
                   </th>
                 </tr>
               </thead>
@@ -59,13 +59,11 @@
                   <td *ngFor="let ans of evaluation.child;">
                     <div>{{ans.AnswerText}}</div>
                   </td>
-                  <td *ngFor="let ans of evaluation.child;">
-                    <div>{{ans.EvaluatorAvg}}</div>
+                  <ng-container *ngFor="let avgans of evaluation.child; let first=first;">
+                  <td *ngIf="first">
+                    <div>{{avgans.EvaluatorAvg}}</div>
                   </td>
-                  <!-- <div *ngFor="let ans of evaluation.child;">
-                    <td>{{ans.AnswerText}}</td>
-                    <td>{{ans.EvaluatorAvg}}</td>
-                  </div> -->
+                </ng-container>
                 </tr>
                 <tr class="text-center" *ngIf="evaluationList.length <= 0">
                   <td colspan="4">There is no record found.</td>
