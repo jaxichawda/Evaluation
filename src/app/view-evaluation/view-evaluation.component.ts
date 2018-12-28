@@ -45,7 +45,7 @@ export class ViewEvaluationComponent implements OnInit {
       this.PerformanceReviewService.getAllQuestionData(obj)
         .then((data) => {
           debugger
-          this.QuestionList = data['QuestionData'];
+          this.QuestionList = data['Questions']['QuestionData'];
           this.Status = data['EvaluationStatus']['StatusId'];
           this.Name = data['EvaluationStatus']['Name'];
           this.UserId = data['EvaluationStatus']['UserId'];

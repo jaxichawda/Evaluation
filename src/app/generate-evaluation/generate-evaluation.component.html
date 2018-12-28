@@ -32,7 +32,7 @@
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="generateEvaluation(evaluationForm)">
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label><span>*</span>Users <i class="fa fa-info-circle tooltip_inline" title="For whom you want to take a evaluation"
+            <label><span>*</span>User <i class="fa fa-info-circle tooltip_inline" title="For whom you want to take a evaluation"
                 data-toggle="tooltip" data-placement="right"></i> </label>
             <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
               name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
@@ -99,14 +99,14 @@
         <div class="clearfix"></div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label>Notes for User</label>
+            <label>Note for User</label>
             <textarea class="form-control" #UserNote="ngModel" [(ngModel)]="evaluationEntity.UserNote"
               name="UserNote" maxlength="1000"></textarea>
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label>Notes for Evaluator</label>
+            <label>Note for Evaluator</label>
             <textarea class="form-control" #EvaluatorNote="ngModel" [(ngModel)]="evaluationEntity.EvaluatorNote"
               name="EvaluatorNote" maxlength="1000"></textarea>
           </div>
