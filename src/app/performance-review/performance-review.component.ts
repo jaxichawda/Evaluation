@@ -198,11 +198,6 @@ export class PerformanceReviewComponent implements OnInit {
         this.percent = Math.round(addpro);
         var progress = document.getElementById("progress");
         $(progress).css("width", addpro + "%");
-        if (k == this.TotalQuestion) {
-          this.submit_true = false;
-        } else {
-          this.submit_true = true;
-        }
       }, 100);
     }
   }

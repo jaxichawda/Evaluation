@@ -25,9 +25,6 @@ export class EmployeeListComponent implements OnInit {
     debugger
     this.globals.isLoading = false;
 
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
-
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -35,9 +32,9 @@ export class EmployeeListComponent implements OnInit {
       else {
         $('footer').addClass('footer_fixed');
       }
-          $("#collapseExample1").addClass("in");
-          $("#test_employee").removeClass("collapsed");
-      		$("#test_employee").attr("aria-expanded","true");
+      $("#collapseExample1").addClass("in");
+      $("#test_employee").removeClass("collapsed");
+      $("#test_employee").attr("aria-expanded", "true");
     }, 100);
     this.globals.isLoading = true;
     this.EmployeeService.getAllEmployee()
@@ -61,27 +58,27 @@ export class EmployeeListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [{
-                extend: 'excel',
-                title: 'Employee List',
-                exportOptions: {
-                  columns: [0, 1, 2, 3, 4]
-                }
-              },
-              {
-                extend: 'print',
-                title: 'Employee List',
-                exportOptions: {
-                  columns: [0, 1, 2, 3, 4]
-                }
-              },
+              extend: 'excel',
+              title: 'Employee List',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4]
+              }
+            },
+            {
+              extend: 'print',
+              title: 'Employee List',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4]
+              }
+            },
             ]
           });
-$('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+          $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+          $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
 
         this.employeeList = data;
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
       },
         (error) => {
           this.globals.isLoading = false;
@@ -102,7 +99,7 @@ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
 
     this.EmployeeService.isActiveChange(changeEntity)
       .then((data) => {
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',

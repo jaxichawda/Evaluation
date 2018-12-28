@@ -46,7 +46,6 @@ class PerformanceReview extends CI_Controller {
 					if($result)
 					{
 						echo json_encode($post_data); 
-						
 					}	
             }
 	}

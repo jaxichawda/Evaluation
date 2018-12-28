@@ -22,10 +22,8 @@ export class EvaluationTypeListComponent implements OnInit {
     private EvaluationTypeService: EvaluationTypeService) { }
 
   ngOnInit() {
-    
+
     this.globals.isLoading = false;
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -36,13 +34,13 @@ export class EvaluationTypeListComponent implements OnInit {
       }
       $("#collapseExample4").addClass("in");
       $("#test_evaluation_type").removeClass("collapsed");
-      $("#test_evaluation_type").attr("aria-expanded","true");
+      $("#test_evaluation_type").attr("aria-expanded", "true");
     }, 100);
 
     this.globals.isLoading = true;
     this.EvaluationTypeService.getAllEvaluationType()
       .then((data) => {
-        
+
         setTimeout(function () {
           var table = $('#dataTables-example').DataTable({
             // scrollY: '55vh',
@@ -61,7 +59,7 @@ export class EvaluationTypeListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-{
+              {
                 extend: 'excel',
                 title: 'Evaluation Type List',
                 exportOptions: {
@@ -77,13 +75,13 @@ export class EvaluationTypeListComponent implements OnInit {
               },
             ]
           });
-		  $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+          $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+          $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
 
         this.evaluationtypeList = data;
         console.log(this.evaluationtypeList);
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
       },
         (error) => {
           this.globals.isLoading = false;
@@ -104,7 +102,7 @@ export class EvaluationTypeListComponent implements OnInit {
 
     this.EvaluationTypeService.isActiveChange(changeEntity)
       .then((data) => {
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',

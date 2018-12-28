@@ -25,8 +25,6 @@ export class EvaluationListComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -39,9 +37,9 @@ export class EvaluationListComponent implements OnInit {
       $('.modal').on('hidden.bs.modal', function () {
         $('.right_content_block').removeClass('style_position');
       });
-          $("#collapseExample2").addClass("in");
-          $("#test_evaluation").removeClass("collapsed");
-      		$("#test_evaluation").attr("aria-expanded","true");
+      $("#collapseExample2").addClass("in");
+      $("#test_evaluation").removeClass("collapsed");
+      $("#test_evaluation").attr("aria-expanded", "true");
     }, 100);
     this.evaluationList = [];
     this.EvaluatorList = [];
@@ -50,7 +48,7 @@ export class EvaluationListComponent implements OnInit {
       .then((data) => {
         debugger
         setTimeout(function () {
-			
+
           var table = $('#dataTables-example').DataTable({
             // scrollY: '55vh',
             responsive: {
@@ -68,25 +66,25 @@ export class EvaluationListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-                 {
-                 extend: 'excel',
-                 title: 'Users List',
-                 exportOptions: {
-                   columns: [ 0, 1, 2, 3, 4]
-                   }
-                 },
-                 {
-                 extend: 'print',
-                 title: 'Users List',
-                 exportOptions: {
-                   columns: [ 0, 1, 2, 3, 4 ]
-                   }
-                 },
-               ]
+              {
+                extend: 'excel',
+                title: 'List of Evaluations',
+                exportOptions: {
+                  columns: [0, 1, 2, 3, 4]
+                }
+              },
+              {
+                extend: 'print',
+                title: 'List of Evaluations',
+                exportOptions: {
+                  columns: [0, 1, 2, 3, 4]
+                }
+              },
+            ]
           });
 
-          $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+          $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+          $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
 
         this.evaluationList = data['evaluations'];
@@ -185,7 +183,7 @@ export class EvaluationListComponent implements OnInit {
 
     this.GenerateEvaluationService.statusChange(changeEntity)
       .then((data) => {
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',

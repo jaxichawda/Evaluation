@@ -42,6 +42,7 @@ export class QuestionComponent implements OnInit {
       $("#test_question").attr("aria-expanded", "true");
     }, 100);
 
+    this.globals.isLoading = true;
     CKEDITOR.replace('QuestionText', {
       height: '300',
       resize_enabled: 'false',
@@ -57,7 +58,7 @@ export class QuestionComponent implements OnInit {
     var count = $(window).height() - 270;
     body.style.setProperty('--screen-height', count + "px");
 
-    this.globals.isLoading = true;
+
     this.QuestionService.getAllQuestionType()
       .then((data) => {
         this.questiontypeList = data;
@@ -96,7 +97,10 @@ export class QuestionComponent implements OnInit {
           } else {
             this.questionEntity.IsActive = '1';
           }
-          CKEDITOR.instances.QuestionText.setData(this.questionEntity.QuestionText);
+          setTimeout(() => {
+            CKEDITOR.instances.QuestionText.setData(this.questionEntity.QuestionText);
+          }, 500);
+
           this.globals.isLoading = false;
         },
           (error) => {

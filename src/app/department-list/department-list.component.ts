@@ -24,8 +24,6 @@ export class DepartmentListComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -36,7 +34,7 @@ export class DepartmentListComponent implements OnInit {
       }
       $("#collapseExample5").addClass("in");
       $("#test_department").removeClass("collapsed");
-      $("#test_department").attr("aria-expanded","true");
+      $("#test_department").attr("aria-expanded", "true");
     }, 100);
     this.globals.isLoading = true;
     this.DepartmentService.getAllDepartment()
@@ -60,7 +58,7 @@ export class DepartmentListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-{
+              {
                 extend: 'excel',
                 title: 'Department List',
                 exportOptions: {
@@ -76,13 +74,13 @@ export class DepartmentListComponent implements OnInit {
               },
             ]
           });
-$('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+          $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+          $('.buttons-print').attr('data-original-title', 'Print').tooltip();
         }, 100);
 
         this.departmentList = data;
         console.log(this.departmentList);
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
       },
         (error) => {
           this.globals.isLoading = false;
@@ -103,7 +101,7 @@ $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
 
     this.DepartmentService.isActiveChange(changeEntity)
       .then((data) => {
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',

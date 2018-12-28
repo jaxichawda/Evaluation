@@ -25,8 +25,6 @@ export class EmployeeReportComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -39,7 +37,7 @@ export class EmployeeReportComponent implements OnInit {
       $('.modal').on('hidden.bs.modal', function () {
         $('.right_content_block').removeClass('style_position');
       });
-      
+
     }, 100);
     this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
@@ -52,12 +50,12 @@ export class EmployeeReportComponent implements OnInit {
           this.globals.isLoading = false;
           var column_length = this.employeelist.length;
           var column_array = [0, 1];
-          if(column_length>0){
-            for(var i=2; i<=column_length+1; i++){
+          if (column_length > 0) {
+            for (var i = 2; i <= column_length + 1; i++) {
               column_array.push(i);
             }
-          } 
-          var employeeName= this.employeeData.EmployeeName;
+          }
+          var employeeName = this.employeeData.EmployeeName;
           setTimeout(function () {
             var table = $('#dataTables-example').DataTable({
               // scrollY: '55vh',
@@ -78,22 +76,22 @@ export class EmployeeReportComponent implements OnInit {
               buttons: [{
                 extend: 'excel',
                 title: 'Evaluation Report of ' + employeeName,
-                  exportOptions: {
-                    columns: column_array
+                exportOptions: {
+                  columns: column_array
                 }
               },
               {
                 extend: 'print',
-                title: 'Question List',
-                  exportOptions: {
-                    columns: column_array
+                title: 'Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
                 }
               },
-            ]
+              ]
             });
-            $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
+            $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
-           }, 100);
+          }, 100);
         },
           (error) => {
             this.globals.isLoading = false;

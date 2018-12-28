@@ -32,7 +32,7 @@
         <div class="form-group col-md-6">
           <label><span class="required">*</span>Evaluation Type</label>
           <input type="text" class="form-control" #EvaluationTypeName="ngModel" [(ngModel)]="evaluationtypeEntity.EvaluationTypeName"
-             name="EvaluationTypeName" maxlength="100" required>
+            name="EvaluationTypeName" maxlength="100" required>
           <span class="error_span" *ngIf="(EvaluationTypeName.dirty && EvaluationTypeName.invalid) || (EvaluationTypeName.pristine && submitted)">
             <span *ngIf="EvaluationTypeName.errors.required || (EvaluationTypeName.pristine && submitted)">Please
               enter Evaluation Type</span>

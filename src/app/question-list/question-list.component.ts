@@ -25,8 +25,6 @@ export class QuestionListComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-    $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-    $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
@@ -37,7 +35,7 @@ export class QuestionListComponent implements OnInit {
       }
       $("#collapseExample3").addClass("in");
       $("#test_question").removeClass("collapsed");
-      $("#test_question").attr("aria-expanded","true");
+      $("#test_question").attr("aria-expanded", "true");
     }, 100);
     this.globals.isLoading = true;
     this.QuestionService.getAllQuestion()
@@ -61,7 +59,7 @@ export class QuestionListComponent implements OnInit {
             },
             dom: 'lBfrtip',
             buttons: [
-{
+              {
                 extend: 'excel',
                 title: 'Question List',
                 exportOptions: {
@@ -77,14 +75,14 @@ export class QuestionListComponent implements OnInit {
               },
             ]
           });
- $('.buttons-excel').attr('data-original-title', 'Export to Excel').tooltip();
-		   $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+          $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+          $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
         }, 100);
 
         this.questionList = data;
         console.log(this.questionList);
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
       },
         (error) => {
           this.globals.isLoading = false;
@@ -105,7 +103,7 @@ export class QuestionListComponent implements OnInit {
 
     this.QuestionService.isActiveChange(changeEntity)
       .then((data) => {
-        this.globals.isLoading = false;	
+        this.globals.isLoading = false;
         swal({
           position: 'top-end',
           type: 'success',
