@@ -168,6 +168,24 @@ export class GenerateEvaluationService {
     });
     return promise;
   }
+  getNewEvaluators(obj) {
+    debugger
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/getNewEvaluators', obj)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
+            this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
+          }
+        );
+    });
+    return promise;
+  }
   getEvaluationReport(evaluationId) {
     debugger
     let promise = new Promise((resolve, reject) => {
@@ -204,4 +222,23 @@ export class GenerateEvaluationService {
     });
     return promise;
   }
+  Invite(obj)
+   {
+     debugger
+   let promise = new Promise((resolve, reject) => {		
+     this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/addPostEvaluation/' ,obj)
+       .toPromise()
+       .then(
+         res => { // Success
+           resolve(res);
+         },
+         msg => { // Error
+       reject(msg);
+       this.globals.isLoading = false;
+       this.router.navigate(['/pagenotfound']);
+         }
+       );
+   });		
+   return promise;
+   }
 }

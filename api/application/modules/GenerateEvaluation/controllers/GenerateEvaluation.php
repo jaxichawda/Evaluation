@@ -100,7 +100,23 @@ class GenerateEvaluation extends CI_Controller {
 			echo json_encode($data);
 		}
 				
-	}
+    }
+    public function getNewEvaluators() {
+		$post_data= json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_data)
+		{
+			$data=$this->GenerateEvaluation_model->getNewEvaluators($post_data);			
+			echo json_encode($data);
+		}
+				
+    }
+    public function addPostEvaluation() {
+        $post_evaluation = json_decode(trim(file_get_contents('php://input')), true);	
+        if ($post_evaluation) {
+            $result = $this->GenerateEvaluation_model->addPostEvaluation($post_evaluation);
+        }
+
+    }
     public function generate_Evaluation() {
       $post_generate = json_decode(trim(file_get_contents('php://input')), true);	
       if ($post_generate) {

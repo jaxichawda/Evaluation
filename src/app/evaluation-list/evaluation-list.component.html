@@ -64,7 +64,8 @@
                   <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
                   -->
                   <td class="text-center">
-                    <div class="inline_delbtn tooltip_inline" title="View Evaluator" data-toggle="tooltip" data-placement="bottom">
+                    <div class="inline_delbtn tooltip_inline" title="View Evaluator" data-toggle="tooltip"
+                      data-placement="bottom">
                       <button class="btn btn-primary btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
                         <span class="fa fa-eye"></span>
                       </button>
@@ -80,13 +81,14 @@
                         <span class="fa fa-share"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Evaluators Report" data-toggle="tooltip"
-                      data-placement="bottom">
+                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Evaluators Report"
+                      data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-warning btn-rounded btn-sm" routerLink="/evaluation/report/{{evaluation.EvaluationId}}">
                         <span class="fa fa-table"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Report" data-toggle="tooltip" data-placement="bottom">
+                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Report" data-toggle="tooltip"
+                      data-placement="bottom">
                       <button class="btn btn-info btn-rounded btn-sm" routerLink="/employee/report/{{evaluation.EvaluationId}}">
                         <span class="fa fa-table"></span>
                       </button>
@@ -110,8 +112,22 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="myModalLabel">Evaluators</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-left">
+              <h3 class="modal-title" id="myModalLabel">Evaluators</h3>
+            </div>
+            <div *ngIf="((date | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))" class="pull-right">
+              <div class="btn-group pull-right add-right">
+                <button class="btn btn-info btn-rounded" (click)="displayNewEvaluators(evaluatorEntity)">
+                  Add Post Evaluator
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="clearfix"></div>
       <div class="modal-body">
         <div class="scroll_preview">
           <table id="preview_table" class=" table-striped table table-hover table-bordered" style="width:100%">
@@ -120,6 +136,7 @@
                 <th class="text-center sr_width">#</th>
                 <th>Evaluator Name</th>
                 <th>Evaluator Position</th>
+                <th>Evaluator Type</th>
                 <th>Status</th>
                 <th class="text-center active_width">Change Status</th>
                 <th class="text-center action_width">Revoke</th>
@@ -130,6 +147,8 @@
                 <td class="text-center">{{i+1}}</td>
                 <td>{{evaluators.Name}}</td>
                 <td>{{evaluators.JobTitleName}}</td>
+                <td *ngIf="evaluators.EvaluatorType=='0'">Pre Evaluator</td>
+                <td *ngIf="evaluators.EvaluatorType=='1'">Post Evaluator</td>
                 <td *ngIf="evaluators.StatusId=='1'">
                   <span class="submit_status">{{status.submitted}}</span>
                 </td>
@@ -178,8 +197,44 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button" data-dismiss="modal"><span class="fa fa-times"></span></button>
+        <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button" data-dismiss="modal"><span
+            class="fa fa-times"></span></button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="Evaluator_Modal" tabindex="-1" role="dialog" aria-labelledby="Evaluator_Modal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form #InviteForm="ngForm" (ngSubmit)="InviteConfirm(InviteForm)">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="form-group">
+                <label><span>*</span>Evaluator</label>
+                <select class='select-option' required class="form-control" #EvaluatorId="ngModel" [(ngModel)]="evaluatorEntity.EvaluatorId"
+                  name="EvaluatorId" [ngClass]="{red_border: (EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)}">
+                  <option value="" ngSelected='evaluatorEntity.EvaluatorId==""'>Select</option>
+                  <ng-container *ngFor="let list of NewEvaluatorList">
+                    <option class='option' [value]="list.EvaluatorId">{{list.Name}}{{list.EvaluatorId}}</option>
+                  </ng-container>
+                </select>
+                <span class="error_span" *ngIf="(EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)">
+                  <span *ngIf="EvaluatorId.errors.required || (EvaluatorId.pristine && submitted)">Please select
+                    Evaluator </span>
+                </span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="text-center">
+              <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+              <button type="button" class="back_btn" (click)="noForm1(InviteForm)" data-dismiss="modal"><span>No</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

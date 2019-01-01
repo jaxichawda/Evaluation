@@ -18,6 +18,12 @@ export class EvaluationListComponent implements OnInit {
   status;
   msgflag;
   EvaluatorList;
+  evaluatorEntity;
+  date;
+  TodaysDate;
+  NewEvaluatorList;
+  submitted;
+  btn_disable;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
@@ -25,7 +31,7 @@ export class EvaluationListComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-
+    this.evaluatorEntity={};
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -96,6 +102,7 @@ export class EvaluationListComponent implements OnInit {
           this.router.navigate(['/pagenotfound']);
         });
     this.msgflag = false;
+    this.TodaysDate = new Date();
   }
 
   revokeEvaluation(evaluation) {
@@ -200,6 +207,9 @@ export class EvaluationListComponent implements OnInit {
   }
 
   showEvaluators(evaluation) {
+    this.evaluatorEntity={};
+    this.evaluatorEntity.EvaluationId=evaluation.EvaluationId;
+    this.date = evaluation.EvaluationDate;
     var obj = { 'UserId': evaluation.UserId, 'EvaluationId': evaluation.EvaluationId };
     this.globals.isLoading = true;
     this.GenerateEvaluationService.getEvaluators(obj)
@@ -217,4 +227,70 @@ export class EvaluationListComponent implements OnInit {
         });
 
   }
+  displayNewEvaluators(evaluatorEntity){
+    //console.log(evaluatorEntity);
+    var obj = { 'UserId': evaluatorEntity.UserId, 'EvaluationId': evaluatorEntity.EvaluationId };
+    this.globals.isLoading = true;
+    this.GenerateEvaluationService.getNewEvaluators(obj)
+      .then((data) => {
+        if (data) {
+          this.NewEvaluatorList = data;
+        }
+        this.globals.isLoading = false;
+        this.evaluatorEntity.EvaluatorId="";
+        $('#Evaluator_Modal').modal('show');
+        $('.right_content_block').addClass('style_position');
+      },
+        (error) => {
+          this.globals.isLoading = false;
+          this.router.navigate(['/pagenotfound']);
+        });
+
+  }
+  InviteConfirm(InviteForm){
+    this.evaluatorEntity.CreatedBy = this.globals.authData.UserId;
+	this.evaluatorEntity.UpdatedBy = this.globals.authData.UserId;
+    this.submitted = true;
+		if (InviteForm.valid) {
+			this.btn_disable = true;
+			this.globals.isLoading = true;
+			
+		this.GenerateEvaluationService.Invite(this.evaluatorEntity)
+		.then((data) => 
+		{
+      this.globals.isLoading = false;
+      $('#Evaluator_Modal').modal('hide');
+      this.btn_disable = false;
+      this.submitted = false;
+      this.evaluatorEntity = {};
+      InviteForm.form.markAsPristine();
+			swal({
+				position: 'top-end',
+				type: 'success',
+				title: 'Invite Successfully',
+				showConfirmButton: false,
+				timer: 1500
+			})
+			
+			this.globals.isLoading = false;
+			this.router.navigate(['/user-invitelist']);
+    }, 
+		(error) => 
+		{
+			this.globals.isLoading = false;
+			$('#Evaluator_Modal').modal('hide');
+			if(error.text){
+				this.globals.message = "You can't send this Email";
+				this.globals.type = 'danger';
+				this.globals.msgflag = true;
+			}	
+		});	
+
+  }
+}
+noForm1(InviteForm) {
+  this.evaluatorEntity = {};	
+  this.submitted = false;
+  InviteForm.form.markAsPristine();
+}
 }

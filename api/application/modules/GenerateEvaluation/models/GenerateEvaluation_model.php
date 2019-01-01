@@ -295,7 +295,7 @@ class GenerateEvaluation_model extends CI_Model
 		return $res;
 	}
 	public function getEvaluators($post_data) {
-		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,ee.EmployeeEvaluatorId,ee.EvaluatorId,ee.StatusId');
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name,jt.JobTitleName,ee.EmployeeEvaluatorId,ee.EvaluatorId,ee.StatusId,ee.EvaluatorType');
 		$this->db->join('tbluser u','u.UserId=ee.EvaluatorId','left');
 		$this->db->join('tblmstjobtitle jt','jt.JobTitleId=u.JobTitleId','left');
 		$this->db->where('ee.EvaluationId',$post_data['EvaluationId']);
@@ -309,7 +309,60 @@ class GenerateEvaluation_model extends CI_Model
 		}
 		return $res;
 	}
-	public	function get_invimsg()
+	public function getNewEvaluators($post_data) {
+		$this->db->select('ee.EvaluatorId');
+		$this->db->where('ee.EvaluationId',$post_data['EvaluationId']);
+		$result = $this->db->get('tblmstempevaluator as ee');	
+		$res = array();
+		foreach($result->result() as $row) {
+			$res1['EvaluatorId'] = $row->EvaluatorId;
+			array_push($res,$res1['EvaluatorId']);
+		}
+		$this->db->select('CONCAT(u.FirstName," ",u.LastName) as Name, u.UserId as EvaluatorId');
+		$this->db->where_not_in('u.UserId',$res);
+		$result1 = $this->db->get('tbluser as u');	
+		$res2 = array();
+		if($result1->result()) {
+			$res2 = $result1->result();
+		}
+		return $res2;
+	}
+	public function addPostEvaluation($post_evaluation) {
+		try{
+			if($post_evaluation) {
+				$evaluation_data=array(
+				"EvaluationId"=>trim($post_evaluation['EvaluationId']),
+				"EvaluatorId"=>trim($post_evaluation['EvaluatorId']),
+				'StatusId' =>  0,
+				'EvaluatorType' => 1,
+				'IsActive' =>  1,
+				'CreatedBy' => trim($post_evaluation['CreatedBy']),
+				'CreatedOn' => date('y-m-d H:i:s'),
+				'UpdatedBy' => trim($post_evaluation['UpdatedBy']),
+				'UpdatedOn' => date('y-m-d H:i:s'),
+				);
+				$res=$this->db->insert('tblmstempevaluator',$evaluation_data);
+				$db_error = $this->db->error();
+				if (!empty($db_error) && !empty($db_error['code'])) { 
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			else
+			{
+					return false;
+			}
+		}catch(Exception $e){
+			trigger_error($e->getMessage(), E_USER_ERROR);
+			return false;
+		}	
+	}
+	public function get_invimsg()
 	{
 		try{
 		$this->db->select('ConfigurationId,Key,Value,DisplayText');
