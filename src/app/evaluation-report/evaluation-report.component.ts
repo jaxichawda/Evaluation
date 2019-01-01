@@ -71,6 +71,15 @@ export class EvaluationReportComponent implements OnInit {
               column_array.push(i);
             }
           }
+
+          var column_length1 = this.evaluatorEmployeeList.length;
+          var column_array1 = [0, 1];
+          if (column_length1 > 0) {
+            for (var i = 2; i <= column_length1 + 2; i++) {
+              column_array1.push(i);
+            }
+          }
+
           var employeeName = this.EmployeeData.EmployeeName;
           setTimeout(function () {
 
@@ -93,14 +102,14 @@ export class EvaluationReportComponent implements OnInit {
                 extend: 'excel',
                 title: 'Evaluator Evaluation Report of ' + employeeName,
                 exportOptions: {
-                  columns: column_array
+                  columns: column_array1
                 }
               },
               {
                 extend: 'print',
                 title: 'Evaluator Evaluation Report of ' + employeeName,
                 exportOptions: {
-                  columns: column_array
+                  columns: column_array1
                 }
               },
               ]
@@ -109,7 +118,7 @@ export class EvaluationReportComponent implements OnInit {
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
-          }, 1000);
+          }, 500);
 
           setTimeout(function () {
 
@@ -148,7 +157,7 @@ export class EvaluationReportComponent implements OnInit {
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
-          }, 1000);
+          }, 100);
 
          
 
@@ -173,14 +182,14 @@ export class EvaluationReportComponent implements OnInit {
                 extend: 'excel',
                 title: 'Employee Evaluation Report of ' + employeeName,
                 exportOptions: {
-                  columns: column_array
+                  columns: [0, 1, 2]
                 }
               },
               {
                 extend: 'print',
                 title: 'Employee Evaluation Report of ' + employeeName,
                 exportOptions: {
-                  columns: column_array
+                  columns: [0, 1, 2]
                 }
               },
               ]
@@ -189,7 +198,7 @@ export class EvaluationReportComponent implements OnInit {
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
-          }, 1000);
+          }, 100);
         },
           (error) => {
             this.globals.isLoading = false;
