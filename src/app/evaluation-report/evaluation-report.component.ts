@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Globals } from '.././globals';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { GenerateEvaluationService } from '../services/generate-evaluation.service';
+import { EvaluationReportService } from '../services/evaluation-report.service';
 declare var $, swal: any;
 
 @Component({
@@ -13,14 +13,19 @@ declare var $, swal: any;
 })
 export class EvaluationReportComponent implements OnInit {
 
-  evaluationList;
-  status;
-  EvaluatorList;
-  employeelist;
-  employeeData;
+  EmployeeData;
+
+  commonEvaluationList;
+  commonEmployeeList;
+
+  evaluatorEvaluationList;
+  evaluatorEmployeeList;
+
+  employeeEvaluationList;
+  employeeEmployeeList;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
-    private GenerateEvaluationService: GenerateEvaluationService) { }
+    private EvaluationReportService: EvaluationReportService) { }
 
   ngOnInit() {
     debugger
@@ -42,24 +47,34 @@ export class EvaluationReportComponent implements OnInit {
     this.globals.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.GenerateEvaluationService.getEvaluationReport(id)
+      this.EvaluationReportService.getCommonReport(id)
         .then((data) => {
           console.log(data);
-          this.employeeData = data['employeeData'];
-          this.employeelist = data['employee'];
-          this.evaluationList = data['report'];
+
+          this.EmployeeData = data['EmployeeData'];
+
+          //Common Report
+          this.commonEmployeeList = data['commonEmployee'];
+          this.commonEvaluationList = data['commonReport'];
+          //Evaluator Report
+          this.evaluatorEmployeeList = data['evaluatorEmployee'];
+          this.evaluatorEvaluationList = data['evaluatorReport'];
+          //Employee Report
+          this.employeeEmployeeList = data['employeeEmployee'];
+          this.employeeEvaluationList = data['employeeReport'];
+
           this.globals.isLoading = false;
-          var column_length = this.employeelist.length;
+          var column_length = this.commonEmployeeList.length;
           var column_array = [0, 1];
           if (column_length > 0) {
             for (var i = 2; i <= column_length + 2; i++) {
               column_array.push(i);
             }
           }
-          var employeeName = this.employeeData.EmployeeName;
+          var employeeName = this.EmployeeData.EmployeeName;
           setTimeout(function () {
-            var table = $('#dataTables-example').DataTable({
-              // scrollY: '55vh',
+
+            var table = $('#CommonReport').DataTable({
               responsive: {
                 details: {
                   display: $.fn.dataTable.Responsive.display.childRowImmediate,
@@ -76,22 +91,102 @@ export class EvaluationReportComponent implements OnInit {
               dom: 'lBfrtip',
               buttons: [{
                 extend: 'excel',
-                title: 'Evaluation Report of ' + employeeName,
+                title: 'Common Evaluation Report of ' + employeeName,
                 exportOptions: {
                   columns: column_array
                 }
               },
               {
                 extend: 'print',
-                title: 'Evaluation Report of ' + employeeName,
+                title: 'Common Evaluation Report of ' + employeeName,
                 exportOptions: {
                   columns: column_array
                 }
               },
               ]
             });
+
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+
+          }, 100);
+
+          setTimeout(function () {
+
+            var table = $('#EvaluatorReport').DataTable({
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                  type: ''
+                }
+              },
+              scrollCollapse: true,
+              "oLanguage": {
+                "sLengthMenu": "_MENU_ Questions per Page",
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Questions",
+                "sInfoFiltered": "(filtered from _MAX_ total Questions)",
+                "sInfoEmpty": "Showing 0 to 0 of 0 Questions"
+              },
+              dom: 'lBfrtip',
+              buttons: [{
+                extend: 'excel',
+                title: 'Evaluator Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              {
+                extend: 'print',
+                title: 'Evaluator Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              ]
+            });
+
+            $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+            $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+
+          }, 100);
+
+          setTimeout(function () {
+
+            var table = $('#EmployeeReport').DataTable({
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                  type: ''
+                }
+              },
+              scrollCollapse: true,
+              "oLanguage": {
+                "sLengthMenu": "_MENU_ Questions per Page",
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Questions",
+                "sInfoFiltered": "(filtered from _MAX_ total Questions)",
+                "sInfoEmpty": "Showing 0 to 0 of 0 Questions"
+              },
+              dom: 'lBfrtip',
+              buttons: [{
+                extend: 'excel',
+                title: 'Employee Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              {
+                extend: 'print',
+                title: 'Employee Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              ]
+            });
+
+            $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+            $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+
           }, 100);
         },
           (error) => {
@@ -99,7 +194,7 @@ export class EvaluationReportComponent implements OnInit {
             this.router.navigate(['/pagenotfound']);
           });
     } else {
-      this.evaluationList = {};
+      this.commonEvaluationList = {};
       this.globals.isLoading = false;
     }
   }

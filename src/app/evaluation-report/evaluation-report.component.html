@@ -1,11 +1,11 @@
-<div id="page-wrapper">
+<div id="page-wrapper" class="tab_content_block">
   <div class="row">
     <!--  page header -->
     <div class="col-lg-12">
       <div class="breadcrumb_block">
         <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="page_heading">
-            <h1>{{employeeData.EmployeeName}}'s Evaluation Report</h1>
+            <h1>{{EmployeeData.EmployeeName}}'s Evaluation Report</h1>
           </div>
         </div>
         <div class="col-md-6 col-sm-6 col-xs-12 text-right">
@@ -18,7 +18,19 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div class="btn-group pull-right add-right">
+      <div class="pull-left">
+        <div class="tab_padding">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#commonReport" aria-controls="commonReport" role="tab"
+                data-toggle="tab">Common Report</a></li>
+            <li role="presentation"><a href="#evaluatorReport" aria-controls="evaluatorReport" role="tab" data-toggle="tab">Evaluator
+                Report</a></li>
+            <li role="presentation"><a href="#employeeReport" aria-controls="employeeReport" role="tab" data-toggle="tab">Employee
+                Report</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn-group pull-right add-right width_auto">
         <a routerLink="/evaluation/list" class="back_btn">
           Back to list
         </a>
@@ -33,94 +45,145 @@
     </button>
     {{globals.message}}
   </div>
-  <div class="row">
-    <div class="col-lg-12">
-      <!-- Advanced Tables -->
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTables-example">
-              <thead>
-                <tr>
-                  <th class="text-center">#</th>
-                  <th>Question</th>
-                  <th *ngFor="let emp of employeelist;">
-                    {{emp.name}}
-                  </th>
-                  <th>
-                    Average Rating
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let evaluation of evaluationList; let i = index">
-                  <td class="text-center">{{i+1}}</td>
-                  <td><span [innerHTML]="evaluation.QuestionText"></span></td>
-                  <td *ngFor="let ans of evaluation.child;">
-                    <div>{{ans.AnswerText}}</div>
-                  </td>
-                  <ng-container *ngFor="let avgans of evaluation.child; let first=first;">
-                    <td *ngIf="first">
-                      <div *ngIf="avgans.EvaluatorAvg!=null">{{avgans.EvaluatorAvg}}</div>
-                      <div *ngIf="avgans.EvaluatorAvg==null"> - </div>
-                    </td>
-                  </ng-container>
-                </tr>
-                <tr class="text-center" *ngIf="evaluationList.length <= 0">
-                  <td colspan="4">There is no record found.</td>
-                </tr>
-              </tbody>
-            </table>
+  <div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="commonReport">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="CommonReport">
+                    <thead>
+                      <tr>
+                        <th class="text-center sr_width">#</th>
+                        <th>Question</th>
+                        <th *ngFor="let emp of commonEmployeeList;">
+                          {{emp.name}}
+                        </th>
+                        <th>
+                          Average Rating
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let evaluation of commonEvaluationList; let i = index">
+                        <td class="text-center sr_width">{{i+1}}</td>
+                        <td><span [innerHTML]="evaluation.QuestionText"></span></td>
+                        <td *ngFor="let ans of evaluation.child;">
+                          <div>{{ans.AnswerText}}</div>
+                        </td>
+                        <ng-container *ngFor="let avgans of evaluation.child; let first=first;">
+                          <td *ngIf="first">
+                            <div *ngIf="avgans.EvaluatorAvg!=null">{{avgans.EvaluatorAvg}}</div>
+                            <div *ngIf="avgans.EvaluatorAvg==null"> - </div>
+                          </td>
+                        </ng-container>
+                      </tr>
+                      <tr class="text-center" *ngIf="commonEvaluationList.length <= 0">
+                        <td colspan="4">There is no record found.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--End Advanced Tables -->
           </div>
         </div>
       </div>
-      <!--End Advanced Tables -->
-    </div>
-  </div>
-</div>
-<!-- end page-wrapper -->
-<div class="modal fade bs-example-modal-sm" id="Details_Modal" tabindex="-1" role="dialog" aria-labelledby="Details_Modal">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="myModalLabel">Evaluators</h3>
-      </div>
-      <div class="modal-body">
-        <div class="scroll_preview">
-          <table id="preview_table" class=" table-striped table table-hover table-bordered" style="width:100%">
-            <thead>
-              <tr>
-                <th style="width:1%;">#</th>
-                <th style="width:20%;">Evaluator Name</th>
-                <th style="width:20%;">Evaluator Position</th>
-                <th style="width:20%;">Status</th>
-                <th style="width:1%;">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let evaluators of EvaluatorList; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{evaluators.Name}} {{evaluators.StatusId}}</td>
-                <td>{{evaluators.JobTitleName}}</td>
-                <td *ngIf="evaluators.StatusId=='1'"><span class="submit_status">{{status.submitted}}</span></td>
-                <td *ngIf="evaluators.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
-                <td *ngIf="evaluators.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
-                <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
-                <td class="text-center">
-                  <button *ngIf="evaluators.StatusId=='0'" type="button" class="back_btn" data-tooltip="Revoke" (click)="revokeEvaluator(evaluators)">
-                    Revoke</button>
-                </td>
-              </tr>
-              <!-- <tr *ngIf="EvaluatorList.length<=0">
-                        <td colspan="6" class="text-center">There is no record found</td>
-                      </tr> -->
-            </tbody>
-          </table>
+      <div role="tabpanel" class="tab-pane" id="evaluatorReport">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="EvaluatorReport">
+                    <thead>
+                      <tr>
+                        <th class="text-center sr_width">#</th>
+                        <th>Question</th>
+                        <th *ngFor="let emp of evaluatorEmployeeList;">
+                          {{emp.name}}
+                        </th>
+                        <th>
+                          Average Rating
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let evaluation of evaluatorEvaluationList; let i = index">
+                        <td class="text-center sr_width">{{i+1}}</td>
+                        <td><span [innerHTML]="evaluation.QuestionText"></span></td>
+                        <td *ngFor="let ans of evaluation.child;">
+                          <div>{{ans.AnswerText}}</div>
+                        </td>
+                        <ng-container *ngFor="let avgans of evaluation.child; let first=first;">
+                          <td *ngIf="first">
+                            <div *ngIf="avgans.EvaluatorAvg!=null">{{avgans.EvaluatorAvg}}</div>
+                            <div *ngIf="avgans.EvaluatorAvg==null"> - </div>
+                          </td>
+                        </ng-container>
+                      </tr>
+                      <tr class="text-center" *ngIf="commonEvaluationList.length <= 0">
+                        <td colspan="4">There is no record found.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--End Advanced Tables -->
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="back_btn" data-dismiss="modal">OK</button>
+      <div role="tabpanel" class="tab-pane" id="employeeReport">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="EmployeeReport">
+                    <thead>
+                      <tr>
+                        <th class="text-center sr_width">#</th>
+                        <th>Question</th>
+                        <th *ngFor="let emp of employeeEmployeeList;">
+                          {{emp.name}}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let evaluation of employeeEvaluationList; let i = index">
+                        <td class="text-center sr_width">{{i+1}}</td>
+                        <td><span [innerHTML]="evaluation.QuestionText"></span></td>
+                        <td *ngFor="let ans of evaluation.child;">
+                          <div>{{ans.AnswerText}}</div>
+                        </td>
+                      </tr>
+                      <tr class="text-center" *ngIf="commonEvaluationList.length <= 0">
+                        <td colspan="4">There is no record found.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--End Advanced Tables -->
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
+  <!-- Common Report with Average -->
+
+  <!-- Evaluator Report with Average -->
+
+  <!-- Employee Report -->
+
 </div>
+<!-- end page-wrapper -->

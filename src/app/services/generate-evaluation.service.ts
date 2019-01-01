@@ -186,10 +186,10 @@ export class GenerateEvaluationService {
     });
     return promise;
   }
-  getEvaluationReport(evaluationId) {
+  Invite(obj) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getEvaluationReport/' + evaluationId)
+      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/addPostEvaluation/', obj)
         .toPromise()
         .then(
           res => { // Success
@@ -197,48 +197,11 @@ export class GenerateEvaluationService {
           },
           msg => { // Error
             reject(msg);
-            // this.globals.isLoading = false;
+            this.globals.isLoading = false;
             this.router.navigate(['/pagenotfound']);
           }
         );
     });
     return promise;
   }
-  getEmployeeReport(evaluationId) {
-    debugger
-    let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'GenerateEvaluation/getEmployeeReport/' + evaluationId)
-        .toPromise()
-        .then(
-          res => { // Success
-            resolve(res);
-          },
-          msg => { // Error
-            reject(msg);
-            // this.globals.isLoading = false;
-            this.router.navigate(['/pagenotfound']);
-          }
-        );
-    });
-    return promise;
-  }
-  Invite(obj)
-   {
-     debugger
-   let promise = new Promise((resolve, reject) => {		
-     this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/addPostEvaluation/' ,obj)
-       .toPromise()
-       .then(
-         res => { // Success
-           resolve(res);
-         },
-         msg => { // Error
-       reject(msg);
-       this.globals.isLoading = false;
-       this.router.navigate(['/pagenotfound']);
-         }
-       );
-   });		
-   return promise;
-   }
 }
