@@ -232,6 +232,13 @@ header .toggle{top:30px;background: rgba(0, 0, 0, 0.3);border-radius: 3px;color:
 .box_qa .rating_section .ans_section{text-align: center;}
 .box_qa .rating_section .ans_section span{display: block;}
 .box_qa .rating_section .ans_section strong{font-size: 20px;}
+
+.width_auto{width:auto;}
+.tab_padding{padding:0 15px;}
+.tab_content_block .nav-tabs{margin-bottom: 20px; border: 0;}
+.tab_content_block .nav-tabs li{display: inline-block; float: none;}
+.tab_content_block .nav-tabs li a{ padding:10px 10px; border-radius:4px; line-height: 13px; text-transform:capitalize; background:#0061af; text-align:center; white-space: normal; color: #fff; font-size: 14px; font-weight: normal; height: auto; display: block; clear: both; border: 1px solid #ccc;}
+.tab_content_block .nav-tabs li a:hover,.tab_content_block .nav-tabs li.active a {background:#fff; color: #0061af; border: 1px solid #ccc;}
 /* ------- Right Content ------- */
 
 /*--------------Loader--------------------*/

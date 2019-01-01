@@ -11,15 +11,14 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { Globals } from './globals';
-import {SelectModule} from 'ng-select';
+import { SelectModule } from 'ng-select';
 
 import { GenerateEvaluationComponent } from './generate-evaluation/generate-evaluation.component';
 import { GenerateEvaluationService } from './services/generate-evaluation.service';
 import { EvaluationListComponent } from './evaluation-list/evaluation-list.component';
+
 import { EvaluationReportComponent } from './evaluation-report/evaluation-report.component';
-import { EmployeeReportComponent } from './employee-report/employee-report.component';
-
-
+import { EvaluationReportService } from './services/evaluation-report.service';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -85,8 +84,7 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
     EvaluationReportComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ViewEvaluationComponent,
-    EmployeeReportComponent
+    ViewEvaluationComponent
 
   ],
   imports: [
@@ -94,9 +92,9 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
     HttpModule,
     FormsModule,
     HttpClientModule,
-	  SelectModule,
+    SelectModule,
     RouterModule.forRoot([
-      
+
 
       { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
       { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [AuthGuard] },
@@ -106,7 +104,6 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
       { path: 'evaluation/edit/:id', component: GenerateEvaluationComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/list', component: EvaluationListComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/report/:id', component: EvaluationReportComponent, canActivate: [AuthGuard] },
-      { path: 'employee/report/:id', component: EmployeeReportComponent, canActivate: [AuthGuard] },
       { path: 'evaluation/view/:id', component: ViewEvaluationComponent, canActivate: [AuthGuard] },
 
       { path: 'department/add', component: DepartmentComponent, canActivate: [AuthGuard] },
@@ -138,7 +135,7 @@ import { ViewEvaluationComponent } from './view-evaluation/view-evaluation.compo
 
     ])
   ],
-  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService, PerformanceReviewService, ForgotResetService],
+  providers: [Globals, AuthGuard, AuthService, GenerateEvaluationService, DepartmentService, EvaluationTypeService, JobTitleService, QuestionService, EmployeeService, ChangePasswordService, DashboardService, PerformanceReviewService, ForgotResetService, EvaluationReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

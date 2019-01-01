@@ -57,12 +57,6 @@
                   <td>{{evaluation.JobTitleName}}</td>
                   <td>{{evaluation.EvaluationTypeName}}</td>
                   <td>{{evaluation.EvaluationDate}}</td>
-                  <!--
-                  <td *ngIf="evaluation.StatusId=='1'"><span class="submit_status">{{status.submitted}}</span></td>
-                  <td *ngIf="evaluation.StatusId=='0'"><span class="pending_status">{{status.pending}}</span></td>
-                  <td *ngIf="evaluation.StatusId=='2'"><span class="inprogress_status">{{status.inprogress}}</span></td>
-                  <td *ngIf="evaluation.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
-                  -->
                   <td class="text-center">
                     <div class="inline_delbtn tooltip_inline" title="View Evaluator" data-toggle="tooltip"
                       data-placement="bottom">
@@ -81,15 +75,9 @@
                         <span class="fa fa-share"></span>
                       </button>
                     </div>
-                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Evaluators Report"
+                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Evaluation Report"
                       data-toggle="tooltip" data-placement="bottom">
                       <button class="btn btn-warning btn-rounded btn-sm" routerLink="/evaluation/report/{{evaluation.EvaluationId}}">
-                        <span class="fa fa-table"></span>
-                      </button>
-                    </div>
-                    <div class="inline_delbtn tooltip_inline" title="{{evaluation.Name}}'s Report" data-toggle="tooltip"
-                      data-placement="bottom">
-                      <button class="btn btn-info btn-rounded btn-sm" routerLink="/employee/report/{{evaluation.EvaluationId}}">
                         <span class="fa fa-table"></span>
                       </button>
                     </div>
