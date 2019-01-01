@@ -205,7 +205,7 @@
                   name="EvaluatorId" [ngClass]="{red_border: (EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)}">
                   <option value="" ngSelected='evaluatorEntity.EvaluatorId==""'>Select</option>
                   <ng-container *ngFor="let list of NewEvaluatorList">
-                    <option class='option' [value]="list.EvaluatorId">{{list.Name}}{{list.EvaluatorId}}</option>
+                    <option class='option' [value]="list.EvaluatorId">{{list.Name}}</option>
                   </ng-container>
                 </select>
                 <span class="error_span" *ngIf="(EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)">
