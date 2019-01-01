@@ -209,6 +209,8 @@ export class EvaluationListComponent implements OnInit {
   showEvaluators(evaluation) {
     this.evaluatorEntity={};
     this.evaluatorEntity.EvaluationId=evaluation.EvaluationId;
+    this.evaluatorEntity.EvaluationTypeName=evaluation.EvaluationTypeName;
+    this.evaluatorEntity.UserName=evaluation.Name;
     this.date = evaluation.EvaluationDate;
     var obj = { 'UserId': evaluation.UserId, 'EvaluationId': evaluation.EvaluationId };
     this.globals.isLoading = true;
@@ -273,7 +275,7 @@ export class EvaluationListComponent implements OnInit {
 			})
 			
 			this.globals.isLoading = false;
-			this.router.navigate(['/user-invitelist']);
+			this.router.navigate(['/evaluation/list']);
     }, 
 		(error) => 
 		{
