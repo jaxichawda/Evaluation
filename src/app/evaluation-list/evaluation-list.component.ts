@@ -30,6 +30,10 @@ export class EvaluationListComponent implements OnInit {
 
   ngOnInit() {
     debugger
+
+    $('#Evaluator_Modal').on('hidden.bs.modal', function () {
+      $('#Details_Modal').modal('hide');
+    });
     this.globals.isLoading = false;
     this.evaluatorEntity={};
     setTimeout(function () {
@@ -251,7 +255,7 @@ export class EvaluationListComponent implements OnInit {
   }
   InviteConfirm(InviteForm){
     this.evaluatorEntity.CreatedBy = this.globals.authData.UserId;
-	this.evaluatorEntity.UpdatedBy = this.globals.authData.UserId;
+	  this.evaluatorEntity.UpdatedBy = this.globals.authData.UserId;
     this.submitted = true;
 		if (InviteForm.valid) {
 			this.btn_disable = true;
@@ -262,6 +266,7 @@ export class EvaluationListComponent implements OnInit {
 		{
       this.globals.isLoading = false;
       $('#Evaluator_Modal').modal('hide');
+      $('#Details_Modal').modal('hide');
       this.btn_disable = false;
       this.submitted = false;
       this.evaluatorEntity = {};
@@ -280,7 +285,8 @@ export class EvaluationListComponent implements OnInit {
 		(error) => 
 		{
 			this.globals.isLoading = false;
-			$('#Evaluator_Modal').modal('hide');
+      $('#Evaluator_Modal').modal('hide');
+      $('#Details_Modal').modal('hide');
 			if(error.text){
 				this.globals.message = "You can't send this Email";
 				this.globals.type = 'danger';
@@ -291,7 +297,8 @@ export class EvaluationListComponent implements OnInit {
   }
 }
 noForm1(InviteForm) {
-  this.evaluatorEntity = {};	
+  this.evaluatorEntity = {};
+  $('#Details_Modal').modal('hide');	
   this.submitted = false;
   InviteForm.form.markAsPristine();
 }

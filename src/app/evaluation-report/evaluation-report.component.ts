@@ -74,45 +74,6 @@ export class EvaluationReportComponent implements OnInit {
           var employeeName = this.EmployeeData.EmployeeName;
           setTimeout(function () {
 
-            var table = $('#CommonReport').DataTable({
-              responsive: {
-                details: {
-                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                  type: ''
-                }
-              },
-              scrollCollapse: true,
-              "oLanguage": {
-                "sLengthMenu": "_MENU_ Questions per Page",
-                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Questions",
-                "sInfoFiltered": "(filtered from _MAX_ total Questions)",
-                "sInfoEmpty": "Showing 0 to 0 of 0 Questions"
-              },
-              dom: 'lBfrtip',
-              buttons: [{
-                extend: 'excel',
-                title: 'Common Evaluation Report of ' + employeeName,
-                exportOptions: {
-                  columns: column_array
-                }
-              },
-              {
-                extend: 'print',
-                title: 'Common Evaluation Report of ' + employeeName,
-                exportOptions: {
-                  columns: column_array
-                }
-              },
-              ]
-            });
-
-            $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
-            $('.buttons-print').attr('data-original-title', 'Print').tooltip();
-
-          }, 100);
-
-          setTimeout(function () {
-
             var table = $('#EvaluatorReport').DataTable({
               responsive: {
                 details: {
@@ -148,7 +109,48 @@ export class EvaluationReportComponent implements OnInit {
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
-          }, 100);
+          }, 1000);
+
+          setTimeout(function () {
+
+            var table = $('#CommonReport').DataTable({
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                  type: ''
+                }
+              },
+              scrollCollapse: true,
+              "oLanguage": {
+                "sLengthMenu": "_MENU_ Questions per Page",
+                "sInfo": "Showing _START_ to _END_ of _TOTAL_ Questions",
+                "sInfoFiltered": "(filtered from _MAX_ total Questions)",
+                "sInfoEmpty": "Showing 0 to 0 of 0 Questions"
+              },
+              dom: 'lBfrtip',
+              buttons: [{
+                extend: 'excel',
+                title: 'Common Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              {
+                extend: 'print',
+                title: 'Common Evaluation Report of ' + employeeName,
+                exportOptions: {
+                  columns: column_array
+                }
+              },
+              ]
+            });
+
+            $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
+            $('.buttons-print').attr('data-original-title', 'Print').tooltip();
+
+          }, 1000);
+
+         
 
           setTimeout(function () {
 
@@ -187,7 +189,7 @@ export class EvaluationReportComponent implements OnInit {
             $('.buttons-excel').attr('data-original-title', 'Export as Excel').tooltip();
             $('.buttons-print').attr('data-original-title', 'Print').tooltip();
 
-          }, 100);
+          }, 1000);
         },
           (error) => {
             this.globals.isLoading = false;
