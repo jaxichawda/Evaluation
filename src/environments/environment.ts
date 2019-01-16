@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://evaluation.devbyopeneyes.com',
-   // baseUrl: 'http://evaluation.uatbyopeneyes.com',
+   baseUrl: 'http://evaluation.devbyopeneyes.com',
+  // baseUrl: 'http://evaluation.uatbyopeneyes.com',
   env: 'dev' 
 };

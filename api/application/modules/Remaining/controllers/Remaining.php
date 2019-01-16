@@ -21,11 +21,11 @@ class Remaining extends CI_Controller {
 		$remaining1=date('Y-m-d',strtotime('+1Day'));
 		$remaining7=date('Y-m-d',strtotime('+7Day'));
 
-		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-		$config['smtp_port'] = '465';
-		$config['smtp_user'] = 'myopeneyes3937@gmail.com';
-		$config['smtp_pass'] = 'W3lc0m3@2019';  //sender's password
+		$config['protocol'] = SMTP_PROTOCOL;
+		$config['smtp_host'] = SMTP_HOST;
+		$config['smtp_port'] = SMTP_PORT;
+		$config['smtp_user'] = SMTP_EMAIL;
+		$config['smtp_pass'] = SMTP_PASSWORD;  //sender's password
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'iso-8859-1';
 		$config['newline']="\r\n";
@@ -39,7 +39,7 @@ class Remaining extends CI_Controller {
 				$email = $row->EmailAddress;
 				$name = $row->FirstName." ".$row->LastName;
 				$evaluationtypename = $row->EvaluationTypeName;
-				$evaluationdate = $row->EvaluationDate;
+				$ExpirationDate = $row->ExpirationDate;
 				$evaluatorid = $row->EvaluatorId;
 				$userid = $row->UserId;
 				if($evaluatorid==$userid){
@@ -71,7 +71,7 @@ class Remaining extends CI_Controller {
 										<tr>
 											<td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
 											<td style="padding:5px; text-align:center; width:4%">:</td>
-											<td style="padding:5px; text-align:left; width:48%">'.$evaluationdate.'</td>
+											<td style="padding:5px; text-align:left; width:48%">'.$ExpirationDate.'</td>
 										</tr>
 									</tbody>
 								</table>
@@ -128,7 +128,7 @@ class Remaining extends CI_Controller {
 										<tr>
 											<td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
 											<td style="padding:5px; text-align:center; width:4%">:</td>
-											<td style="padding:5px; text-align:left; width:48%">'.$evaluationdate.'</td>
+											<td style="padding:5px; text-align:left; width:48%">'.$ExpirationDate.'</td>
 										</tr>
 									</tbody>
 								</table>
@@ -160,11 +160,20 @@ class Remaining extends CI_Controller {
 				}
 				
 				$this->email->initialize($config); 
-				$this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+				$this->email->from(FROM_EMAIL,FROM_USER);
 				$this->email->to($email);
 				$this->email->subject($subject);
 				$this->email->message($message);
-				$this->email->send();
+				
+				if($this->email->send()){
+					$email_log = array(
+						'From' => SMTP_EMAIL,
+						'To' => $email,
+						'Subject' => $subject,
+						'MessageBody' => $message,
+					);
+					$res = $this->db->insert('tblemaillog',$email_log);
+				}
 				
 				echo json_encode('Success');
 			}
@@ -180,7 +189,7 @@ class Remaining extends CI_Controller {
 				$email = $row->EmailAddress;
 				$name = $row->FirstName." ".$row->LastName;
 				$evaluationtypename = $row->EvaluationTypeName;
-				$evaluationdate = $row->EvaluationDate;
+				$ExpirationDate = $row->ExpirationDate;
 				$evaluatorid = $row->EvaluatorId;
 				$userid = $row->UserId;
 				if($evaluatorid==$userid){
@@ -212,7 +221,7 @@ class Remaining extends CI_Controller {
 										<tr>
 											<td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
 											<td style="padding:5px; text-align:center; width:4%">:</td>
-											<td style="padding:5px; text-align:left; width:48%">'.$evaluationdate.'</td>
+											<td style="padding:5px; text-align:left; width:48%">'.$ExpirationDate.'</td>
 										</tr>
 									</tbody>
 								</table>
@@ -269,7 +278,7 @@ class Remaining extends CI_Controller {
 										<tr>
 											<td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
 											<td style="padding:5px; text-align:center; width:4%">:</td>
-											<td style="padding:5px; text-align:left; width:48%">'.$evaluationdate.'</td>
+											<td style="padding:5px; text-align:left; width:48%">'.$ExpirationDate.'</td>
 										</tr>
 									</tbody>
 								</table>
@@ -301,11 +310,20 @@ class Remaining extends CI_Controller {
 				}
 				
 				$this->email->initialize($config); 
-				$this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+				$this->email->from(FROM_EMAIL,FROM_USER);
 				$this->email->to($email);
 				$this->email->subject($subject);
 				$this->email->message($message);
-				$this->email->send();
+				
+				if($this->email->send()){
+					$email_log = array(
+						'From' => SMTP_EMAIL,
+						'To' => $email,
+						'Subject' => $subject,
+						'MessageBody' => $message,
+					);
+					$res = $this->db->insert('tblemaillog',$email_log);
+				}
 				
 				echo json_encode('Success');
 			}

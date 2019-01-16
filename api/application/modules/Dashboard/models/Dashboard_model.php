@@ -5,7 +5,7 @@ class Dashboard_model extends CI_Model {
 	{
 	  if($UserId)
 	  {
-        $result = $this->db->query('select ee.EmployeeEvaluatorId,ee.EvaluationId,ee.EvaluatorId,ee.StatusId,ee.EvaluatorType,e.UserId,e.EvaluationTypeId,e.EvaluationDate,et.EvaluationTypeName,u.FirstName,u.LastName from tblmstempevaluator as ee left join tblmstempevaluation as e on (e.EvaluationId=ee.EvaluationId) left join tblmstevaluationtype as et on (e.EvaluationTypeId=et.EvaluationTypeId)
+        $result = $this->db->query('select ee.EmployeeEvaluatorId,ee.EvaluationId,ee.EvaluatorId,ee.StatusId,ee.EvaluatorType,e.UserId,e.EvaluationTypeId,e.ExpirationDate,e.EvaluationDate,et.EvaluationTypeName,u.FirstName,u.LastName from tblmstempevaluator as ee left join tblmstempevaluation as e on (e.EvaluationId=ee.EvaluationId) left join tblmstevaluationtype as et on (e.EvaluationTypeId=et.EvaluationTypeId)
           LEFT join tbluser as u on (u.UserId=e.UserId) where ee.EvaluatorId='.$UserId.'
           ORDER BY CASE WHEN e.UserId='.$UserId.' THEN e.UserId END DESC');
 		
@@ -25,6 +25,12 @@ class Dashboard_model extends CI_Model {
         if($result1) {
             $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$post_data['Id']);
             if($result){
+                $log_data = array(
+                    'UserId' => $post_data['UserId'],
+                    'Module' => 'Evaluation',
+                    'Activity' =>'Start Evaluation (EmployeeEvaluatorId = '.$post_data['Id'].')'
+                );
+                $log = $this->db->insert('tblactivitylog',$log_data);
                 return true; 
             }
             else{

@@ -277,7 +277,7 @@ footer.footer_sidebaractive {width: 96% !important;}
 	header.header_fixed .screen_menu .address_block{font-size: 25px;}
 	.inner_banner .innerbanner_text{padding: 7% 0 0 0;}
 	.user_dashboard .user_feedback_grid .last_day_p{line-height:18px;}
-	.user_dashboard .user_feedback_grid .user_title {height: 150px;}
+	.user_dashboard .user_feedback_grid .user_title {height: 170px;}
 }
 @media (max-width:1300px){
     header .header_address .address{ padding: 0 15px 0 0; margin: 0 15px 0 0;}

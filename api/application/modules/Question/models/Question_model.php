@@ -31,9 +31,10 @@ class Question_model extends CI_Model {
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
+				$QuestionId = $this->db->insert_id();
 				$QuestionType = trim($question['AnswerTypeId']);
 				if(($res) && ($QuestionType == 3)) {
-					$QuestionId = $this->db->insert_id();
+					
 					foreach($option as $options) {
 						$Option_data = array(
 							'QuestionId' => trim($QuestionId),
@@ -43,12 +44,24 @@ class Question_model extends CI_Model {
 						$res2 = $this->db->insert('tblquestionoptions',$Option_data);
 					}
 					if($res2) {
+						$log_data = array(
+							'UserId' => trim($question['CreatedBy']),
+							'Module' => 'Question',
+							'Activity' =>'Add Question (QuestionId = '.$QuestionId.')'
+						);
+						$log = $this->db->insert('tblactivitylog',$log_data);
 						return true;
 					} else {
 						return false;
 					}
 				}
 				elseif($res){
+					$log_data = array(
+						'UserId' => trim($question['CreatedBy']),
+						'Module' => 'Question',
+						'Activity' =>'Add Question (QuestionId = '.$QuestionId.')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -188,12 +201,24 @@ class Question_model extends CI_Model {
 						}
 					}
 					if($res2) {
+						$log_data = array(
+							'UserId' => trim($question['UpdatedBy']),
+							'Module' => 'Question',
+							'Activity' =>'Update Question (QuestionId = '.$QuestionId.')'
+						);
+						$log = $this->db->insert('tblactivitylog',$log_data);
 						return true;
 					} else {
 						return false;
 					}
 				}
 				elseif($res){
+					$log_data = array(
+						'UserId' => trim($question['UpdatedBy']),
+						'Module' => 'Question',
+						'Activity' =>'Update Question (QuestionId = '.$QuestionId.')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -296,7 +321,12 @@ class Question_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
-					
+					$log_data = array(
+						'UserId' => trim($post_data['UpdatedBy']),
+						'Module' => 'Question',
+						'Activity' =>'Update Question Active Status (QuestionId = '.$post_data['QuestionId'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -322,6 +352,17 @@ class Question_model extends CI_Model {
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					$log_data = array(
+						'UserId' => $post_Question['Userid'],
+						'Module' => 'Question',
+						'Activity' =>'Delete Question (QuestionId = '.$post_Question['id'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return true;
+				} else {
+					return false;
 				}
 			}else {
 				return false;

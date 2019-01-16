@@ -42,10 +42,11 @@
               <thead>
                 <tr>
                   <th class="text-center sr_width">#</th>
-                  <th>Employee Name</th>
-                  <th>Employee Position</th>
+                  <th>Employee</th>
+                  <th>Job Title</th>
                   <th>Evaluation Type</th>
-                  <th>Scheduled Evaluation Date</th>
+                  <th>Expiration Date</th>
+                  <th>Evaluation Date</th>
                   <!--<th style="width:20%;">Status</th>-->
                   <th class="text-center all_action">Actions</th>
                 </tr>
@@ -54,10 +55,30 @@
                 <tr *ngFor="let evaluation of evaluationList; let i = index">
                   <td class="text-center">{{i+1}}</td>
                   <td>{{evaluation.Name}}</td>
-                  <td>{{evaluation.JobTitleName}}</td>
+                  <td>{{evaluation.JobTitle}}</td>
                   <td>{{evaluation.EvaluationTypeName}}</td>
-                  <td>{{evaluation.EvaluationDate}}</td>
+                  <td>{{evaluation.ExpirationDate | date : 'MM/dd/yyyy, h:mm a' }}</td>
+                  <td>{{evaluation.EvaluationDate | date : 'MM/dd/yyyy, h:mm a' }}</td>
                   <td class="text-center">
+
+                    <div class="inline_delbtn tooltip_inline" title="Add Evaluation Note" data-toggle="tooltip"
+                      data-placement="bottom" *ngIf="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') < (newTime | date : 'yyyy/MM/dd HH:mm')) && evaluation.EvaluationNote==null">
+                      <button class="btn btn-default btn-rounded btn-sm" (click)="evaluationNote(evaluation)">
+                        <span class="fa fa-comment-o"></span>
+                      </button>
+                    </div>
+                    <div class="inline_delbtn tooltip_inline" title="View Evaluation Note" data-toggle="tooltip"
+                      data-placement="bottom" *ngIf="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') < (newTime | date : 'yyyy/MM/dd HH:mm')) && evaluation.EvaluationNote!=null">
+                      <button class="btn btn-default btn-rounded btn-sm" (click)="evaluationNote(evaluation)">
+                        <span class="fa fa-comment"></span>
+                      </button>
+                    </div>
+                    <div class="inline_delbtn tooltip_inline" title="Evaluation Note can be add after Evaluation Complete."
+                      data-toggle="tooltip" data-placement="bottom" *ngIf="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') >= (newTime | date : 'yyyy/MM/dd HH:mm'))">
+                      <button class="btn btn-default btn-rounded btn-sm" [disabled]="((evaluation.EvaluationDate | date : 'yyyy/MM/dd HH:mm') >= (newTime | date : 'yyyy/MM/dd HH:mm'))">
+                        <span class="fa fa-comment-o"></span>
+                      </button>
+                    </div>
                     <div class="inline_delbtn tooltip_inline" title="View Evaluator" data-toggle="tooltip"
                       data-placement="bottom">
                       <button class="btn btn-primary btn-rounded btn-sm" (click)="showEvaluators(evaluation)">
@@ -103,13 +124,12 @@
         <div class="row">
           <div class="col-md-12">
             <div class="pull-left">
-              <h3 class="modal-title" id="myModalLabel">Evaluators</h3>
+              <h3 class="modal-title" id="myModalLabel">{{evaluatorEntity.UserName}}'s Evaluators</h3>
             </div>
-            <div *ngIf="((date | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))" class="pull-right">
+            <div class="pull-right">
               <div class="btn-group pull-right add-right">
-                <button class="btn btn-info btn-rounded" (click)="displayNewEvaluators(evaluatorEntity)">
-                  Add Post Evaluator
-                </button>
+                <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
+                  data-dismiss="modal"><span class="fa fa-times"></span></button>
               </div>
             </div>
           </div>
@@ -122,9 +142,8 @@
             <thead>
               <tr>
                 <th class="text-center sr_width">#</th>
-                <th>Evaluator Name</th>
-                <th>Evaluator Position</th>
-                <th>Evaluator Type</th>
+                <th>Evaluator</th>
+                <th>Job Title</th>
                 <th>Status</th>
                 <th class="text-center active_width">Change Status</th>
                 <th class="text-center action_width">Revoke</th>
@@ -133,10 +152,9 @@
             <tbody>
               <tr *ngFor="let evaluators of EvaluatorList; let i = index">
                 <td class="text-center">{{i+1}}</td>
-                <td>{{evaluators.Name}}</td>
-                <td>{{evaluators.JobTitleName}}</td>
-                <td *ngIf="evaluators.EvaluatorType=='0'">Pre Evaluator</td>
-                <td *ngIf="evaluators.EvaluatorType=='1'">Post Evaluator</td>
+                <td>{{evaluators.Name}} <span *ngIf="evaluators.Name==evaluatorEntity.UserName" class="fa fa-user"></span>
+                </td>
+                <td>{{evaluators.JobTitle}}</td>
                 <td *ngIf="evaluators.StatusId=='1'">
                   <span class="submit_status">{{status.submitted}}</span>
                 </td>
@@ -145,14 +163,14 @@
                 <td *ngIf="evaluators.StatusId=='3'"><span class="revoke_status">{{status.revoked}}</span></td>
 
                 <td class="text-center">
-                  <div *ngIf="evaluators.StatusId=='1'" class="activeyes_box" data-toggle="tooltip" data-placement="top"
-                    [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submit'">
+                  <div *ngIf="(evaluators.StatusId=='1') && ((evaluatorEntity.date | date : 'yyyy/MM/dd HH:mm') >= (newTime | date : 'yyyy/MM/dd HH:mm'))"
+                    class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submitted'">
                     <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)"
                       [checked]="evaluators.StatusId==1" value="Yes">
                     <label for="status{{i}}"></label>
                   </div>
-                  <div *ngIf="evaluators.StatusId=='2'" class="activeyes_box" data-toggle="tooltip" data-placement="top"
-                    [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submit'">
+                  <div *ngIf="(evaluators.StatusId=='2') && ((evaluatorEntity.date | date : 'yyyy/MM/dd HH:mm') >= (newTime | date : 'yyyy/MM/dd HH:mm'))"
+                    class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="evaluators.StatusId==1 ? 'Change to In Progress' : 'Change to Submitted'">
                     <input type="checkbox" name="status" id="status{{i}}" (change)="statusChange(evaluators,i)"
                       [checked]="evaluators.StatusId==1" value="Yes">
                     <label for="status{{i}}"></label>
@@ -184,45 +202,54 @@
           </table>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button" data-dismiss="modal"><span
-            class="fa fa-times"></span></button>
-      </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" id="Evaluator_Modal" tabindex="-1" role="dialog" aria-labelledby="Evaluator_Modal">
-  <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade bs-example-modal-sm" id="EvaluationNote_Modal" tabindex="-1" role="dialog" aria-labelledby="EvaluationNote_Modal">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-body">
-        <form #InviteForm="ngForm" (ngSubmit)="InviteConfirm(InviteForm)">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <div class="form-group">
-                <label><span>*</span>Evaluator</label>
-                <select class='select-option' required class="form-control" #EvaluatorId="ngModel" [(ngModel)]="evaluatorEntity.EvaluatorId"
-                  name="EvaluatorId" [ngClass]="{red_border: (EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)}">
-                  <option value="" ngSelected='evaluatorEntity.EvaluatorId==""'>Select</option>
-                  <ng-container *ngFor="let list of NewEvaluatorList">
-                    <option class='option' [value]="list.EvaluatorId">{{list.Name}}</option>
-                  </ng-container>
-                </select>
-                <span class="error_span" *ngIf="(EvaluatorId.dirty && EvaluatorId.invalid) || (EvaluatorId.pristine && submitted)">
-                  <span *ngIf="EvaluatorId.errors.required || (EvaluatorId.pristine && submitted)">Please select
-                    Evaluator </span>
-                </span>
+      <div class="modal-header">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-left">
+              <h3 class="modal-title" id="myModalLabel">Evaluation Note of {{Name}}</h3>
+            </div>
+            <div class="pull-right">
+              <div class="btn-group add-right">
+                <button type="button" class="btn btn-danger btn-rounded btn-sm delete-user-row-with-ajax-button"
+                  data-dismiss="modal"><span class="fa fa-times"></span></button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="modal-body">
+        <div class="col-lg-12 col-md-12">
+          <div class="alert alert-info" *ngIf="evaluationNoteEntity.EvaluationNoteEnter==1">You can not edit the
+            Evaluation Note once it's submitted. Make sure, this is your final Evaluation Note.</div>
+          <!-- <div class="alert alert-info" *ngIf="evaluationNoteEntity.EvaluationNote!=null">You already Added.</div> -->
+        </div>
+        <form #evaluationNoteForm="ngForm" (ngSubmit)="AddEvaluationNote(evaluationNoteForm)">
+          <div class="row">
+            <div class="col-md-12 col-sm-12" *ngIf="evaluationNoteEntity.EvaluationNoteEnter==1">
+              <div class="form-group">
+                <label>Evaluation Note</label>
+                <textarea class="form-control" #EvaluationNote="ngModel" [(ngModel)]="evaluationNoteEntity.EvaluationNote"
+                  name="EvaluationNote" maxlength="1000"></textarea>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-12" *ngIf="evaluationNoteEntity.EvaluationNoteEnter==false">
+              <p>{{evaluationNoteEntity.EvaluationNote}}</p>
+            </div>
             <div class="clearfix"></div>
-            <div class="text-center">
+            <div class="text-center" *ngIf="evaluationNoteEntity.EvaluationNoteEnter==1">
               <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
-              <button type="button" class="back_btn" (click)="noForm1(InviteForm)" data-dismiss="modal"><span>No</span></button>
             </div>
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>

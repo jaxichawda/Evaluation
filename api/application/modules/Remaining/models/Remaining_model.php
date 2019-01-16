@@ -5,7 +5,7 @@ class Remaining_model extends CI_Model {
 	public function getEvaluation($remaining)
 	{
 		$result = $this->db->query('
-		select ee.EvaluatorId, e.UserId, e.EvaluationDate,et.EvaluationTypeName,u.FirstName,u.LastName, uu.EmailAddress
+		select ee.EvaluatorId, e.UserId, e.ExpirationDate,et.EvaluationTypeName,u.FirstName,u.LastName, uu.EmailAddress
 		from tblmstempevaluation as e
 		left join  tblmstempevaluator as ee 
 		on (e.EvaluationId=ee.EvaluationId) 
@@ -15,7 +15,7 @@ class Remaining_model extends CI_Model {
 		on (uu.UserId=ee.EvaluatorId)
 		LEFT join tbluser as u
 		on (u.UserId=e.UserId)
-		WHERE ee.StatusId!=1 && DATE(e.EvaluationDate) = "'.$remaining.'"
+		WHERE ee.StatusId!=1 && DATE(e.ExpirationDate) = "'.$remaining.'"
 		;');
 
 		$res = array();

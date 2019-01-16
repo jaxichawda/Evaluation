@@ -130,7 +130,7 @@ export class EvaluationTypeListComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          var del = { 'Userid': 1, 'id': evaluationtype.EvaluationTypeId, 'Name': evaluationtype.EvaluationTypeName };
+          var del = { 'Userid': this.globals.authData.UserId, 'id': evaluationtype.EvaluationTypeId, 'Name': evaluationtype.EvaluationTypeName };
           this.globals.isLoading = true;
           this.EvaluationTypeService.deleteEvaluationType(del)
             .then((data) => {

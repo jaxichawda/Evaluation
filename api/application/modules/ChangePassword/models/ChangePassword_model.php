@@ -14,12 +14,22 @@ class ChangePassword_model extends CI_Model {
 				if ($query->num_rows() == 1) {
 					$password_data = array(
 						'Password'=>md5($post_password['NewPassword']),
-						'CreatedOn' => date('y-m-d H:i:s'),
+						'UpdatedBy' => trim($post_password['UserId']),
 						'UpdatedOn' => date('y-m-d H:i:s')
 					);
 					$this->db->where('UserId',trim($post_password['UserId']));
 					$res = $this->db->update('tbluser',$password_data);
-					return true;
+					if($res) {
+						$log_data = array(
+							'UserId' => trim($post_password['UserId']),
+							'Module' => 'Password',
+							'Activity' =>'Change Password after Login'
+						);
+						$log = $this->db->insert('tblactivitylog',$log_data);
+						return true;
+					} else {
+						return false;
+					}
 				} else {
 					return false;
 				}
@@ -32,7 +42,7 @@ class ChangePassword_model extends CI_Model {
 	try{
 		if($post_pass)
 		{
-				$this->db->select('UserId,EmailAddress,ResetPasswordCode');				
+				$this->db->select('UserId,EmailAddress,ForgotPasswordCode');				
 				$this->db->where('EmailAddress',trim($post_pass['EmailAddress']));
 				//$this->db->where('Status',0);
 				$this->db->limit(1);
@@ -43,13 +53,11 @@ class ChangePassword_model extends CI_Model {
 				{
 					$pass_data = array(
 						//'Status' =>0,
-						'ResetPasswordCode' =>$post_pass['ResetPasswordCode'],
-						'CreatedOn' => date('y-m-d H:i:s'),
+						'ForgotPasswordCode' =>$post_pass['ForgotPasswordCode'],
 						'UpdatedOn' => date('y-m-d H:i:s')
 					);
 					
 					$this->db->where('EmailAddress',trim($post_pass['EmailAddress']));
-					//$this->db->where('Code',trim($post_pass['Code']));
 					$res = $this->db->update('tbluser',$pass_data);
 					$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -58,11 +66,20 @@ class ChangePassword_model extends CI_Model {
 					}
 					if($res)
 					{
-					    $pass = array();
+						$pass = array();
+						
 						foreach($query->result() as $row) {
 							$pass = $row;
 						}
+						$log_data = array(
+							'UserId' => $query->result()[0]->UserId,
+							'Module' => 'Password',
+							'Activity' =>'Send Password reset Link'
+						);
+						$log = $this->db->insert('tblactivitylog',$log_data);
+
 						return $query->result()[0]->UserId;
+
 					}else
 					{
 						return false;
@@ -94,7 +111,7 @@ class ChangePassword_model extends CI_Model {
 			
 			$pass_data = array(
 				'Password' =>md5(trim($post_pass['NewPassword'])),
-				'ResetPasswordCode' =>'',
+				'ForgotPasswordCode' =>'',
 				'UpdatedOn' => date('y-m-d H:i:s')
 				
 			);
@@ -103,7 +120,17 @@ class ChangePassword_model extends CI_Model {
 			//$this->db->where('Status',0);
 			$res = $this->db->update('tbluser',$pass_data);
 			
-			return true;
+			if($res) {
+				$log_data = array(
+					'UserId' => trim($post_pass['UserId']),
+					'Module' => 'Password',
+					'Activity' =>'Reset Password without Login'
+				);
+				$log = $this->db->insert('tblactivitylog',$log_data);
+				return true;
+			} else {
+				return false;
+			}
 			
 				
 		} 
@@ -117,10 +144,10 @@ class ChangePassword_model extends CI_Model {
 		if($post_passlink)
 		{
 			
-				$this->db->select('UserId,ResetPasswordCode');				
+				$this->db->select('UserId,ForgotPasswordCode');				
 				$this->db->where('UserId',trim($post_passlink['UserId']));
 				//$this->db->where('EmailAddress',$post_pass['EmailAddress']);
-				$this->db->where('ResetPasswordCode',trim($post_passlink['ResetPasswordCode']));
+				$this->db->where('ForgotPasswordCode',trim($post_passlink['ForgotPasswordCode']));
 				$this->db->limit(1);
 				$this->db->from('tbluser');
 			    $query= $this->db->get();

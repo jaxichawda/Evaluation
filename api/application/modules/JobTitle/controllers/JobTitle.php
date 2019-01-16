@@ -15,7 +15,7 @@ class JobTitle extends CI_Controller {
 	{
 		$post_JobTitle = json_decode(trim(file_get_contents('php://input')), true);
 		if ($post_JobTitle) {
-			if($post_JobTitle['JobTitleId']>0) {
+			if($post_JobTitle['JobId']>0) {
 				$result = $this->JobTitle_model->editJobTitle($post_JobTitle);
 				if($result) {
 					echo json_encode($post_JobTitle);	
@@ -34,11 +34,11 @@ class JobTitle extends CI_Controller {
 		$data=$this->JobTitle_model->getAllDepartment();
 		echo json_encode($data);
 	}
-	public function getById($jobtitleId=null)
+	public function getById($JobId=null)
 	{	
-		if(!empty($jobtitleId)) {
+		if(!empty($JobId)) {
 			$data=[];
-			$data=$this->JobTitle_model->getById($jobtitleId);
+			$data=$this->JobTitle_model->getById($JobId);
 			echo json_encode($data);
 		}
 	}

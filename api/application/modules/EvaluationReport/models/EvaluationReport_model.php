@@ -63,9 +63,12 @@ class EvaluationReport_model extends CI_Model
 				$this->db->select('ea.EmployeeEvaluatorId,ea.QuestionId,ea.AnswerText,
 				(SELECT ROUND(AVG(tea.AnswerText)) as EvaluatorAvg FROM tblevaluationanswer tea 
                 LEFT JOIN tblmstquestion tmq
-                ON tmq.QuestionId = tea.QuestionId
+				ON tmq.QuestionId = tea.QuestionId
+				LEFT JOIN tblmstempevaluator tmee
+                ON tmee.EmployeeEvaluatorId = tea.EmployeeEvaluatorId
                 WHERE tmq.AnswerTypeId=2 && 
-                tea.QuestionId=ea.QuestionId 
+				tea.QuestionId=ea.QuestionId &&
+				tmee.EvaluationId = '.$evaluationId.'
                 )
             as EvaluatorAvg');
 				$this->db->join('tblmstempevaluator a','a.EmployeeEvaluatorId=ea.EmployeeEvaluatorId','left');

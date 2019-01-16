@@ -24,6 +24,12 @@ class Department_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_Department['CreatedBy']),
+						'Module' => 'Department',
+						'Activity' =>'Add Department - '.$post_Department['DepartmentName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -31,7 +37,7 @@ class Department_model extends CI_Model {
 			}
 			else
 			{
-					return false;
+				return false;
 			}
 		}catch(Exception $e){
 			trigger_error($e->getMessage(), E_USER_ERROR);
@@ -62,6 +68,12 @@ class Department_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_Department['UpdatedBy']),
+						'Module' => 'Department',
+						'Activity' =>'Update Department - '.$post_Department['DepartmentName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -86,10 +98,8 @@ class Department_model extends CI_Model {
 		 foreach($result->result() as $row)
 		 {
 			$department_data=$row;
-			
 		 }
 		 return $department_data;
-		 
 	  }
 	  else
 	  {
@@ -99,7 +109,7 @@ class Department_model extends CI_Model {
 	public function getAllDepartment()
 	{
 		try{
-			$this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive, (SELECT COUNT(tmjt.JobTitleId) FROM tblmstjobtitle as tmjt WHERE tmjt.DepartmentId=tmd.DepartmentId) as isdisabled');
+			$this->db->select('tmd.DepartmentId, tmd.DepartmentName, tmd.IsActive, (SELECT COUNT(tmjt.JobId) FROM tblmstjob as tmjt WHERE tmjt.DepartmentId=tmd.DepartmentId) as isdisabled');
 			$result = $this->db->get('tblmstdepartment tmd');
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
@@ -138,7 +148,12 @@ class Department_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
-					
+					$log_data = array(
+						'UserId' => trim($post_data['UpdatedBy']),
+						'Module' => 'Department',
+						'Activity' =>'Update Department Active Status - '.$post_data['DepartmentName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -162,6 +177,17 @@ class Department_model extends CI_Model {
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					$log_data = array(
+						'UserId' => $post_Department['Userid'],
+						'Module' => 'Department',
+						'Activity' =>'Delete Department - '.$post_Department['Name'].' (Id - '.$post_Department['id'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return true;
+				} else {
+					return false;
 				}
 			}else {
 				return false;

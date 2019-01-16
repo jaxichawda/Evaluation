@@ -129,7 +129,7 @@ export class DepartmentListComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          var del = { 'Userid': 1, 'id': department.DepartmentId, 'Name': department.DepartmentName };
+          var del = { 'Userid': this.globals.authData.UserId, 'id': department.DepartmentId, 'Name': department.DepartmentName };
           this.globals.isLoading = true;
           this.DepartmentService.deleteDepartment(del)
             .then((data) => {

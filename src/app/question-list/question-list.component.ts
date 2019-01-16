@@ -131,7 +131,7 @@ export class QuestionListComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          var del = { 'Userid': 1, 'id': question.QuestionId, 'Name': question.QuestionText };
+          var del = { 'Userid': this.globals.authData.UserId, 'id': question.QuestionId, 'Name': question.QuestionText };
           this.globals.isLoading = true;
           this.QuestionService.deleteQuestion(del)
             .then((data) => {

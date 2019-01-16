@@ -24,6 +24,12 @@ class EvaluationType_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_EvaluationType['CreatedBy']),
+						'Module' => 'Evaluation Type',
+						'Activity' =>'Add Evaluation Type - '.$post_EvaluationType['EvaluationTypeName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -62,6 +68,12 @@ class EvaluationType_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_EvaluationType['UpdatedBy']),
+						'Module' => 'Evaluation Type',
+						'Activity' =>'Update Evaluation Type - '.$post_EvaluationType['EvaluationTypeName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -138,7 +150,12 @@ class EvaluationType_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
-					
+					$log_data = array(
+						'UserId' => trim($post_data['UpdatedBy']),
+						'Module' => 'Evaluation Type',
+						'Activity' =>'Update Evaluation Type Active Status - '.$post_data['EvaluationTypeName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -162,6 +179,17 @@ class EvaluationType_model extends CI_Model {
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					$log_data = array(
+						'UserId' => $post_EvaluationType['Userid'],
+						'Module' => 'Evaluation Type',
+						'Activity' =>'Delete Evaluation Type - '.$post_EvaluationType['Name'].' (Id - '.$post_EvaluationType['id'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return true;
+				} else {
+					return false;
 				}
 			}else {
 				return false;

@@ -152,7 +152,7 @@ export class QuestionComponent implements OnInit {
     } else {
       this.questionEntity.CreatedBy = this.globals.authData.UserId;
       this.questionEntity.UpdatedBy = this.globals.authData.UserId;
-      this.questionEntity.JobTitleId = 0;
+      this.questionEntity.JobId = 0;
       this.submitted = true;
     }
 

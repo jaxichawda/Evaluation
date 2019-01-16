@@ -89,33 +89,43 @@ class PerformanceReview_model extends CI_Model {
     }
     public function insertPerformance($PerformanceData)
 	{	
-                    foreach($PerformanceData as $data){
-                        foreach($data['row'] as $value){
-                        if ($value['AnswerText'] == null)
-                        $AnswerText = null;
-                            else
-                        $AnswerText = $value['AnswerText'];
+        foreach($PerformanceData as $data){
+            foreach($data['row'] as $value){
+            if ($value['AnswerText'] == null)
+            $AnswerText = null;
+                else
+            $AnswerText = $value['AnswerText'];
 
-                        if ($value['Comments'] == null)
-                        $Comments = null;
-                            else
-                        $Comments = $value['Comments'];
-                        //$child = $data['child'];
-                            $data1=array(
-                                "EmployeeEvaluatorId"=>$value['EmployeeEvaluatorId'],
-                                "QuestionId"=>$value['QuestionId'],
-                                "AnswerText"=>$AnswerText,
-                                "Comments"=>$Comments,
-                                "IsActive"=>1,
-                                "UpdatedOn"=>date('y-m-d H:i:s')
-                                );	
-                                $this->db->where('EvaluationAnswerId',trim($value['EvaluationAnswerId']));
-                                $res1=$this->db->update('tblevaluationanswer',$data1);
-                            }
-                    } 
-                    $result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$value['EmployeeEvaluatorId']);
-                    return true;
-                    
+            if ($value['Comments'] == null)
+            $Comments = null;
+                else
+            $Comments = $value['Comments'];
+            //$child = $data['child'];
+                $data1=array(
+                    "EmployeeEvaluatorId"=>$value['EmployeeEvaluatorId'],
+                    "QuestionId"=>$value['QuestionId'],
+                    "AnswerText"=>$AnswerText,
+                    "Comments"=>$Comments,
+                    "IsActive"=>1,
+                    "UpdatedOn"=>date('y-m-d H:i:s')
+                    );	
+                    $this->db->where('EvaluationAnswerId',trim($value['EvaluationAnswerId']));
+                    $res1=$this->db->update('tblevaluationanswer',$data1);
+                }
+        } 
+        $result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$value['EmployeeEvaluatorId']);
+        $CreatedBy=$this->db->query("select EvaluatorId from tblmstempevaluator where EmployeeEvaluatorId=".$value['EmployeeEvaluatorId'].";");
+        if($CreatedBy) {
+            $log_data = array(
+                'UserId' => $CreatedBy->result()[0]->EvaluatorId,
+                'Module' => 'Evaluation',
+                'Activity' =>'Submit Evaluation (EmployeeEvaluatorId = '.$value['EmployeeEvaluatorId'].')'
+            );
+            $log = $this->db->insert('tblactivitylog',$log_data);
+            return true;
+        } else {
+            return false;
+        }       
     }
     public function saveAsDraft($PerformanceData)
 	{	   
@@ -143,8 +153,19 @@ class PerformanceReview_model extends CI_Model {
                                 $res1=$this->db->update('tblevaluationanswer',$data1);
                             }
                     } 
-                    //$result=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$data['EmployeeEvaluatorId']);
-                    return true;
+                    //$res=$this->db->query("update tblmstempevaluator set StatusId=1 where EmployeeEvaluatorId=".$data['EmployeeEvaluatorId']);
+                    $CreatedBy=$this->db->query("select EvaluatorId from tblmstempevaluator where EmployeeEvaluatorId=".$value['EmployeeEvaluatorId'].";");
+                    if($CreatedBy) {
+                        $log_data = array(
+                            'UserId' => $CreatedBy->result()[0]->EvaluatorId,
+                            'Module' => 'Evaluation',
+                            'Activity' =>'Save as Draft Evaluation (EmployeeEvaluatorId = '.$value['EmployeeEvaluatorId'].')'
+                        );
+                        $log = $this->db->insert('tblactivitylog',$log_data);
+                        return true;
+                    } else {
+                        return false;
+                    }
                     
 	}
 }

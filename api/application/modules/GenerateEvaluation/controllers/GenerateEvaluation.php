@@ -84,108 +84,27 @@ class GenerateEvaluation extends CI_Controller {
 		}
 				
     }
-    public function getNewEvaluators() {
+    public function getEvaluationNote() {
 		$post_data= json_decode(trim(file_get_contents('php://input')), true);
 		if ($post_data)
 		{
-			$data=$this->GenerateEvaluation_model->getNewEvaluators($post_data);			
+			$data=$this->GenerateEvaluation_model->getEvaluationNote($post_data);			
 			echo json_encode($data);
 		}
 				
     }
-    public function addPostEvaluation() {
-        $post_evaluation = json_decode(trim(file_get_contents('php://input')), true);	
-        if ($post_evaluation) {
-            $result = $this->GenerateEvaluation_model->addPostEvaluation($post_evaluation);
-            if($result){
-                $config['protocol'] = 'smtp';
-                $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-                $config['smtp_port'] = '465';
-                $config['smtp_user'] = 'myopeneyes3937@gmail.com';
-                $config['smtp_pass'] = 'W3lc0m3@2019';  //sender's password
-                $config['mailtype'] = 'html';
-                $config['charset'] = 'iso-8859-1';
-                $config['newline']="\r\n";
-                $config['wordwrap'] = 'TRUE';
-                $dashboardpath = BASE_URL.'/dashboard/';
 
-                $this->db->select('u.EmailAddress');
-                $this->db->where('u.UserId',$post_evaluation['EvaluatorId']);
-                $data = $this->db->get('tbluser as u');
-                $row = $data->result()[0];
-                $email = $row->EmailAddress;
-
-                $subject = $post_evaluation['UserName']."'s Post-Employee evaluation";
-
-                $message = '
-                <table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
-                <tbody>
-                    <tr>
-                        <td style="background-color:#fff; background:#fff; padding:10px 10px 5px 10px; text-align:center"><img alt="" style="width:130px" src="https://devbyopeneyes.com/emailer_images/oess.png" /></td>
-                    </tr>
-                    <tr>
-                        <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center">
-            
-                        <p style="color:#000; font-size: 18px; line-height: 18px; font-weight: bold; padding: 0; margin: 0 0 10px;">Please provide feedback for below employee.</p>
-                        
-                        <p style="color:#ff0000; font-size: 14px; line-height:20px; padding: 0; margin:20px 0;">Please consider this feedback is as post evaluation meeting for future data references.</p>
-            
-                        <table border="0" cellpadding="0" cellspacing="0" style="margin:20px 0; width:100%; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto;">
-                            <tbody>
-                                <tr>
-                                    <td style="padding:5px; text-align:right; width:35%">Employee Name</td>
-                                    <td style="padding:5px; text-align:center; width:4%">:</td>
-                                    <td style="padding:5px; text-align:left; width:48%">'.$post_evaluation['UserName'].'</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:5px; text-align:right; width:35%">Evaluation Type:</td>
-                                    <td style="padding:5px; text-align:center; width:4%">:</td>
-                                    <td style="padding:5px; text-align:left; width:48%">'.$post_evaluation['EvaluationTypeName'].'</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p style="color:#000; font-size: 14px; line-height:20px; padding: 0; margin:20px 0 0;">Use the button below to give evaluation:</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-width:0; padding:0; text-align:center; vertical-align:middle">
-                        <table border="0" cellpadding="0" cellspacing="0" style="border:0; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto">
-                            <tbody>
-                                <tr>
-                                    <td style="background-color:#0061AF; background:#0061AF; border-radius:4px; border-width:0; clear:both; color:#ffffff; font-size:14px; line-height:13px; opacity:1; padding:10px; text-align:center; text-decoration:none; width:130px"><a href="'.$dashboardpath.'" style="color:#fff; text-decoration:none;">Give Evaluation</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-width:0; padding:20px 10px 10px 10px; text-align:center; vertical-align:middle">
-                            <p style="color:#777; font-size: 12px; line-height:20px; padding: 0; margin: 0 0 10px; text-align: left;">If you&rsquo;re having trouble with the button above, copy and paste the URL below into your web browser. <a href="'.$dashboardpath.'" style="cursor:pointer;">click here</a></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
-                    </tr>
-                </tbody>
-            </table>
-                ';
-
-            $this->email->initialize($config); 
-            $this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
-            $this->email->to($email);
-            $this->email->subject($subject);
-            $this->email->message($message);
-            if($this->email->send()){
-               // return true;
-            }else{
-               // return false;
-            }  
-                echo json_encode($result);
-            }
-           
-        }
-
-    }
+    public function addEvaluationNote()
+	{
+		$post_EvaluationNote = json_decode(trim(file_get_contents('php://input')), true);
+		if ($post_EvaluationNote) {
+            $result = $this->GenerateEvaluation_model->addEvaluationNote($post_EvaluationNote); 
+            if($result) {
+                echo json_encode($post_EvaluationNote);	
+            }	
+		}
+	}
+    
     public function generate_Evaluation() {
       $post_generate = json_decode(trim(file_get_contents('php://input')), true);	
       if ($post_generate) {
@@ -198,27 +117,11 @@ class GenerateEvaluation extends CI_Controller {
           }
 
           if($result) {
-            // $evaluationId=$result;
-            // $this->db->select('u.FirstName,u.MiddleName,u.LastName,u.EmailAddress,et.EvaluationTypeName,e.EvaluationDate,e.EvaluationDescription');
-            // $this->db->join('tbluser u','u.UserId=e.UserId','left');
-            // $this->db->join('tblmstevaluationtype et','et.EvaluationTypeId=e.EvaluationTypeId','left');
-			// $this->db->where('e.EvaluationId',$evaluationId);
-            // $data = $this->db->get('tblmstempevaluation as e');
-			// foreach($data->result() as $row) {
-            //     $firstname = $row->FirstName;
-            //     $lastname = $row->LastName;
-            //     $middlename = $row->MiddleName;
-            //     $email = $row->EmailAddress;
-            //     $evaluationtypename = $row->EvaluationTypeName;
-            //     $evaluationdate = $row->EvaluationDate;
-            //     $description = $row->EvaluationDescription;
-			// }
-            //config email settings
-            $config['protocol'] = 'smtp';
-            $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-            $config['smtp_port'] = '465';
-            $config['smtp_user'] = 'myopeneyes3937@gmail.com';
-            $config['smtp_pass'] = 'W3lc0m3@2019';  //sender's password
+            $config['protocol'] = SMTP_PROTOCOL;
+            $config['smtp_host'] = SMTP_HOST;
+            $config['smtp_port'] = SMTP_PORT;
+            $config['smtp_user'] = SMTP_EMAIL;
+            $config['smtp_pass'] = SMTP_PASSWORD;  //sender's password
             $config['mailtype'] = 'html';
             $config['charset'] = 'iso-8859-1';
             $config['newline']="\r\n";
@@ -249,15 +152,15 @@ class GenerateEvaluation extends CI_Controller {
                
                     $email = $row1->EmailAddress;
 
-                    if($post_generate['UserNote'] == null) {
-                        $UserNote = 'Not mentioned!';
+                    if($post_generate['EmployeeEmailNote'] == null) {
+                        $EmployeeEmailNote = 'Not mentioned!';
                     } else {
-                        $UserNote = $post_generate['UserNote'];
+                        $EmployeeEmailNote = $post_generate['EmployeeEmailNote'];
                     }
-                    if($post_generate['EvaluatorNote'] == null) {
-                        $EvaluatorNote = 'Not mentioned!';
+                    if($post_generate['EvaluatorEmailNote'] == null) {
+                        $EvaluatorEmailNote = 'Not mentioned!';
                     } else {
-                        $EvaluatorNote = $post_generate['EvaluatorNote'];
+                        $EvaluatorEmailNote = $post_generate['EvaluatorEmailNote'];
                     }
 
                     if($id==$post_generate['UserId']){
@@ -284,12 +187,12 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['ExpirationDate'].'</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$UserNote.'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$EmployeeEmailNote.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -348,12 +251,12 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['ExpirationDate'].'</td>
                                             </tr>
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Note</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
-                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluatorNote.'</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$EvaluatorEmailNote.'</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -396,12 +299,18 @@ class GenerateEvaluation extends CI_Controller {
             // $config['smtp_pass']='W3lc0m3@2018';
 
             $this->email->initialize($config); 
-            $this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+            $this->email->from(FROM_EMAIL,FROM_USER);
             $this->email->to($email);
             $this->email->subject($subject);
             $this->email->message($message);
             if($this->email->send()){
-               // return true;
+                $email_log = array(
+                    'From' => SMTP_EMAIL,
+                    'To' => $email,
+                    'Subject' => $subject,
+                    'MessageBody' => $message,
+                );
+                $res = $this->db->insert('tblemaillog',$email_log);
             }else{
                // return false;
             }  

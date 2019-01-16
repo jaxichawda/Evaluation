@@ -127,7 +127,7 @@ export class EmployeeListComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          var del = { 'Userid': 1, 'id': employee.UserId, 'Name': employee.FirstName };
+          var del = { 'Userid': this.globals.authData.UserId, 'id': employee.UserId, 'FirstName': employee.FirstName, 'LastName': employee.LastName };
           this.globals.isLoading = true;
           this.EmployeeService.deleteEmployee(del)
             .then((data) => {

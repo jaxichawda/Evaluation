@@ -35,7 +35,7 @@ class Employee_model extends CI_Model {
 						}
 						$employee_data=array(
 						"RoleId"=>trim($post_Employee['RoleId']),
-						"JobTitleId"=>trim($post_Employee['JobTitleId']),
+						"JobId"=>trim($post_Employee['JobId']),
 						"LineManagerId"=>$LineManagerId,
 						"FirstName"=>trim($post_Employee['FirstName']),
 						"MiddleName"=>$MiddleName,
@@ -55,6 +55,12 @@ class Employee_model extends CI_Model {
 							return false; // unreachable return statement !!!
 						}
 						if($res) {
+							$log_data = array(
+								'UserId' => trim($post_Employee['CreatedBy']),
+								'Module' => 'Employee',
+								'Activity' =>'Add Employee - '.$post_Employee['FirstName'].' '.$post_Employee['LastName']
+							);
+							$log = $this->db->insert('tblactivitylog',$log_data);
 							return $UserId;
 						} else {
 							return false;
@@ -73,10 +79,10 @@ class Employee_model extends CI_Model {
 	public function getAllEmployee()
 	{
 		try{
-			$this->db->select('tu.UserId, tu.RoleId, tmur.RoleName, tmjt.JobTitleName, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive, CONCAT (tuu.FirstName, " ", tuu.LastName) as LineManager, (SELECT COUNT(tmee.EmployeeEvaluatorId) FROM tblmstempevaluator as tmee WHERE tu.UserId=tmee.EvaluatorId) as isdisabled');
+			$this->db->select('tu.UserId, tu.RoleId, tmur.RoleName, tmjt.JobTitle, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive, CONCAT (tuu.FirstName, " ", tuu.LastName) as LineManager, (SELECT COUNT(tmee.EmployeeEvaluatorId) FROM tblmstempevaluator as tmee WHERE tu.UserId=tmee.EvaluatorId) as isdisabled');
 			$this->db->from('tbluser tu');
-			$this->db->join('tblmstuserrole tmur', 'tu.RoleId = tmur.RoleId', 'LEFT');
-			$this->db->join('tblmstjobtitle tmjt', 'tu.JobTitleId = tmjt.JobTitleId', 'LEFT');
+			$this->db->join('tblmstrole tmur', 'tu.RoleId = tmur.RoleId', 'LEFT');
+			$this->db->join('tblmstjob tmjt', 'tu.JobId = tmjt.JobId', 'LEFT');
 			$this->db->join('tbluser tuu', 'tuu.UserId=tu.LineManagerId', 'LEFT');
 			$result = $this->db->get();
 			$db_error = $this->db->error();
@@ -98,10 +104,10 @@ class Employee_model extends CI_Model {
 	public function getAllJobTitle() 
 	{
 		try{
-			$this->db->select('JobTitleId, JobTitleName');
+			$this->db->select('JobId, JobTitle');
 			$this->db->where('IsActive',1);
-			$this->db->order_by('JobTitleName','asc');
-			$result = $this->db->get('tblmstjobtitle');
+			$this->db->order_by('JobTitle','asc');
+			$result = $this->db->get('tblmstjob');
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
 						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -125,7 +131,7 @@ class Employee_model extends CI_Model {
 			$this->db->where('IsActive',1);
 			$this->db->where('RoleName !=','Admin');
 			$this->db->order_by('RoleName','asc');
-			$result = $this->db->get('tblmstuserrole');
+			$result = $this->db->get('tblmstrole');
 			$db_error = $this->db->error();
 					if (!empty($db_error) && !empty($db_error['code'])) { 
 						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
@@ -177,7 +183,7 @@ class Employee_model extends CI_Model {
 			if($post_Employee) {
 				$employee_data = array(
 				"RoleId"=>trim($post_Employee['RoleId']),
-				"JobTitleId"=>trim($post_Employee['JobTitleId']),
+				"JobId"=>trim($post_Employee['JobId']),
 				"LineManagerId"=>trim($post_Employee['LineManagerId']),
 				"FirstName"=>trim($post_Employee['FirstName']),
 				"MiddleName"=>trim($post_Employee['MiddleName']),
@@ -196,6 +202,12 @@ class Employee_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_Employee['UpdatedBy']),
+						'Module' => 'Employee',
+						'Activity' =>'Update Employee - '.$post_Employee['FirstName'].' '.$post_Employee['LastName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -213,7 +225,7 @@ class Employee_model extends CI_Model {
 	{
 	  if($userId)
 	  {
-		 $this->db->select('tu.UserId, tu.RoleId, tu.JobTitleId, tu.LineManagerId, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive');
+		 $this->db->select('tu.UserId, tu.RoleId, tu.JobId, tu.LineManagerId, tu.FirstName, tu.MiddleName, tu.LastName, tu.EmployeeId, tu.EmailAddress, tu.IsActive');
 		 $this->db->where('tu.UserId',$userId);
 		 $result=$this->db->get('tbluser tu');
 		 $employee_data= array();
@@ -250,7 +262,12 @@ class Employee_model extends CI_Model {
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
-					
+					$log_data = array(
+						'UserId' => trim($post_data['UpdatedBy']),
+						'Module' => 'Employee',
+						'Activity' =>'Update Employee Active Status - '.$post_data['FirstName'].' '.$post_data['LastName']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -274,6 +291,17 @@ class Employee_model extends CI_Model {
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					$log_data = array(
+						'UserId' => $post_Employee['Userid'],
+						'Module' => 'Employee',
+						'Activity' =>'Delete Employee - '.$post_Employee['FirstName'].' '.$post_Employee['LastName'].' (Id - '.$post_Employee['id'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return true;
+				} else {
+					return false;
 				}
 			}else {
 				return false;

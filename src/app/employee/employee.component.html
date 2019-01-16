@@ -89,15 +89,15 @@
         <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <label><span class="required">*</span>Job Title</label>
-            <select class='select-option' required class="form-control" #JobTitleId="ngModel" [(ngModel)]="employeeEntity.JobTitleId"
-              name="JobTitleId" [ngClass]="{red_border: (JobTitleId.dirty && JobTitleId.invalid) || (JobTitleId.pristine && submitted)}">
-              <option value="" ngSelected='employeeEntity.JobTitleId==""'>Select</option>
+            <select class='select-option' required class="form-control" #JobId="ngModel" [(ngModel)]="employeeEntity.JobId"
+              name="JobId" [ngClass]="{red_border: (JobId.dirty && JobId.invalid) || (JobId.pristine && submitted)}">
+              <option value="" ngSelected='employeeEntity.JobId==""'>Select</option>
               <ng-container *ngFor='let jobtitle of jobtitleList'>
-                <option class='option' [value]="jobtitle.JobTitleId" ngSelected="employeeEntity.JobTitleId==jobtitle.JobTitleId">{{jobtitle.JobTitleName}}</option>
+                <option class='option' [value]="jobtitle.JobId" ngSelected="employeeEntity.JobId==jobtitle.JobId">{{jobtitle.JobTitle}}</option>
               </ng-container>
             </select>
-            <span class="error_span" *ngIf="(JobTitleId.dirty && JobTitleId.invalid) || (JobTitleId.pristine && submitted)">
-              <span *ngIf="JobTitleId.errors.required || (JobTitleId.pristine && submitted)">Please select
+            <span class="error_span" *ngIf="(JobId.dirty && JobId.invalid) || (JobId.pristine && submitted)">
+              <span *ngIf="JobId.errors.required || (JobId.pristine && submitted)">Please select
                 Job Title </span>
             </span>
           </div>

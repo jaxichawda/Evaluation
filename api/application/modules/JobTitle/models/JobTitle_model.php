@@ -12,19 +12,25 @@ class JobTitle_model extends CI_Model {
 					$IsActive = false;
 				}
 				$jobtitle_data=array(
-				"JobTitleName"=>trim($post_JobTitle['JobTitleName']),
+				"JobTitle"=>trim($post_JobTitle['JobTitle']),
 				"DepartmentId"=>trim($post_JobTitle['DepartmentId']),
 				"IsActive"=>$IsActive,
 				"CreatedBy" => trim($post_JobTitle['CreatedBy']),
 				"CreatedOn" =>date('y-m-d H:i:s')
 				);
-				$res=$this->db->insert('tblmstjobtitle',$jobtitle_data);
+				$res=$this->db->insert('tblmstjob',$jobtitle_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_JobTitle['CreatedBy']),
+						'Module' => 'Job Title',
+						'Activity' =>'Add Job Title - '.$post_JobTitle['JobTitle']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -74,20 +80,26 @@ class JobTitle_model extends CI_Model {
 			}
 			if($post_JobTitle) {
 				$jobtitle_data = array(
-				"JobTitleName"=>trim($post_JobTitle['JobTitleName']),
+				"JobTitle"=>trim($post_JobTitle['JobTitle']),
 				"DepartmentId"=>trim($post_JobTitle['DepartmentId']),
 				"IsActive"=>$IsActive,
 				"UpdatedBy" => trim($post_JobTitle['UpdatedBy']),
 				"UpdatedOn" =>date('y-m-d H:i:s')
 				);
-				$this->db->where('JobTitleId',trim($post_JobTitle['JobTitleId']));
-				$res = $this->db->update('tblmstjobtitle',$jobtitle_data);
+				$this->db->where('JobId',trim($post_JobTitle['JobId']));
+				$res = $this->db->update('tblmstjob',$jobtitle_data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
+					$log_data = array(
+						'UserId' => trim($post_JobTitle['UpdatedBy']),
+						'Module' => 'Job Title',
+						'Activity' =>'Update Job Title - '.$post_JobTitle['JobTitle']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -101,13 +113,13 @@ class JobTitle_model extends CI_Model {
 			return false;
 		}	
 	}
-	public function getById($jobtitleId=Null)
+	public function getById($JobId=Null)
 	{
-	  if($jobtitleId)
+	  if($JobId)
 	  {
-		 $this->db->select('tmjt.JobTitleId, tmjt.JobTitleName, tmjt.DepartmentId,tmjt.IsActive');
-		 $this->db->where('tmjt.JobTitleId',$jobtitleId);
-		 $result=$this->db->get('tblmstjobtitle tmjt');
+		 $this->db->select('tmjt.JobId, tmjt.JobTitle, tmjt.DepartmentId,tmjt.IsActive');
+		 $this->db->where('tmjt.JobId',$JobId);
+		 $result=$this->db->get('tblmstjob tmjt');
 		 $jobtitle_data= array();
 		 foreach($result->result() as $row)
 		 {
@@ -124,8 +136,8 @@ class JobTitle_model extends CI_Model {
 	public function getAllJobTitle()
 	{
 		try{
-			$this->db->select('tmjt.JobTitleId, tmjt.JobTitleName, tmd.DepartmentName, tmjt.IsActive, (SELECT COUNT(tu.UserId) FROM tbluser as tu WHERE tmjt.JobTitleId=tu.JobTitleId) as isdisabled');
-			$this->db->from('tblmstjobtitle tmjt');
+			$this->db->select('tmjt.JobId, tmjt.JobTitle, tmd.DepartmentName, tmjt.IsActive, (SELECT COUNT(tu.UserId) FROM tbluser as tu WHERE tmjt.JobId=tu.JobId) as isdisabled');
+			$this->db->from('tblmstjob tmjt');
 			$this->db->join('tblmstdepartment tmd', 'tmjt.DepartmentId = tmd.DepartmentId');
 			$result = $this->db->get();
 			$db_error = $this->db->error();
@@ -157,15 +169,20 @@ class JobTitle_model extends CI_Model {
 					'UpdatedBy' => trim($post_data['UpdatedBy']),
 					'UpdatedOn' => date('y-m-d H:i:s'),
 				);			
-				$this->db->where('JobTitleId',trim($post_data['JobTitleId']));
-				$res = $this->db->update('tblmstjobtitle',$data);
+				$this->db->where('JobId',trim($post_data['JobId']));
+				$res = $this->db->update('tblmstjob',$data);
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
 				}
 				if($res) {
-					
+					$log_data = array(
+						'UserId' => trim($post_data['UpdatedBy']),
+						'Module' => 'Job Title',
+						'Activity' =>'Update Job Title Active Status - '.$post_data['JobTitle']
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
 					return true;
 				} else {
 					return false;
@@ -183,12 +200,23 @@ class JobTitle_model extends CI_Model {
 			if($post_JobTitle) 
 			{
 				$id=$post_JobTitle['id'];
-				$this->db->where('JobTitleId',$post_JobTitle['id']);
-				$res = $this->db->delete('tblmstjobtitle');
+				$this->db->where('JobId',$post_JobTitle['id']);
+				$res = $this->db->delete('tblmstjob');
 				$db_error = $this->db->error();
 				if (!empty($db_error) && !empty($db_error['code'])) { 
 					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 					return false; // unreachable return statement !!!
+				}
+				if($res) {
+					$log_data = array(
+						'UserId' => $post_JobTitle['Userid'],
+						'Module' => 'Job Title',
+						'Activity' =>'Delete Job Title - '.$post_JobTitle['Name'].' (Id - '.$post_JobTitle['id'].')'
+					);
+					$log = $this->db->insert('tblactivitylog',$log_data);
+					return true;
+				} else {
+					return false;
 				}
 			}else {
 				return false;

@@ -63,7 +63,7 @@
                     <span *ngIf="employee.RoleId==2" class="fa fa-user-circle tooltip_inline" title="HR" data-toggle="tooltip" data-placement="bottom"></span>
                   </td>
                   <td>{{employee.EmailAddress}}</td>
-                  <td>{{employee.JobTitleName}}</td>
+                  <td>{{employee.JobTitle}}</td>
                   <td *ngIf="employee.LineManager!=null">{{employee.LineManager}}</td>
                   <td *ngIf="employee.LineManager==null">Not assigned</td>
                   <td class="text-center">

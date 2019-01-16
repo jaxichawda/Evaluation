@@ -114,12 +114,12 @@
 
         <!-- <div class="form-group col-md-6">
           <label><span class="required">*</span>Job Title</label>
-          <input type="text" class="form-control" #JobTitleName="ngModel" [(ngModel)]="questionEntity.JobTitleName"
-            class="form-control" name="JobTitleName" maxlength="100" required>
-          <span class="error_span" *ngIf="(JobTitleName.dirty && JobTitleName.invalid) || (JobTitleName.pristine && submitted)">
-            <span *ngIf="JobTitleName.errors.required || (JobTitleName.pristine && submitted)">Please
+          <input type="text" class="form-control" #JobTitle="ngModel" [(ngModel)]="questionEntity.JobTitle"
+            class="form-control" name="JobTitle" maxlength="100" required>
+          <span class="error_span" *ngIf="(JobTitle.dirty && JobTitle.invalid) || (JobTitle.pristine && submitted)">
+            <span *ngIf="JobTitle.errors.required || (JobTitle.pristine && submitted)">Please
               enter Job Title</span>
-            <span class="error_span" *ngIf="JobTitleName.errors && JobTitleName.errors.pattern">
+            <span class="error_span" *ngIf="JobTitle.errors && JobTitle.errors.pattern">
               Please enter a valid Job Title
             </span>
           </span>

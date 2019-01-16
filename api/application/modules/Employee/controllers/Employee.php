@@ -46,11 +46,11 @@ class Employee extends CI_Controller {
 					}
 
 					//config email settings
-					$config['protocol'] = 'smtp';
-					$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-					$config['smtp_port'] = '465';
-					$config['smtp_user'] = 'myopeneyes3937@gmail.com';
-					$config['smtp_pass'] = 'W3lc0m3@2019';  //sender's password
+					$config['protocol'] = SMTP_PROTOCOL;
+					$config['smtp_host'] = SMTP_HOST;
+					$config['smtp_port'] = SMTP_PORT;
+					$config['smtp_user'] = SMTP_EMAIL;
+					$config['smtp_pass'] = SMTP_PASSWORD;  //sender's password
 					$config['mailtype'] = 'html';
 					$config['charset'] = 'iso-8859-1';
 					$config['newline']="\r\n";
@@ -58,6 +58,7 @@ class Employee extends CI_Controller {
 					
 					$path = BASE_URL;
 					$loginpath = BASE_URL.'/login/';
+					$subject = 'Employee Evaluation';
 
 					$message = '
 					<table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
@@ -116,12 +117,18 @@ class Employee extends CI_Controller {
 					</table>
 					';
 					$this->email->initialize($config); 
-					$this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+					$this->email->from(FROM_EMAIL,FROM_USER);
 					$this->email->to($EmployeeEmail);
-					$this->email->subject('Employee Evaluation');
+					$this->email->subject($subject);
 					$this->email->message($message);
 					if($this->email->send()){
-					// return true;
+						$email_log = array(
+							'From' => SMTP_EMAIL,
+							'To' => $EmployeeEmail,
+							'Subject' => $subject,
+							'MessageBody' => $message,
+						);
+						$res = $this->db->insert('tblemaillog',$email_log);
 					}else{
 						//return false;
 					}

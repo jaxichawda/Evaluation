@@ -26,8 +26,10 @@ export class GenerateEvaluationComponent implements OnInit {
   reportingData;
   UserId;
   header;
-  DateValid;
+  EvaluationDateValid;
+  ExpirationDateValid;
   showError;
+  DateValid;
 
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
@@ -36,7 +38,8 @@ export class GenerateEvaluationComponent implements OnInit {
   ngOnInit() {
     debugger
     this.globals.isLoading = false;
-    this.DateValid = false;
+    this.ExpirationDateValid = false;
+    this.EvaluationDateValid = false;
     this.showError = false;
     setTimeout(function () {
       if ($("body").height() < $(window).height()) {
@@ -47,7 +50,7 @@ export class GenerateEvaluationComponent implements OnInit {
       }
       $("#collapseExample2").addClass("in");
       $("#test_evaluation").removeClass("collapsed");
-      $("#test_evaluation").attr("aria-expanded","true");
+      $("#test_evaluation").attr("aria-expanded", "true");
     }, 100);
 
     const body = document.querySelector('body');
@@ -96,10 +99,23 @@ export class GenerateEvaluationComponent implements OnInit {
     }
 
     setTimeout(function () {
-      $('.form_date').datetimepicker({
+      $('.evaluation_date').datetimepicker({
         startDate: new Date(),
         weekStart: 1,
-        todayBtn: 1,
+        //todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        //minView: 2
+        format: 'mm/dd/yyyy hh:ii',
+        showMeridian: true,
+      });
+    }, 500);
+    setTimeout(function () {
+      $('.expiration_date').datetimepicker({
+        startDate: new Date(),
+        weekStart: 1,
+        //todayBtn: 1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
@@ -126,22 +142,33 @@ export class GenerateEvaluationComponent implements OnInit {
   }
   generateEvaluation(evaluationForm) {
     debugger
+    this.evaluationEntity.ExpirationDate = $("#ExpirationDate").val();
     this.evaluationEntity.EvaluationDate = $("#EvaluationDate").val();
     this.evaluationEntity.EvaluatorsId = this.selectedCharacters;
-    if (this.evaluationEntity.EvaluationDate == "" || this.evaluationEntity.EvaluationDate == null || this.evaluationEntity.EvaluationDate == undefined) {
+    if(this.evaluationEntity.ExpirationDate > this.evaluationEntity.EvaluationDate){
       this.DateValid = true;
     } else {
       this.DateValid = false;
     }
-    if (this.evaluationEntity.UserNote == "" || this.evaluationEntity.UserNote == null || this.evaluationEntity.UserNote == undefined) {
-      this.evaluationEntity.UserNote = null;
+    if (this.evaluationEntity.ExpirationDate == "" || this.evaluationEntity.ExpirationDate == null || this.evaluationEntity.ExpirationDate == undefined) {
+      this.ExpirationDateValid = true;
     } else {
-      this.evaluationEntity.UserNote = this.evaluationEntity.UserNote;
+      this.ExpirationDateValid = false;
     }
-    if (this.evaluationEntity.EvaluatorNote == "" || this.evaluationEntity.EvaluatorNote == null || this.evaluationEntity.EvaluatorNote == undefined) {
-      this.evaluationEntity.EvaluatorNote = null;
+    if (this.evaluationEntity.EvaluationDate == "" || this.evaluationEntity.EvaluationDate == null || this.evaluationEntity.EvaluationDate == undefined) {
+      this.EvaluationDateValid = true;
     } else {
-      this.evaluationEntity.EvaluatorNote = this.evaluationEntity.EvaluatorNote;
+      this.EvaluationDateValid = false;
+    }
+    if (this.evaluationEntity.EmployeeEmailNote == "" || this.evaluationEntity.EmployeeEmailNote == null || this.evaluationEntity.EmployeeEmailNote == undefined) {
+      this.evaluationEntity.EmployeeEmailNote = null;
+    } else {
+      this.evaluationEntity.EmployeeEmailNote = this.evaluationEntity.EmployeeEmailNote;
+    }
+    if (this.evaluationEntity.EvaluatorEmailNote == "" || this.evaluationEntity.EvaluatorEmailNote == null || this.evaluationEntity.EvaluatorEmailNote == undefined) {
+      this.evaluationEntity.EvaluatorEmailNote = null;
+    } else {
+      this.evaluationEntity.EvaluatorEmailNote = this.evaluationEntity.EvaluatorEmailNote;
     }
     if (this.evaluationEntity.EvaluatorsId.length == 0 || this.evaluationEntity.EvaluatorsId == "" || this.evaluationEntity.EvaluatorsId == null || this.evaluationEntity.EvaluatorsId == undefined) {
       this.showError = true;
@@ -160,7 +187,7 @@ export class GenerateEvaluationComponent implements OnInit {
       this.submitted = true;
     }
     console.log(this.evaluationEntity);
-    if (evaluationForm.valid && !this.DateValid && !this.showError) {
+    if (evaluationForm.valid && !this.ExpirationDateValid && !this.EvaluationDateValid && !this.DateValid && !this.showError) {
       this.btn_disable = true;
       this.globals.isLoading = true;
       this.GenerateEvaluationService.generateEvaluation(this.evaluationEntity)
@@ -209,7 +236,7 @@ export class GenerateEvaluationComponent implements OnInit {
         //this.selectedCharacters['1'] = [this.UserId];
         console.log(this.selectedCharacters);
         this.globals.isLoading = false;
-        
+
       },
         (error) => {
           this.globals.isLoading = false;

@@ -99,7 +99,7 @@ export class EmployeeComponent implements OnInit {
       this.employeeEntity.UserId = 0;
       this.employeeEntity.IsActive = '1';
       this.employeeEntity.RoleId = '';
-      this.employeeEntity.JobTitleId = '';
+      this.employeeEntity.JobId = '';
       this.employeeEntity.LineManagerId = '';
       this.globals.isLoading = false;
     }

@@ -42,9 +42,9 @@ export class JobTitleService {
     });
     return promise;
   }
-  getById(jobtitleId) {
+  getById(JobId) {
     let promise = new Promise((resolve, reject) => {
-      this.http.get(this.globals.baseAPIUrl + 'JobTitle/getById/' + jobtitleId)
+      this.http.get(this.globals.baseAPIUrl + 'JobTitle/getById/' + JobId)
         .toPromise()
         .then(
           res => { // Success

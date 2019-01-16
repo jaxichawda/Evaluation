@@ -51,7 +51,7 @@
               <tbody>
                 <tr *ngFor="let jobtitle of jobtitleList; let i = index">
                   <td class="text-center">{{i+1}}</td>
-                  <td>{{jobtitle.JobTitleName}}</td>
+                  <td>{{jobtitle.JobTitle}}</td>
                   <td>{{jobtitle.DepartmentName}}</td>
                   <td class="text-center">
                     <div class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="jobtitle.IsActive==1 ? 'Active' : 'Deactive'">
@@ -62,7 +62,7 @@
                   </td>
                   <td class="text-center">
                     <div class="inline_delbtn tooltip_inline" title="Edit" data-toggle="tooltip" data-placement="bottom">
-                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/job-title/edit/{{jobtitle.JobTitleId}}">
+                      <button class="btn btn-default btn-rounded btn-sm" routerLink="/job-title/edit/{{jobtitle.JobId}}">
                         <span class="fa fa-pencil"></span>
                       </button>
                     </div>

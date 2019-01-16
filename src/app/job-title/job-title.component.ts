@@ -76,7 +76,7 @@ export class JobTitleComponent implements OnInit {
     else {
       this.header = 'Add';
       this.jobtitleEntity = {};
-      this.jobtitleEntity.JobTitleId = 0;
+      this.jobtitleEntity.JobId = 0;
       this.jobtitleEntity.IsActive = '1';
       this.jobtitleEntity.DepartmentId='';
     }
@@ -91,7 +91,7 @@ export class JobTitleComponent implements OnInit {
     } else {
       this.jobtitleEntity.CreatedBy = this.globals.authData.UserId;
       this.jobtitleEntity.UpdatedBy = this.globals.authData.UserId;
-      this.jobtitleEntity.JobTitleId = 0;
+      this.jobtitleEntity.JobId = 0;
       this.submitted = true;
     }
 

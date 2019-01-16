@@ -24,6 +24,9 @@ export class EvaluationListComponent implements OnInit {
   NewEvaluatorList;
   submitted;
   btn_disable;
+  newTime;
+  evaluationNoteEntity;
+  Name;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute,
     private GenerateEvaluationService: GenerateEvaluationService) { }
@@ -35,7 +38,8 @@ export class EvaluationListComponent implements OnInit {
       $('#Details_Modal').modal('hide');
     });
     this.globals.isLoading = false;
-    this.evaluatorEntity={};
+    this.evaluationNoteEntity = {};
+    this.evaluatorEntity = {};
     setTimeout(function () {
       if ($(".bg_white_block").hasClass("ps--active-y")) {
         $('footer').removeClass('footer_fixed');
@@ -51,6 +55,7 @@ export class EvaluationListComponent implements OnInit {
       $("#test_evaluation").removeClass("collapsed");
       $("#test_evaluation").attr("aria-expanded", "true");
     }, 100);
+    this.newTime = new Date();
     this.evaluationList = [];
     this.EvaluatorList = [];
     this.globals.isLoading = true;
@@ -211,11 +216,11 @@ export class EvaluationListComponent implements OnInit {
   }
 
   showEvaluators(evaluation) {
-    this.evaluatorEntity={};
-    this.evaluatorEntity.EvaluationId=evaluation.EvaluationId;
-    this.evaluatorEntity.EvaluationTypeName=evaluation.EvaluationTypeName;
-    this.evaluatorEntity.UserName=evaluation.Name;
-    this.date = evaluation.EvaluationDate;
+    this.evaluatorEntity = {};
+    this.evaluatorEntity.EvaluationId = evaluation.EvaluationId;
+    this.evaluatorEntity.EvaluationTypeName = evaluation.EvaluationTypeName;
+    this.evaluatorEntity.UserName = evaluation.Name;
+    this.evaluatorEntity.date = evaluation.ExpirationDate;
     var obj = { 'UserId': evaluation.UserId, 'EvaluationId': evaluation.EvaluationId };
     this.globals.isLoading = true;
     this.GenerateEvaluationService.getEvaluators(obj)
@@ -231,75 +236,66 @@ export class EvaluationListComponent implements OnInit {
           this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
-
   }
-  displayNewEvaluators(evaluatorEntity){
-    //console.log(evaluatorEntity);
-    var obj = { 'UserId': evaluatorEntity.UserId, 'EvaluationId': evaluatorEntity.EvaluationId };
+
+  evaluationNote(evaluation) {
+    debugger
+    this.evaluationNoteEntity = {};
+    this.Name = evaluation.Name;
+    this.evaluationNoteEntity.EvaluationId = evaluation.EvaluationId;
+    var obj = { 'EvaluationId': evaluation.EvaluationId };
     this.globals.isLoading = true;
-    this.GenerateEvaluationService.getNewEvaluators(obj)
+    this.GenerateEvaluationService.getEvaluationNote(obj)
       .then((data) => {
         if (data) {
-          this.NewEvaluatorList = data;
+          this.evaluationNoteEntity.EvaluationNote = data;
+          this.evaluationNoteEntity.EvaluationNoteEnter = 0;
+        }
+        else {
+          this.evaluationNoteEntity.EvaluationNoteEnter = 1;
         }
         this.globals.isLoading = false;
-        this.evaluatorEntity.EvaluatorId="";
-        $('#Evaluator_Modal').modal('show');
+        $('#EvaluationNote_Modal').modal('show');
         $('.right_content_block').addClass('style_position');
       },
         (error) => {
           this.globals.isLoading = false;
           this.router.navigate(['/pagenotfound']);
         });
-
   }
-  InviteConfirm(InviteForm){
-    this.evaluatorEntity.CreatedBy = this.globals.authData.UserId;
-	  this.evaluatorEntity.UpdatedBy = this.globals.authData.UserId;
-    this.submitted = true;
-		if (InviteForm.valid) {
-			this.btn_disable = true;
-			this.globals.isLoading = true;
-			
-		this.GenerateEvaluationService.Invite(this.evaluatorEntity)
-		.then((data) => 
-		{
-      this.globals.isLoading = false;
-      $('#Evaluator_Modal').modal('hide');
-      $('#Details_Modal').modal('hide');
-      this.btn_disable = false;
-      this.submitted = false;
-      this.evaluatorEntity = {};
-      InviteForm.form.markAsPristine();
-			swal({
-				position: 'top-end',
-				type: 'success',
-				title: 'Invite Successfully',
-				showConfirmButton: false,
-				timer: 1500
-			})
-			
-			this.globals.isLoading = false;
-			this.router.navigate(['/evaluation/list']);
-    }, 
-		(error) => 
-		{
-			this.globals.isLoading = false;
-      $('#Evaluator_Modal').modal('hide');
-      $('#Details_Modal').modal('hide');
-			if(error.text){
-				this.globals.message = "You can't send this Email";
-				this.globals.type = 'danger';
-				this.globals.msgflag = true;
-			}	
-		});	
 
+  AddEvaluationNote(evaluationNoteForm) {
+    debugger
+
+    if (evaluationNoteForm.valid) {
+      this.btn_disable = true;
+      this.globals.isLoading = true;
+      this.evaluationNoteEntity.UpdatedBy=this.globals.authData.UserId;
+      this.GenerateEvaluationService.addEvaluationNote(this.evaluationNoteEntity)
+        .then((data) => {
+          $('#EvaluationNote_Modal').modal('hide');
+          this.btn_disable = false;
+          this.submitted = false;
+          this.evaluationNoteEntity = {};
+          evaluationNoteForm.form.markAsPristine();
+          this.globals.isLoading = false;
+
+          swal({
+            position: 'top-end',
+            type: 'success',
+            title: 'Evaluation Note added successfully!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.router.navigate(['/evaluation/list']);
+        },
+          (error) => {
+            alert('error');
+            this.btn_disable = false;
+            this.submitted = false;
+            this.globals.isLoading = false;
+            //	this.router.navigate(['/admin/pagenotfound']);
+          });
+    }
   }
-}
-noForm1(InviteForm) {
-  this.evaluatorEntity = {};
-  $('#Details_Modal').modal('hide');	
-  this.submitted = false;
-  InviteForm.form.markAsPristine();
-}
 }

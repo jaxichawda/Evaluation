@@ -130,7 +130,7 @@ export class JobTitleListComponent implements OnInit {
     })
       .then((result) => {
         if (result.value) {
-          var del = { 'Userid': 1, 'id': jobtitle.JobTitleId, 'Name': jobtitle.JobTitleName };
+          var del = { 'Userid': 1, 'id': jobtitle.JobId, 'Name': jobtitle.JobTitle };
           this.globals.isLoading = true;
           this.JobTitleService.deleteJobTitle(del)
             .then((data) => {

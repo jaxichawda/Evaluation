@@ -85,14 +85,22 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 //   Local
-    define('ACTIVE_GROUP', 'default'); // database mode
-    define('BASE_URL', 'http://localhost:4200'); // local Base URL
-
+  //  define('ACTIVE_GROUP', 'default'); // database mode
+  //  define('BASE_URL', 'http://localhost:4200'); // local Base URL
+    
 //   Development
-  // define('ACTIVE_GROUP', 'Development'); // database mode
-  // define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
+   define('ACTIVE_GROUP', 'Development'); // database mode
+   define('BASE_URL', 'http://evaluation.devbyopeneyes.com'); // Development Base URL
 
 //   UAT
   // define('ACTIVE_GROUP', 'QA'); // database mode
   // define('BASE_URL', 'http://evaluation.uatbyopeneyes.com'); // UAT Base URL
+
+define('SMTP_EMAIL', 'myopeneyes3937@gmail.com');
+define('SMTP_PASSWORD', 'W3lc0m3@2019');
+define('SMTP_HOST', 'ssl://smtp.googlemail.com');
+define('SMTP_PORT', '465');
+define('SMTP_PROTOCOL', 'smtp');
+define('FROM_EMAIL', 'no-reply@theopeneyes.com');
+define('FROM_USER', 'OpenEyes Software Solutions Pvt. Ltd');
 

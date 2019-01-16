@@ -168,10 +168,10 @@ export class GenerateEvaluationService {
     });
     return promise;
   }
-  getNewEvaluators(obj) {
+  getEvaluationNote(obj) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/getNewEvaluators', obj)
+      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/getEvaluationNote', obj)
         .toPromise()
         .then(
           res => { // Success
@@ -186,10 +186,10 @@ export class GenerateEvaluationService {
     });
     return promise;
   }
-  Invite(obj) {
+  addEvaluationNote(evaluationNoteEntity) {
     debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/addPostEvaluation/', obj)
+      this.http.post(this.globals.baseAPIUrl + 'GenerateEvaluation/addEvaluationNote', evaluationNoteEntity)
         .toPromise()
         .then(
           res => { // Success
@@ -197,11 +197,12 @@ export class GenerateEvaluationService {
           },
           msg => { // Error
             reject(msg);
-            this.globals.isLoading = false;
-            this.router.navigate(['/pagenotfound']);
+            //this.globals.isLoading = false;
+            // this.router.navigate(['/pagenotfound']);
           }
         );
     });
     return promise;
   }
+
 }

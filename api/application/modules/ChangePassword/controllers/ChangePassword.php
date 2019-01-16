@@ -30,14 +30,14 @@ class ChangePassword extends CI_Controller {
 		$post_pass = json_decode(trim(file_get_contents('php://input')), true);		
 		if ($post_pass)
 			{
-				$post_pass['ResetPasswordCode']=mt_rand(100000, 999999);
+				$post_pass['ForgotPasswordCode']=mt_rand(100000, 999999);
 				
 				$result = $this->ChangePassword_model->forgotPassword($post_pass);
 				if($result)
 				{	
 					 $userId=$result;
 					 $data['UserId']=$userId;
-					 $data['ResetPasswordCode']=$post_pass['ResetPasswordCode'];
+					 $data['ForgotPasswordCode']=$post_pass['ForgotPasswordCode'];
 					 $data['EmailAddress']=$post_pass['EmailAddress'];
 
 					 $this->db->select('FirstName,LastName,EmailAddress');
@@ -48,17 +48,18 @@ class ChangePassword extends CI_Controller {
 							$LastName = $row->LastName;
 							$EmailAddress = $row->EmailAddress;
 						}
-						$config['protocol'] = 'smtp';
-						$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-						$config['smtp_port'] = '465';
-						$config['smtp_user'] = 'myopeneyes3937@gmail.com';
-						$config['smtp_pass'] = 'W3lc0m3@2019';  //sender's password
+						$config['protocol'] = SMTP_PROTOCOL;
+						$config['smtp_host'] = SMTP_HOST;
+						$config['smtp_port'] = SMTP_PORT;
+						$config['smtp_user'] = SMTP_EMAIL;
+						$config['smtp_pass'] = SMTP_PASSWORD;  //sender's password
 						$config['mailtype'] = 'html';
 						$config['charset'] = 'iso-8859-1';
 						$config['newline']="\r\n";
 						$config['wordwrap'] = 'TRUE';
 
 						$path = BASE_URL.'/reset-password/'.JWT::encode($data,"MyGeneratedKey","HS256");
+						$subject = 'Employee Evaluation - Password Reset Request';
 						$message = '
 						<table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
 						<tbody>
@@ -95,12 +96,18 @@ class ChangePassword extends CI_Controller {
 						</tbody>
 					</table>';
 					$this->email->initialize($config); 
-					$this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+					$this->email->from(FROM_EMAIL,FROM_USER);
 					$this->email->to($EmailAddress);
-					$this->email->subject('Employee Evaluation - Password Reset Request');
+					$this->email->subject($subject);
 					$this->email->message($message);
 					if($this->email->send()){
-					// return true;
+						$email_log = array(
+							'From' => SMTP_EMAIL,
+							'To' => $EmailAddress,
+							'Subject' => $subject,
+							'MessageBody' => $message,
+						);
+						$res = $this->db->insert('tblemaillog',$email_log);
 					}else{
 					// return false;
 					}  
@@ -129,11 +136,11 @@ class ChangePassword extends CI_Controller {
 							$LastName = $row->LastName;
 							$EmailAddress = $row->EmailAddress;
 						}
-						$config['protocol'] = 'smtp';
-						$config['smtp_host'] = 'ssl://smtp.googlemail.com';
-						$config['smtp_port'] = '465';
-						$config['smtp_user'] = 'myopeneyes3937@gmail.com';
-						$config['smtp_pass'] = 'W3lc0m3@2018';  //sender's password
+						$config['protocol'] = SMTP_PROTOCOL;
+						$config['smtp_host'] = SMTP_HOST;
+						$config['smtp_port'] = SMTP_PORT;
+						$config['smtp_user'] = SMTP_EMAIL;
+						$config['smtp_pass'] = SMTP_PASSWORD;  //sender's password
 						$config['mailtype'] = 'html';
 						$config['charset'] = 'iso-8859-1';
 						$config['newline']="\r\n";
@@ -141,6 +148,7 @@ class ChangePassword extends CI_Controller {
 
 						$loginpath = BASE_URL.'/login/';
 						$forgotpath = BASE_URL.'/forgot-password/';
+						$subject = 'Employee Evaluation - Password has been Changed';
 						$message = '
 						<table border="0" cellpadding="0" cellspacing="0" style="border:1px solid #333333; color:#000000; font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:22px; margin:0 auto; width:600px">
 							<tbody>
@@ -178,12 +186,18 @@ class ChangePassword extends CI_Controller {
 							</tbody>
 						</table>';
 					$this->email->initialize($config); 
-					$this->email->from('info@theopeneyes.com','OpenEyes Software Solutions Pvt. Ltd');
+					$this->email->from(FROM_EMAIL,FROM_USER);
 					$this->email->to($EmailAddress);
-					$this->email->subject('Employee Evaluation - Password has been Changed');
+					$this->email->subject($subject);
 					$this->email->message($message);
 					if($this->email->send()){
-					// return true;
+						$email_log = array(
+							'From' => SMTP_EMAIL,
+							'To' => $EmailAddress,
+							'Subject' => $subject,
+							'MessageBody' => $message,
+						);
+						$res = $this->db->insert('tblemaillog',$email_log);
 					}else{
 					// return false;
 					}  

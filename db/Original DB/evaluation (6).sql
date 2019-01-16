@@ -165,7 +165,7 @@ CREATE TABLE `tblmstempevaluation` (
   `EvaluationId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `EvaluationTypeId` int(11) NOT NULL,
-  `EvaluationDate` timestamp NOT NULL,
+  `ExpirationDate` timestamp NOT NULL,
   `EvaluationDescription` text,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
@@ -178,7 +178,7 @@ CREATE TABLE `tblmstempevaluation` (
 -- Dumping data for table `tblmstempevaluation`
 --
 
-INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `EvaluationDate`, `EvaluationDescription`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `ExpirationDate`, `EvaluationDescription`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (21, 5, 1, '2018-12-18 02:55:00', 'jaxi\'s evaluation', b'1', 4, '2018-12-13 14:15:54', 1, '2018-12-17 13:25:55'),
 (23, 4, 2, '2018-12-31 15:15:00', 'Not mentioned!', b'1', 1, '2018-12-17 09:28:55', 1, '2018-12-17 13:19:12');
 
@@ -236,13 +236,13 @@ INSERT INTO `tblmstevaluationtype` (`EvaluationTypeId`, `EvaluationTypeName`, `I
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmstjobtitle`
+-- Table structure for table `tblmstjob`
 --
 
-CREATE TABLE `tblmstjobtitle` (
-  `JobTitleId` int(11) NOT NULL,
+CREATE TABLE `tblmstjob` (
+  `JobId` int(11) NOT NULL,
   `DepartmentId` int(11) NOT NULL,
-  `JobTitleName` varchar(100) NOT NULL,
+  `JobTitle` varchar(100) NOT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -251,10 +251,10 @@ CREATE TABLE `tblmstjobtitle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblmstjobtitle`
+-- Dumping data for table `tblmstjob`
 --
 
-INSERT INTO `tblmstjobtitle` (`JobTitleId`, `DepartmentId`, `JobTitleName`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+INSERT INTO `tblmstjob` (`JobId`, `DepartmentId`, `JobTitle`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (1, 1, 'Office Administrator', b'1', 1, '2018-12-07 07:42:32', 1, '2018-12-07 07:42:32'),
 (2, 2, 'HR Executive', b'1', 1, '2018-12-07 07:49:00', 1, '2018-12-07 07:49:00'),
 (3, 2, 'Sr. HR Executive', b'1', 1, '2018-12-07 07:49:00', 1, '2018-12-07 07:49:00'),
@@ -310,10 +310,10 @@ INSERT INTO `tblmstquestion` (`QuestionId`, `EvaluationTypeId`, `QuestionText`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblmstuserrole`
+-- Table structure for table `tblmstrole`
 --
 
-CREATE TABLE `tblmstuserrole` (
+CREATE TABLE `tblmstrole` (
   `RoleId` int(11) NOT NULL,
   `RoleName` varchar(50) NOT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
@@ -324,10 +324,10 @@ CREATE TABLE `tblmstuserrole` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tblmstuserrole`
+-- Dumping data for table `tblmstrole`
 --
 
-INSERT INTO `tblmstuserrole` (`RoleId`, `RoleName`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+INSERT INTO `tblmstrole` (`RoleId`, `RoleName`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (1, 'Admin', b'1', 1, '2018-12-07 07:24:43', 1, '2018-12-07 07:24:43'),
 (2, 'HR', b'1', 1, '2018-12-07 07:24:43', 1, '2018-12-07 07:24:43'),
 (3, 'Employee', b'1', 1, '2018-12-07 07:24:43', 1, '2018-12-07 07:24:43');
@@ -375,7 +375,7 @@ INSERT INTO `tblquestionoptions` (`QuestionOptionId`, `QuestionId`, `OptionValue
 CREATE TABLE `tbluser` (
   `UserId` int(11) NOT NULL,
   `RoleId` int(11) NOT NULL,
-  `JobTitleId` int(11) NOT NULL,
+  `JobId` int(11) NOT NULL,
   `LineManagerId` int(11) NOT NULL DEFAULT '0',
   `FirstName` varchar(50) DEFAULT NULL,
   `MiddleName` varchar(50) DEFAULT NULL,
@@ -383,7 +383,7 @@ CREATE TABLE `tbluser` (
   `EmployeeId` varchar(50) DEFAULT '0',
   `EmailAddress` varchar(100) NOT NULL,
   `Password` varchar(100) DEFAULT NULL,
-  `ResetPasswordCode` varchar(10) DEFAULT NULL,
+  `ForgotPasswordCode` varchar(10) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL DEFAULT '1',
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -395,7 +395,7 @@ CREATE TABLE `tbluser` (
 -- Dumping data for table `tbluser`
 --
 
-INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobTitleId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `ResetPasswordCode`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
+INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `ForgotPasswordCode`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
 (1, 1, 15, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
 (2, 2, 2, 0, 'HR', 'Admin', 'Developer', NULL, 'sparmar@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
 (4, 3, 10, 2, 'Uttam', '', 'Bhut', NULL, 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-07 05:24:11', 1, '2018-12-07 05:24:11'),
@@ -444,10 +444,10 @@ ALTER TABLE `tblmstevaluationtype`
   ADD PRIMARY KEY (`EvaluationTypeId`);
 
 --
--- Indexes for table `tblmstjobtitle`
+-- Indexes for table `tblmstjob`
 --
-ALTER TABLE `tblmstjobtitle`
-  ADD PRIMARY KEY (`JobTitleId`);
+ALTER TABLE `tblmstjob`
+  ADD PRIMARY KEY (`JobId`);
 
 --
 -- Indexes for table `tblmstquestion`
@@ -456,9 +456,9 @@ ALTER TABLE `tblmstquestion`
   ADD PRIMARY KEY (`QuestionId`);
 
 --
--- Indexes for table `tblmstuserrole`
+-- Indexes for table `tblmstrole`
 --
-ALTER TABLE `tblmstuserrole`
+ALTER TABLE `tblmstrole`
   ADD PRIMARY KEY (`RoleId`);
 
 --
@@ -508,19 +508,19 @@ ALTER TABLE `tblmstempevaluator`
 ALTER TABLE `tblmstevaluationtype`
   MODIFY `EvaluationTypeId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `tblmstjobtitle`
+-- AUTO_INCREMENT for table `tblmstjob`
 --
-ALTER TABLE `tblmstjobtitle`
-  MODIFY `JobTitleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+ALTER TABLE `tblmstjob`
+  MODIFY `JobId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tblmstquestion`
 --
 ALTER TABLE `tblmstquestion`
   MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT for table `tblmstuserrole`
+-- AUTO_INCREMENT for table `tblmstrole`
 --
-ALTER TABLE `tblmstuserrole`
+ALTER TABLE `tblmstrole`
   MODIFY `RoleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblquestionoptions`
