@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2018 at 03:24 PM
+-- Generation Time: Jan 30, 2019 at 06:26 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -25,6 +25,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblactivitylog`
+--
+
+CREATE TABLE `tblactivitylog` (
+  `ActivityLogId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Module` varchar(50) NOT NULL,
+  `Activity` varchar(100) NOT NULL,
+  `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblemaillog`
+--
+
+CREATE TABLE `tblemaillog` (
+  `EmailLogId` int(11) NOT NULL,
+  `TokenId` int(11) NOT NULL,
+  `From` varchar(100) NOT NULL,
+  `Cc` text NOT NULL,
+  `Bcc` text NOT NULL,
+  `To` varchar(100) NOT NULL,
+  `Subject` varchar(250) NOT NULL,
+  `MessageBody` text NOT NULL,
+  `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblevaluationanswer`
 --
 
@@ -41,43 +73,20 @@ CREATE TABLE `tblevaluationanswer` (
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 --
--- Dumping data for table `tblevaluationanswer`
+-- Table structure for table `tblloginlog`
 --
 
-INSERT INTO `tblevaluationanswer` (`EvaluationAnswerId`, `EmployeeEvaluatorId`, `QuestionId`, `AnswerText`, `Comments`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 13, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(2, 1, 14, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(3, 1, 15, '2.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(4, 1, 16, '4.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(5, 1, 29, '4.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(6, 1, 30, '4', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:40'),
-(7, 1, 31, '5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:41'),
-(8, 1, 32, '3.5', NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:41'),
-(9, 1, 39, NULL, NULL, b'1', 1, '2018-12-26 06:58:50', 1, '2018-12-27 13:53:41'),
-(16, 3, 7, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(17, 3, 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaeca.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(18, 3, 13, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(19, 3, 14, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(20, 3, 15, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(21, 3, 16, '4.5', ' dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur i.', b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(22, 3, 29, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(23, 3, 30, '4.5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(24, 3, 31, '5', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(25, 3, 32, '4', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(26, 3, 38, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(27, 3, 39, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.', NULL, b'1', 3, '2018-12-26 07:00:44', 3, '2018-12-26 07:02:20'),
-(31, 2, 13, '3', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:18'),
-(32, 2, 14, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(33, 2, 15, '5', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(34, 2, 16, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(35, 2, 29, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(36, 2, 30, '5', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(37, 2, 31, '3', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(38, 2, 32, '4', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19'),
-(39, 2, 39, 'Answer 9', NULL, b'1', 2, '2018-12-26 07:02:57', 2, '2018-12-26 07:04:19');
+CREATE TABLE `tblloginlog` (
+  `LoginLogId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `LoginType` int(1) NOT NULL,
+  `UserAgent` int(11) DEFAULT NULL,
+  `IPAddress` varchar(50) DEFAULT NULL,
+  `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
 --
 -- Table structure for table `tblmstconfiguration`
@@ -139,7 +148,7 @@ INSERT INTO `tblmstdepartment` (`DepartmentId`, `DepartmentName`, `IsActive`, `C
 (3, 'Development', b'1', 1, '2018-12-07 07:41:31', 1, '2018-12-07 07:41:31'),
 (4, 'Staffing', b'1', 1, '2018-12-07 07:41:31', 1, '2018-12-07 07:41:31'),
 (5, 'Marketing', b'1', 1, '2018-12-07 07:41:31', 1, '2018-12-07 07:41:31'),
-(6, 'Head Department', b'1', 1, '2018-12-07 08:11:58', 1, '2018-12-07 08:11:58');
+(6, 'Head Department', b'1', 1, '2018-12-07 08:11:58', 9, '2019-01-10 11:41:09');
 
 -- --------------------------------------------------------
 
@@ -151,9 +160,12 @@ CREATE TABLE `tblmstempevaluation` (
   `EvaluationId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
   `EvaluationTypeId` int(11) NOT NULL,
-  `ExpirationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `EvaluationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ExpirationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `EmployeeEmailNote` text,
   `EvaluatorEmailNote` text,
+  `EvaluationNote` text,
+  `ParentEvaluation` int(11) DEFAULT NULL,
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL,
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -161,14 +173,6 @@ CREATE TABLE `tblmstempevaluation` (
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tblmstempevaluation`
---
-
-INSERT INTO `tblmstempevaluation` (`EvaluationId`, `UserId`, `EvaluationTypeId`, `ExpirationDate`, `EmployeeEmailNote`, `EvaluatorEmailNote`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 3, 2, '2018-12-28 14:30:00', 'Note for User', 'Note for Evaluator', b'1', 1, '2018-12-26 06:56:57', 1, '2018-12-26 06:56:57');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `tblmstempevaluator`
@@ -179,6 +183,7 @@ CREATE TABLE `tblmstempevaluator` (
   `EvaluationId` int(11) NOT NULL,
   `EvaluatorId` int(11) NOT NULL,
   `StatusId` tinyint(1) NOT NULL DEFAULT '0',
+  `EvaluatorType` bit(1) NOT NULL DEFAULT b'0',
   `IsActive` bit(1) NOT NULL DEFAULT b'1',
   `CreatedBy` int(11) NOT NULL,
   `CreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -186,16 +191,6 @@ CREATE TABLE `tblmstempevaluator` (
   `UpdatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tblmstempevaluator`
---
-
-INSERT INTO `tblmstempevaluator` (`EmployeeEvaluatorId`, `EvaluationId`, `EvaluatorId`, `StatusId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 1, 2, b'1', 1, '2018-12-26 06:56:57', 1, '2018-12-27 10:44:14'),
-(2, 1, 2, 1, b'1', 1, '2018-12-26 06:56:58', 1, '2018-12-26 06:56:58'),
-(3, 1, 3, 1, b'1', 1, '2018-12-26 06:56:58', 1, '2018-12-26 13:54:42');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `tblmstevaluationtype`
@@ -283,39 +278,39 @@ CREATE TABLE `tblmstquestion` (
 --
 
 INSERT INTO `tblmstquestion` (`QuestionId`, `EvaluationTypeId`, `QuestionText`, `AnswerTypeId`, `EvaluatorTypeId`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(7, 2, '<p>What were your major achievements in the past year? &nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:47:46', 1, '2018-12-20 07:05:15'),
-(8, 2, '<p>What was your goal? Did you reach to your goal? Personally and Professionally. &nbsp;</p>', 1, 1, b'1', 1, '2018-12-18 23:52:59', 1, '2018-12-20 07:06:39'),
-(9, 2, '<p>What are the areas of your performance (behaviors and results) on which you could improve? Please describe. &nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:09', 1, '2018-12-26 06:57:29'),
-(10, 2, '<p>What you have done to accomplish company&rsquo;s goal? Did you find any difficulties to complete any task/ project?&nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:19', 1, '2018-12-26 06:57:30'),
-(11, 2, '<p>Are there additional skills or knowledge that would help you more effectively perform your present job or enhance your skill opportunities? If yes, please list. &nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:30', 1, '2018-12-26 06:57:32'),
-(12, 2, '<p>What goals (specific measurable results) do you expect to accomplish during the next year? &nbsp;<br />\n&nbsp;</p>', 1, 1, b'0', 1, '2018-12-18 23:53:42', 1, '2018-12-26 06:57:37'),
-(13, 2, '<p>Rate out of 10 -&nbsp;COMMUNICATION</p>', 2, 0, b'1', 1, '2018-12-18 23:54:43', 1, '2018-12-18 23:59:54'),
-(14, 2, '<p>Rate out of 10 - AMBITION / INITIATIVE</p>', 2, 0, b'1', 1, '2018-12-18 23:59:40', 1, '2018-12-18 13:29:40'),
-(15, 2, '<p>Rate out of 10 - ATTENDANCE</p>', 2, 0, b'1', 1, '2018-12-19 00:02:38', 1, '2018-12-18 13:32:38'),
-(16, 2, '<p>Rate out of 10 - ATTITUDE / COOPERATION</p>', 2, 0, b'1', 1, '2018-12-19 00:02:47', 1, '2018-12-18 13:32:47'),
-(17, 2, '<p>Rate out of 10 - DEPARTMENT AND COMPANY ORIENTED</p>', 2, 0, b'0', 1, '2018-12-19 00:03:08', 1, '2018-12-26 06:57:47'),
-(18, 2, '<p>Rate out of 10 - FOCUS</p>', 2, 0, b'0', 1, '2018-12-19 00:03:17', 1, '2018-12-26 06:57:48'),
-(19, 2, '<p>Rate out of 10 - IMPROVEMENT FROM PREVIOUS EVALUATION</p>', 2, 0, b'0', 1, '2018-12-19 00:03:48', 1, '2018-12-26 06:57:50'),
-(20, 2, '<p>Rate out of 10 - INTEGRITY</p>', 2, 0, b'0', 1, '2018-12-19 00:03:56', 1, '2018-12-26 06:57:51'),
-(21, 2, '<p>Rate out of 10 - LEVEL OF (TECHNICAL) KNOWLEDGE</p>', 2, 0, b'0', 1, '2018-12-19 00:04:06', 1, '2018-12-26 06:57:53'),
-(22, 2, '<p>Rate out of 10 - PRODUCTIVITY / DEADLINE</p>', 2, 0, b'0', 1, '2018-12-19 00:06:22', 1, '2018-12-26 06:57:56'),
-(23, 2, '<p>Rate out of 10 - QUALITY OF WORK</p>', 2, 0, b'0', 1, '2018-12-19 00:06:32', 1, '2018-12-26 06:57:57'),
-(24, 2, '<p>Rate out of 10 - RELIABILITY / GO-TO PERSON</p>', 2, 0, b'0', 1, '2018-12-19 00:06:40', 1, '2018-12-26 06:57:59'),
-(25, 2, '<p>Rate out of 10 - STRESS MANAGEMENT</p>', 2, 0, b'0', 1, '2018-12-19 00:06:48', 1, '2018-12-26 06:58:01'),
-(26, 2, '<p>Rate out of 10 - TEAMWORK</p>', 2, 0, b'0', 1, '2018-12-19 00:06:56', 1, '2018-12-26 06:58:04'),
-(27, 2, '<p>Rate out of 10 - PRESENTATION</p>', 2, 0, b'0', 1, '2018-12-19 00:07:04', 1, '2018-12-26 06:58:13'),
-(28, 2, '<p>List the subjects you would like to discuss during your annual performance evaluation meeting:&nbsp;</p>', 1, 0, b'0', 1, '2018-12-19 00:07:38', 1, '2018-12-26 06:58:09'),
-(29, 2, '<p>Quality of work: Consider quality of work produced and the promptness with which it is completed</p>', 2, 0, b'1', 1, '2018-12-19 00:08:27', 1, '2018-12-18 13:38:27'),
-(30, 2, '<p>Productivity: Consider the ability to produce a quantity of accepted work which meets company standards.</p>', 2, 0, b'1', 1, '2018-12-19 00:09:09', 1, '2018-12-18 13:39:09'),
-(31, 2, '<p>Knowledge of job: Consider the knowledge of present job of other work closely related to it and of the equipment necessary to perform job functions.</p>', 2, 0, b'1', 1, '2018-12-19 00:10:03', 1, '2018-12-18 13:40:03'),
-(32, 2, '<p>Reliability and Dependability: Consider the amount of supervision required and job performance regarding timely completion and follow-ups.</p>', 2, 0, b'1', 1, '2018-12-19 00:10:45', 1, '2018-12-19 00:11:05'),
-(33, 2, '<p>Attendance: Consider overall attendance record and punctuality.</p>', 2, 0, b'0', 1, '2018-12-19 00:11:43', 1, '2018-12-26 06:58:22'),
-(34, 2, '<p>Initiative: Consider the extent to which new work assignments and additional duties are sought out when necessary.</p>', 2, 0, b'0', 1, '2018-12-19 00:12:13', 1, '2018-12-26 06:58:24'),
-(35, 2, '<p>The job timings are suitable for me.</p>', 2, 1, b'0', 1, '2018-12-19 00:12:38', 1, '2018-12-26 06:58:26'),
-(36, 2, '<p>I am satisfied with my pay and other perks of this job.</p>', 2, 1, b'0', 1, '2018-12-19 00:13:10', 1, '2018-12-26 06:58:28'),
-(37, 2, '<p>List your key strengths:</p>', 1, 0, b'0', 1, '2018-12-19 00:13:20', 1, '2018-12-26 06:58:39'),
-(38, 2, '<p>List your performance areas that need further development.</p>', 1, 1, b'1', 1, '2018-12-19 00:13:35', 1, '2018-12-20 07:13:08'),
-(39, 2, '<p>Mention any skills&nbsp;according to you are not utilised or under utilised for&nbsp;your role,&nbsp;if any.&nbsp;</p>', 1, 0, b'1', 1, '2018-12-19 00:20:52', 1, '2018-12-18 13:50:52');
+(7, 2, '<p>What were your major achievements in the past year?</p>', 1, 0, b'1', 1, '2018-12-18 18:17:46', 1, '2018-12-31 09:55:39'),
+(8, 2, '<p>What was your goal? Did you reach to your goal? Personally and Professionally.</p>', 1, 0, b'1', 1, '2018-12-18 18:22:59', 1, '2018-12-31 09:55:50'),
+(9, 2, '<p>What are the areas of your performance (behaviors and results) on which you could improve? Please describe.</p>', 1, 0, b'1', 1, '2018-12-18 18:23:09', 1, '2018-12-31 09:56:07'),
+(10, 2, '<p>What you have done to accomplish company&rsquo;s goal? Did you find any difficulties to complete any task/ project?</p>', 1, 0, b'1', 1, '2018-12-18 18:23:19', 1, '2018-12-18 07:53:19'),
+(11, 2, '<p>Are there additional skills or knowledge that would help you more effectively perform your present job or enhance your skill opportunities? If yes, please list.</p>', 1, 0, b'1', 1, '2018-12-18 18:23:30', 1, '2018-12-18 07:53:30'),
+(12, 2, '<p>What goals (specific measurable results) do you expect to accomplish during the next year?</p>', 1, 0, b'1', 1, '2018-12-18 18:23:42', 1, '2018-12-31 09:56:57'),
+(13, 2, '<p>Rate out of 5 - COMMUNICATION</p>', 2, 0, b'1', 1, '2018-12-18 18:24:43', 1, '2018-12-18 18:29:54'),
+(14, 2, '<p>Rate out of 5 - AMBITION / INITIATIVE</p>', 2, 0, b'1', 1, '2018-12-18 18:29:40', 1, '2018-12-18 07:59:40'),
+(15, 2, '<p>Rate out of 5 - ATTENDANCE</p>', 2, 0, b'1', 1, '2018-12-18 18:32:38', 1, '2018-12-18 08:02:38'),
+(16, 2, '<p>Rate out of 5 - ATTITUDE / COOPERATION</p>', 2, 0, b'1', 1, '2018-12-18 18:32:47', 1, '2018-12-18 08:02:47'),
+(17, 2, '<p>Rate out of 5 - DEPARTMENT AND COMPANY ORIENTED</p>', 2, 0, b'1', 1, '2018-12-18 18:33:08', 1, '2018-12-18 08:03:08'),
+(18, 2, '<p>Rate out of 5 - FOCUS</p>', 2, 0, b'1', 1, '2018-12-18 18:33:17', 1, '2018-12-18 08:03:17'),
+(19, 2, '<p>Rate out of 5 - IMPROVEMENT FROM PREVIOUS EVALUATION</p>', 2, 0, b'1', 1, '2018-12-18 18:33:48', 1, '2018-12-18 08:03:48'),
+(20, 2, '<p>Rate out of 5 - INTEGRITY</p>', 2, 0, b'1', 1, '2018-12-18 18:33:56', 1, '2018-12-18 08:03:56'),
+(21, 2, '<p>Rate out of 5 - LEVEL OF (TECHNICAL) KNOWLEDGE</p>', 2, 0, b'1', 1, '2018-12-18 18:34:06', 1, '2018-12-18 08:04:06'),
+(22, 2, '<p>Rate out of 5 - PRODUCTIVITY / DEADLINE</p>', 2, 0, b'1', 1, '2018-12-18 18:36:22', 1, '2018-12-18 08:06:22'),
+(23, 2, '<p>Rate out of 5 - QUALITY OF WORK</p>', 2, 0, b'1', 1, '2018-12-18 18:36:32', 1, '2018-12-18 08:06:32'),
+(24, 2, '<p>Rate out of 5 - RELIABILITY / GO-TO PERSON</p>', 2, 0, b'1', 1, '2018-12-18 18:36:40', 1, '2018-12-18 08:06:40'),
+(25, 2, '<p>Rate out of 5 - STRESS MANAGEMENT</p>', 2, 0, b'1', 1, '2018-12-18 18:36:48', 1, '2018-12-18 08:06:48'),
+(26, 2, '<p>Rate out of 5 - TEAMWORK</p>', 2, 0, b'1', 1, '2018-12-18 18:36:56', 1, '2018-12-18 08:06:56'),
+(27, 2, '<p>Rate out of 5 - PRESENTATION</p>', 2, 0, b'1', 1, '2018-12-18 18:37:04', 1, '2018-12-18 08:07:04'),
+(28, 2, '<p>List the subjects you would like to discuss during your annual performance evaluation meeting:&nbsp;</p>', 1, 0, b'1', 1, '2018-12-18 18:37:38', 1, '2018-12-18 08:07:38'),
+(29, 2, '<p>Quality of work: Consider quality of work produced and the promptness with which it is completed.</p>', 2, 0, b'1', 1, '2018-12-18 18:38:27', 1, '2018-12-31 10:01:38'),
+(30, 2, '<p>Productivity: Consider the ability to produce a quantity of accepted work which meets company standards.</p>', 2, 0, b'1', 1, '2018-12-18 18:39:09', 1, '2018-12-31 10:01:51'),
+(31, 2, '<p>Knowledge of job: Consider the knowledge of present job of other work closely related to it and of the equipment necessary to perform job functions.</p>', 2, 0, b'1', 1, '2018-12-18 18:40:03', 1, '2018-12-31 10:02:06'),
+(32, 2, '<p>Reliability and Dependability: Consider the amount of supervision required and job performance regarding timely completion and follow-ups.</p>', 2, 0, b'1', 1, '2018-12-18 18:40:45', 1, '2018-12-31 10:00:48'),
+(33, 2, '<p>Attendance: Consider overall attendance record and punctuality.</p>', 2, 0, b'1', 1, '2018-12-18 18:41:43', 1, '2018-12-31 10:00:29'),
+(34, 2, '<p>Initiative: Consider the extent to which new work assignments and additional duties are sought out when necessary.</p>', 2, 0, b'1', 1, '2018-12-18 18:42:13', 1, '2018-12-31 10:00:16'),
+(35, 2, '<p>The job timings are suitable for me.</p>', 2, 0, b'1', 1, '2018-12-18 18:42:38', 1, '2018-12-31 09:59:23'),
+(36, 2, '<p>I am satisfied with my pay and other perks of this job.</p>', 2, 0, b'1', 1, '2018-12-18 18:43:10', 1, '2018-12-31 09:59:35'),
+(37, 2, '<p>List your key strengths:</p>', 1, 0, b'1', 1, '2018-12-18 18:43:20', 1, '2018-12-18 08:13:20'),
+(38, 2, '<p>List your performance areas that need further development.</p>', 1, 0, b'1', 1, '2018-12-18 18:43:35', 1, '2018-12-18 08:13:35'),
+(39, 2, '<p>Mention any skills according to you are not utilised or under utilised for your role, if any.</p>', 1, 0, b'1', 1, '2018-12-18 18:50:52', 1, '2019-01-11 09:02:07');
 
 -- --------------------------------------------------------
 
@@ -389,19 +384,43 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`UserId`, `RoleId`, `JobId`, `LineManagerId`, `FirstName`, `MiddleName`, `LastName`, `EmployeeId`, `EmailAddress`, `Password`, `ForgotPasswordCode`, `IsActive`, `CreatedBy`, `CreatedOn`, `UpdatedBy`, `UpdatedOn`) VALUES
-(1, 1, 15, 0, 'IT', NULL, 'Developer', '0', 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-19 14:08:56', 1, '2018-12-19 14:08:56'),
-(2, 2, 5, 0, 'Jaxi', '', 'Chawda', '', 'jaxi.chawda@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-20 07:22:28', 1, '2018-12-20 07:22:28'),
-(3, 3, 5, 2, 'Uttam', '', 'Bhut', '', 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 2, '2018-12-20 07:24:01', 1, '2018-12-20 07:24:01');
+(1, 1, 15, 0, 'IT', 'Admin', 'Developer', NULL, 'it@theopeneyes.com', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 1, '2018-12-18 18:15:58', 1, '2018-12-18 18:15:58'),
+(2, 3, 5, 0, 'Uttam', '', 'Bhut', '37', 'uttam.bhut@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'0', 1, '2018-12-18 17:29:22', 1, '2018-12-19 16:19:39'),
+(3, 2, 15, 0, 'Trushant', '', 'Mehta', '007', 'TMehta@theopeneyes.com', 'a7871740a2c841299f8661527e721329', NULL, b'1', 1, '2018-12-18 19:30:13', 1, '2018-12-18 09:00:13'),
+(4, 3, 10, 3, 'Pooja', '', 'Shah', '29', 'pooja.patel@theopeneyes.com', '82080600934821faf0bc59cba79964bc', NULL, b'1', 1, '2018-12-20 12:25:13', 1, '2018-12-20 12:26:18'),
+(5, 3, 5, 4, 'Vidhi', '', 'Bathani', '28', 'vidhi.bathani@theopeneyes.in', '4285e46dd79d81d14cc290464e67b842', NULL, b'1', 1, '2019-01-09 14:58:15', 1, '2019-01-09 14:59:24'),
+(6, 2, 2, 3, 'Dharti', '', 'Desai', '29', 'dharti.desai@theopeneyes.in', '7ed990bb62e5627aedc639c34383d158', NULL, b'1', 1, '2019-01-09 12:15:51', 1, '2019-01-09 12:16:28'),
+(7, 3, 5, 4, 'Mitesh', '', 'Patel', '27', 'mitesh.patel@theopeneyes.in', '40e2744ed5e11495748555c090369cbf', NULL, b'1', 6, '2018-12-19 16:41:49', 1, '2018-12-19 16:41:49'),
+(8, 3, 5, 4, 'Nirav', '', 'Patel', '26', 'nirav.patel@theopeneyes.in', '8af3d234280b1e0ec6919cd265648e0a', NULL, b'1', 6, '2018-12-19 16:42:43', 1, '2018-12-19 16:42:43'),
+(9, 3, 6, 3, 'Krupali', '', 'Mistry', '31', 'krupali.mistry@theopeneyes.in', '25d55ad283aa400af464c76d713c07ad', NULL, b'1', 6, '2019-01-10 11:11:37', 1, '2019-01-10 11:12:32');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `tblactivitylog`
+--
+ALTER TABLE `tblactivitylog`
+  ADD PRIMARY KEY (`ActivityLogId`);
+
+--
+-- Indexes for table `tblemaillog`
+--
+ALTER TABLE `tblemaillog`
+  ADD PRIMARY KEY (`EmailLogId`);
+
+--
 -- Indexes for table `tblevaluationanswer`
 --
 ALTER TABLE `tblevaluationanswer`
   ADD PRIMARY KEY (`EvaluationAnswerId`);
+
+--
+-- Indexes for table `tblloginlog`
+--
+ALTER TABLE `tblloginlog`
+  ADD PRIMARY KEY (`LoginLogId`);
 
 --
 -- Indexes for table `tblmstconfiguration`
@@ -468,10 +487,28 @@ ALTER TABLE `tbluser`
 --
 
 --
+-- AUTO_INCREMENT for table `tblactivitylog`
+--
+ALTER TABLE `tblactivitylog`
+  MODIFY `ActivityLogId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblemaillog`
+--
+ALTER TABLE `tblemaillog`
+  MODIFY `EmailLogId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tblevaluationanswer`
 --
 ALTER TABLE `tblevaluationanswer`
-  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `EvaluationAnswerId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblloginlog`
+--
+ALTER TABLE `tblloginlog`
+  MODIFY `LoginLogId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblmstconfiguration`
@@ -489,13 +526,13 @@ ALTER TABLE `tblmstdepartment`
 -- AUTO_INCREMENT for table `tblmstempevaluation`
 --
 ALTER TABLE `tblmstempevaluation`
-  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `EvaluationId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblmstempevaluator`
 --
 ALTER TABLE `tblmstempevaluator`
-  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `EmployeeEvaluatorId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblmstevaluationtype`
@@ -531,7 +568,7 @@ ALTER TABLE `tblquestionoptions`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
