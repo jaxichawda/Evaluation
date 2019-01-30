@@ -36,7 +36,7 @@
                 data-toggle="tooltip" data-placement="right"></i> </label>
             <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
               name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
-              (change)="onChange($event)">
+              (change)="onChange($event)" [disabled]="evaluationEntity.EvaluationId>0">
               <option value="">Select</option>
               <ng-container *ngFor="let user of userlist1">
                 <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
@@ -59,7 +59,7 @@
             <label>Evaluators <i class="fa fa-info-circle tooltip_inline" title="Invite employee to give evaluation for above details"
                 data-toggle="tooltip" data-placement="right"></i> </label>
             <ng-select [options]="userlist" [multiple]="true" [(ngModel)]="selectedCharacters" name="selectedCharacters"
-              [ngClass]="{'red_border': showError}">
+              [ngClass]="{'red_border': showError}" [disabled]="evaluationEntity.EvaluationId>0">
             </ng-select>
             <span class="error_span" *ngIf="showError">
               Please select Evaluator
@@ -100,14 +100,14 @@
           <div class="form-group">
             <label>Email note for Employee</label>
             <textarea class="form-control" #EmployeeEmailNote="ngModel" [(ngModel)]="evaluationEntity.EmployeeEmailNote"
-              name="EmployeeEmailNote" maxlength="1000"></textarea>
+              name="EmployeeEmailNote" maxlength="1000" [disabled]="evaluationEntity.EvaluationId>0"></textarea>
           </div>
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label>Email note for Evaluator</label>
             <textarea class="form-control" #EvaluatorEmailNote="ngModel" [(ngModel)]="evaluationEntity.EvaluatorEmailNote"
-              name="EvaluatorEmailNote" maxlength="1000"></textarea>
+              name="EvaluatorEmailNote" maxlength="1000" [disabled]="evaluationEntity.EvaluationId>0"></textarea>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -115,7 +115,7 @@
           <div class="form-group">
             <label><span>*</span>Evaluation type</label>
             <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="evaluationEntity.EvaluationTypeId"
-              name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}">
+              name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}" [disabled]="evaluationEntity.EvaluationId>0">
               <option value="">Select</option>
               <ng-container *ngFor="let type of evaluationtypelist">
                 <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}</option>

@@ -8,23 +8,24 @@ import { HttpClient } from "@angular/common/http";
 export class ForgotResetService {
 
   constructor(private http: Http, private globals: Globals, private router: Router) { }
-  forgotPassword(forgotEntity)
-  { debugger
-   let promise = new Promise((resolve, reject) => {
-     this.http.post(this.globals.baseAPIUrl + 'ChangePassword/forgotPassword', forgotEntity)
-     .toPromise()
-     .then(
-       res => { // Success
-         resolve(res); 
-       },
-       msg => { // Error
-     reject(msg);
-       }
-     );
- });		
-   return promise;
-   }
-   resetPassword(UserId){debugger
+  forgotPassword(forgotEntity) {
+    debugger
+    let promise = new Promise((resolve, reject) => {
+      this.http.post(this.globals.baseAPIUrl + 'ChangePassword/forgotPassword', forgotEntity)
+        .toPromise()
+        .then(
+          res => { // Success
+            resolve(res);
+          },
+          msg => { // Error
+            reject(msg);
+          }
+        );
+    });
+    return promise;
+  }
+  resetPassword(UserId) {
+    debugger
     let promise = new Promise((resolve, reject) => {
       this.http.post(this.globals.baseAPIUrl + 'ChangePassword/resetPassword', UserId, this.globals.headerpath)
         .toPromise()
@@ -33,30 +34,30 @@ export class ForgotResetService {
             resolve(res.json());
           },
           msg => { // Error
-        reject(msg);
-        //this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
+            reject(msg);
+            //this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
           }
         );
-    });		
+    });
     return promise;
-    }
-    getResetlink2(UserId){
-      debugger
+  }
+  getResetlink2(UserId) {
+    debugger
     let promise = new Promise((resolve, reject) => {
-      this.http.post(this.globals.baseAPIUrl + 'ChangePassword/resetpasslink2',UserId)
+      this.http.post(this.globals.baseAPIUrl + 'ChangePassword/resetpasslink2', UserId)
         .toPromise()
         .then(
           res => { // Success
             resolve(res.json());
           },
           msg => { // Error
-        reject(msg);
-       // this.globals.isLoading = false;
-        this.router.navigate(['/pagenotfound']);
+            reject(msg);
+            // this.globals.isLoading = false;
+            this.router.navigate(['/pagenotfound']);
           }
         );
-    });		
+    });
     return promise;
-    }
+  }
 }

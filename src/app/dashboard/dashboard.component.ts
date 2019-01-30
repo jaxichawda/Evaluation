@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
         this.TodaysDate = new Date();
 
         this.newTime = new Date();
-        this.newTime.setMinutes(this.newTime.getMinutes() + 60);
+        //this.newTime.setMinutes(this.newTime.getMinutes());
         //console.log(this.newTime);
 
         this.TomorrowsDate = new Date();
