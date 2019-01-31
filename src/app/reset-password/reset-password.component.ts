@@ -33,18 +33,17 @@ export class ResetPasswordComponent implements OnInit {
 		id = new JwtHelper().decodeToken(id);
 		this.ForgotResetService.getResetlink2(id)
 			.then((data) => {
+				this.globals.isLoading = false;
 				if (data == 'fail') {
 					swal({
-						position: 'top-end',
-						type: 'danger',
-						title: 'You are already used this link!',
-						showConfirmButton: false,
-						timer: 1500
+						type: 'warning',
+						title: 'Oops...',
+						text: 'Your password reset link is not valid, or already used!',
 					})
 
 					this.router.navigate(['/admin/login']);
 				}
-				this.globals.isLoading = false;
+
 			},
 				(error) => {
 					this.btn_disable = false;

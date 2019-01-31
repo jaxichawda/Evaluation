@@ -97,6 +97,7 @@ export class QuestionComponent implements OnInit {
           } else {
             this.questionEntity.IsActive = '1';
           }
+
           setTimeout(() => {
             CKEDITOR.instances.QuestionText.setData(this.questionEntity.QuestionText);
           }, 500);

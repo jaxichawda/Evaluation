@@ -237,7 +237,7 @@ class Question_model extends CI_Model {
 	{
 	  if($QuestionId)
 	  {
-		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.EvaluatorTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive');
+		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.EvaluatorTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tea.QuestionId='.$QuestionId.') as isdisabled');
 		 $this->db->where('tmq.QuestionId',$QuestionId);
 		 $result=$this->db->get('tblmstquestion tmq');
 		 $question_data= array();
@@ -275,7 +275,6 @@ class Question_model extends CI_Model {
 	{
 		try{
 			$this->db->select('tmq.QuestionId, COALESCE(tmet.EvaluationTypeName,"All (Common for all Evaluation)") as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmcc.DisplayText as EvaluatorType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
-			//$this->db->select('tmq.QuestionId, tmet.EvaluationTypeName as EvaluationType, tmq.QuestionText, tmc.DisplayText as QuestionType, tmq.IsActive, (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tmq.QuestionId=tea.QuestionId) as isdisabled');
 			$this->db->from('tblmstquestion tmq');
 			$this->db->join('tblmstevaluationtype tmet', 'tmet.EvaluationTypeId=tmq.EvaluationTypeId', 'LEFT');
 			$this->db->join('tblmstconfiguration tmc', 'tmc.Value=tmq.AnswerTypeId', 'LEFT');

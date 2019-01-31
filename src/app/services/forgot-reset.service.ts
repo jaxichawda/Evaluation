@@ -15,7 +15,7 @@ export class ForgotResetService {
         .toPromise()
         .then(
           res => { // Success
-            resolve(res);
+            resolve(res.json());
           },
           msg => { // Error
             reject(msg);
