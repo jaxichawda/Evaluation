@@ -23,6 +23,8 @@ class Employee extends CI_Controller {
 			$post_Employee['Password']= $password;
 
 			if($post_Employee['UserId']>0) {
+				//check if any update send mail to employee
+				
 				$result = $this->Employee_model->editEmployee($post_Employee);
 				if($result) {
 					echo json_encode($post_Employee);	
@@ -111,7 +113,7 @@ class Employee extends CI_Controller {
 								</td>
 							</tr>
 							<tr>
-								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
 							</tr>
 						</tbody>
 					</table>

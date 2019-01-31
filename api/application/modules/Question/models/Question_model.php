@@ -237,7 +237,7 @@ class Question_model extends CI_Model {
 	{
 	  if($QuestionId)
 	  {
-		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.EvaluatorTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive');
+		 $this->db->select('tmq.QuestionId, tmq.EvaluationTypeId, tmq.EvaluatorTypeId, tmq.QuestionText, tmq.AnswerTypeId, tmq.IsActive , (SELECT COUNT(tea.EvaluationAnswerId) FROM tblevaluationanswer as tea WHERE tea.QuestionId='.$QuestionId.') as isdisabled');
 		 $this->db->where('tmq.QuestionId',$QuestionId);
 		 $result=$this->db->get('tblmstquestion tmq');
 		 $question_data= array();
