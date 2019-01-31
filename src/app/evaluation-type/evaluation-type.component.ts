@@ -23,7 +23,7 @@ export class EvaluationTypeComponent implements OnInit {
   ngOnInit() {
     
     this.globals.isLoading = false;
-    setTimeout(function () {
+    setTimeout(function () {  
       if ($("body").height() < $(window).height()) {
         $('footer').addClass('footer_fixed');
       }

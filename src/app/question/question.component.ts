@@ -156,7 +156,7 @@ export class QuestionComponent implements OnInit {
       this.questionEntity.JobId = 0;
       this.submitted = true;
     }
-
+    
     if (questionForm.valid && this.des_valid == false) {
       this.btn_disable = true;
       this.questionEntity.check = 0;

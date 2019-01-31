@@ -73,7 +73,7 @@
           <div class="form-group">
             <label><span class="required">*</span>Question Type</label>
             <select class='select-option' required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
-              name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}">
+              name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}" [disabled]="questionEntity.isdisabled>0">
               <option value="" ngSelected='questionEntity.AnswerTypeId==""'>Select</option>
               <ng-container *ngFor='let questiontype of questiontypeList'>
                 <option class='option' [value]="questiontype.AnswerTypeId" ngSelected="questionEntity.AnswerTypeId==questiontype.AnswerTypeId">{{questiontype.QuestionTypeName}}</option>

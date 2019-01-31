@@ -95,7 +95,7 @@ class Remaining extends CI_Controller {
 								</td>
 							</tr>
 							<tr>
-								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
 							</tr>
 						</tbody>
 					</table>
@@ -152,7 +152,7 @@ class Remaining extends CI_Controller {
 								</td>
 							</tr>
 							<tr>
-								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
 							</tr>
 						</tbody>
 					</table>
@@ -245,7 +245,7 @@ class Remaining extends CI_Controller {
 								</td>
 							</tr>
 							<tr>
-								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
 							</tr>
 						</tbody>
 					</table>
@@ -302,7 +302,7 @@ class Remaining extends CI_Controller {
 								</td>
 							</tr>
 							<tr>
-								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+								<td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
 							</tr>
 						</tbody>
 					</table>

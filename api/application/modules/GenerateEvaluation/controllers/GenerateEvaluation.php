@@ -187,6 +187,11 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Expiration Date</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$post_generate['ExpirationDate'].'</td>
                                             </tr>
                                             <tr>
@@ -216,7 +221,7 @@ class GenerateEvaluation extends CI_Controller {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -251,6 +256,11 @@ class GenerateEvaluation extends CI_Controller {
                                             <tr>
                                                 <td style="padding:5px; text-align:right; width:35%">Scheduled Evaluation Date</td>
                                                 <td style="padding:5px; text-align:center; width:4%">:</td>
+                                                <td style="padding:5px; text-align:left; width:48%">'.$post_generate['EvaluationDate'].'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:5px; text-align:right; width:35%">Expiration Date</td>
+                                                <td style="padding:5px; text-align:center; width:4%">:</td>
                                                 <td style="padding:5px; text-align:left; width:48%">'.$post_generate['ExpirationDate'].'</td>
                                             </tr>
                                             <tr>
@@ -280,7 +290,7 @@ class GenerateEvaluation extends CI_Controller {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2018 OpenEyes Software Solutions</td>
+                                    <td style="background-color:#a6ce39; background:#a6ce39; border-top:1px solid #cccccc; color:#000; font-size:13px; padding:7px; text-align:center">Copyright &copy; 2019 OpenEyes Software Solutions</td>
                                 </tr>
                             </tbody>
                         </table>

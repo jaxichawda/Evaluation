@@ -29,6 +29,7 @@ export class PerformanceReviewComponent implements OnInit {
     private PerformanceReviewService: PerformanceReviewService) { }
 
   ngOnInit() {
+    
     var item = { 'OptionValue': '' };
     this.QuestionList = [];
     this.ans = [];
