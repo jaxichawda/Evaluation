@@ -29,7 +29,11 @@ export class PerformanceReviewComponent implements OnInit {
     private PerformanceReviewService: PerformanceReviewService) { }
 
   ngOnInit() {
-    
+    $('#Preview_Modal').on('hidden.bs.modal', function () {
+      $('#Preview_Modal').modal('hide');
+      $('.right_content_block').removeClass('style_position');
+    });
+
     var item = { 'OptionValue': '' };
     this.QuestionList = [];
     this.ans = [];
@@ -117,33 +121,31 @@ export class PerformanceReviewComponent implements OnInit {
         else {
           count++;
         }
-        //alert(count);
       }
     }
-    //alert(count);
-    // if(count==this.QuestionList.length){
-    //   this.disabled=false;
-    // }
 
     if (count == totalQues) {
-      this.globals.isLoading = true;
+      console.log(this.QuestionList);
+      $('#Preview_Modal').modal('show');
+      $('.right_content_block').addClass('style_position');
+      // this.globals.isLoading = true;
 
-      this.PerformanceReviewService.insertPerformance(this.QuestionList)
-        .then((data) => {
-          this.globals.isLoading = false;
-          swal({
-            position: 'top-end',
-            type: 'success',
-            title: 'Your Evaluation Submitted Successfully!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          this.router.navigate(['/dashboard']);
-        },
-          (error) => {
-            //this.btn_disable = false;
-            //this.submitted = false;
-          });
+      // this.PerformanceReviewService.insertPerformance(this.QuestionList)
+      //   .then((data) => {
+      //     this.globals.isLoading = false;
+      //     swal({
+      //       position: 'top-end',
+      //       type: 'success',
+      //       title: 'Your Evaluation Submitted Successfully!',
+      //       showConfirmButton: false,
+      //       timer: 1500
+      //     })
+      //     this.router.navigate(['/dashboard']);
+      //   },
+      //     (error) => {
+      //       //this.btn_disable = false;
+      //       //this.submitted = false;
+      //     });
     }
     else {
       swal({

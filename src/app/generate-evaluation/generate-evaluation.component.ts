@@ -131,6 +131,7 @@ export class GenerateEvaluationComponent implements OnInit {
     this.GenerateEvaluationService.getData()
       .then((data) => {
         this.userlist = data['users'];
+        console.log(this.userlist);
         this.userlist1 = data['users'];
         this.evaluationtypelist = data['evaluationtypes'];
         this.globals.isLoading = false;

@@ -32,16 +32,15 @@
       <form class="form-validate" role="form" #evaluationForm="ngForm" (ngSubmit)="generateEvaluation(evaluationForm)">
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label><span>*</span>Employee <i class="fa fa-info-circle tooltip_inline" title="For whom you want to take a evaluation"
-                data-toggle="tooltip" data-placement="right"></i> </label>
+            <label><span>*</span>Employee <i class="fa fa-info-circle tooltip_inline"
+                title="For whom you want to take a evaluation" data-toggle="tooltip" data-placement="right"></i>
+            </label>
             <select required class="form-control select-option" #UserId="ngModel" [(ngModel)]="evaluationEntity.UserId"
               name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}"
               (change)="onChange($event)" [disabled]="evaluationEntity.EvaluationId>0">
               <option value="">Select</option>
               <ng-container *ngFor="let user of userlist1">
                 <option *ngIf="(user.IsActive==1)" value="{{user.value}}">{{user.label}}</option>
-                <!-- <option *ngIf="(user.IsActive==1) && (user.RoleId==1)" value="{{user.value}}">{{user.label}} (Admin)</option>
-                      <option *ngIf="(user.IsActive==1) && (user.RoleId==2)" value="{{user.value}}">{{user.label}} (HR)</option> -->
               </ng-container>
             </select>
             <span class="error_span" *ngIf="(UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)">
@@ -56,8 +55,9 @@
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
-            <label>Evaluators <i class="fa fa-info-circle tooltip_inline" title="Invite employee to give evaluation for above employee"
-                data-toggle="tooltip" data-placement="right"></i> </label>
+            <label>Evaluators <i class="fa fa-info-circle tooltip_inline"
+                title="Invite employee to give evaluation for above employee" data-toggle="tooltip"
+                data-placement="right"></i> </label>
             <ng-select [options]="userlist" [multiple]="true" [(ngModel)]="selectedCharacters" name="selectedCharacters"
               [ngClass]="{'red_border': showError}" [disabled]="evaluationEntity.EvaluationId>0">
             </ng-select>
@@ -70,10 +70,11 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label><span>*</span>Scheduled Evaluation Date
-              <i class="fa fa-info-circle tooltip_inline" title="This is date of Evaluation Meeting." data-toggle="tooltip"
-                data-placement="right"></i></label>
-            <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control evaluation_date"
-              #EvaluationDate="ngModel" [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate"
+              <i class="fa fa-info-circle tooltip_inline" title="This is date of Evaluation Meeting."
+                data-toggle="tooltip" data-placement="right"></i></label>
+            <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly
+              class="form-control evaluation_date" #EvaluationDate="ngModel"
+              [(ngModel)]="evaluationEntity.EvaluationDate" name="EvaluationDate" id="EvaluationDate"
               [ngClass]="{'red_border': EvaluationDateValid}">
             <span class="error_span" *ngIf="EvaluationDateValid">
               Please select Evaluation Date
@@ -84,10 +85,12 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label><span>*</span>Expiration Date
-              <i class="fa fa-info-circle tooltip_inline" title="After this date, Evaluators or Employee cannot give Evaluation." data-toggle="tooltip"
+              <i class="fa fa-info-circle tooltip_inline"
+                title="After this date, Evaluators or Employee cannot give Evaluation." data-toggle="tooltip"
                 data-placement="right"></i></label>
-            <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control expiration_date"
-              #ExpirationDate="ngModel" [(ngModel)]="evaluationEntity.ExpirationDate" name="ExpirationDate" id="ExpirationDate"
+            <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly
+              class="form-control expiration_date" #ExpirationDate="ngModel"
+              [(ngModel)]="evaluationEntity.ExpirationDate" name="ExpirationDate" id="ExpirationDate"
               [ngClass]="{'red_border': ExpirationDateValid}">
             <span class="error_span" *ngIf="ExpirationDateValid">
               Please select Expiration Date
@@ -110,23 +113,27 @@
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label>Email note for Evaluator</label>
-            <textarea class="form-control" #EvaluatorEmailNote="ngModel" [(ngModel)]="evaluationEntity.EvaluatorEmailNote"
-              name="EvaluatorEmailNote" maxlength="1000" [disabled]="evaluationEntity.EvaluationId>0"></textarea>
+            <textarea class="form-control" #EvaluatorEmailNote="ngModel"
+              [(ngModel)]="evaluationEntity.EvaluatorEmailNote" name="EvaluatorEmailNote" maxlength="1000"
+              [disabled]="evaluationEntity.EvaluationId>0"></textarea>
           </div>
         </div>
         <div class="clearfix"></div>
         <div class="col-md-6 col-sm-6">
           <div class="form-group">
             <label><span>*</span>Evaluation type</label>
-            <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="evaluationEntity.EvaluationTypeId"
-              name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}"
+            <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel"
+              [(ngModel)]="evaluationEntity.EvaluationTypeId" name="EvaluationTypeId"
+              [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}"
               [disabled]="evaluationEntity.EvaluationId>0">
               <option value="">Select</option>
               <ng-container *ngFor="let type of evaluationtypelist">
-                <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}</option>
+                <option *ngIf="(type.IsActive==1)" value="{{type.EvaluationTypeId}}">{{type.EvaluationTypeName}}
+                </option>
               </ng-container>
             </select>
-            <span class="error_span" *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
+            <span class="error_span"
+              *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
               <span *ngIf="EvaluationTypeId.errors.required || (EvaluationTypeId.pristine && submitted)">
                 Please select Evaluation Type
               </span>
@@ -136,7 +143,8 @@
         <div class="form-group col-md-6">
           <label><span class="required">*</span>Active ?</label>
           <div class="activeyes_box">
-            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="evaluationEntity.IsActive">
+            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel"
+              [(ngModel)]="evaluationEntity.IsActive">
             <label for="IsActive"></label>
           </div>
         </div>

@@ -58,14 +58,14 @@ export class DashboardComponent implements OnInit {
         this.TomorrowsDate.setDate(this.TomorrowsDate.getDate() + 1);
         
   }
-  startEvaluation(Id,typeId,evaluatorType) {
+  startEvaluation(EmployeeEvaluatorId,EvaluationTypeId,EvaluatorTypeId) {
     debugger
     this.globals.isLoading = true;
-    var obj = { 'Id': Id, 'TypeId': typeId, 'EvaluatorType': evaluatorType, 'UserId': this.globals.authData.UserId};
+    var obj = { 'EmployeeEvaluatorId': EmployeeEvaluatorId, 'EvaluationTypeId': EvaluationTypeId, 'EvaluatorTypeId': EvaluatorTypeId, 'CreatedBy': this.globals.authData.UserId};
     this.DashboardService.insertQuestions(obj)
       .then((data) => {
         this.globals.isLoading = false;
-        this.router.navigate(['/performance-review/' + Id]);
+        this.router.navigate(['/performance-review/' + EmployeeEvaluatorId]);
       },
         (error) => {
           this.globals.isLoading = false;

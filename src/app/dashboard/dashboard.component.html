@@ -55,17 +55,17 @@
             </div>
 
             <button *ngIf="(evaluation.StatusId==0) && (evaluation.UserId==globals.authData.UserId) && (evaluation.EvaluatorType==0)"
-              (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId,2)" [disabled]="((evaluation.ExpirationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm')) || ((evaluation.ExpirationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))"
-              class="btn next_btn">
-              Start</button>
-
-            <button *ngIf="(evaluation.StatusId==0) && (evaluation.UserId!=globals.authData.UserId) && (evaluation.EvaluatorType==0)"
               (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId,1)" [disabled]="((evaluation.ExpirationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm')) || ((evaluation.ExpirationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))"
               class="btn next_btn">
               Start</button>
 
+            <button *ngIf="(evaluation.StatusId==0) && (evaluation.UserId!=globals.authData.UserId) && (evaluation.EvaluatorType==0)"
+              (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId,2)" [disabled]="((evaluation.ExpirationDate | date : 'yyyy/MM/dd HH:mm') <= (newTime | date : 'yyyy/MM/dd HH:mm')) || ((evaluation.ExpirationDate | date : 'yyyy/MM/dd') < (TodaysDate | date : 'yyyy/MM/dd'))"
+              class="btn next_btn">
+              Start</button>
+
             <button *ngIf="(evaluation.StatusId==0) && (evaluation.UserId!=globals.authData.UserId) && (evaluation.EvaluatorType==1)"
-              (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId,1)" class="btn next_btn">
+              (click)="startEvaluation(evaluation.EmployeeEvaluatorId,evaluation.EvaluationTypeId,2)" class="btn next_btn">
               Start</button>
 
             <button *ngIf="evaluation.StatusId==1" (click)="reviewById(evaluation.EmployeeEvaluatorId)" class="btn back_btn">

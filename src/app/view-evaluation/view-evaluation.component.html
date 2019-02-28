@@ -35,7 +35,7 @@
           <div *ngFor="let question of QuestionList; let k=index; let last = last;">
             <div class="col-md-12 col-sm-12" *ngFor="let que of question.row; let i = index;">
               <div class="box_qa">
-                <div *ngIf="que.AnswerTypeId==1">
+                <div *ngIf="que.AnswerTypeId==1 || que.AnswerTypeId==3 || que.AnswerTypeId==4">
                   <div class="col-md-12 col-sm-12">
                     <div class="que_section">
                       <h4 class="que_title">Question {{(4*k)+i+1}}</h4>

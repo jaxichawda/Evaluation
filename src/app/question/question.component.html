@@ -31,55 +31,50 @@
       <form class="form-validate" role="form" #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
         <div class="form-group col-md-8 ckeditor_block editor">
           <label><span class="required">*</span>Question</label>
-          <textarea class="form-control" #QuestionText="ngModel" [(ngModel)]="questionEntity.QuestionText" name="QuestionText"
-            id="QuestionText" rows="10" cols="60" contenteditable="true"></textarea>
+          <textarea class="form-control" #QuestionText="ngModel" [(ngModel)]="questionEntity.QuestionText"
+            name="QuestionText" id="QuestionText" rows="10" cols="60" contenteditable="true"></textarea>
           <span class="error_span" *ngIf="des_valid">Please enter Question</span>
         </div>
         <div class="col-md-4 col-sm-4">
           <div class="form-group">
-            <label><span class="required">*</span>Evaluation Type</label>
-            <select class='select-option' required class="form-control" #EvaluationTypeId="ngModel" [(ngModel)]="questionEntity.EvaluationTypeId"
-              name="EvaluationTypeId" [ngClass]="{red_border: (EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)}">
-              <option value="" ngSelected='questionEntity.EvaluationTypeId==""'>Select</option>
-              <option value="0" ngSelected='questionEntity.EvaluationTypeId==0'>All (Common for all below Evaluation
-                Type)</option>
-              <ng-container *ngFor='let evaluationtype of evaluationtypeList'>
-                <option class='option' [value]="evaluationtype.EvaluationTypeId" ngSelected="questionEntity.EvaluationTypeId==evaluationtype.EvaluationTypeId">{{evaluationtype.EvaluationTypeName}}</option>
-              </ng-container>
-            </select>
-            <span class="error_span" *ngIf="(EvaluationTypeId.dirty && EvaluationTypeId.invalid) || (EvaluationTypeId.pristine && submitted)">
-              <span *ngIf="EvaluationTypeId.errors.required || (EvaluationTypeId.pristine && submitted)">Please select
-                Evaluation Type </span>
+            <label>Evaluation Type <i class="fa fa-info-circle tooltip_inline" title="Select Evaluation Type"
+                data-toggle="tooltip" data-placement="right"></i> </label>
+            <ng-select [options]="evaluationtypeList" [multiple]="true" [(ngModel)]="selectedEvaluationType"
+              name="selectedEvaluationType" [ngClass]="{'red_border': showError}">
+            </ng-select>
+            <span class="error_span" *ngIf="showError">
+              Please select Evaluator
             </span>
           </div>
         </div>
         <div class="col-md-4 col-sm-4">
           <div class="form-group">
-            <label><span class="required">*</span>Question For</label>
-            <select class='select-option' required class="form-control" #EvaluatorTypeId="ngModel" [(ngModel)]="questionEntity.EvaluatorTypeId"
-              name="EvaluatorTypeId" [ngClass]="{red_border: (EvaluatorTypeId.dirty && EvaluatorTypeId.invalid) || (EvaluatorTypeId.pristine && submitted)}">
-              <option value="" ngSelected='questionEntity.EvaluatorTypeId==""'>Select</option>
-              <ng-container *ngFor='let evaluatortype of evaluatortypeList'>
-                <option class='option' [value]="evaluatortype.EvaluatorTypeId" ngSelected="questionEntity.EvaluatorTypeId==evaluatortype.EvaluatorTypeId">{{evaluatortype.EvaluatorTypeName}}</option>
-              </ng-container>
-            </select>
-            <span class="error_span" *ngIf="(EvaluatorTypeId.dirty && EvaluatorTypeId.invalid) || (EvaluatorTypeId.pristine && submitted)">
-              <span *ngIf="EvaluatorTypeId.errors.required || (EvaluatorTypeId.pristine && submitted)">Please select
-                Evaluation Type </span>
+            <label>Question For <i class="fa fa-info-circle tooltip_inline" title="Select Question For"
+                data-toggle="tooltip" data-placement="right"></i> </label>
+            <ng-select [options]="evaluatortypeList" [multiple]="true" [(ngModel)]="selectedEvaluatorType"
+              name="selectedEvaluatorType" [ngClass]="{'red_border': showError}">
+            </ng-select>
+            <span class="error_span" *ngIf="showError">
+              Please select Evaluator
             </span>
           </div>
         </div>
         <div class="col-md-4 col-sm-4">
           <div class="form-group">
             <label><span class="required">*</span>Question Type</label>
-            <select class='select-option' required class="form-control" #AnswerTypeId="ngModel" [(ngModel)]="questionEntity.AnswerTypeId"
-              name="AnswerTypeId" [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}" [disabled]="questionEntity.isdisabled>0">
+            <select class='select-option' required class="form-control" #AnswerTypeId="ngModel"
+              [(ngModel)]="questionEntity.AnswerTypeId" name="AnswerTypeId"
+              [ngClass]="{red_border: (AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)}"
+              [disabled]="questionEntity.QuestionId!=0">
               <option value="" ngSelected='questionEntity.AnswerTypeId==""'>Select</option>
               <ng-container *ngFor='let questiontype of questiontypeList'>
-                <option class='option' [value]="questiontype.AnswerTypeId" ngSelected="questionEntity.AnswerTypeId==questiontype.AnswerTypeId">{{questiontype.QuestionTypeName}}</option>
+                <option class='option' [value]="questiontype.AnswerTypeId"
+                  ngSelected="questionEntity.AnswerTypeId==questiontype.AnswerTypeId">{{questiontype.QuestionTypeName}}
+                </option>
               </ng-container>
             </select>
-            <span class="error_span" *ngIf="(AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)">
+            <span class="error_span"
+              *ngIf="(AnswerTypeId.dirty && AnswerTypeId.invalid) || (AnswerTypeId.pristine && submitted)">
               <span *ngIf="AnswerTypeId.errors.required || (AnswerTypeId.pristine && submitted)">Please select
                 Question Type </span>
             </span>
@@ -91,46 +86,36 @@
             <div *ngIf="questionEntity.AnswerTypeId==3">
               <label><span class="required">*</span>Enter MCQ Options</label>
               <div class="r-group add_que" *ngFor="let Question of OptionList; let i = index; let last = last;">
-                <input type="text" class="form-control" maxlength="100" #QueOption="ngModel" [(ngModel)]="OptionList[i].QueOption"
-                  name="QueOption{{i}}" placeholder="Option {{i+1}}" required />
-                <button type="button" (click)="RemoveOption(Question)" *ngIf="i!=0" class="r-btnRemove btn btn-danger btn-rounded btn-sm"
-                  title="Remove Option">
+                <input type="text" class="form-control" maxlength="100" #QueOption="ngModel"
+                  [disabled]="questionEntity.QuestionId!=0" [(ngModel)]="OptionList[i].QueOption" name="QueOption{{i}}"
+                  placeholder="Option {{i+1}}" required />
+                <button type="button" [disabled]="questionEntity.QuestionId!=0" (click)="RemoveOption(Question)"
+                  *ngIf="(i!=0 && last) || (i!=0 && !last) || (i==0 && !last)"
+                  class="r-btnRemove btn btn-danger btn-rounded btn-sm" title="Remove Option">
                   <span class="fa fa-times"></span>
                 </button>
-                <button type="button" (click)="AddOption(i)" *ngIf="last" class="r-btnAdd btn btn-default btn-rounded btn-sm"
-                  title="Add Option">
+                <button type="button" [disabled]="questionEntity.QuestionId!=0" (click)="AddOption(i)" *ngIf="last"
+                  class="r-btnAdd btn btn-default btn-rounded btn-sm" title="Add Option">
                   <span class="fa fa-plus"></span>
                 </button>
                 <div class="clearfix"></div>
-                <span class="error_span" *ngIf="(QueOption.dirty && QueOption.invalid) || (QueOption.pristine && submitted)">
+                <span class="error_span"
+                  *ngIf="(QueOption.dirty && QueOption.invalid) || (QueOption.pristine && submitted)">
                   <span *ngIf="QueOption.errors && QueOption.errors.required">
-                    Please enter Option {{i+1}} or Remove it
+                    <span *ngIf="i==0">Please enter Option {{i+1}}</span>
+                    <span *ngIf="i!=0">Please enter Option {{i+1}} or Remove it</span>
                   </span>
                 </span>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- <div class="form-group col-md-6">
-          <label><span class="required">*</span>Job Title</label>
-          <input type="text" class="form-control" #JobTitle="ngModel" [(ngModel)]="questionEntity.JobTitle"
-            class="form-control" name="JobTitle" maxlength="100" required>
-          <span class="error_span" *ngIf="(JobTitle.dirty && JobTitle.invalid) || (JobTitle.pristine && submitted)">
-            <span *ngIf="JobTitle.errors.required || (JobTitle.pristine && submitted)">Please
-              enter Job Title</span>
-            <span class="error_span" *ngIf="JobTitle.errors && JobTitle.errors.pattern">
-              Please enter a valid Job Title
-            </span>
-          </span>
-        </div> -->
-
-
         <div class="clearfix"></div>
         <div class="form-group col-md-8">
           <label><span class="required">*</span>Active ?</label>
           <div class="activeyes_box">
-            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive">
+            <input type="checkbox" name="IsActive" id="IsActive" value="yes" #IsActive="ngModel"
+              [(ngModel)]="questionEntity.IsActive">
             <label for="IsActive"></label>
           </div>
         </div>

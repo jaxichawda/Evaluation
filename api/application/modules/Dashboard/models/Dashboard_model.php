@@ -1,8 +1,7 @@
 <?php
 
 class Dashboard_model extends CI_Model {
-    public function getEvaluationsById($UserId=Null)
-	{
+    public function getEvaluationsById($UserId=Null){
 	  if($UserId)
 	  {
         $result = $this->db->query('select ee.EmployeeEvaluatorId,ee.EvaluationId,ee.EvaluatorId,ee.StatusId,ee.EvaluatorType,e.UserId,e.EvaluationTypeId,e.ExpirationDate,e.EvaluationDate,et.EvaluationTypeName,u.FirstName,u.LastName from tblmstempevaluator as ee left join tblmstempevaluation as e on (e.EvaluationId=ee.EvaluationId) left join tblmstevaluationtype as et on (e.EvaluationTypeId=et.EvaluationTypeId)
@@ -16,33 +15,40 @@ class Dashboard_model extends CI_Model {
           return $res;
         }
     }
-    public function insertQuestions($post_data)
-	{
-	  if($post_data)
-	  {  
-        $result1 = $this->db->query("INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId, CreatedBy, UpdatedBy) SELECT ".$post_data['Id'].",QuestionId,".$post_data['UserId'].",".$post_data['UserId']." FROM tblmstquestion where EvaluationTypeId=".$post_data['TypeId']." && EvaluatorTypeId!=".$post_data['EvaluatorType']." && IsActive=1;");
-        
-        if($result1) {
-            $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$post_data['Id']);
-            if($result){
-                $log_data = array(
-                    'UserId' => $post_data['UserId'],
-                    'Module' => 'Evaluation',
-                    'Activity' =>'Start Evaluation (EmployeeEvaluatorId = '.$post_data['Id'].')'
-                );
-                $log = $this->db->insert('tblactivitylog',$log_data);
-                return true; 
-            }
-            else{
+    public function insertQuestions($post_data) {
+	    if($post_data) { 
+            $EmployeeEvaluatorId = $post_data['EmployeeEvaluatorId'];
+            $EvaluationTypeId = $post_data['EvaluationTypeId'];
+            $EvaluatorTypeId = $post_data['EvaluatorTypeId'];
+            $CreatedBy = $post_data['CreatedBy'];
+
+            $result1 = $this->db->query(
+                "INSERT INTO tblevaluationanswer (EmployeeEvaluatorId, QuestionId, CreatedBy, UpdatedBy) 
+                SELECT ".$EmployeeEvaluatorId.",QuestionId,".$CreatedBy.",".$CreatedBy." 
+                FROM tblmstquestion 
+                where IsActive=1
+                && (`EvaluationTypeId` like '%".$EvaluationTypeId.",%' || `EvaluationTypeId` like '%,".$EvaluationTypeId."%' || `EvaluationTypeId` like '".$EvaluationTypeId."')
+                && (`EvaluatorTypeId` like '%".$EvaluatorTypeId.",%' || `EvaluatorTypeId` like '%,".$EvaluatorTypeId."%' || `EvaluatorTypeId` like '".$EvaluatorTypeId."')
+                ;");
+            
+            if($result1) {
+                $result=$this->db->query("update tblmstempevaluator set StatusId=2 where EmployeeEvaluatorId=".$EmployeeEvaluatorId);
+                if($result){
+                    $log_data = array(
+                        'UserId' => $CreatedBy,
+                        'Module' => 'Evaluation',
+                        'Activity' =>'Start Evaluation (EmployeeEvaluatorId = '.$EmployeeEvaluatorId.')'
+                    );
+                    $log = $this->db->insert('tblactivitylog',$log_data);
+                    return true; 
+                } else {
+                    return false;
+                }
+            } else {
                 return false;
-            }
+            }        
         }
-        else{
-            return false;
-        }
-        
     }
-}
 public function reviewById($EmployeeEvaluatorId=Null)
 	{
         try{

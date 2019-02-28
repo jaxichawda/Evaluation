@@ -26,7 +26,6 @@ class EvaluationReport_model extends CI_Model
 			$this->db->join('tbluser b','a.EvaluatorId=b.UserId','left');
 			$this->db->order_by('ea.EmployeeEvaluatorId','asc');
 			$this->db->group_by('ea.EmployeeEvaluatorId');
-			//$this->db->where('ee.UserId!=a.EvaluatorId');
 			$this->db->where('a.EvaluationId',$evaluationId);
 			
 			$result = $this->db->get('tblevaluationanswer as ea');	
@@ -53,7 +52,7 @@ class EvaluationReport_model extends CI_Model
 			$this->db->join('tblmstquestion q','q.QuestionId=ea.QuestionId','left');
 			$this->db->group_by('ea.QuestionId');
 			$this->db->order_by('ea.QuestionId','asc');
-			$this->db->where('q.EvaluatorTypeId',0);
+			$this->db->where('q.EvaluatorTypeId','1,2');
 			//$this->db->where('ee.UserId!=a.EvaluatorId');
 			$this->db->where('a.EvaluationId',$evaluationId);
 			$result = $this->db->get('tblevaluationanswer as ea');	

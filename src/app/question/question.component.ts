@@ -26,7 +26,8 @@ export class QuestionComponent implements OnInit {
   des_valid;
 
   constructor(private http: Http, public globals: Globals, private router: Router, private route: ActivatedRoute, private QuestionService: QuestionService) { }
-
+  selectedEvaluationType: Array<string> = [];
+  selectedEvaluatorType: Array<string> = [];
   ngOnInit() {
 
     this.globals.isLoading = false;
@@ -90,6 +91,7 @@ export class QuestionComponent implements OnInit {
         .then((data) => {
 
           this.questionEntity = data['question'];
+          console.log(this.questionEntity);
           this.OptionList = data['option'];
 
           if (data['IsActive'] == 0) {
@@ -100,6 +102,8 @@ export class QuestionComponent implements OnInit {
 
           setTimeout(() => {
             CKEDITOR.instances.QuestionText.setData(this.questionEntity.QuestionText);
+            this.selectedEvaluationType = this.questionEntity.EvaluationTypeId;
+            this.selectedEvaluatorType = this.questionEntity.EvaluatorTypeId;
           }, 500);
 
           this.globals.isLoading = false;
@@ -120,7 +124,7 @@ export class QuestionComponent implements OnInit {
       this.questionEntity.EvaluationTypeId = '';
       this.questionEntity.EvaluatorTypeId = '';
       this.questionEntity.IsActive = '1';
-      this.questionEntity.QuestionId = '';
+      this.questionEntity.QuestionId = '0';
       var item = { 'QueOption': '' };
       this.OptionList = [];
       this.OptionList.push(item);
@@ -156,8 +160,10 @@ export class QuestionComponent implements OnInit {
       this.questionEntity.JobId = 0;
       this.submitted = true;
     }
-    
+
     if (questionForm.valid && this.des_valid == false) {
+      this.questionEntity.EvaluationTypeId = this.selectedEvaluationType;
+      this.questionEntity.EvaluatorTypeId = this.selectedEvaluatorType;
       this.btn_disable = true;
       this.questionEntity.check = 0;
       var question = { 'question': this.questionEntity, 'option': this.OptionList };
